@@ -1,9 +1,30 @@
-<h1>Whag is up</h1>
+<div class="container">
 
 
-<input type="text" ng-model="oscar.name" />
-<input type="text" ng-model="oscar.age" />
+  <div class="well color-indicator">
+    <div class="color"
+          ng-class="colorRed ? 'red' : 'green'">
 
-<pre>
-  {{oscar | json}}
-</pre>
+    </div>
+  </div>
+
+  <div class="input-group buttons">
+    <button class="btn btn-success btn-lg button"
+            ng-click="voteLike()">
+            Like
+    </button>
+    <button class="btn btn-danger btn-lg button"
+            ng-click="voteDislike()">
+            Dislike
+    </button>
+  </div>
+
+
+  <pre>
+    {{ attendee | json }} {{ dislikePercent }}
+  </pre>
+
+  <pre>
+    {{ attendees | json }}
+  </pre>
+</div>
