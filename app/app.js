@@ -13,7 +13,12 @@ function ApplicationConfig($stateProvider, $urlRouterProvider) {
   		url: '/',
   		templateUrl: 'views/landing-page/landing-page.html',
       controller: 'AttendeeCtrl'
-  	});
+  	})
+    .state('results', {
+      url: '/results',
+      templateUrl: 'views/results/results.html',
+      controller: 'ResultsCtrl'
+    });
 
   $urlRouterProvider.otherwise('/');
 }
@@ -21,7 +26,7 @@ function ApplicationConfig($stateProvider, $urlRouterProvider) {
 
 
 angular.module('YolkoApp')
-.controller("AttendeeCtrl", function(FIREBASE_URL, $firebaseObject, $firebaseArray, $scope) {
+.controller("AttendeeCtrl", function(FIREBASE_URL, $firebaseObject, $firebaseArray, $scope, $timeout) {
 
 //
 // TODO: PUT ALL OF THIS IN A SERVICE OR FACTORY
@@ -71,7 +76,7 @@ angular.module('YolkoApp')
 
 // create an end point in Firebase for the votes of the current user
   var currentLikeVotesRef = new Firebase(FIREBASE_URL + "/votes/likes");
-// create an Array for all the votes of the current user
+// create an Array for all the vostes of the current user
   $scope.likeVotesArray = $firebaseArray(currentLikeVotesRef);
 
   $scope.voteLike = function() {
@@ -82,6 +87,10 @@ angular.module('YolkoApp')
       value: 1,
       timestamp: Firebase.ServerValue.TIMESTAMP
     });
+    $scope.disableLikeBtn = true;
+    $timeout(function() {
+      $scope.disableLikeBtn = false;
+    }, 3000);
   };
 
 // create an end point in Firebase for the votes of the current user
@@ -97,6 +106,10 @@ angular.module('YolkoApp')
       value: 0,
       timestamp: Firebase.ServerValue.TIMESTAMP
     });
+    $scope.disableDislikeBtn = true;
+    $timeout(function() {
+      $scope.disableDislikeBtn = false;
+    }, 3000);
   };
 
 
@@ -106,7 +119,7 @@ angular.module('YolkoApp')
 
 // Create a watch to watch othe what happens on the Attendees node
   $scope.$watch('attendees', function(newVal, oldVal) {
-    
+
   }, true);
 
 

@@ -10,11 +10,13 @@
 
   <div class="input-group buttons">
     <button class="btn btn-success btn-lg button"
-            ng-click="voteLike()">
+            ng-click="voteLike()"
+            ng-disabled="disableLikeBtn">
             Like
     </button>
     <button class="btn btn-danger btn-lg button"
-            ng-click="voteDislike()">
+            ng-click="voteDislike()"
+            ng-disabled="disableDislikeBtn">
             Dislike
     </button>
   </div>
