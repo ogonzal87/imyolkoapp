@@ -22,7 +22,9 @@
     "angular-ui-router": "^1.0.0-alpha.4",
     "angularfire": "^1.2.0",
     "bootstrap": "^3.3.6",
+    "chartist": "^0.9.7",
     "firebase": "^2.4.2",
-    "lodash": "^4.9.0"
+    "lodash": "^4.9.0",
+    "underscore": "^1.8.3"
   }
 }

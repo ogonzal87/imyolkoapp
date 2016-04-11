@@ -16,7 +16,7 @@ function ApplicationConfig($stateProvider, $urlRouterProvider) {
   	})
     .state('results', {
       url: '/results',
-      templateUrl: 'views/results/results.html',
+      templateUrl: 'views/results-page/results-page.html',
       controller: 'ResultsCtrl'
     });
 
@@ -79,6 +79,7 @@ angular.module('YolkoApp')
 // create an Array for all the vostes of the current user
   $scope.likeVotesArray = $firebaseArray(currentLikeVotesRef);
 
+// Create a function that when is clicked creates a LIKE vote Object in Firebase this is stored in an array
   $scope.voteLike = function() {
     $scope.attendee.vote = 'like';
     $scope.likeVotesArray.$add({
@@ -87,6 +88,8 @@ angular.module('YolkoApp')
       value: 1,
       timestamp: Firebase.ServerValue.TIMESTAMP
     });
+// I have to disable to btn so people so not submit more than 1 vote per
+// interval
     $scope.disableLikeBtn = true;
     $timeout(function() {
       $scope.disableLikeBtn = false;
@@ -98,6 +101,7 @@ angular.module('YolkoApp')
 // create an Array for all the votes of the current user
   $scope.dislikeVotesArray = $firebaseArray(currentDislikeVotesRef);
 
+// Create a function that when is clicked creates a DISLIKE vote Object in Firebase this is stored in an array
   $scope.voteDislike = function() {
     $scope.attendee.vote = 'dislike';
     $scope.dislikeVotesArray.$add({
@@ -106,10 +110,12 @@ angular.module('YolkoApp')
       value: 0,
       timestamp: Firebase.ServerValue.TIMESTAMP
     });
+// I have to disable to btn so people so not submit more than 1 vote per
+// interval
     $scope.disableDislikeBtn = true;
     $timeout(function() {
       $scope.disableDislikeBtn = false;
-    }, 3000);
+    }, 1000);
   };
 
 
@@ -133,6 +139,21 @@ angular.module('YolkoApp')
 
     $scope.dislikePercent = Math.round((numDislikeVotes / numVotes) * 100);
   }, true);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

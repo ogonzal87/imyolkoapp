@@ -8,8 +8,12 @@
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/js/bootstrap.min.js" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf" media="screen" title="no title" charset="utf-8">
 
+    <!-- Chart Library CSS -->
+    <link rel="stylesheet" href="../bower_components/chartist/dist/chartist.min.css" media="screen" title="no title" charset="utf-8">
+
     <!-- my css pages after SASS is ran through Gulp.js -->
     <link rel="stylesheet" href="/app/views/landing-page/landing-page.css" media="screen" title="no title" charset="utf-8" />
+    <link rel="stylesheet" href="/app/views/results-page/results-page.css" media="screen" title="no title" charset="utf-8" />
 
   </head>
   <body >
@@ -40,11 +44,16 @@
   <script src="../node_modules/angularfire/dist/angularfire.min.js"></script>
 
   <!-- lodash -->
-  <script src="../bower_components/lodash/dist/lodash.min.js"></script>
+  <script src="../node_modules/underscore/underscore-min.js"></script>
+
+  <!-- Chartist - Chart Library-->
+  <script src="../bower_components/chartist/dist/chartist.min.js"></script>
+
 
   <!-- routing and app init -->
   <script src="../app/app.js"></script>
 
+  <script src="components/chart/chart.controller.js"></script>
 
   </body>
 </html>
