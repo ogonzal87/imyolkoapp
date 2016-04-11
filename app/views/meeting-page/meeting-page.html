@@ -6,35 +6,35 @@
 
 <!-- YOLKO BEHAVIOR -->
 		<div class="avatar-container">
-			<div ng-show="zzz">
-				<img src="../img/zzz.png"/>
+			<div ng-show="true">
+				<img src="assets/avatars/zzz.png"/>
 			</div>
 			<div ng-show="badass">
-				<img src="../img/badass.png"/>
+				<img src="assets/avatars/badass.png"/>
 			</div>
 			<div ng-show="igotthis">
-				<img src="../img/igotthis.png"/>
+				<img src="assets/avatars/igotthis.png"/>
 			</div>
 			<div ng-show="confident">
-				<img src="../img/confident.png"/>
+				<img src="assets/avatars/confident.png"/>
 			</div>
 			<div ng-show="want">
-				<img src="../img/want.png"/>
+				<img src="assets/avatars/want.png"/>
 			</div>
 			<div ng-show="tastey">
-				<img src="../img/tastey.png"/>
+				<img src="assets/avatars/tastey.png"/>
 			</div>
 			<div ng-show="startingtonotgetit">
-				<img src="../img/startingtonotgetit.png"/>
+				<img src="assets/avatars/startingtonotgetit.png"/>
 			</div>
 			<div ng-show="idontgetit">
-				<img src="../img/idontgetit.png"/>
+				<img src="assets/avatars/idontgetit.png"/>
 			</div>
 			<div ng-show="shocked">
-				<img src="../img/shocked.png"/>
+				<img src="assets/avatars/shocked.png"/>
 			</div>
 			<div ng-show="burnt">
-	      <img src="../img/burnt.png"/>
+	      <img src="assets/avatars/burnt.png"/>
 	    </div>
 		</div>
 <!-- YOLKO BEHAVIOR -->
@@ -87,7 +87,7 @@
                 ng-click='attendee.speed = 1'>
           <i class="fa fa-fast-forward fa-3x"></i>
         </button>
-				
+
       </div>
 
       <!-- Panic Button-->
@@ -110,41 +110,50 @@
 
 </div> <!--End of Jumbotron -->
 
-<div class="container">
+<div class="container panel question-containrer">
 
-    <div class="form-group"> <!-- Questions -->
-      <div class="input-group">
-        <input ng-model="questionContent"
+	<!-- ask question area - input filed and btn -->
+	<form role="form">
+		<div class="form-group">
+			<textarea class="form-control"
+								rows="3"
+								id="comment"
+								ng-model="questionContent"
                 type="text"
-                class="form-control"
+                class="form-control question-input-field"
                 placeholder="Ask way..."
       		      ng-keydown="addQuestionKeyDown($event)">
-        <span class="input-group-btn">
-          <button class="btn btn-default askbutton"
-                  type="button"
-                  ng-click="addQuestionClick()">
-                  Ask
-          </button>
-        </span>
-      </div>
-    </div>
+      </textarea>
+			<!-- <span class="input-group-addon btn btn-success">Send</span> -->
+			<div class="clearfix">
+				<button class="btn btn-success pull-right askbutton"
+								type="button"
+								ng-click="addQuestionClick()">
+								Send
+				</button>
+			</div>
 
-    <div class="panel panel-default" ng-hide='questions.length == 0'>
-      <div class="panel-body">
-      	<ul class="list-group">
-      	  <li class="list-group-item" ng-repeat="(key, question) in questions">
-      	    {{ question.content }}
-      	    <span>
-      	      <button class="btn btn-sm btn-default alignright" ng-click="removeQuestion(key)">X</button>
-      	    </span>
-      	  </li>
-      	</ul>
-      </div>
-    </div>
+		</div>
+	</form>
+
+	<ul class="list-group">
+	  <li class="list-group-item" ng-repeat="(key, question) in allQuestionsFromAttendees">
+	    {{ question.content }}
+	    <span>
+				<button class="btn btn-sm btn-default alignright" ng-click="">
+					<i class="fa fa-chevron-up"></i>
+				</button>
+				<button class="btn btn-sm btn-default alignright" ng-click="">
+					<i class="fa fa-chevron-down"></i>
+				</button>
+				<button class="btn btn-sm btn-default alignright" ng-click="removeQuestion(key)">X</button>
+	    </span>
+	  </li>
+	</ul>
 </div>
 
 
 
-<pre>
+<!-- <pre>
   These are all the questions asked: {{ allQuestionsFromAttendeessd | json }}
-</pre>
+</pre> -->

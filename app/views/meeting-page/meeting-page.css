@@ -9,13 +9,15 @@
   text-align: center; }
   .meetingjumbotronn .container {
     color: #ffffff; }
+    .meetingjumbotronn .container .avatar-container {
+      height: 250px; }
     .meetingjumbotronn .container .votebtns-container {
       display: flex;
       align-items: center;
       justify-content: center; }
       .meetingjumbotronn .container .votebtns-container .votebtn {
         margin: 20px 10px;
-        padding: 20px; }
+        padding: 25px; }
   .meetingjumbotronn .attendee-buttons-panel {
     position: absolute;
     background: rgba(34, 34, 34, 0.25);
@@ -27,18 +29,11 @@
     right: 0px;
     margin-bottom: 0px; }
 
-.buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center; }
-  .buttons .button {
-    margin: 10px; }
-
-.color-indicator {
-  margin: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: center; }
-  .color-indicator .color {
-    height: 200px;
-    width: 200px; }
+.question-containrer {
+  max-width: 1000px;
+  margin: 0 auto 50px;
+  padding: 30px 40px 10px 40px;
+  background-color: #ecf0f1; }
+  .question-containrer .askbutton {
+    margin-top: 20px;
+    padding: 10px 20px; }

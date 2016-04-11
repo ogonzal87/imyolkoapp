@@ -11,7 +11,7 @@
   .container {
     color: #ffffff;
     .avatar-container {
-
+      height:250px;
     }
 
     .votebtns-container {
@@ -21,7 +21,7 @@
 
       .votebtn {
         margin: 20px 10px;
-        padding: 20px;
+        padding: 25px;
       }
     }
   }
@@ -29,8 +29,8 @@
   .attendee-buttons-panel {
     position: absolute;
     background: rgba(34,34,34,0.25);
-   box-shadow: 0 3px -6px rgba(0,0,0,0.3), inset 0 -3px 3px rgba(0,0,0,0.1);
-   border-radius: 5px;
+    box-shadow: 0 3px -6px rgba(0,0,0,0.3), inset 0 -3px 3px rgba(0,0,0,0.1);
+    border-radius: 5px;
     padding: 15px;
     bottom:0px;
     left:0px;
@@ -40,27 +40,15 @@
 }
 
 
+.question-containrer {
+  max-width: 1000px;
+  margin: 0 auto 50px;;
+  padding: 30px 40px 10px 40px;
+  background-color: #ecf0f1;
 
+  .askbutton {
+    margin-top: 20px;
+    padding: 10px 20px;
 
-
-.buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  .button {
-    margin: 10px;
-  }
-}
-
-.color-indicator {
-  margin: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  .color {
-    height: 200px;
-    width: 200px;
   }
 }
