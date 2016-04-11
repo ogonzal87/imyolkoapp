@@ -14,6 +14,7 @@
     <!-- my css pages after SASS is ran through Gulp.js -->
     <link rel="stylesheet" href="/app/views/landing-page/landing-page.css" media="screen" title="no title" charset="utf-8" />
     <link rel="stylesheet" href="/app/views/results-page/results-page.css" media="screen" title="no title" charset="utf-8" />
+    <link rel="stylesheet" href="/app/views/meeting-page/meeting-page.css" media="screen" title="no title" charset="utf-8" />
 
   </head>
   <body >
@@ -43,7 +44,7 @@
   <!-- angularfire -->
   <script src="../node_modules/angularfire/dist/angularfire.min.js"></script>
 
-  <!-- lodash -->
+  <!-- underscore.js -->
   <script src="../node_modules/underscore/underscore-min.js"></script>
 
   <!-- Chartist - Chart Library-->
@@ -53,6 +54,13 @@
   <!-- routing and app init -->
   <script src="../app/app.js"></script>
 
+  <!-- components -->
+  <script src="components/attendee/attendee.module.js"></script>
+  <script src="components/attendee/attendee.controller.js"></script>
+  <script src="components/presenter/presenter.module.js"></script>
+  <script src="components/presenter/presenter.controller.js"></script>
+  <script src="components/chart/chart.module.js"></script>
+  <script src="components/chart/chart.controller.js"></script>
   <script src="components/chart/chart.controller.js"></script>
 
   </body>

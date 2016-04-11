@@ -1,0 +1,65 @@
+<div class="container">
+
+
+  <div class="well color-indicator">
+    <div class="color"
+          ng-class="colorRed ? 'red' : 'green'">
+
+    </div>
+  </div>
+
+  <div class="input-group buttons">
+    <button class="btn btn-success btn-lg button"
+            ng-click="voteLike()"
+            ng-disabled="disableLikeBtn">
+            Like
+    </button>
+    <button class="btn btn-danger btn-lg button"
+            ng-click="voteDislike()"
+            ng-disabled="disableDislikeBtn">
+            Dislike
+    </button>
+  </div>
+
+
+
+
+  <pre>
+    {{ attendee | json }}
+  </pre>
+
+  <!-- <pre>
+    {{ attendees | json }}
+  </pre> -->
+</div>
+
+
+<div class="container">
+
+	  <div class="form-group"> <!-- Questions -->
+		  <div class="input-group">
+		    <input ng-model="questionContent" type="text" class="form-control" placeholder="Ask way..."
+					ng-keydown="addQuestionKeyDown($event)">
+		    <span class="input-group-btn">
+		      <button class="btn btn-default askbutton" type="button" ng-click="addQuestionClick()">Ask</button>
+		    </span>
+		  </div>
+		</div>
+
+		<div class="panel panel-default" ng-hide="questions.length == 0">
+	  	<div class="panel-body">
+	    	<ul class="list-group">
+				  <li class="list-group-item" ng-repeat="(key, question) in questions">
+				    {{ question.content }}
+				    <span>
+				      <button class="btn btn-sm btn-default" ng-click="removeQuestion(key)">X</button>
+				    </span>
+				  </li>
+				</ul>
+	  	</div>
+		</div>
+	</div>
+
+  <pre>
+    These are all the questions asked: {{ allQuestionsFromAttendees | json }}
+  </pre>

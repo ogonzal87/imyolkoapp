@@ -1,0 +1,15 @@
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+  .buttons .button {
+    margin: 10px; }
+
+.color-indicator {
+  margin: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+  .color-indicator .color {
+    height: 200px;
+    width: 200px; }

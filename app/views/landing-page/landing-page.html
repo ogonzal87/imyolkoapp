@@ -1,34 +1,4 @@
-<div class="container">
+<h1>Landing Page</h1>
 
 
-  <div class="well color-indicator">
-    <div class="color"
-          ng-class="colorRed ? 'red' : 'green'">
-
-    </div>
-  </div>
-
-  <div class="input-group buttons">
-    <button class="btn btn-success btn-lg button"
-            ng-click="voteLike()"
-            ng-disabled="disableLikeBtn">
-            Like
-    </button>
-    <button class="btn btn-danger btn-lg button"
-            ng-click="voteDislike()"
-            ng-disabled="disableDislikeBtn">
-            Dislike
-    </button>
-  </div>
-
-
-
-
-  <pre>
-    {{ attendee | json }} {{ dislikePercent }}
-  </pre>
-
-  <pre>
-    {{ attendees | json }}
-  </pre>
-</div>
+<button ui-sref="meeting" class="btn btn-lg btn-success">Go to Meeting</button>
