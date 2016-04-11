@@ -17,14 +17,18 @@ function ResultsCtrl($scope, $interval, FIREBASE_URL, $firebaseArray, $firebaseO
 // for the snapshots I want to use to populale on the Chart with both a
 // Like and a Dislike Lines.
   $scope.intervalLikeVotes = [];
+  $scope.intervalDislikeVotes = [];
   var likeLine = [];
+  var dislikeLine = [];
 
   $scope.startPresentation = function() {
     var interval = $interval(function() {
       var numLikeVotes    = $scope.likeVotesArray.length;
       var numDislikeVotes = $scope.dislikeVotesArray.length;
       $scope.intervalLikeVotes.push(numLikeVotes);
-      $scope.pushToLikeLineLineArr();
+      $scope.intervalDislikeVotes.push(numDislikeVotes);
+      pushToLikeLineLineArr();
+      pushToDislikeLineLineArr();
     }, 1000);
 // Create a wey to stop the Presetation and Intevals
     $scope.stopPresentation = function() {
@@ -33,29 +37,40 @@ function ResultsCtrl($scope, $interval, FIREBASE_URL, $firebaseArray, $firebaseO
     };
   };
 
-  $scope.pushToLikeLineLineArr = function () {
+  var pushToLikeLineLineArr = function () {
     var a = _.last($scope.intervalLikeVotes, [2]);
     var b = _.reduce(a, function(memo, num){
        return num - memo;
      }, 0);
     likeLine.push(b);
   };
+  var pushToDislikeLineLineArr = function () {
+    var a = _.last($scope.intervalDislikeVotes, [2]);
+    var b = _.reduce(a, function(memo, num){
+       return num - memo;
+     }, 0);
+    dislikeLine.push(b);
+  };
 
+// Only doing this to see the values on the PRE tag on the page
   $scope.likeLine = likeLine;
+  $scope.dislikeLine = dislikeLine;
 
-  $scope.$watch('likeLine', function(newVal, oldVal, scope) {
+  $scope.$watchGroup(['likeLine', 'dislikeLine'], function(newVals, oldVals, scope) {
+
     var allData = {
       // A labels array that can contain any sort of values
       labels: ['1min', '2min', '3min', '4min', '5min', '6min', '7min', '8min', '9min', '10min', '11min', '12min', '13min', '14min', '15min'],
       // Series array that contains series objects or in this case series data arrays
-      series: [{
-        name: 'likes',
-        data: likeLine
-      }
-      // {
-      //   name: 'dislikes',
-      //   data: [1, 2, null, 7]
-      // }
+      series: [
+        {
+          name: 'likes',
+          data: likeLine
+        },
+        {
+          name: 'dislikes',
+          data: dislikeLine
+        }
       ]
     };
     // As options we currently only set a static size of 300x200 px. We can also omit this and use aspect ratio containers
