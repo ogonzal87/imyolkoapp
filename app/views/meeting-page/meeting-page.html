@@ -1,65 +1,150 @@
-<div class="container">
+<div class="jumbotron meetingjumbotronn">
+
+	<div class="container">
+
+		<h1>Yolko, how are you feeling?</h1>
+
+<!-- YOLKO BEHAVIOR -->
+		<div class="avatar-container">
+			<div ng-show="zzz">
+				<img src="../img/zzz.png"/>
+			</div>
+			<div ng-show="badass">
+				<img src="../img/badass.png"/>
+			</div>
+			<div ng-show="igotthis">
+				<img src="../img/igotthis.png"/>
+			</div>
+			<div ng-show="confident">
+				<img src="../img/confident.png"/>
+			</div>
+			<div ng-show="want">
+				<img src="../img/want.png"/>
+			</div>
+			<div ng-show="tastey">
+				<img src="../img/tastey.png"/>
+			</div>
+			<div ng-show="startingtonotgetit">
+				<img src="../img/startingtonotgetit.png"/>
+			</div>
+			<div ng-show="idontgetit">
+				<img src="../img/idontgetit.png"/>
+			</div>
+			<div ng-show="shocked">
+				<img src="../img/shocked.png"/>
+			</div>
+			<div ng-show="burnt">
+	      <img src="../img/burnt.png"/>
+	    </div>
+		</div>
+<!-- YOLKO BEHAVIOR -->
 
 
-  <div class="well color-indicator">
-    <div class="color"
-          ng-class="colorRed ? 'red' : 'green'">
+<!-- Vote bottons -->
 
+    <div class="votebtns-container">
+      <!-- vote up -->
+		  <button class="btn btn-lg btn-success votebtn" ng-click="attendee.vote = 'like'">
+		  	<span class="fa fa-thumbs-up fa-3x"></span>
+      </button>
+      <!-- vote down -->
+		  <button class="btn btn-lg btn-danger dislike-button votebtn" ng-click="attendee.vote = 'dislike'">
+		  	<span class="fa fa-thumbs-down fa-3x"></span>
+      </button>
+		</div>
+
+  </div>
+
+    <!-- row of bottons -->
+
+  <div class="container attendee-buttons-panel">
+
+    <div class="row">
+
+      <!-- Volume Up Button-->
+      <div class="col-sm-4 attendee-buttons">
+        <button class="btn btn-secondary-outline"
+                title="Press if you can't hear!"
+                ng-class="{ 'btn-warning': attendee.volumeUp == 'yes' }"
+                ng-click='attendee.volumeUp = "yes"'>
+          <i class="fa fa-volume-up fa-3x"></i>
+        </button>
+      </div>
+
+      <!-- Speed Buttons -->
+      <div class="col-sm-4 attendee-buttons">
+        <!-- SLOW DOWN-->
+        <button class="btn btn-secondary-outline slow-down-button"
+                title="Press if you want the speaker to go slower"
+                ng-class="{ 'btn-success': attendee.speed == -1 }"
+                ng-click='attendee.speed = -1'>
+          <i class="fa fa-fast-backward fa-3x"></i>
+        </button>
+        <!-- SPEED  UP -->
+        <button class="btn btn-secondary-outline go-faster-button"
+                title="Press if you want the speaker to go faster"
+                ng-class="{ 'btn-success': attendee.speed == 1 }"
+                ng-click='attendee.speed = 1'>
+          <i class="fa fa-fast-forward fa-3x"></i>
+        </button>
+				<a href="#" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-edit"></span> Bootstrap Button</a>
+      </div>
+
+      <!-- Panic Button-->
+      <div class="col-sm-4 attendee-buttons">
+        <button class="btn btn-secondary-outline"
+                title="Press if you are lost!"
+                ng-show="attendee.feeling == 'fine'"
+                ng-click='panicButton(attendee)'>
+          <i class="fa fa-fire-extinguisher fa-3x"></i>
+        </button>
+        <button class="btn btn-success"
+                title="I am fine now!"
+                ng-show="attendee.feeling == 'panic'"
+                ng-click='panicButton(attendee)'>
+          <i class="fa fa-check-circle-o fa-3x"></i>
+        </button>
+      </div>
     </div>
   </div>
 
-  <div class="input-group buttons">
-    <button class="btn btn-success btn-lg button"
-            ng-click="voteLike()"
-            ng-disabled="disableLikeBtn">
-            Like
-    </button>
-    <button class="btn btn-danger btn-lg button"
-            ng-click="voteDislike()"
-            ng-disabled="disableDislikeBtn">
-            Dislike
-    </button>
-  </div>
-
-
-
-
-  <pre>
-    {{ attendee | json }}
-  </pre>
-
-  <!-- <pre>
-    {{ attendees | json }}
-  </pre> -->
-</div>
-
+</div> <!--End of Jumbotron -->
 
 <div class="container">
 
-	  <div class="form-group"> <!-- Questions -->
-		  <div class="input-group">
-		    <input ng-model="questionContent" type="text" class="form-control" placeholder="Ask way..."
-					ng-keydown="addQuestionKeyDown($event)">
-		    <span class="input-group-btn">
-		      <button class="btn btn-default askbutton" type="button" ng-click="addQuestionClick()">Ask</button>
-		    </span>
-		  </div>
-		</div>
+    <div class="form-group"> <!-- Questions -->
+      <div class="input-group">
+        <input ng-model="questionContent"
+                type="text"
+                class="form-control"
+                placeholder="Ask way..."
+      		      ng-keydown="addQuestionKeyDown($event)">
+        <span class="input-group-btn">
+          <button class="btn btn-default askbutton"
+                  type="button"
+                  ng-click="addQuestionClick()">
+                  Ask
+          </button>
+        </span>
+      </div>
+    </div>
 
-		<div class="panel panel-default" ng-hide="questions.length == 0">
-	  	<div class="panel-body">
-	    	<ul class="list-group">
-				  <li class="list-group-item" ng-repeat="(key, question) in questions">
-				    {{ question.content }}
-				    <span>
-				      <button class="btn btn-sm btn-default" ng-click="removeQuestion(key)">X</button>
-				    </span>
-				  </li>
-				</ul>
-	  	</div>
-		</div>
-	</div>
+    <div class="panel panel-default" ng-hide='questions.length == 0'>
+      <div class="panel-body">
+      	<ul class="list-group">
+      	  <li class="list-group-item" ng-repeat="(key, question) in questions">
+      	    {{ question.content }}
+      	    <span>
+      	      <button class="btn btn-sm btn-default alignright" ng-click="removeQuestion(key)">X</button>
+      	    </span>
+      	  </li>
+      	</ul>
+      </div>
+    </div>
+</div>
 
-  <pre>
-    These are all the questions asked: {{ allQuestionsFromAttendees | json }}
-  </pre>
+
+
+<pre>
+  These are all the questions asked: {{ allQuestionsFromAttendeessd | json }}
+</pre>
