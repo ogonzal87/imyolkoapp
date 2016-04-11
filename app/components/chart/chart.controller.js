@@ -29,7 +29,7 @@ function ResultsCtrl($scope, $interval, FIREBASE_URL, $firebaseArray, $firebaseO
       $scope.intervalDislikeVotes.push(numDislikeVotes);
       pushToLikeLineLineArr();
       pushToDislikeLineLineArr();
-    }, 1000);
+    }, 60000);
 // Create a wey to stop the Presetation and Intevals
     $scope.stopPresentation = function() {
       console.log("Called cancel interval");
@@ -56,7 +56,9 @@ function ResultsCtrl($scope, $interval, FIREBASE_URL, $firebaseArray, $firebaseO
   $scope.likeLine = likeLine;
   $scope.dislikeLine = dislikeLine;
 
-  $scope.$watchGroup(['likeLine', 'dislikeLine'], function(newVals, oldVals, scope) {
+  $scope.$watch('likeLine', function(newVals, oldVals) {
+    console.log(likeLine);
+    console.log(oldVals);
 
     var allData = {
       // A labels array that can contain any sort of values
