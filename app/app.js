@@ -3,8 +3,7 @@ angular
   'firebase',
   'ui.router',
   'Attendee',
-  'Presenter',
-  'Chart'
+  'Presenter'
 ])
 .constant('FIREBASE_URL', 'https://yolkoapp.firebaseio.com')
 .config(ApplicationConfig);
@@ -25,12 +24,7 @@ function ApplicationConfig($stateProvider, $urlRouterProvider) {
   		url: '/dashboard',
   		templateUrl: 'views/dashboard-page/dashboard-page.html',
       controller: 'PresenterCtrl'
-  	})
-    .state('results', {
-      url: '/results',
-      templateUrl: 'views/results-page/results-page.html',
-      controller: 'ResultsCtrl'
-    });
+  	});
 
   $urlRouterProvider.otherwise('/');
 }
