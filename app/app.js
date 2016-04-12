@@ -22,8 +22,8 @@ function ApplicationConfig($stateProvider, $urlRouterProvider) {
       controller: 'AttendeeCtrl'
   	})
     .state('dashboard', {
-  		url: '/dasboard',
-  		templateUrl: 'views/dashboard-page/dasboard-page.html',
+  		url: '/dashboard',
+  		templateUrl: 'views/dashboard-page/dashboard-page.html',
       controller: 'PresenterCtrl'
   	})
     .state('results', {

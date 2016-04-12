@@ -1,16 +1,21 @@
 .meetingjumbotronn {
   position: relative;
-  height: 70vh;
-  background-color: #690996;
+  height: 75vh;
+  background: url(../../assets/backgrounds/landing.png);
+  background-repeat: no-repeat;
+  background-size: cover;
   min-height: 400px;
   display: flex;
   align-items: center;
   flex-direction: column;
-  text-align: center; }
+  text-align: center;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 1px 3px; }
   .meetingjumbotronn .container {
     color: #ffffff; }
     .meetingjumbotronn .container .avatar-container {
-      height: 250px; }
+      height: 300px; }
     .meetingjumbotronn .container .votebtns-container {
       display: flex;
       align-items: center;
@@ -23,17 +28,19 @@
     background: rgba(34, 34, 34, 0.25);
     box-shadow: 0 3px -6px rgba(0, 0, 0, 0.3), inset 0 -3px 3px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
-    padding: 15px;
+    padding: 15px 15px 20px 15px;
     bottom: 0px;
     left: 0px;
     right: 0px;
     margin-bottom: 0px; }
 
-.question-containrer {
+.question-container {
   max-width: 1000px;
   margin: 0 auto 50px;
   padding: 30px 40px 10px 40px;
   background-color: #ecf0f1; }
-  .question-containrer .askbutton {
+  .question-container .askbutton {
     margin-top: 20px;
     padding: 10px 20px; }
+  .question-container .questions {
+    margin-bottom: 20px; }

@@ -1,6 +1,6 @@
 .jumbotronhome {
   height: 60vh;
-  background-color: #690996;
+  background: url(../../assets/backgrounds/landing.png);
   color: #ffffff;
   min-height: 700px;
   display: flex;

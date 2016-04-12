@@ -1,0 +1,9 @@
+.panels-dashboard {
+  width: 100%;
+  height: 130px;
+  margin: 20px 5px; }
+  .panels-dashboard .icons-dashboard-center {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center; }

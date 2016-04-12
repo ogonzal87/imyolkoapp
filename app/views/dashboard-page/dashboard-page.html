@@ -1,0 +1,160 @@
+<!--   DASHBOARD -->
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-3 col-sm-6">
+    <!-- START WIDGET -->
+      <div class="panel panels-dashboard">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-xs-4 icons-dashboard-center">
+              <i class="fa fa-user fa-3x"></i>
+            </div>
+            <div class="col-xs-8">
+              <h3>Attendees</h3>
+              <h3>{{ numAttendees }}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6 ">
+    <!-- START WIDGET -->
+      <div class="panel panels-dashboard" ng-class="volumeUpPercent.class">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-xs-4 icons-dashboard-center">
+              <i class="fa fa-volume-off fa-3x"></i>
+            </div>
+            <div class="col-xs-8">
+              <h3>Can't Hear</h3>
+              <h3>{{ volumeUpPercent.content }}%</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6 ">
+      <!-- START WIDGET -->
+      <div class="panel panels-dashboard " ng-class="speedPercent.class">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-xs-4 icons-dashboard-center">
+              <i class="fa fa-rocket fa-3x"></i>
+            </div>
+            <div class="col-xs-8">
+              <h3>Speed</h3>
+              <h3>{{ speedPercent.content }}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6 ">
+      <!-- START WIDGET -->
+      <div class="panel panels-dashboard " ng-class="panicPercent.class">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-xs-4 panel-center-items">
+              <i class="fa fa-fire-extinguisher fa-3x"></i>
+            </div>
+            <div class="col-xs-8">
+              <h3>Lost</h3>
+              <h3>{{ panicPercent.content }}%</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <!-- YOLKO MESSAGE -->
+         <strong><h2>{{ message }}</h2></strong>
+        <!-- YOLKO MESSAGE END -->
+      </div>
+    </div>
+    </div>
+</div>
+
+
+<!-- {{speedPercent.value}}<br>
+{{volumeUpPercent.value}}<br> -->
+<!-- {{dislikePercent}}<br> -->
+
+
+<div class="container results">
+
+  <div class="container text-center">
+  <!--   <h1>How is Yolko feeling?</h1> -->
+
+  <!-- YOLKO BEHAVIOR -->
+        <div ng-show="zzz">
+          <img src="../img/zzz.png"/>
+        </div>
+        <div ng-show="laughing">
+          <img src="../img/laughing.png"/>
+        </div>
+        <div ng-show="want">
+          <img src="../img/want.png"/>
+        </div>
+        <div ng-show="indifferent">
+          <img src="../img/indifferent.png"/>
+        </div>
+        <div ng-show="startingtonotgetit">
+          <img src="../img/startingtonotgetit.png"/>
+        </div>
+        <div ng-show="idontgetit">
+          <img src="../img/idontgetit.png"/>
+        </div>
+        <div ng-show="burnt">
+          <img src="../img/burnt.png"/>
+        </div>
+  </div>
+</div><!-- container results end -->
+
+
+  <!--   DASHBOARD END-->
+
+<!--   QUESTIONS -->
+	<div class="panel panel-default" ng-hide="questions == 0">
+  	<div class="panel-body">
+    	<ul class="list-group">
+			  <li class="list-group-item" ng-repeat="question in questions">
+			    {{ question.content }}
+			    <span>
+			      <!-- <button class="btn btn-sm btn-default alignright" ng-click="removeQuestion(question)">X</button> -->
+			    </span>
+			  </li>
+			</ul>
+  	</div>
+	</div>
+  <!--   QUESTIONS END -->
+
+<!-- RESET BUTTONS -->
+<div class="container text-center">
+    <button class="btn btn-default resetbutton" ng-click="resetYolko()">Reset Yolko</button>
+    <button class="btn btn-default resetbutton" ng-click="resetVolumeTraceker()">Reset Volume</button>
+    <button class="btn btn-default resetbutton" ng-click="resetSpeedTracker()">Reset Speed</button>
+    <button class="btn btn-default resetbutton" ng-click="resetPanicTracker()">Reset Panic</button>
+    <button class="btn btn-default resetbutton" ng-click="resetEverything()">Reset Everything</button>
+
+  <div class="resetbutton start-new-presentation-button">
+    <button class="btn btn-danger" ng-click="deleteEverything()">Start New Presentation</button>
+  </div>
+</div>
+
+</div>
+
+
+
+<!-- RESET BUTTONS -->

@@ -110,7 +110,7 @@
 
 </div> <!--End of Jumbotron -->
 
-<div class="container panel question-containrer">
+<div class="container panel question-container">
 
 	<!-- ask question area - input filed and btn -->
 	<form role="form">
@@ -121,7 +121,7 @@
 								ng-model="questionContent"
                 type="text"
                 class="form-control question-input-field"
-                placeholder="Ask way..."
+                placeholder="Ask a question and the audience will up or down vote it..."
       		      ng-keydown="addQuestionKeyDown($event)">
       </textarea>
 			<!-- <span class="input-group-addon btn btn-success">Send</span> -->
@@ -136,7 +136,7 @@
 		</div>
 	</form>
 
-	<ul class="list-group">
+	<ul class="list-group questions">
 	  <li class="list-group-item" ng-repeat="(key, question) in allQuestionsFromAttendees">
 	    {{ question.content }}
 	    <span>
