@@ -12,6 +12,10 @@ function PresenterCtrl($scope, $interval, FIREBASE_URL, $firebaseArray, $firebas
 // create an Array for all the votes of the current user
   $scope.dislikeVotesArray = $firebaseArray(currentDislikeVotesRef);
 
+// On load create an end point for all attendees
+  var refArrayAllAttendees = new Firebase(FIREBASE_URL + "/attendees");
+  $scope.attendees = $firebaseArray(refArrayAllAttendees);
+
 // arrays that keep track of all the votes --> this arrays are populated each time the interval is triggered
   $scope.intervalLikeVotes = [];
   $scope.intervalDislikeVotes = [];
@@ -98,4 +102,147 @@ function PresenterCtrl($scope, $interval, FIREBASE_URL, $firebaseArray, $firebas
     // is the actual data object.
     new Chartist.Line('.ct-chart', allData, options);
   }, true);
+
+
+
+//+++++++++++++++++++++++++++++++++//FIREBASE WATCHING ALL EVENTS+++++++++++++++++++++++++++++++//
+  $scope.$watch('attendees', function(newVal, oldVal) {
+    $scope.numAttendees = $scope.attendees.length;
+
+  //VOTES
+  ///////////////////////////////////////////////////////////////////////////
+    // var dislikeVotesAttendees = _.filter($scope.attendees, function(attendee) {
+    //   return attendee.vote == "dislike";
+    // });
+    // $scope.dislikeVotesAttendees = dislikeVotesAttendees.length;
+    // $scope.dislikePercent = Math.round((dislikeVotesAttendees.length / $scope.numAttendees) * 100);
+  //VOTES END
+  ///////////////////////////////////////////////////////////////////////////
+
+  //VOLUME
+  ///////////////////////////////////////////////////////////////////////////
+    var volumeUpAttendees = _.filter($scope.attendees, function(attendee) {
+      return attendee.volumeUp == "yes";
+    });
+    $scope.volumeUpAttendees = volumeUpAttendees.length;
+    $scope.volumeUpPercent = volume(Math.round((volumeUpAttendees.length / $scope.numAttendees) * 100));
+  //VOLUME END
+  ///////////////////////////////////////////////////////////////////////////
+
+
+  //SPEED
+  ///////////////////////////////////////////////////////////////////////////
+    $scope.speedValue = _.reduce($scope.attendees, function(memo, attendee) {
+      return memo + attendee.speed;
+    }, 0);
+    $scope.speedPercent = speed(Math.round(($scope.speedValue / $scope.numAttendees) * 100));
+  //SPEED END
+  ///////////////////////////////////////////////////////////////////////////
+
+  //FEELING
+  ///////////////////////////////////////////////////////////////////////////
+    var feelingValues = _.filter($scope.attendees, function(attendee) {
+      return attendee.feeling == "panic";
+    });
+    $scope.feelingValues = feelingValues.length;
+    $scope.panicPercent = panic(Math.round((feelingValues.length / $scope.numAttendees) * 100));
+  //FEELING END
+  ///////////////////////////////////////////////////////////////////////////
+
+  //QUESTIONS
+  ///////////////////////////////////////////////////////////////////////////
+  // Create a watch to watch othe what happens on the Attendees node
+    $scope.allQuestionsFromAttendees = [];
+    _.each($scope.attendees, function(attendee) {
+      _.each(attendee.questions, function(question) {
+        $scope.allQuestionsFromAttendees.push({
+          content: question.content,
+          name: attendee.name
+        });
+      });
+    });
+  //QUESTIONS END
+  ////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////
+  }, true);
+
+
+
+  function volume(percent) {
+    if (percent > 10) {
+      return { value: percent, content: percent, class: 'panel-dashboard-bad' };
+    } else {
+      return { value: percent, content: percent, class: 'panel' };
+    }
+  }
+
+  function speed(percent) {
+    if (percent > 20) {
+      return { value: percent, content: 'Too Slow!', class: 'panel-dashboard-bad' };
+      } else if (percent > 10) {
+        return { value: percent, content: 'Go Faster', class: 'panel-dashboard-middle' };
+      } else if (percent < -20) {
+        return { value: percent, content: 'Too Fast!', class: 'panel-dashboard-bad' };
+      } else if (percent < -10) {
+        return { value: percent, content: 'Go Slower', class: 'panel-dashboard-middle' };
+      } else {
+        return { value: percent, content: 'Just Fine', class: 'panel' };
+      }
+    }
+
+    function panic(percent) {
+      if (percent > 25) {
+        return { content: percent, class: 'panel-dashboard-bad' };
+      } else {
+        return { content: percent, class: 'panel' };
+      }
+    }
+
+// ============================ RESET ================================
+
+
+  $scope.resetVolumeTraceker = function() {
+    _.each($scope.attendees, function(attendee) {
+      attendee.volumeUp = 'no';
+      $scope.attendees.$save(attendee);
+    });
+  };
+
+  $scope.resetSpeedTracker = function() {
+    _.each($scope.attendees, function(attendee) {
+      attendee.speed = 0;
+      $scope.attendees.$save(attendee);
+    });
+  };
+
+  $scope.resetYolko = function() {
+    _.each($scope.attendees, function(attendee) {
+      attendee.vote = 'like';
+      $scope.attendees.$save(attendee);
+    });
+  };
+
+  $scope.resetPanicTracker = function() {
+    _.each($scope.attendees, function(attendee) {
+      attendee.feeling = 'fine';
+      $scope.attendees.$save(attendee);
+    });
+  };
+
+ $scope.resetEverything = function() {
+    _.each($scope.attendees, function(attendee) {
+      attendee.feeling = 'fine';
+      attendee.speed = 0;
+      attendee.volumeUp = 0;
+      attendee.vote = 'like';
+      $scope.attendees.$save(attendee);
+      var refArrayQuestions = new Firebase(FIREBASE_URL + '/attendees/' + attendee.key + '/questions');
+      refArrayQuestions.remove();
+    });
+  };
+
+  $scope.deleteEverything = function() {
+   refArrayAllAttendees.remove();
+  };
+
 }

@@ -12,7 +12,7 @@
             </div>
             <div class="col-xs-8">
               <h3>Attendees</h3>
-              <h3>{{ numAttendees }}</h3>
+              <h3>{{ numAttendees || 0}}</h3>
             </div>
           </div>
         </div>
@@ -21,7 +21,8 @@
 
     <div class="col-md-3 col-sm-6">
     <!-- START WIDGET -->
-      <div class="panel panels-dashboard" ng-class="volumeUpPercent.class">
+      <div class="panel panels-dashboard"
+          ng-class="volumeUpPercent.class">
         <div class="panel-body">
           <div class="row">
             <div class="col-xs-4 icons-dashboard-center">
@@ -29,7 +30,7 @@
             </div>
             <div class="col-xs-8">
               <h3>Can't Hear</h3>
-              <h3>{{ volumeUpPercent.content }}%</h3>
+              <h3 ng-if="volumeUpPercent.content">{{ volumeUpPercent.content }}%</h3>
             </div>
           </div>
         </div>
@@ -38,7 +39,8 @@
 
     <div class="col-md-3 col-sm-6 ">
       <!-- START WIDGET -->
-      <div class="panel panels-dashboard " ng-class="speedPercent.class">
+      <div class="panel panels-dashboard "
+            ng-class="speedPercent.class">
         <div class="panel-body">
           <div class="row">
             <div class="col-xs-4 icons-dashboard-center">
@@ -55,7 +57,7 @@
 
     <div class="col-md-3 col-sm-6">
       <!-- START WIDGET -->
-      <div class="panel panels-dashboard " ng-class="panicPercent.class">
+      <div class="panel panels-dashboard" ng-class="panicPercent.class">
         <div class="panel-body">
           <div class="row">
             <div class="col-xs-4 panel-center-items">
@@ -63,7 +65,7 @@
             </div>
             <div class="col-xs-8">
               <h3>Lost</h3>
-              <h3>{{ panicPercent.content }}24%</h3>
+              <h3 ng-if="panicPercent.content">{{ panicPercent.content }}%</h3>
             </div>
           </div>
         </div>
@@ -89,10 +91,11 @@
   </div>
 </div>
 
-
-<!-- {{speedPercent.value}}<br>
-{{volumeUpPercent.value}}<br> -->
-<!-- {{dislikePercent}}<br> -->
+<!-- <pre>
+  Speed Percent: {{speedPercent.value}}<br>
+  Volume up Percent: {{volumeUpPercent.value}}<br>
+  Dislike Percent: {{dislikePercent}}<br>
+</pre> -->
 
 
 <div class="container results">
@@ -119,10 +122,10 @@
   <!--   DASHBOARD END-->
 
 <!--   QUESTIONS -->
-	<div class="panel panel-default" ng-hide="true">
+	<div class="panel panel-default" ng-if="allQuestionsFromAttendees.length > 0">
   	<div class="panel-body">
     	<ul class="list-group">
-			  <li class="list-group-item" ng-repeat="question in questions">
+			  <li class="list-group-item" ng-repeat="question in allQuestionsFromAttendees">
 			    {{ question.content }}
 			    <span>
 			      <!-- <button class="btn btn-sm btn-default alignright" ng-click="removeQuestion(question)">X</button> -->

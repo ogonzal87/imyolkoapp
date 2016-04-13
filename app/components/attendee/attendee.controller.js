@@ -68,8 +68,6 @@ function AttendeeCtrl(FIREBASE_URL, $firebaseObject, $firebaseArray, $scope, $ti
 //QUESTIONS END
 ///////////////////////////////////////////////////////////////////////////
 
-
-
 //Votes ____________________________________________________________________________________________________________________________________
 
 // create an end point in Firebase for all attendees (root of attendees)
@@ -93,10 +91,10 @@ function AttendeeCtrl(FIREBASE_URL, $firebaseObject, $firebaseArray, $scope, $ti
     });
 // I have to disable to btn so people so not submit more than 1 vote per
 // interval
-    // $scope.disableLikeBtn = true;
-    // $timeout(function() {
-    //   $scope.disableLikeBtn = false;
-    // }, 1000);
+    $scope.disableLikeBtn = true;
+    $timeout(function() {
+      $scope.disableLikeBtn = false;
+    }, 1000);
   };
 
 // create an end point in Firebase for the votes of the current user
@@ -115,10 +113,10 @@ function AttendeeCtrl(FIREBASE_URL, $firebaseObject, $firebaseArray, $scope, $ti
     });
 // I have to disable to btn so people so not submit more than 1 vote per
 // interval
-    // $scope.disableDislikeBtn = true;
-    // $timeout(function() {
-    //   $scope.disableDislikeBtn = false;
-    // }, 1000);
+    $scope.disableDislikeBtn = true;
+    $timeout(function() {
+      $scope.disableDislikeBtn = false;
+    }, 1000);
   };
 
 
@@ -136,6 +134,15 @@ function AttendeeCtrl(FIREBASE_URL, $firebaseObject, $firebaseArray, $scope, $ti
         });
       });
     });
+
+    // Panic Button Logic
+  $scope.panicButton = function(attendee) {
+    if ($scope.attendee.feeling == "fine") {
+      $scope.attendee.feeling = "panic";
+    } else if ($scope.attendee.feeling == "panic") {
+      $scope.attendee.feeling = "fine";
+    }
+   };// Panic Button Logic
   }, true);
 
 

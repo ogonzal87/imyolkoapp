@@ -44,12 +44,15 @@
 
     <div class="votebtns-container">
       <!-- vote up -->
-		  <button class="btn btn-lg btn-success votebtn" ng-click="attendee.vote = 'like'">
-		  	<span class="fa fa-thumbs-up fa-3x"></span>
+		  <button class="btn btn-lg btn-success votebtn"
+							ng-click="attendee.vote = 'like'">
+		  	<i class="fa fa-thumbs-up fa-3x"></i>
       </button>
       <!-- vote down -->
-		  <button class="btn btn-lg btn-danger dislike-button votebtn" ng-click="attendee.vote = 'dislike'">
-		  	<span class="fa fa-thumbs-down fa-3x"></span>
+		  <button class="btn btn-lg btn-danger votebtn"
+							ng-click="attendee.vote = 'dislike'"
+							ng>
+		  	<i class="fa fa-thumbs-down fa-3x"></i>
       </button>
 		</div>
 
@@ -94,13 +97,13 @@
       <div class="col-sm-4 attendee-buttons">
         <button class="btn btn-secondary-outline"
                 title="Press if you are lost!"
-                ng-show="attendee.feeling == 'fine'"
+                ng-show="attendee.feeling ==='fine'"
                 ng-click='panicButton(attendee)'>
           <i class="fa fa-fire-extinguisher fa-3x"></i>
         </button>
         <button class="btn btn-success"
                 title="I am fine now!"
-                ng-show="attendee.feeling == 'panic'"
+                ng-show="attendee.feeling === 'panic'"
                 ng-click='panicButton(attendee)'>
           <i class="fa fa-check-circle-o fa-3x"></i>
         </button>
