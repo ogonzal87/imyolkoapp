@@ -72,6 +72,7 @@ function AttendeeCtrl(FIREBASE_URL, $firebaseObject, $firebaseArray, $scope, $ti
 
 // create an end point in Firebase for all attendees (root of attendees)
   var votesRefArray = new Firebase(FIREBASE_URL + "/votes");
+
 // create an Array with all the attendees in the database with theis keys
   $scope.votes         = $firebaseArray(votesRefArray);
 
@@ -85,16 +86,16 @@ function AttendeeCtrl(FIREBASE_URL, $firebaseObject, $firebaseArray, $scope, $ti
     $scope.attendee.vote = 'like';
     $scope.likeVotesArray.$add({
       user: defaultAttendee.key,
-      name: 'like',
+      vote: 'like',
       value: 1,
       timestamp: Firebase.ServerValue.TIMESTAMP
     });
 // I have to disable to btn so people so not submit more than 1 vote per
 // interval
-    $scope.disableLikeBtn = true;
-    $timeout(function() {
-      $scope.disableLikeBtn = false;
-    }, 1000);
+    // $scope.disableLikeBtn = true;
+    // $timeout(function() {
+    //   $scope.disableLikeBtn = false;
+    // }, 1000);
   };
 
 // create an end point in Firebase for the votes of the current user
@@ -107,16 +108,16 @@ function AttendeeCtrl(FIREBASE_URL, $firebaseObject, $firebaseArray, $scope, $ti
     $scope.attendee.vote = 'dislike';
     $scope.dislikeVotesArray.$add({
       user: defaultAttendee.key,
-      name: 'dislike',
+      vote: 'dislike',
       value: 0,
       timestamp: Firebase.ServerValue.TIMESTAMP
     });
 // I have to disable to btn so people so not submit more than 1 vote per
 // interval
-    $scope.disableDislikeBtn = true;
-    $timeout(function() {
-      $scope.disableDislikeBtn = false;
-    }, 1000);
+    // $scope.disableDislikeBtn = true;
+    // $timeout(function() {
+    //   $scope.disableDislikeBtn = false;
+    // }, 1000);
   };
 
 

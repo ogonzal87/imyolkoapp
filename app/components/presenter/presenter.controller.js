@@ -30,12 +30,13 @@ function PresenterCtrl($scope, $interval, FIREBASE_URL, $firebaseArray, $firebas
     var interval = $interval(function() {
       var numLikeVotes    = $scope.likeVotesArray.length;
       var numDislikeVotes = $scope.dislikeVotesArray.length;
+      console.log(numLikeVotes);
       $scope.intervalLikeVotes.push(numLikeVotes);
       $scope.intervalDislikeVotes.push(numDislikeVotes);
       pushToLikeLineLineArr();
       pushToDislikeLineLineArr();
 // interval duration is set to 1 minute by default
-// TODO: need to establish a varibale so that the presented can dictate
+// TODO: need to establish a variable so that the presented can dictate
 // the interval themselves.
     }, 5000);
 // Create a way to stop the Presetation and Intevals
@@ -53,6 +54,7 @@ function PresenterCtrl($scope, $interval, FIREBASE_URL, $firebaseArray, $firebas
        return num - memo;
      }, 0);
     likeLine.push(b);
+    console.log('pushed to like');
   };
   var pushToDislikeLineLineArr = function () {
     var a = _.last($scope.intervalDislikeVotes, [2]);
@@ -165,7 +167,6 @@ function PresenterCtrl($scope, $interval, FIREBASE_URL, $firebaseArray, $firebas
   ////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
   }, true);
-
 
 
   function volume(percent) {

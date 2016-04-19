@@ -45,13 +45,14 @@
     <div class="votebtns-container">
       <!-- vote up -->
 		  <button class="btn btn-lg btn-success votebtn"
-							ng-click="attendee.vote = 'like'">
+							
+							ng-click="voteLike()">
 		  	<i class="fa fa-thumbs-up fa-3x"></i>
       </button>
       <!-- vote down -->
 		  <button class="btn btn-lg btn-danger votebtn"
-							ng-click="attendee.vote = 'dislike'"
-							ng>
+
+							ng-click="voteDislike()">
 		  	<i class="fa fa-thumbs-down fa-3x"></i>
       </button>
 		</div>

@@ -1,0 +1,28 @@
+.jumbotronhome {
+  height: 60vh;
+  background: url(../../assets/backgrounds/landing.png);
+  color: #ffffff;
+  min-height: 700px;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .jumbotronhome .btn-xlg {
+    font-size: 30px;
+    margin-top: 30px;
+    width: 100%;
+    padding-top: 12px;
+    padding-bottom: 12px; }
+
+.rows-home {
+  padding: 0 25px; }
+
+.icons-home {
+  display: flex;
+  align-items: center;
+  flex-direction: column; }
+
+.homemain {
+  max-width: 900px;
+  margin-bottom: 100px; }
+  .homemain .padding-paragraph {
+    padding-top: 50px; }
