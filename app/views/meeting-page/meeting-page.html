@@ -6,46 +6,48 @@
 
 <!-- YOLKO BEHAVIOR -->
 		<div class="avatar-container">
-			<div ng-show="true">
+			<div ng-if="zzz || votes.length === 0">
 				<img src="assets/avatars/zzz.png"/>
 			</div>
-			<div ng-show="badass">
+			<div ng-if="badass">
 				<img src="assets/avatars/badass.png"/>
 			</div>
-			<div ng-show="igotthis">
+			<div ng-if="igotthis">
 				<img src="assets/avatars/igotthis.png"/>
 			</div>
-			<div ng-show="confident">
+			<div ng-if="confident">
 				<img src="assets/avatars/confident.png"/>
 			</div>
-			<div ng-show="want">
+			<div ng-if="want">
 				<img src="assets/avatars/want.png"/>
 			</div>
-			<div ng-show="tastey">
+			<div ng-if="tastey">
 				<img src="assets/avatars/tastey.png"/>
 			</div>
-			<div ng-show="startingtonotgetit">
+			<div ng-if="startingtonotgetit">
 				<img src="assets/avatars/startingtonotgetit.png"/>
 			</div>
-			<div ng-show="idontgetit">
+			<div ng-if="idontgetit">
 				<img src="assets/avatars/idontgetit.png"/>
 			</div>
-			<div ng-show="shocked">
+			<div ng-if="shocked">
 				<img src="assets/avatars/shocked.png"/>
 			</div>
-			<div ng-show="burnt">
+			<div ng-if="burnt">
 	      <img src="assets/avatars/burnt.png"/>
 	    </div>
 		</div>
 <!-- YOLKO BEHAVIOR -->
-
+<pre>
+	{{ dislikePercent}}
+</pre>
 
 <!-- Vote bottons -->
 
     <div class="votebtns-container">
       <!-- vote up -->
 		  <button class="btn btn-lg btn-success votebtn"
-							
+
 							ng-click="voteLike()">
 		  	<i class="fa fa-thumbs-up fa-3x"></i>
       </button>

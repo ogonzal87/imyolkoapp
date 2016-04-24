@@ -1,9 +1,8 @@
 angular
 .module('YolkoApp', [
-  'firebase',
   'ui.router',
-  'Attendee',
-  'Presenter'
+  'Presenter',
+  'Attendee'
 ])
 .constant('FIREBASE_URL', 'https://yolkoapp.firebaseio.com')
 .config(ApplicationConfig);

@@ -1,20 +1,18 @@
 angular.module('Presenter')
 .controller('PresenterCtrl', PresenterCtrl);
 
-function PresenterCtrl($scope, $interval, FIREBASE_URL, $firebaseArray, $firebaseObject) {
+function PresenterCtrl($scope, $interval, VotesService, QuestionsService, DataAttendeeService) {
 
-// create an end point in Firebase for the votes of the current user
-  var currentLikeVotesRef = new Firebase(FIREBASE_URL + "/votes/likes");
-// create an Array for all the vostes of the current user
-  $scope.likeVotesArray = $firebaseArray(currentLikeVotesRef);
-// create an end point in Firebase for the votes of the current user
-  var currentDislikeVotesRef = new Firebase(FIREBASE_URL + "/votes/dislikes");
-// create an Array for all the votes of the current user
-  $scope.dislikeVotesArray = $firebaseArray(currentDislikeVotesRef);
-
-// On load create an end point for all attendees
-  var refArrayAllAttendees = new Firebase(FIREBASE_URL + "/attendees");
-  $scope.attendees = $firebaseArray(refArrayAllAttendees);
+// LOAD ATTENDEES
+  $scope.attendees = DataAttendeeService.attendees;
+// LOAD QUESTIONS
+  $scope.questions = QuestionsService.questions;
+// LOAD VOTES
+  $scope.votes = VotesService.votes;
+// LOAD LIKE VOTES
+  $scope.likeVotesArray = VotesService.allLikeVotesApiUrl;
+// LOAD DISLIKE VOTES
+  $scope.dislikeVotesArray = VotesService.allDislikeVotesApiUrl;
 
 // arrays that keep track of all the votes --> this arrays are populated each time the interval is triggered
   $scope.intervalLikeVotes = [];
@@ -36,7 +34,7 @@ function PresenterCtrl($scope, $interval, FIREBASE_URL, $firebaseArray, $firebas
       pushToLikeLineLineArr();
       pushToDislikeLineLineArr();
 // interval duration is set to 1 minute by default
-// TODO: need to establish a variable so that the presented can dictate
+// TODO: need to establish a varibale so that the presented can dictate
 // the interval themselves.
     }, 5000);
 // Create a way to stop the Presetation and Intevals
