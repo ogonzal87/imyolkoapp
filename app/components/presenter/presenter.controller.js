@@ -10,9 +10,9 @@ function PresenterCtrl($scope, $interval, VotesService, QuestionsService, DataAt
 // LOAD VOTES
   $scope.votes = VotesService.votes;
 // LOAD LIKE VOTES
-  $scope.likeVotesArray = VotesService.allLikeVotesApiUrl;
+  $scope.likeVotesArray = VotesService.likeVotesArray;
 // LOAD DISLIKE VOTES
-  $scope.dislikeVotesArray = VotesService.allDislikeVotesApiUrl;
+  $scope.dislikeVotesArray = VotesService.dislikeVotesArray;
 
 // arrays that keep track of all the votes --> this arrays are populated each time the interval is triggered
   $scope.intervalLikeVotes = [];
@@ -26,41 +26,40 @@ function PresenterCtrl($scope, $interval, VotesService, QuestionsService, DataAt
 // Like and a Dislike Lines.
   $scope.startPresentation = function() {
     var interval = $interval(function() {
-      var numLikeVotes    = $scope.likeVotesArray.length;
-      var numDislikeVotes = $scope.dislikeVotesArray.length;
-      console.log(numLikeVotes);
-      $scope.intervalLikeVotes.push(numLikeVotes);
-      $scope.intervalDislikeVotes.push(numDislikeVotes);
+      $scope.intervalLikeVotes.push($scope.likeVotesArray.length);
+      $scope.intervalDislikeVotes.push($scope.dislikeVotesArray.length);
       pushToLikeLineLineArr();
       pushToDislikeLineLineArr();
 // interval duration is set to 1 minute by default
 // TODO: need to establish a varibale so that the presented can dictate
 // the interval themselves.
-    }, 5000);
+    }, 2000);
+// TODO: I need to take this stopPresetnation function out side on the Start Presentation function.
 // Create a way to stop the Presetation and Intevals
     $scope.stopPresentation = function() {
-      console.log("Called cancel interval");
       $interval.cancel(interval);
+      console.log("Stopped the meeting and canceled the interval");
     };
   };
+
+
 // functions that take the last 2 values of the interval arrays and
 // substracts them to come up of the number of clicks by interval
 // the product of this is pushed to the respective line arrays for display
-  var pushToLikeLineLineArr = function () {
+  function pushToLikeLineLineArr() {
     var a = _.last($scope.intervalLikeVotes, [2]);
     var b = _.reduce(a, function(memo, num){
        return num - memo;
      }, 0);
     likeLine.push(b);
-    console.log('pushed to like');
-  };
-  var pushToDislikeLineLineArr = function () {
+  }
+  function pushToDislikeLineLineArr() {
     var a = _.last($scope.intervalDislikeVotes, [2]);
     var b = _.reduce(a, function(memo, num){
        return num - memo;
      }, 0);
     dislikeLine.push(b);
-  };
+  }
 
 // Only doing this to see the values on the PRE tag on the page
   $scope.likeLine = likeLine;
@@ -164,6 +163,8 @@ function PresenterCtrl($scope, $interval, VotesService, QuestionsService, DataAt
   //QUESTIONS END
   ////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
+
+  
   }, true);
 
 

@@ -9,7 +9,7 @@ function AttendeeCtrl(FIREBASE_URL, $scope, $timeout, DataAttendeeService, Votes
   $scope.questions = QuestionsService.questions;
 // LOAD VOTES
   $scope.votes = VotesService.votes;
-  console.log($scope.votes);
+  console.log('All the votes in an array: ', $scope.votes);
 // LOAD LIKE VOTES
   $scope.likeVotesArray = VotesService.likeVotesArray;
 // LOAD DISLIKE VOTES
@@ -118,7 +118,7 @@ function AttendeeCtrl(FIREBASE_URL, $scope, $timeout, DataAttendeeService, Votes
 
 
 
-//TODO: I need to come up with better math here... 
+//TODO: I need to come up with better math here...
 
 // Create a watch to watch what happens on the Votes node
   $scope.$watch('votes', function(newVal, oldVal) {
