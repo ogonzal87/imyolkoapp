@@ -1,7 +1,7 @@
 angular.module('Presenter')
 .controller('PresenterCtrl', PresenterCtrl);
 
-function PresenterCtrl($scope, $interval, VotesService, QuestionsService, DataAttendeeService) {
+function PresenterCtrl($scope, $interval, VotesService, QuestionsService, DataAttendeeService, ResetService) {
 
 // LOAD ATTENDEES
   $scope.attendees = DataAttendeeService.attendees;
@@ -108,16 +108,6 @@ function PresenterCtrl($scope, $interval, VotesService, QuestionsService, DataAt
   $scope.$watch('attendees', function(newVal, oldVal) {
     $scope.numAttendees = $scope.attendees.length;
 
-  //VOTES
-  ///////////////////////////////////////////////////////////////////////////
-    // var dislikeVotesAttendees = _.filter($scope.attendees, function(attendee) {
-    //   return attendee.vote == "dislike";
-    // });
-    // $scope.dislikeVotesAttendees = dislikeVotesAttendees.length;
-    // $scope.dislikePercent = Math.round((dislikeVotesAttendees.length / $scope.numAttendees) * 100);
-  //VOTES END
-  ///////////////////////////////////////////////////////////////////////////
-
   //VOLUME
   ///////////////////////////////////////////////////////////////////////////
     var volumeUpAttendees = _.filter($scope.attendees, function(attendee) {
@@ -125,9 +115,6 @@ function PresenterCtrl($scope, $interval, VotesService, QuestionsService, DataAt
     });
     $scope.volumeUpAttendees = volumeUpAttendees.length;
     $scope.volumeUpPercent = volume(Math.round((volumeUpAttendees.length / $scope.numAttendees) * 100));
-  //VOLUME END
-  ///////////////////////////////////////////////////////////////////////////
-
 
   //SPEED
   ///////////////////////////////////////////////////////////////////////////
@@ -135,8 +122,6 @@ function PresenterCtrl($scope, $interval, VotesService, QuestionsService, DataAt
       return memo + attendee.speed;
     }, 0);
     $scope.speedPercent = speed(Math.round(($scope.speedValue / $scope.numAttendees) * 100));
-  //SPEED END
-  ///////////////////////////////////////////////////////////////////////////
 
   //FEELING
   ///////////////////////////////////////////////////////////////////////////
@@ -145,8 +130,6 @@ function PresenterCtrl($scope, $interval, VotesService, QuestionsService, DataAt
     });
     $scope.feelingValues = feelingValues.length;
     $scope.panicPercent = panic(Math.round((feelingValues.length / $scope.numAttendees) * 100));
-  //FEELING END
-  ///////////////////////////////////////////////////////////////////////////
 
   //QUESTIONS
   ///////////////////////////////////////////////////////////////////////////
@@ -160,11 +143,7 @@ function PresenterCtrl($scope, $interval, VotesService, QuestionsService, DataAt
         });
       });
     });
-  //QUESTIONS END
-  ////////////////////////////
-  ///////////////////////////////////////////////////////////////////////////
 
-  
   }, true);
 
 
@@ -198,51 +177,13 @@ function PresenterCtrl($scope, $interval, VotesService, QuestionsService, DataAt
       }
     }
 
-// ============================ RESET ================================
-
-
-  $scope.resetVolumeTraceker = function() {
-    _.each($scope.attendees, function(attendee) {
-      attendee.volumeUp = 'no';
-      $scope.attendees.$save(attendee);
-    });
-  };
-
-  $scope.resetSpeedTracker = function() {
-    _.each($scope.attendees, function(attendee) {
-      attendee.speed = 0;
-      $scope.attendees.$save(attendee);
-    });
-  };
-
-  $scope.resetYolko = function() {
-    _.each($scope.attendees, function(attendee) {
-      attendee.vote = 'like';
-      $scope.attendees.$save(attendee);
-    });
-  };
-
-  $scope.resetPanicTracker = function() {
-    _.each($scope.attendees, function(attendee) {
-      attendee.feeling = 'fine';
-      $scope.attendees.$save(attendee);
-    });
-  };
-
- $scope.resetEverything = function() {
-    _.each($scope.attendees, function(attendee) {
-      attendee.feeling = 'fine';
-      attendee.speed = 0;
-      attendee.volumeUp = 0;
-      attendee.vote = 'like';
-      $scope.attendees.$save(attendee);
-      var refArrayQuestions = new Firebase(FIREBASE_URL + '/attendees/' + attendee.key + '/questions');
-      refArrayQuestions.remove();
-    });
-  };
-
-  $scope.deleteEverything = function() {
-   refArrayAllAttendees.remove();
-  };
+    //QUESTIONS
+    ///////////////////////////////////////////////////////////////////////////
+    $scope.resetVolumeTraceker = ResetService.resetVolumeTraceker;
+    $scope.resetSpeedTracker   = ResetService.resetSpeedTracker;
+    $scope.resetYolko          = ResetService.resetYolko;
+    $scope.resetPanicTracker   = ResetService.resetPanicTracker;
+    $scope.resetEverything     = ResetService.resetEverything;
+    $scope.deleteEverything    = ResetService.deleteEverything;
 
 }
