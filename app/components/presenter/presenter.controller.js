@@ -1,21 +1,21 @@
 angular.module('Presenter')
 .controller('PresenterCtrl', PresenterCtrl);
 
-function PresenterCtrl($scope, $interval, VotesService, QuestionsService, DataAttendeeService, ResetService) {
+function PresenterCtrl($scope, $interval, VotesService, QuestionsService, DataAttendeeService, ResetService, QuizService) {
 
 // LOAD ATTENDEES
-  $scope.attendees = DataAttendeeService.attendees;
+  $scope.attendees         = DataAttendeeService.attendees;
 // LOAD QUESTIONS
-  $scope.questions = QuestionsService.questions;
+  $scope.questions         = QuestionsService.questions;
 // LOAD VOTES
-  $scope.votes = VotesService.votes;
+  $scope.votes             = VotesService.votes;
 // LOAD LIKE VOTES
-  $scope.likeVotesArray = VotesService.likeVotesArray;
-// LOAD DISLIKE VOTES
+  $scope.likeVotesArray    = VotesService.likeVotesArray;
+// LOAD DISLIKE VOTESs
   $scope.dislikeVotesArray = VotesService.dislikeVotesArray;
 
 // arrays that keep track of all the votes --> this arrays are populated each time the interval is triggered
-  $scope.intervalLikeVotes = [];
+  $scope.intervalLikeVotes    = [];
   $scope.intervalDislikeVotes = [];
 // initializing the dislike and like line arrays that will be used to populate the chart
   var likeLine = [];
@@ -64,7 +64,6 @@ function PresenterCtrl($scope, $interval, VotesService, QuestionsService, DataAt
 // Only doing this to see the values on the PRE tag on the page
   $scope.likeLine = likeLine;
   $scope.dislikeLine = dislikeLine;
-
 // Watch for events in the line arrays and dray the lines in the chart dinamically.
   $scope.$watch('likeLine', function(newVals, oldVals) {
     var allData = {
@@ -143,7 +142,6 @@ function PresenterCtrl($scope, $interval, VotesService, QuestionsService, DataAt
         });
       });
     });
-
   }, true);
 
 
@@ -177,13 +175,93 @@ function PresenterCtrl($scope, $interval, VotesService, QuestionsService, DataAt
       }
     }
 
-    //QUESTIONS
-    ///////////////////////////////////////////////////////////////////////////
+//Quiz
+///////////////////////////////////////////////////////////////////////////
+  $scope.isCorrectAnsA = false;
+  $scope.isCorrectAnsB = false;
+  $scope.isCorrectAnsC = false;
+  $scope.pushQuestion = function() {
+    var randomKey = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 8);
+    var questionData = {
+      question: $scope.questionContent,
+      availableAns: [
+        {
+          value: 'a',
+          content: $scope.choiceA,
+          isCorrectAns: $scope.isCorrectAnsA
+        },
+        {
+          value: 'b',
+          content: $scope.choiceB,
+          isCorrectAns: $scope.isCorrectAnsB
+        },
+        {
+          value: 'c',
+          content: $scope.choiceC,
+          isCorrectAns: $scope.isCorrectAnsC
+        }
+      ],
+      key: randomKey
+    };
+
+// Set the question in Firebase
+    QuizService.quizQuestion1Url.set(questionData);
+    // var refObject = new Firebase(FIREBASE_URL + questionData.key);
+    // var syncObject = $firebaseObject(refObject);
+    // refObject.set(questionData);
+
+    // var refArray = new Firebase(FIREBASE_URL + "quiz");
+    // $scope.quizQuestions = $firebaseArray(refArray);
+    console.log("Question: ", questionData );
+
+    var correctAns = _.findWhere(questionData.availableAns, {isCorrectAns: true});
+    console.log("correctAns: ", correctAns);
+  };
+
+  // Figure out which is thw correct answer from the data in Firebase and store in a variable
+
+    var correctAns = _.findWhere(QuizService.quizQuestion1Url.availableAns, {isCorrectAns: true});
+    console.log("correctAns: ", correctAns);
+
+
+
+  // Store all answers from the audience in an array
+
+
+
+
+
+
+
+
+
+  // Do a loop over the anser array and pull the answers that match the correct answer and store these in an array
+
+
+
+
+
+
+
+
+
+
+
+
+  // Find the length of this array and divide it by the number of attendees
+
+
+
+
+//RESET
+///////////////////////////////////////////////////////////////////////////
     $scope.resetVolumeTraceker = ResetService.resetVolumeTraceker;
     $scope.resetSpeedTracker   = ResetService.resetSpeedTracker;
     $scope.resetYolko          = ResetService.resetYolko;
     $scope.resetPanicTracker   = ResetService.resetPanicTracker;
     $scope.resetEverything     = ResetService.resetEverything;
     $scope.deleteEverything    = ResetService.deleteEverything;
+
+
 
 }

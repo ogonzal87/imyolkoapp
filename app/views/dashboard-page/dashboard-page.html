@@ -119,6 +119,56 @@
 </div><!-- container results end -->
 
 
+  <form role="form">
+    <div class="form-group">
+      <br>
+      <label for="question">Question:</label>
+      <input type="text"
+              class="form-control"
+              id="question"
+              placeholder="What would you like to ask everyone?"
+              ng-model="questionContent">
+    </div>
+    <div class="form-group">
+      <label for="choice-a">A</label>
+      <input type="text"
+              class="form-control"
+              id="choice-a"
+              placeholder="I'm a choice option"
+              ng-model="choiceA">
+      <div class="checkbox">
+        <label><input type="checkbox" ng-model"isCorrectAnsA" ng-click="isCorrectAnsA = !isCorrectAnsA"> Correct Answer</label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="choice-b">B</label>
+      <input type="text"
+              class="form-control"
+              id="choice-b"
+              placeholder="I'm a choice option"
+              ng-model="choiceB">
+      <div class="checkbox">
+        <label><input type="checkbox" ng-model"isCorrectAnsB" ng-click="isCorrectAnsB = !isCorrectAnsB"> Correct Answer</label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="choice-c">C</label>
+      <input type="text"
+              class="form-control"
+              id="choice-c"
+              placeholder="I'm a choice option"
+              ng-model="choiceC">
+      <div class="checkbox">
+        <label><input type="checkbox" ng-model"correctAnsC" ng-click="isCorrectAnsC = !isCorrectAnsC"> Correct Answer</label>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+    <button ng-click="pushQuestion()" class="btn btn-default">Submit</button>
+  </form>
+
+</div>
+
+
   <!--   DASHBOARD END-->
 
 <!--   QUESTIONS -->
