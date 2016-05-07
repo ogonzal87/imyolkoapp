@@ -204,24 +204,15 @@ function PresenterCtrl($scope, $interval, VotesService, QuestionsService, DataAt
       key: randomKey
     };
 
+    // Figure out which is thw correct answer from the data in Firebase and store in a variable
+    questionData.correctAns =  _.findWhere(questionData.availableAns, {isCorrectAns: true});
+
 // Set the question in Firebase
     QuizService.quizQuestion1Url.set(questionData);
-    // var refObject = new Firebase(FIREBASE_URL + questionData.key);
-    // var syncObject = $firebaseObject(refObject);
-    // refObject.set(questionData);
-
-    // var refArray = new Firebase(FIREBASE_URL + "quiz");
-    // $scope.quizQuestions = $firebaseArray(refArray);
     console.log("Question: ", questionData );
-
-    var correctAns = _.findWhere(questionData.availableAns, {isCorrectAns: true});
-    console.log("correctAns: ", correctAns);
   };
 
-  // Figure out which is thw correct answer from the data in Firebase and store in a variable
 
-    var correctAns = _.findWhere(QuizService.quizQuestion1Url.availableAns, {isCorrectAns: true});
-    console.log("correctAns: ", correctAns);
 
 
 

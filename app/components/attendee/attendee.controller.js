@@ -1,7 +1,7 @@
 angular.module('Attendee')
 .controller("AttendeeCtrl", AttendeeCtrl);
 
-function AttendeeCtrl(FIREBASE_URL, $scope, $timeout, DataAttendeeService, VotesService, QuestionsService) {
+function AttendeeCtrl(FIREBASE_URL, $scope, $timeout, DataAttendeeService, VotesService, QuestionsService, QuizService) {
 
 // LOAD ATTENDEES
   $scope.attendees = DataAttendeeService.attendees;
@@ -9,11 +9,14 @@ function AttendeeCtrl(FIREBASE_URL, $scope, $timeout, DataAttendeeService, Votes
   $scope.questions = QuestionsService.questions;
 // LOAD VOTES
   $scope.votes = VotesService.votes;
-  console.log('All the votes in an array: ', $scope.votes);
 // LOAD LIKE VOTES
   $scope.likeVotesArray = VotesService.likeVotesArray;
 // LOAD DISLIKE VOTES
   $scope.dislikeVotesArray = VotesService.dislikeVotesArray;
+  //LOAD QUIZ QUESTIONS
+  $scope.quizQuestion1 = QuizService.quizQuestion1;
+  $scope.quizQuestion2 = QuizService.quizQuestion2;
+  $scope.quizQuestion3 = QuizService.quizQuestion3;
 
 // bind the obj to the database in Firebase
 // any chnages that happen in the view will be updated automaticaly in Firebase and viseversa
@@ -63,6 +66,32 @@ function AttendeeCtrl(FIREBASE_URL, $scope, $timeout, DataAttendeeService, Votes
 
 //VOTES
 /////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+//QUIZ
+/////////////////////////////////////////////////////////////////////////
+  answerAArr = [];
+  answerBArr = [];
+  answerCArr = [];
+  $scope.answer = function () {
+
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -119,7 +148,6 @@ function AttendeeCtrl(FIREBASE_URL, $scope, $timeout, DataAttendeeService, Votes
 
 
 //TODO: I need to come up with better math here...
-
 // Create a watch to watch what happens on the Votes node
   $scope.$watch('votes', function(newVal, oldVal) {
     var numVotes = ($scope.likeVotesArray.length + $scope.dislikeVotesArray.length);

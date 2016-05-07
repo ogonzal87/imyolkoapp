@@ -116,6 +116,49 @@
 
 </div> <!--End of Jumbotron -->
 
+<div class="container">
+
+	<div class="row">
+    <div class="col-lg-12">
+        <h1 class="text-center">Pop Quiz</h1>
+       <div id="quiz">
+         <div id="question">
+					<p>{{ quizQuestion1.question }}</p>
+           <div id="choices">
+						 <div class="radio">
+						   <label><input type="radio" name="optradio">A) {{quizQuestion1.availableAns[0].content}}</label>
+						 </div>
+						 <div class="radio">
+						   <label><input type="radio" name="optradio">B) {{quizQuestion1.availableAns[1].content}}</label>
+						 </div>
+						 <div class="radio disabled">
+						   <label><input type="radio" name="optradio">C) {{quizQuestion1.availableAns[2].content}}</label>
+						 </div>
+         </div>
+
+         <button type="button" class="btn btn-primary">Submit</button>
+         </div>
+    </div>
+	</div>
+
+	<!-- <pre>
+
+		Question: {{ quizQuestion1.question }}
+
+		A: {{ quizQuestion1.availableAns[0].content }}
+		B: {{ quizQuestion1.availableAns[1].content }}
+		C: {{ quizQuestion1.availableAns[2].content }}
+
+		CorrectAns: {{ quizQuestion1.correctAns.content }}
+	</pre> -->
+
+
+</div>
+
+
+
+
+
 <div class="container panel question-container">
 
 	<!-- ask question area - input filed and btn -->
