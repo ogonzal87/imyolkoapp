@@ -116,30 +116,50 @@
 
 </div> <!--End of Jumbotron -->
 
-<div class="container">
+<div class="container quiz-container">
 
 	<div class="row">
-    <div class="col-lg-12">
-        <h1 class="text-center">Pop Quiz</h1>
-       <div id="quiz">
-         <div id="question">
-					<p>{{ quizQuestion1.question }}</p>
-           <div id="choices">
-						 <div class="radio">
-						   <label><input type="radio" name="optradio">A) {{quizQuestion1.availableAns[0].content}}</label>
-						 </div>
-						 <div class="radio">
-						   <label><input type="radio" name="optradio">B) {{quizQuestion1.availableAns[1].content}}</label>
-						 </div>
-						 <div class="radio disabled">
-						   <label><input type="radio" name="optradio">C) {{quizQuestion1.availableAns[2].content}}</label>
-						 </div>
-         </div>
+		<div class="col-md-12 well">
+			<h1 class="text-center">Pop Quiz</h1>
+			<div id="quiz">
+				 <div id="question">
+				 <p>{{ quizQuestion1.question }}</p>
+				 <div id="choices">
+					 <div class="radio">
+						 <label><input type="radio"
+													 name="availableAnsA"
+													 ng-model="chosenAnswer"
+													 ng-value="'A'">
+							 A) {{quizQuestion1.availableAns[0].content}}
+						 </label>
+					 </div>
+					 <div class="radio">
+						 <label><input type="radio"
+													 name="availableAnsB"
+													 ng-model="chosenAnswer"
+													 ng-value="'B'">
+							 B) {{quizQuestion1.availableAns[1].content}}
+						 </label>
+					 </div>
+					 <div class="radio">
+						 <label><input type="radio"
+													 name="availableAnsC"
+													 ng-model="chosenAnswer"
+													 ng-value="'C'">
+							 C) {{quizQuestion1.availableAns[2].content}}
+						 </label>
+					 </div>
+			 	 </div>
 
-         <button type="button" class="btn btn-primary">Submit</button>
-         </div>
+
+
+			 <button type="button"
+							 class="btn btn-primary"
+			 	       ng-click="submitAnswer()">Submit</button>
+			 </div>
     </div>
 	</div>
+
 
 	<!-- <pre>
 

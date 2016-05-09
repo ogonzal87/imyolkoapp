@@ -1,7 +1,7 @@
 angular.module('Attendee')
 .controller("AttendeeCtrl", AttendeeCtrl);
 
-function AttendeeCtrl(FIREBASE_URL, $scope, $timeout, DataAttendeeService, VotesService, QuestionsService, QuizService) {
+function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, QuestionsService, QuizService) {
 
 // LOAD ATTENDEES
   $scope.attendees = DataAttendeeService.attendees;
@@ -64,8 +64,13 @@ function AttendeeCtrl(FIREBASE_URL, $scope, $timeout, DataAttendeeService, Votes
   };
 
 
-//VOTES
-/////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
 
 
 
@@ -73,12 +78,22 @@ function AttendeeCtrl(FIREBASE_URL, $scope, $timeout, DataAttendeeService, Votes
 
 //QUIZ
 /////////////////////////////////////////////////////////////////////////
-  answerAArr = [];
-  answerBArr = [];
-  answerCArr = [];
-  $scope.answer = function () {
-
+  $scope.submitAnswer = function () {
+    if ($scope.chosenAnswer === "A") {
+      QuizService.quizAnswers1A.$add(1);
+    } else if ($scope.chosenAnswer === "B") {
+      QuizService.quizAnswers1B.$add(1);
+    } else if ($scope.chosenAnswer === "C") {
+      QuizService.quizAnswers1C.$add(1);
+    } else {
+      alert('Choose an option');
+    }
   };
+
+
+
+
+
 
 
 

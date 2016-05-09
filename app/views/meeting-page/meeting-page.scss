@@ -1,7 +1,6 @@
 .meetingjumbotronn {
   position: relative;
   height: 75vh;
-  // background-color: #690996;
   background: url(../../assets/backgrounds/landing.png);
   background-repeat: no-repeat;
   background-size: cover;
@@ -38,10 +37,10 @@
     box-shadow: 0 3px -6px rgba(0,0,0,0.3), inset 0 -3px 3px rgba(0,0,0,0.1);
     border-radius: 5px;
     padding: 15px 15px 20px 15px;
-    bottom:0px;
-    left:0px;
-    right:0px;
-    margin-bottom:0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 0px;
   }
 }
 
@@ -59,5 +58,17 @@
 
   .questions {
     margin-bottom: 20px;
+  }
+}
+
+.quiz-container {
+  margin-bottom: 40px;
+
+  h1 {
+    margin: 0;
+  }
+
+  button {
+    margin: 20px;
   }
 }
