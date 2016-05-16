@@ -1,7 +1,7 @@
 angular.module('Attendee')
 .controller("AttendeeCtrl", AttendeeCtrl);
 
-function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, QuestionsService, QuizService) {
+function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, QuestionsService, QuizService, QuizChartService) {
 
 // LOAD ATTENDEES
   $scope.attendees = DataAttendeeService.attendees;
@@ -73,6 +73,26 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
   };
 
 
+  $scope.$watch('quizQuestion1', function(newVals, oldVals) {
+    // var quizChart = QuizChartService.chart;
+    QuizChartService.answersA = QuizService.quizAnswers1A.length;
+    QuizChartService.answersB = QuizService.quizAnswers1B.length;
+    QuizChartService.answersC = QuizService.quizAnswers1C.length;
+
+    console.log("answersA", QuizChartService.answersA);
+    console.log("answersB", QuizChartService.answersB);
+    console.log("answersC", QuizChartService.answersC);
+
+  }, true);
+
+
+
+
+
+
+
+
+
 //QUESTIONS TO THE PRESENTER
 /////////////////////////////////////////////////////////////////////////
   $scope.addQuestionKeyDown = function(event) {
@@ -108,7 +128,7 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
         });
       });
     });
-    
+
     // Panic Button Logic
   $scope.panicButton = function(attendee) {
     if ($scope.attendee.feeling == "fine") {
@@ -117,7 +137,7 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
       $scope.attendee.feeling = "fine";
     }
    };// Panic Button Logic
-    
+
    displayYolko();
   }, true);
 
@@ -138,16 +158,16 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 
   //Displaying Yolko
   function displayYolko() {
-    $scope.burnt = $scope.dislikePercent >= 76;
-    $scope.shocked = $scope.dislikePercent >= 64 && $scope.dislikePercent <= 75.999999999999;
-    $scope.idontgetit = $scope.dislikePercent >= 56 && $scope.dislikePercent <= 63.999999999999;
+    $scope.burnt              = $scope.dislikePercent >= 76;
+    $scope.shocked            = $scope.dislikePercent >= 64 && $scope.dislikePercent <= 75.999999999999;
+    $scope.idontgetit         = $scope.dislikePercent >= 56 && $scope.dislikePercent <= 63.999999999999;
     $scope.startingtonotgetit = $scope.dislikePercent >= 48 && $scope.dislikePercent <= 55.999999999999;
-    $scope.tastey = $scope.dislikePercent >= 40 && $scope.dislikePercent <= 47.999999999999;
-    $scope.want = $scope.dislikePercent >= 32 && $scope.dislikePercent <= 39.999999999999;
-    $scope.confident = $scope.dislikePercent >= 24 && $scope.dislikePercent <= 31.999999999999;
-    $scope.igotthis = $scope.dislikePercent >= 16 && $scope.dislikePercent <= 23.999999999999;
-    $scope.badass = $scope.dislikePercent >= 8 && $scope.dislikePercent <= 15.999999999999;
-    $scope.zzz = $scope.dislikePercent < 7.999999999999 || null;
+    $scope.tastey             = $scope.dislikePercent >= 40 && $scope.dislikePercent <= 47.999999999999;
+    $scope.want               = $scope.dislikePercent >= 32 && $scope.dislikePercent <= 39.999999999999;
+    $scope.confident          = $scope.dislikePercent >= 24 && $scope.dislikePercent <= 31.999999999999;
+    $scope.igotthis           = $scope.dislikePercent >= 16 && $scope.dislikePercent <= 23.999999999999;
+    $scope.badass             = $scope.dislikePercent >= 8 && $scope.dislikePercent <= 15.999999999999;
+    $scope.zzz                = $scope.dislikePercent < 7.999999999999 || null;
   }
 
 }
