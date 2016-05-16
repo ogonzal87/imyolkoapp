@@ -38,9 +38,10 @@
 	    </div>
 		</div>
 <!-- YOLKO BEHAVIOR -->
-<!-- <pre>
-	{{ dislikePercent}}
-</pre> -->
+
+		<!-- <pre>
+			{{ dislikePercent}}
+		</pre> -->
 
 <!-- Vote bottons -->
 
@@ -116,6 +117,37 @@
 
 </div> <!--End of Jumbotron -->
 
+
+
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+	Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+			</div>
+			<div class="modal-body">
+				Here are the Availabel answers. The user selects something here and is diplayed in the
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
 <div class="container quiz-container">
 
 	<div class="row">
@@ -151,28 +183,12 @@
 					 </div>
 			 	 </div>
 
-
-
 			 <button type="button"
 							 class="btn btn-primary"
 			 	       ng-click="submitAnswer()">Submit</button>
 			 </div>
     </div>
 	</div>
-
-
-	<!-- <pre>
-
-		Question: {{ quizQuestion1.question }}
-
-		A: {{ quizQuestion1.availableAns[0].content }}
-		B: {{ quizQuestion1.availableAns[1].content }}
-		C: {{ quizQuestion1.availableAns[2].content }}
-
-		CorrectAns: {{ quizQuestion1.correctAns.content }}
-	</pre> -->
-
-
 </div>
 
 
@@ -184,12 +200,11 @@
 	<!-- ask question area - input filed and btn -->
 	<form role="form">
 		<div class="form-group">
-			<textarea class="form-control"
+			<textarea class="form-control question-input-field"
 								rows="3"
 								id="comment"
 								ng-model="questionContent"
                 type="text"
-                class="form-control question-input-field"
                 placeholder="Ask a question and the audience will up or down vote it..."
       		      ng-keydown="addQuestionKeyDown($event)">
       </textarea>

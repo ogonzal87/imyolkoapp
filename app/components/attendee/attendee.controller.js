@@ -19,14 +19,13 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
   $scope.quizQuestion3 = QuizService.quizQuestion3;
 
 // bind the obj to the database in Firebase
-// any chnages that happen in the view will be updated automaticaly in Firebase and viseversa
+// any changes that happen in the view will be updated automatically in Firebase and viceversa
   DataAttendeeService.currentAttendeeSyncObj.$bindTo($scope, 'attendee');
 // create the attendee on page arrival - Push the user to the database and start the session
   DataAttendeeService.currentAttendeeApiUrl.set(DataAttendeeService.defaultAttendee);
 
 //VOTES
 /////////////////////////////////////////////////////////////////////////
-
 // Create a function that when is clicked creates a LIKE vote Object in Firebase this is stored in an array
   $scope.voteLike = function() {
     $scope.attendee.vote = 'like';
@@ -43,9 +42,6 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
     //   $scope.disableLikeBtn = false;
     // }, 1000);
   };
-
-
-
 // Create a function that when is clicked creates a DISLIKE vote Object in Firebase this is stored in an array
   $scope.voteDislike = function() {
     $scope.attendee.vote = 'dislike';
@@ -64,18 +60,6 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
   };
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 //QUIZ
 /////////////////////////////////////////////////////////////////////////
   $scope.submitAnswer = function () {
@@ -85,34 +69,12 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
       QuizService.quizAnswers1B.$add(1);
     } else if ($scope.chosenAnswer === "C") {
       QuizService.quizAnswers1C.$add(1);
-    } else {
-      alert('Choose an option');
     }
   };
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//QUESTIONS
+//QUESTIONS TO THE PRESENTER
 /////////////////////////////////////////////////////////////////////////
-//ASKING A QUESTIONS TO THE PRESENTER
   $scope.addQuestionKeyDown = function(event) {
     if (event.keyCode === 13 && $scope.questionContent) {
       $scope.questions.$add({
@@ -132,11 +94,10 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
    $scope.removeQuestion = function(key) {
     $scope.questions.$remove(key);
   };
-//QUESTIONS END
-///////////////////////////////////////////////////////////////////////////
 
 
-
+//WATCHING ATTENDEE OBJECT
+/////////////////////////////////////////////////////////////////////////
 // Create a watch to watch what happens on the Attendees node
   $scope.$watch('attendees', function(newVal, oldVal) {
     $scope.allQuestionsFromAttendees = [];
@@ -147,7 +108,7 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
         });
       });
     });
-
+    
     // Panic Button Logic
   $scope.panicButton = function(attendee) {
     if ($scope.attendee.feeling == "fine") {
@@ -156,7 +117,7 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
       $scope.attendee.feeling = "fine";
     }
    };// Panic Button Logic
-
+    
    displayYolko();
   }, true);
 
@@ -177,16 +138,16 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 
   //Displaying Yolko
   function displayYolko() {
-    $scope.burnt              = $scope.dislikePercent >= 76;
-    $scope.shocked            = $scope.dislikePercent >= 64 && $scope.dislikePercent <= 75.999999999999;
-    $scope.idontgetit         = $scope.dislikePercent >= 56 && $scope.dislikePercent <= 63.999999999999;
+    $scope.burnt = $scope.dislikePercent >= 76;
+    $scope.shocked = $scope.dislikePercent >= 64 && $scope.dislikePercent <= 75.999999999999;
+    $scope.idontgetit = $scope.dislikePercent >= 56 && $scope.dislikePercent <= 63.999999999999;
     $scope.startingtonotgetit = $scope.dislikePercent >= 48 && $scope.dislikePercent <= 55.999999999999;
-    $scope.tastey             = $scope.dislikePercent >= 40 && $scope.dislikePercent <= 47.999999999999;
-    $scope.want               = $scope.dislikePercent >= 32 && $scope.dislikePercent <= 39.999999999999;
-    $scope.confident          = $scope.dislikePercent >= 24 && $scope.dislikePercent <= 31.999999999999;
-    $scope.igotthis           = $scope.dislikePercent >= 16 && $scope.dislikePercent <= 23.999999999999;
-    $scope.badass             = $scope.dislikePercent >= 8 && $scope.dislikePercent <= 15.999999999999;
-    $scope.zzz                = $scope.dislikePercent < 7.999999999999 || null;
-  } //Displaying Yolko
+    $scope.tastey = $scope.dislikePercent >= 40 && $scope.dislikePercent <= 47.999999999999;
+    $scope.want = $scope.dislikePercent >= 32 && $scope.dislikePercent <= 39.999999999999;
+    $scope.confident = $scope.dislikePercent >= 24 && $scope.dislikePercent <= 31.999999999999;
+    $scope.igotthis = $scope.dislikePercent >= 16 && $scope.dislikePercent <= 23.999999999999;
+    $scope.badass = $scope.dislikePercent >= 8 && $scope.dislikePercent <= 15.999999999999;
+    $scope.zzz = $scope.dislikePercent < 7.999999999999 || null;
+  }
 
 }
