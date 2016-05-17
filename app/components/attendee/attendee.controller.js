@@ -1,7 +1,7 @@
 angular.module('Attendee')
 .controller("AttendeeCtrl", AttendeeCtrl);
 
-function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, QuestionsService, QuizService, QuizChartService) {
+function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, QuestionsService, QuizService) {
 
 // LOAD ATTENDEES
   $scope.attendees = DataAttendeeService.attendees;
@@ -75,15 +75,25 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 
   $scope.$watch('quizQuestion1', function(newVals, oldVals) {
     // var quizChart = QuizChartService.chart;
-    QuizChartService.answersA = QuizService.quizAnswers1A.length;
-    QuizChartService.answersB = QuizService.quizAnswers1B.length;
-    QuizChartService.answersC = QuizService.quizAnswers1C.length;
+    var answersA = QuizService.quizAnswers1A.length;
+    var answersB = QuizService.quizAnswers1B.length;
+    var answersC = QuizService.quizAnswers1C.length;
 
-    console.log("answersA", QuizChartService.answersA);
-    console.log("answersB", QuizChartService.answersB);
-    console.log("answersC", QuizChartService.answersC);
+    console.log("answersA", answersA);
+    console.log("answersB", answersB);
+    console.log("answersC", answersC);
+
+
+    new Chartist.Bar('.ct-chart', {
+      labels: ['A', 'B', 'C'],
+      series: [answersA, answersB, answersC]
+    }, {
+      distributeSeries: true
+    });
 
   }, true);
+
+
 
 
 
