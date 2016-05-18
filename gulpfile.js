@@ -1,25 +1,67 @@
-var gulp      = require('gulp');
-var gutil     = require('gulp-util');
-var webserver = require('gulp-webserver');
-var sass      = require('gulp-sass');
+var gulp        = require('gulp');
+var webserver   = require('gulp-webserver');
+var sass        = require('gulp-sass');
+var rename      = require('gulp-rename');
+var concat      = require('gulp-concat');
+var uglify      = require('gulp-uglify');
+var runSequence = require('run-sequence');
+
+
+gulp.task('depsjs', function() {
+  return gulp.src([
+    'node_modules/jquery/dist/jquery.min.js',
+    'node_modules/bootstrap/dist/js/bootstrap.min.js',
+    'node_modules/angular/angular.min.js',
+    'bower_components/firebase/firebase.js',
+    'node_modules/angular-ui-router/release/angular-ui-router.min.js',
+    'node_modules/angularfire/dist/angularfire.min.js',
+    'node_modules/underscore/underscore-min.js',
+    'bower_components/chartist/dist/chartist.min.js'
+  ])
+    .pipe(concat('deps.js'))
+    .pipe(gulp.dest('./app/'));
+});
+
+gulp.task('depscss', function() {
+  return gulp.src([
+    'node_modules/bootstrap/dist/css/bootstrap.min.css',
+    'bower_components/chartist/dist/chartist.min.css'
+  ])
+    .pipe(concat('deps.css'))
+    .pipe(gulp.dest('./app/'));
+});
+
+
+gulp.task('depsDist', function() {
+  return gulp.src(['app/deps.js', 'app/deps.css'])
+    .pipe(gulp.dest('./public/'));
+});
+
+gulp.task('assets', function () {
+  return gulp.src('./app/**/*.png')
+    .pipe(gulp.dest('./public/'));
+});
 
 
 gulp.task('sass', function () {
   return gulp.src('./app/**/*.scss')
     .pipe(sass())
-    .pipe(gulp.dest('./app/'));
+    .pipe(gulp.dest('./public/'));
 });
 
 gulp.task('js', function() {
-  gulp.src('./app/**/*.js');
+  return gulp.src('./app/**/*.js')
+    .pipe(gulp.dest('./public/'));
 });
 
 gulp.task('html', function() {
-  gulp.src('./app/**/*.html');
+  return gulp.src('./app/**/*.html')
+    .pipe(gulp.dest('./public/'));
 });
 
 gulp.task('css', function() {
-  gulp.src('./app/**/*.css');
+  return gulp.src('./app/**/*.css')
+  .pipe(gulp.dest('./public/'));
 });
 
 gulp.task('watch', function() {
@@ -36,4 +78,17 @@ gulp.task('webserver', function() {
     }));
 });
 
-gulp.task('default', ['watch', 'html', 'js', 'sass', 'webserver']);
+gulp.task('default', function(callback) {
+  runSequence(
+    'depsjs',
+    'depscss',
+    'depsDist',
+    'assets',
+    'watch',
+    'html',
+    'js',
+    'sass',
+    'css',
+    'webserver',
+    callback);
+});

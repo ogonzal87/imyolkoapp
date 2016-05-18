@@ -44,3 +44,10 @@
     padding: 10px 20px; }
   .question-container .questions {
     margin-bottom: 20px; }
+
+.quiz-container {
+  margin-bottom: 40px; }
+  .quiz-container h1 {
+    margin: 0; }
+  .quiz-container button {
+    margin: 20px; }
