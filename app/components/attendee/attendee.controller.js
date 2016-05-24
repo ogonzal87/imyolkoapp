@@ -1,12 +1,12 @@
 angular.module('Attendee')
 .controller("AttendeeCtrl", AttendeeCtrl);
 
-function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, QuestionsService, QuizService) {
+function AttendeeCtrl($scope, FIREBASE_URL, $timeout, DataAttendeeService, VotesService, QuestionsService, QuizService, $firebaseObject) {
 
 // LOAD ATTENDEES
   $scope.attendees = DataAttendeeService.attendees;
 // LOAD QUESTIONS
-  $scope.questions = QuestionsService.questions;
+  $scope.questionsToPresenter = QuestionsService.questions;
 // LOAD VOTES
   $scope.votes = VotesService.votes;
 // LOAD LIKE VOTES
@@ -23,6 +23,7 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
   DataAttendeeService.currentAttendeeSyncObj.$bindTo($scope, 'attendee');
 // create the attendee on page arrival - Push the user to the database and start the session
   DataAttendeeService.currentAttendeeApiUrl.set(DataAttendeeService.defaultAttendee);
+
 
 //VOTES
 /////////////////////////////////////////////////////////////////////////
@@ -79,11 +80,6 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
     var answersB = QuizService.quizAnswers1B.length;
     var answersC = QuizService.quizAnswers1C.length;
 
-    console.log("answersA", answersA);
-    console.log("answersB", answersB);
-    console.log("answersC", answersC);
-
-
     new Chartist.Bar('.ct-chart', {
       labels: ['A', 'B', 'C'],
       series: [answersA, answersB, answersC]
@@ -107,48 +103,92 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 /////////////////////////////////////////////////////////////////////////
   $scope.addQuestionKeyDown = function(event) {
     if (event.keyCode === 13 && $scope.questionContent) {
-      $scope.questions.$add({
-        content: $scope.questionContent
+      $scope.questionsToPresenter.$add({
+        content: $scope.questionContent,
+        counter: 0
       });
       $scope.questionContent = "";
     }
-  };//questions
+  };
 
   $scope.addQuestionClick = function() {
-     $scope.questions.$add({
-       content: $scope.questionContent
-     });
-     $scope.questionContent = "";
-   };//questions
+    if($scope.questionContent) {
+      $scope.questionsToPresenter.$add({
+        content: $scope.questionContent,
+        counter: 0
+      });
+    }
+    $scope.questionContent = "";
+   };
 
    $scope.removeQuestion = function(key) {
-    $scope.questions.$remove(key);
+    $scope.questionsToPresenter.$remove(key);
   };
+
+
+  $scope.voteQuestionUp = function(key, questionToPresenter) {
+    questionToPresenter.counter++;
+    QuestionsService.questions[key] = questionToPresenter;
+    QuestionsService.questions.$save(key);
+  };
+ 
+  $scope.voteQuestionDown = function(key, questionToPresenter) {
+    questionToPresenter.counter--;
+    QuestionsService.questions[key] = questionToPresenter;
+    QuestionsService.questions.$save(key);
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //WATCHING ATTENDEE OBJECT
 /////////////////////////////////////////////////////////////////////////
 // Create a watch to watch what happens on the Attendees node
   $scope.$watch('attendees', function(newVal, oldVal) {
-    $scope.allQuestionsFromAttendees = [];
-    _.each($scope.attendees, function(attendee) {
-      _.each(attendee.questions, function(question) {
-        $scope.allQuestionsFromAttendees.push({
-          content: question.content
-        });
-      });
-    });
+
+    // $scope.allQuestionsFromAttendees = [];
+    // _.each($scope.attendees, function(attendee) {
+    //   _.each(attendee.questions, function(question) {
+    //     $scope.allQuestionsFromAttendees.push({
+    //       content: question.content
+    //     });
+    //   });
+    // });
+
 
     // Panic Button Logic
-  $scope.panicButton = function(attendee) {
-    if ($scope.attendee.feeling == "fine") {
-      $scope.attendee.feeling = "panic";
-    } else if ($scope.attendee.feeling == "panic") {
-      $scope.attendee.feeling = "fine";
-    }
-   };// Panic Button Logic
+    $scope.panicButton = function(attendee) {
+      if ($scope.attendee.feeling == "fine") {
+        $scope.attendee.feeling = "panic";
+      } else if ($scope.attendee.feeling == "panic") {
+        $scope.attendee.feeling = "fine";
+      }
+    };// Panic Button Logic
 
-   displayYolko();
+    displayYolko();
   }, true);
 
 

@@ -11,7 +11,7 @@ function PresenterCtrl($scope, $interval, VotesService, QuestionsService, DataAt
   $scope.votes             = VotesService.votes;
 // LOAD LIKE VOTES
   $scope.likeVotesArray    = VotesService.likeVotesArray;
-// LOAD DISLIKE VOTESs
+// LOAD DISLIKE VOTES
   $scope.dislikeVotesArray = VotesService.dislikeVotesArray;
 
 // arrays that keep track of all the votes --> this arrays are populated each time the interval is triggered
