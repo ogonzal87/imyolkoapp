@@ -88,16 +88,7 @@ function AttendeeCtrl($scope, FIREBASE_URL, $timeout, DataAttendeeService, Votes
     });
 
   }, true);
-
-
-
-
-
-
-
-
-
-
+  
 
 //QUESTIONS TO THE PRESENTER
 /////////////////////////////////////////////////////////////////////////
@@ -126,42 +117,17 @@ function AttendeeCtrl($scope, FIREBASE_URL, $timeout, DataAttendeeService, Votes
   };
 
 
-  $scope.voteQuestionUp = function(key, questionToPresenter) {
+  $scope.voteQuestionUp = function(questionToPresenter) {
     questionToPresenter.counter++;
-    QuestionsService.questions[key] = questionToPresenter;
-    QuestionsService.questions.$save(key);
+    console.log(questionToPresenter);
+    QuestionsService.questions.$save(questionToPresenter);
   };
  
-  $scope.voteQuestionDown = function(key, questionToPresenter) {
+  $scope.voteQuestionDown = function(questionToPresenter) {
     questionToPresenter.counter--;
-    QuestionsService.questions[key] = questionToPresenter;
-    QuestionsService.questions.$save(key);
+    console.log(questionToPresenter);
+    QuestionsService.questions.$save(questionToPresenter);
   };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //WATCHING ATTENDEE OBJECT
@@ -187,7 +153,6 @@ function AttendeeCtrl($scope, FIREBASE_URL, $timeout, DataAttendeeService, Votes
         $scope.attendee.feeling = "fine";
       }
     };// Panic Button Logic
-
     displayYolko();
   }, true);
 
