@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="8dfa04c0-729e-474a-9e07-ae9c23f3895e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/components/attendee/attendee.controller.js" afterPath="$PROJECT_DIR$/app/components/attendee/attendee.controller.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/meeting-page/meeting-page.html" afterPath="$PROJECT_DIR$/app/views/meeting-page/meeting-page.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/components/attendee/attendee.controller.js" afterPath="$PROJECT_DIR$/public/components/attendee/attendee.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/views/meeting-page/meeting-page.html" afterPath="$PROJECT_DIR$/public/views/meeting-page/meeting-page.html" />
     </list>
     <ignored path="imyolkoapp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -66,8 +63,8 @@
           <file leaf-file-name="meeting-page.html" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app/views/meeting-page/meeting-page.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="540">
-                  <caret line="57" column="32" selection-start-line="57" selection-start-column="32" selection-end-line="57" selection-end-column="32" />
+                <state relative-caret-position="300">
+                  <caret line="41" column="4" selection-start-line="41" selection-start-column="8" selection-end-line="46" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -108,8 +105,8 @@
         <option value="$PROJECT_DIR$/app/views/templates/_top-nav.html" />
         <option value="$PROJECT_DIR$/app/components/presenter/presenter.controller.js" />
         <option value="$PROJECT_DIR$/app/components/questions/questions.service.js" />
-        <option value="$PROJECT_DIR$/app/views/meeting-page/meeting-page.html" />
         <option value="$PROJECT_DIR$/app/components/attendee/attendee.controller.js" />
+        <option value="$PROJECT_DIR$/app/views/meeting-page/meeting-page.html" />
       </list>
     </option>
   </component>
@@ -410,12 +407,12 @@
       <workItem from="1464106537012" duration="11754000" />
       <workItem from="1464867437879" duration="677000" />
       <workItem from="1464929914546" duration="3455000" />
-      <workItem from="1465141435607" duration="8299000" />
+      <workItem from="1465141435607" duration="8462000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43516000" />
+    <option name="totallyTimeSpent" value="43679000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="2567" y="23" width="2467" height="1052" extended-state="0" />
@@ -832,18 +829,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/meeting-page/meeting-page.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="57" column="32" selection-start-line="57" selection-start-column="32" selection-end-line="57" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/components/attendee/attendee.controller.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="416">
           <caret line="167" column="64" selection-start-line="167" selection-start-column="64" selection-end-line="167" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/meeting-page/meeting-page.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="41" column="4" selection-start-line="41" selection-start-column="8" selection-end-line="46" selection-end-column="0" />
           <folding />
         </state>
       </provider>
