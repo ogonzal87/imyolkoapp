@@ -164,10 +164,11 @@ function AttendeeCtrl($scope, FIREBASE_URL, $timeout, DataAttendeeService, Votes
     var numVotes = ($scope.likeVotesArray.length + $scope.dislikeVotesArray.length);
     var numDislikeVotes = $scope.dislikeVotesArray.length;
 
-    //console.log('Total # of votes: ' + numVotes);
-    //console.log('Total # of dislike votes: ' + numDislikeVotes);
+    console.log('Total # of votes: ' + numVotes);
+    console.log('Total # of dislike votes: ' + numDislikeVotes);
 
     $scope.dislikePercent = Math.round((numDislikeVotes / $scope.attendees.length) * 100);
+    displayYolko();
   }, true);
 
 
