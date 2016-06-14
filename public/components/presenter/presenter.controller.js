@@ -217,21 +217,12 @@ function PresenterCtrl($scope, $interval, VotesService, QuestionsService, DataAt
 
 
 
-
-
-
-
-
-
 //RESET
 ///////////////////////////////////////////////////////////////////////////
-    $scope.resetVolumeTraceker = ResetService.resetVolumeTraceker;
-    $scope.resetSpeedTracker   = ResetService.resetSpeedTracker;
-    $scope.resetYolko          = ResetService.resetYolko;
-    $scope.resetPanicTracker   = ResetService.resetPanicTracker;
-    $scope.resetEverything     = ResetService.resetEverything;
-    $scope.deleteEverything    = ResetService.deleteEverything;
-
-
-
+  $scope.resetVolumeTraceker = ResetService.resetVolumeTraceker; //sets to default values
+  $scope.resetSpeedTracker   = ResetService.resetSpeedTracker; //sets to default values
+  $scope.resetYolko          = ResetService.resetYolko; //deletes the Votes node
+  $scope.resetPanicTracker   = ResetService.resetPanicTracker; //sets to default values
+  $scope.resetEverything     = ResetService.resetEverything; //deletes the Votes and Questionn nodes in the database but sets the values of the attendees back to start
+  $scope.deleteEverything    = ResetService.deleteEverything; //delets all the nodes in the Database
 }
