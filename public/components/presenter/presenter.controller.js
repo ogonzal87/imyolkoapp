@@ -216,7 +216,7 @@ function PresenterCtrl($scope, $interval, VotesService, QuestionsService, DataAt
 
 //RESET
 ///////////////////////////////////////////////////////////////////////////
-  $scope.resetVolumeTraceker = ResetService.resetVolumeTraceker; //sets to default values
+  $scope.resetVolumeTracker  = ResetService.resetVolumeTracker; //sets to default values
   $scope.resetSpeedTracker   = ResetService.resetSpeedTracker; //sets to default values
   $scope.resetYolko          = ResetService.resetYolko; //deletes the Votes node
   $scope.resetPanicTracker   = ResetService.resetPanicTracker; //sets to default values

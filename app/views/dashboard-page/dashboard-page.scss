@@ -13,10 +13,9 @@
 }
 
 /***** Panels Styles *****/
-
 .panels-dashboard {
   width: 280px;
-  height: 130px;
+  height: 140px;
   margin: 20px 5px;
   background-color: #ecf0f1;
 
@@ -30,6 +29,27 @@
 
       .icon {
         padding-top: 25px;
+      }
+    }
+    
+    .reset-btns {
+      display: inline-block;
+      opacity: .3;
+      border-top: 1px solid grey;
+      margin-top: 15px;
+      width: 100%;
+      text-align: center;
+
+      .resetbutton {
+        background-color: transparent;
+        border: none;
+        padding: 6px 24px;
+        width: 100%;
+
+        &:hover {
+          border: 1px solid grey;
+          border-radius: 3px;
+        }
       }
     }
   }

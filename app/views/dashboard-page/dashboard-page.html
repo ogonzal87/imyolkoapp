@@ -6,15 +6,22 @@
     <!-- START WIDGET -->
       <div class="panel panels-dashboard">
         <div class="panel-body">
+          <div class="col-xs-4 icons-dashboard-center">
+            <i class="fa fa-user fa-3x icon"></i>
+          </div>
+          <div class="col-xs-8">
+            <h3>Attendees</h3>
+            <h4>{{ numAttendees || 0}}</h4>
+          </div>
 
-            <div class="col-xs-4 icons-dashboard-center">
-              <i class="fa fa-user fa-3x icon"></i>
-            </div>
-            <div class="col-xs-8">
-              <h3>Attendees</h3>
-              <h4>{{ numAttendees || 0}}</h4>
-            </div>
-
+          <div class="reset-btns">
+            <button uib-popover="This resets the Yolko Avatar"
+                    popover-trigger="mouseenter"
+                    class="resetbutton"
+                    ng-click="resetYolko()">
+              Reset Yolko
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -29,7 +36,16 @@
           </div>
           <div class="col-xs-8">
             <h3>Can't Hear</h3>
-            <h4 ng-if="volumeUpPercent.content">{{ volumeUpPercent.content }}%</h4>
+            <h4 ng-show="volumeUpPercent.content  || 'We are good!'">{{ volumeUpPercent.content || 'We are good!'}}</h4>
+          </div>
+
+          <div class="reset-btns">
+            <button class="resetbutton"
+                    ng-click="resetVolumeTracker()"
+                    uib-popover="This resets the Volume"
+                    popover-trigger="mouseenter">
+              Reset
+            </button>
           </div>
         </div>
       </div>
@@ -47,6 +63,15 @@
             <h3>Speed</h3>
             <h4>{{ speedPercent.content }}</h4>
           </div>
+
+          <div class="reset-btns">
+            <button class="resetbutton"
+                    ng-click="resetSpeedTracker()"
+                    uib-popover="This resets the Speed"
+                    popover-trigger="mouseenter">
+              Reset
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -60,7 +85,16 @@
           </div>
           <div class="col-xs-8">
             <h3>Lost</h3>
-            <h4 ng-if="panicPercent.content">{{ panicPercent.content }}%</h4>
+            <h4 ng-if="panicPercent.content || 'We are good!'">{{ panicPercent.content || 'We are good!'}}</h4>
+          </div>
+
+          <div class="reset-btns">
+            <button class="resetbutton"
+                    ng-click="resetPanicTracker()"
+                    uib-popover="This resets the Panic"
+                    popover-trigger="mouseenter">
+              Reset
+            </button>
           </div>
         </div>
       </div>
@@ -73,15 +107,27 @@
 
 <div class="panel panel-default panel-start-stop-btns">
   <div class="panel-body start-stop-meeting-container">
+
+    <button class="btn btn-default resetbutton"
+            ng-click="resetEverything()">
+      Reset Everything
+    </button>
+
     <button class="btn btn-success btns"
             ng-click="startPresentation()">
-            Start the Meeting
+      Start the Meeting
     </button>
 
     <button class="btn btn-danger btns"
             ng-click="stopPresentation()">
-            Stop the Meeting
+      Stop the Meeting
     </button>
+
+    <button class="btn btn-info"
+            ng-click="deleteEverything()">
+      Start New Presentation
+    </button>
+
   </div>
 </div>
 
@@ -178,26 +224,3 @@
   	</div>
 	</div>
   <!--   QUESTIONS END -->
-
-<!-- RESET BUTTONS -->
-
-
-<div class="container">
-  <div class="container reset-btns-container">
-    <div class="">
-      <button class="btn btn-default resetbutton" ng-click="resetYolko()">Reset Yolko</button>
-      <button class="btn btn-default resetbutton" ng-click="resetVolumeTraceker()">Reset Volume</button>
-      <button class="btn btn-default resetbutton" ng-click="resetSpeedTracker()">Reset Speed</button>
-      <button class="btn btn-default resetbutton" ng-click="resetPanicTracker()">Reset Panic</button>
-      <button class="btn btn-default resetbutton" ng-click="resetEverything()">Reset Everything</button>
-    </div>
-
-    <div class="resetbutton start-new-meeting-button">
-      <button class="btn btn-info" ng-click="deleteEverything()">Start New Presentation</button>
-    </div>
-  </div>
-</div>
-
-
-
-<!-- RESET BUTTONS -->

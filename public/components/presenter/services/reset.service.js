@@ -3,7 +3,7 @@ angular.module('Presenter')
 
 function ResetService(DataAttendeeService, VotesService, QuestionsService) {
 
-    var resetVolumeTraceker = function() {
+    var resetVolumeTracker = function() {
       _.each(DataAttendeeService.attendees, function(attendee) {
         attendee.volumeUp = 'no';
         DataAttendeeService.attendees.$save(attendee);
@@ -48,7 +48,7 @@ function ResetService(DataAttendeeService, VotesService, QuestionsService) {
     };
 
   return {
-    resetVolumeTraceker: resetVolumeTraceker,
+    resetVolumeTracker: resetVolumeTracker,
     resetSpeedTracker:   resetSpeedTracker,
     resetYolko:          resetYolko,
     resetPanicTracker:   resetPanicTracker,

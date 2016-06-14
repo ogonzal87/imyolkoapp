@@ -2,7 +2,10 @@ angular
 .module('YolkoApp', [
   'ui.router',
   'Presenter',
-  'Attendee'
+  'Attendee',
+
+	// Angular Bootstrap
+	'ui.bootstrap'
 ])
 .constant('FIREBASE_URL', 'https://yolkoapp.firebaseio.com')
 .config(ApplicationConfig);
