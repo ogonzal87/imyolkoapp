@@ -59,10 +59,10 @@ gulp.task('html', function() {
     .pipe(gulp.dest('./public/'));
 });
 
-gulp.task('css', function() {
-  return gulp.src('./app/**/*.css')
-  .pipe(gulp.dest('./public/'));
-});
+// gulp.task('css', function() {
+//   return gulp.src('./app/**/*.css')
+//   .pipe(gulp.dest('./public/'));
+// });
 
 gulp.task('watch', function() {
   gulp.watch('./app/**/*.js', ['js']);
@@ -85,10 +85,9 @@ gulp.task('default', function(callback) {
     'depsDist',
     'assets',
     'watch',
+    'sass',
     'html',
     'js',
-    'sass',
-    'css',
     'webserver',
     callback);
 });

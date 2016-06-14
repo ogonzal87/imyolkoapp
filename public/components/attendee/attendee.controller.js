@@ -4,19 +4,19 @@ angular.module('Attendee')
 function AttendeeCtrl($scope, FIREBASE_URL, $timeout, DataAttendeeService, VotesService, QuestionsService, QuizService, $firebaseObject) {
 
 // LOAD ATTENDEES
-  $scope.attendees = DataAttendeeService.attendees;
+  $scope.attendees            = DataAttendeeService.attendees;
 // LOAD QUESTIONS
   $scope.questionsToPresenter = QuestionsService.questions;
 // LOAD VOTES
-  $scope.votes = VotesService.votes;
+  $scope.votes                = VotesService.votes;
 // LOAD LIKE VOTES
-  $scope.likeVotesArray = VotesService.likeVotesArray;
+  $scope.likeVotesArray       = VotesService.likeVotesArray;
 // LOAD DISLIKE VOTES
-  $scope.dislikeVotesArray = VotesService.dislikeVotesArray;
+  $scope.dislikeVotesArray    = VotesService.dislikeVotesArray;
   //LOAD QUIZ QUESTIONS
-  $scope.quizQuestion1 = QuizService.quizQuestion1;
-  $scope.quizQuestion2 = QuizService.quizQuestion2;
-  $scope.quizQuestion3 = QuizService.quizQuestion3;
+  $scope.quizQuestion1        = QuizService.quizQuestion1;
+  $scope.quizQuestion2        = QuizService.quizQuestion2;
+  $scope.quizQuestion3        = QuizService.quizQuestion3;
 
 // bind the obj to the database in Firebase
 // any changes that happen in the view will be updated automatically in Firebase and viceversa
@@ -88,7 +88,7 @@ function AttendeeCtrl($scope, FIREBASE_URL, $timeout, DataAttendeeService, Votes
     });
 
   }, true);
-  
+
 
 //QUESTIONS TO THE PRESENTER
 /////////////////////////////////////////////////////////////////////////
@@ -122,7 +122,7 @@ function AttendeeCtrl($scope, FIREBASE_URL, $timeout, DataAttendeeService, Votes
     console.log(questionToPresenter);
     QuestionsService.questions.$save(questionToPresenter);
   };
- 
+
   $scope.voteQuestionDown = function(questionToPresenter) {
     questionToPresenter.counter--;
     console.log(questionToPresenter);
@@ -134,16 +134,6 @@ function AttendeeCtrl($scope, FIREBASE_URL, $timeout, DataAttendeeService, Votes
 /////////////////////////////////////////////////////////////////////////
 // Create a watch to watch what happens on the Attendees node
   $scope.$watch('attendees', function(newVal, oldVal) {
-
-    // $scope.allQuestionsFromAttendees = [];
-    // _.each($scope.attendees, function(attendee) {
-    //   _.each(attendee.questions, function(question) {
-    //     $scope.allQuestionsFromAttendees.push({
-    //       content: question.content
-    //     });
-    //   });
-    // });
-
 
     // Panic Button Logic
     $scope.panicButton = function(attendee) {
@@ -164,8 +154,8 @@ function AttendeeCtrl($scope, FIREBASE_URL, $timeout, DataAttendeeService, Votes
     var numVotes = ($scope.likeVotesArray.length + $scope.dislikeVotesArray.length);
     var numDislikeVotes = $scope.dislikeVotesArray.length;
 
-    console.log('Total # of votes: ' + numVotes);
-    console.log('Total # of dislike votes: ' + numDislikeVotes);
+    //console.log('Total # of votes: ' + numVotes);
+    //console.log('Total # of dislike votes: ' + numDislikeVotes);
 
     $scope.dislikePercent = Math.round((numDislikeVotes / $scope.attendees.length) * 100);
     displayYolko();

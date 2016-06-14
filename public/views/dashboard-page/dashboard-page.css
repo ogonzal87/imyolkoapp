@@ -1,3 +1,4 @@
+/***** Chart Styles *****/
 .ct-series-a .ct-line {
   stroke: green; }
 
@@ -10,16 +11,20 @@
 .ct-series-b .ct-point {
   stroke: red; }
 
+/***** Panels Styles *****/
 .panels-dashboard {
-  width: 100%;
+  width: 280px;
   height: 130px;
   margin: 20px 5px;
   background-color: #ecf0f1; }
-  .panels-dashboard .icons-dashboard-center {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center; }
+  .panels-dashboard .panel-body {
+    padding: 5px; }
+    .panels-dashboard .panel-body .icons-dashboard-center {
+      display: flex;
+      align-items: center;
+      justify-content: center; }
+      .panels-dashboard .panel-body .icons-dashboard-center .icon {
+        padding-top: 25px; }
 
 .panel-start-stop-btns {
   background-color: #ecf0f1;

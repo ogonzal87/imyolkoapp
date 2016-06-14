@@ -6,15 +6,15 @@
     <!-- START WIDGET -->
       <div class="panel panels-dashboard">
         <div class="panel-body">
-          <div class="row">
+
             <div class="col-xs-4 icons-dashboard-center">
-              <i class="fa fa-user fa-3x"></i>
+              <i class="fa fa-user fa-3x icon"></i>
             </div>
             <div class="col-xs-8">
               <h3>Attendees</h3>
-              <h3>{{ numAttendees || 0}}</h3>
+              <h4>{{ numAttendees || 0}}</h4>
             </div>
-          </div>
+
         </div>
       </div>
     </div>
@@ -24,14 +24,12 @@
       <div class="panel panels-dashboard"
           ng-class="volumeUpPercent.class">
         <div class="panel-body">
-          <div class="row">
-            <div class="col-xs-4 icons-dashboard-center">
-              <i class="fa fa-volume-off fa-3x"></i>
-            </div>
-            <div class="col-xs-8">
-              <h3>Can't Hear</h3>
-              <h3 ng-if="volumeUpPercent.content">{{ volumeUpPercent.content }}%</h3>
-            </div>
+          <div class="col-xs-4 icons-dashboard-center">
+            <i class="fa fa-volume-off fa-3x icon"></i>
+          </div>
+          <div class="col-xs-8">
+            <h3>Can't Hear</h3>
+            <h4 ng-if="volumeUpPercent.content">{{ volumeUpPercent.content }}%</h4>
           </div>
         </div>
       </div>
@@ -42,14 +40,12 @@
       <div class="panel panels-dashboard "
             ng-class="speedPercent.class">
         <div class="panel-body">
-          <div class="row">
-            <div class="col-xs-4 icons-dashboard-center">
-              <i class="fa fa-rocket fa-3x"></i>
-            </div>
-            <div class="col-xs-8">
-              <h3>Speed</h3>
-              <h3>{{ speedPercent.content }}</h3>
-            </div>
+          <div class="col-xs-4 icons-dashboard-center">
+            <i class="fa fa-rocket fa-3x icon"></i>
+          </div>
+          <div class="col-xs-8">
+            <h3>Speed</h3>
+            <h4>{{ speedPercent.content }}</h4>
           </div>
         </div>
       </div>
@@ -59,14 +55,12 @@
       <!-- START WIDGET -->
       <div class="panel panels-dashboard" ng-class="panicPercent.class">
         <div class="panel-body">
-          <div class="row">
-            <div class="col-xs-4 panel-center-items">
-              <i class="fa fa-fire-extinguisher fa-3x"></i>
-            </div>
-            <div class="col-xs-8">
-              <h3>Lost</h3>
-              <h3 ng-if="panicPercent.content">{{ panicPercent.content }}%</h3>
-            </div>
+          <div class="col-xs-4 icons-dashboard-center">
+            <i class="fa fa-fire-extinguisher fa-3x icon"></i>
+          </div>
+          <div class="col-xs-8">
+            <h3>Lost</h3>
+            <h4 ng-if="panicPercent.content">{{ panicPercent.content }}%</h4>
           </div>
         </div>
       </div>

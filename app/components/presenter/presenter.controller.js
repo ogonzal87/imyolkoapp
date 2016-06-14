@@ -214,9 +214,6 @@ function PresenterCtrl($scope, $interval, VotesService, QuestionsService, DataAt
 
 
 
-
-
-
 //RESET
 ///////////////////////////////////////////////////////////////////////////
   $scope.resetVolumeTraceker = ResetService.resetVolumeTraceker; //sets to default values
