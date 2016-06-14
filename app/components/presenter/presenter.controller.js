@@ -216,30 +216,9 @@ function PresenterCtrl($scope, $interval, VotesService, QuestionsService, DataAt
 
 
 
-  // Store all answers from the audience in an array
 
 
 
-
-
-
-
-
-
-  // Do a loop over the anser array and pull the answers that match the correct answer and store these in an array
-
-
-
-
-
-
-
-
-
-
-
-
-  // Find the length of this array and divide it by the number of attendees
 
 
 

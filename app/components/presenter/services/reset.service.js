@@ -1,7 +1,7 @@
 angular.module('Presenter')
 .service('ResetService', ResetService);
 
-function ResetService(DataAttendeeService) {
+function ResetService(DataAttendeeService, VotesService, QuestionsService) {
 
     var resetVolumeTraceker = function() {
       _.each(DataAttendeeService.attendees, function(attendee) {
@@ -14,14 +14,12 @@ function ResetService(DataAttendeeService) {
       _.each(DataAttendeeService.attendees, function(attendee) {
         attendee.speed = 0;
         DataAttendeeService.attendees.$save(attendee);
+        console.log("Attendees", DataAttendeeService.attendees);
       });
     };
 
     var resetYolko = function() {
-      _.each(DataAttendeeService.attendees, function(attendee) {
-        attendee.vote = 'like';
-        DataAttendeeService.attendees.$save(attendee);
-      });
+      VotesService.allVotesApiUrl.remove();
     };
 
     var resetPanicTracker = function() {
@@ -38,12 +36,15 @@ function ResetService(DataAttendeeService) {
         attendee.volumeUp = 0;
         attendee.vote = 'like';
         DataAttendeeService.attendees.$save(attendee);
-        QuestionsService.questions.remove();
+        QuestionsService.allQuestionsApiUrl.remove();
+        VotesService.allVotesApiUrl.remove();
       });
     };
 
     var deleteEverything = function() {
-     DataAttendeeService.attendees.remove();
+     DataAttendeeService.allAttendeesApiUrl.remove();
+     VotesService.allVotesApiUrl.remove();
+     QuestionsService.allQuestionsApiUrl.remove();
     };
 
   return {
