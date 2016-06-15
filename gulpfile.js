@@ -33,8 +33,7 @@ gulp.task('depscss', function() {
     .pipe(gulp.dest('./app/'));
 });
 
-
-gulp.task('depsDist', function() {
+gulp.task('depsPublic', function() {
   return gulp.src(['app/deps.js', 'app/deps.css'])
     .pipe(gulp.dest('./public/'));
 });
@@ -83,7 +82,7 @@ gulp.task('default', function(callback) {
   runSequence(
     'depsjs',
     'depscss',
-    'depsDist',
+    'depsPublic',
     'assets',
     'watch',
     'sass',
