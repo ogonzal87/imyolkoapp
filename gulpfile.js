@@ -15,6 +15,8 @@ gulp.task('depsjs', function() {
     'bower_components/firebase/firebase.js',
     'node_modules/angular-ui-router/release/angular-ui-router.min.js',
     'node_modules/angularfire/dist/angularfire.min.js',
+    'node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js',
+    'node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js',
     'node_modules/underscore/underscore-min.js',
     'bower_components/chartist/dist/chartist.min.js'
   ])
@@ -42,7 +44,6 @@ gulp.task('assets', function () {
     .pipe(gulp.dest('./public/'));
 });
 
-
 gulp.task('sass', function () {
   return gulp.src('./app/**/*.scss')
     .pipe(sass())
@@ -59,10 +60,10 @@ gulp.task('html', function() {
     .pipe(gulp.dest('./public/'));
 });
 
-// gulp.task('css', function() {
-//   return gulp.src('./app/**/*.css')
-//   .pipe(gulp.dest('./public/'));
-// });
+gulp.task('css', function() {
+  return gulp.src('./app/**/*.css')
+  .pipe(gulp.dest('./public/'));
+});
 
 gulp.task('watch', function() {
   gulp.watch('./app/**/*.js', ['js']);
@@ -86,6 +87,7 @@ gulp.task('default', function(callback) {
     'assets',
     'watch',
     'sass',
+    'css',
     'html',
     'js',
     'webserver',
