@@ -26,7 +26,7 @@ function ApplicationConfig($stateProvider, $urlRouterProvider) {
   		url: '/dashboard',
   		templateUrl: 'views/dashboard-page/dashboard-page.html',
       controller: 'PresenterCtrl'
-  	});
+  	});  
 
   $urlRouterProvider.otherwise('/');
 }

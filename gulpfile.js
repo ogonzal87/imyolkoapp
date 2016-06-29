@@ -1,94 +1,120 @@
 var gulp        = require('gulp');
-var webserver   = require('gulp-webserver');
+var browserSync = require('browser-sync');
 var sass        = require('gulp-sass');
-var rename      = require('gulp-rename');
 var concat      = require('gulp-concat');
 var uglify      = require('gulp-uglify');
 var runSequence = require('run-sequence');
+var gulpIf      = require('gulp-if');
+var useref      = require('gulp-useref');
+var cssnano     = require('gulp-cssnano');
+var imagemin    = require('gulp-imagemin');
+var cache       = require('gulp-cache');
+var del         = require('del');
 
 
-gulp.task('depsjs', function() {
-  return gulp.src([
-    'node_modules/jquery/dist/jquery.min.js',
-    'node_modules/bootstrap/dist/js/bootstrap.min.js',
-    'node_modules/angular/angular.min.js',
-    'bower_components/firebase/firebase.js',
-    'node_modules/angular-ui-router/release/angular-ui-router.min.js',
-    'node_modules/angularfire/dist/angularfire.min.js',
-    'node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js',
-    'node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js',
-    'node_modules/underscore/underscore-min.js',
-    'bower_components/chartist/dist/chartist.min.js'
-  ])
-    .pipe(concat('deps.js'))
-    .pipe(gulp.dest('./app/'));
+/////////////////////////// Development Tasks ////////////////////////////
+
+///////// Start browserSync server ///////////
+// ---------------
+gulp.task('browserSync', function() {
+  browserSync({
+    server: {
+      baseDir: 'app',
+      routes: {
+        "/node_modules": "node_modules",
+        "/bower_components": "bower_components"
+      }
+    }
+  })
 });
 
-gulp.task('depscss', function() {
-  return gulp.src([
-    'node_modules/bootstrap/dist/css/bootstrap.min.css',
-    'bower_components/chartist/dist/chartist.min.css'
-  ])
-    .pipe(concat('deps.css'))
-    .pipe(gulp.dest('./app/'));
-});
-
-gulp.task('depsPublic', function() {
-  return gulp.src(['app/deps.js', 'app/deps.css'])
-    .pipe(gulp.dest('./public/'));
-});
-
-gulp.task('assets', function () {
-  return gulp.src('./app/**/*.png')
-    .pipe(gulp.dest('./public/'));
-});
 
 gulp.task('sass', function () {
   return gulp.src('./app/**/*.scss')
     .pipe(sass())
-    .pipe(gulp.dest('./public/'));
+    .pipe(gulp.dest('./app/'))
+    .pipe(browserSync.reload({
+      stream: true
+    }));
 });
 
-gulp.task('js', function() {
-  return gulp.src('./app/**/*.js')
-    .pipe(gulp.dest('./public/'));
-});
 
 gulp.task('html', function() {
   return gulp.src('./app/**/*.html')
     .pipe(gulp.dest('./public/'));
 });
 
-gulp.task('css', function() {
-  return gulp.src('./app/**/*.css')
-  .pipe(gulp.dest('./public/'));
-});
 
-gulp.task('watch', function() {
-  gulp.watch('./app/**/*.js', ['js']);
+
+///////// Watchers ///////////
+// ---------------
+gulp.task('watch', ['browserSync', 'sass'], function (){
   gulp.watch('./app/**/*.scss', ['sass']);
-  gulp.watch(['./app/**/*.html', '**/*.html'], ['html']);
+  gulp.watch(['./app/**/*.html', '**/*.html'], ['html'], browserSync.reload);
+  gulp.watch('./app/**/*.js', ['js'], browserSync.reload);
 });
 
-gulp.task('webserver', function() {
-  gulp.src('./')
-    .pipe(webserver({
-      livereload: true,
-      open: 'http://localhost:8000/app/'
-    }));
+
+
+/////////////////////////////// Optimization Tasks ////////////////////////
+
+
+///////// Optimizing CSS and JavaScript ///////////
+// ---------------
+gulp.task('useref', function(){
+  return gulp.src('app/*.html')
+    .pipe(useref())
+    .pipe(gulpIf('*.js', uglify()))
+    // Minifies only if it's a CSS file
+    .pipe(gulpIf('*.css', cssnano()))
+    .pipe(gulp.dest('public'))
 });
+
+
+
+///////// Optimizing Assets/Images ///////////
+// ---------------
+gulp.task('assets', function(){
+  return gulp.src('app/assets/**/*.+(png|jpg|gif|svg)')
+    .pipe(imagemin())
+    // Caching images that ran through imagemin
+    .pipe(cache(imagemin({
+      interlaced: true
+    })))
+    .pipe(gulp.dest('public/assets'))
+});
+
+
+
+///////// Cleaning ///////////
+// ---------------
+gulp.task('clean', function() {
+  return del.sync('public').then(function(cb) {
+    return cache.clearAll(cb);
+  });
+})
+
+gulp.task('clean:public', function() {
+  return del.sync('public');
+});
+
+
+
+//////////////////////////// Build Sequences /////////////////////////////
+
 
 gulp.task('default', function(callback) {
   runSequence(
-    'depsjs',
-    'depscss',
-    'depsPublic',
-    'assets',
-    'watch',
     'sass',
-    'css',
     'html',
-    'js',
-    'webserver',
+    'browserSync',
+    'watch',
     callback);
+});
+
+gulp.task('build', function (callback) {
+  runSequence('clean:public',
+    ['sass', 'useref', 'assets'],
+    callback
+  )
 });
