@@ -40,8 +40,13 @@ gulp.task('sass', function () {
 
 
 gulp.task('html', function() {
-  return gulp.src('./app/**/*.html')
-    .pipe(gulp.dest('./public/'));
+	return gulp.src('./app/**/*.html')
+		.pipe(gulp.dest('./public/'));
+});
+
+gulp.task('js', function() {
+	return gulp.src('./app/**/*.js')
+		.pipe(gulp.dest('./public/'));
 });
 
 

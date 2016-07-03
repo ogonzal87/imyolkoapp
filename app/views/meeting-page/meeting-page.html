@@ -1,10 +1,9 @@
 <div class="jumbotron meetingjumbotronn">
 
 	<div class="container">
-
 		<h1>Yolko, how are you feeling?</h1>
 
-<!-- YOLKO BEHAVIOR -->
+		<!-- YOLKO BEHAVIOR -->
 		<div class="avatar-container">
 			<div ng-if="zzz || votes.length === 0">
 				<img src="assets/avatars/zzz.png"/>
@@ -34,10 +33,10 @@
 				<img src="assets/avatars/shocked.png"/>
 			</div>
 			<div ng-if="burnt">
-	      <img src="assets/avatars/burnt.png"/>
-	    </div>
+				<img src="assets/avatars/burnt.png"/>
+			</div>
 		</div>
-<!-- YOLKO BEHAVIOR -->
+		<!-- YOLKO BEHAVIOR -->
 
 		<!--<pre>-->
 			<!--Dislike Percent: {{ dislikePercent}} %-->
@@ -45,76 +44,72 @@
 			<!--Num Dislike Votes:-->
 		<!--</pre>-->
 
-<!-- Vote bottons -->
-
-    <div class="votebtns-container">
-      <!-- vote up -->
-		  <button class="btn btn-lg btn-success votebtn"
-							ng-click="voteLike()">
-		  	<i class="fa fa-thumbs-up fa-3x"></i>
-      </button>
-      <!-- vote down -->
-		  <button class="btn btn-lg btn-danger votebtn"
-							ng-click="voteDislike()">
-		  	<i class="fa fa-thumbs-down fa-3x"></i>
-      </button>
+		<!-- Vote bottons -->
+		<div class="votebtns-container">
+			<!-- vote up -->
+			<button class="btn btn-lg btn-success votebtn"
+					ng-click="voteLike()">
+				<i class="fa fa-thumbs-up fa-3x"></i>
+			</button>
+			<!-- vote down -->
+			<button class="btn btn-lg btn-danger votebtn"
+					ng-click="voteDislike()">
+				<i class="fa fa-thumbs-down fa-3x"></i>
+			</button>
 		</div>
-
-  </div>
+	</div>
 
 	<!--row of bottons-->
 
-  <div class="container attendee-buttons-panel">
+	<div class="container attendee-buttons-panel">
 
-    <div class="row">
+		<div class="row">
 
-      <!-- Volume Up Button-->
-      <div class="col-sm-4 attendee-buttons">
-        <button class="btn btn-secondary-outline"
-                title="Press if you can't hear!"
-                ng-class="{ 'btn-warning': attendee.volumeUp == 'yes' }"
-                ng-click='attendee.volumeUp = "yes"'>
-          <i class="fa fa-volume-up fa-3x"></i>
-        </button>
-      </div>
+			<!-- Volume Up Button-->
+			<div class="col-sm-4 attendee-buttons">
+				<button class="btn btn-secondary-outline"
+						title="Press if you can't hear!"
+						ng-class="{ 'btn-warning': attendee.volumeUp == 'yes' }"
+						ng-click='attendee.volumeUp = "yes"'>
+					<i class="fa fa-volume-up fa-3x"></i>
+				</button>
+			</div>
 
-      <!-- Speed Buttons -->
-      <div class="col-sm-4 attendee-buttons">
-        <!-- SLOW DOWN-->
-        <button class="btn btn-secondary-outline slow-down-button"
-                title="Press if you want the speaker to go slower"
-                ng-class="{ 'btn-success': attendee.speed == -1 }"
-                ng-click='attendee.speed = -1'>
-          <i class="fa fa-fast-backward fa-3x"></i>
-        </button>
-        <!-- SPEED  UP -->
-        <button class="btn btn-secondary-outline go-faster-button"
-                title="Press if you want the speaker to go faster"
-                ng-class="{ 'btn-success': attendee.speed == 1 }"
-                ng-click='attendee.speed = 1'>
-          <i class="fa fa-fast-forward fa-3x"></i>
-        </button>
+			<!-- Speed Buttons -->
+			<div class="col-sm-4 attendee-buttons">
+				<!-- SLOW DOWN-->
+				<button class="btn btn-secondary-outline slow-down-button"
+                		title="Press if you want the speaker to go slower"
+                		ng-class="{ 'btn-success': attendee.speed == -1 }"
+                		ng-click='attendee.speed = -1'>
+					<i class="fa fa-fast-backward fa-3x"></i>
+				</button>
+				<!-- SPEED  UP -->
+				<button class="btn btn-secondary-outline go-faster-button"
+                		title="Press if you want the speaker to go faster"
+                		ng-class="{ 'btn-success': attendee.speed == 1 }"
+                		ng-click='attendee.speed = 1'>
+					<i class="fa fa-fast-forward fa-3x"></i>
+				</button>
+			</div>
 
-      </div>
-
-      <!-- Panic Button-->
-      <div class="col-sm-4 attendee-buttons">
-        <button class="btn btn-secondary-outline"
-                title="Press if you are lost!"
-                ng-show="attendee.feeling ==='fine'"
-                ng-click='panicButton(attendee)'>
-          <i class="fa fa-fire-extinguisher fa-3x"></i>
-        </button>
-        <button class="btn btn-success"
-                title="I am fine now!"
-                ng-show="attendee.feeling === 'panic'"
-                ng-click='panicButton(attendee)'>
-          <i class="fa fa-check-circle-o fa-3x"></i>
-        </button>
-      </div>
-    </div>
-  </div>
-
+			<!-- Panic Button-->
+			<div class="col-sm-4 attendee-buttons">
+				<button class="btn btn-secondary-outline"
+                		title="Press if you are lost!"
+                		ng-show="attendee.feeling ==='fine'"
+                		ng-click='panicButton(attendee)'>
+					<i class="fa fa-fire-extinguisher fa-3x"></i>
+				</button>
+				<button class="btn btn-success"
+                		title="I am fine now!"
+                		ng-show="attendee.feeling === 'panic'"
+                		ng-click='panicButton(attendee)'>
+					<i class="fa fa-check-circle-o fa-3x"></i>
+				</button>
+			</div>
+		</div>
+	</div>
 </div>
 
 <!--End of Jumbotron-->
@@ -149,109 +144,112 @@
 
 
 
-
-<div class="container quiz-container">
-
+<!-- POP QUIZ -->
+<div class="container quiz-container" ng-if="showPopQuiz">
 	<div class="row">
 		<div class="col-md-12 well">
 			<h1 class="text-center">Pop Quiz</h1>
 			<div id="quiz">
-				 <div id="question">
-				 <p>{{ quizQuestion1.question }}</p>
-				 <div id="choices">
-					 <div class="radio">
-						 <label><input type="radio"
-													 name="availableAnsA"
-													 ng-model="chosenAnswer"
-													 ng-value="'A'">
-							 A) {{quizQuestion1.availableAns[0].content}}
-						 </label>
-					 </div>
-					 <div class="radio">
-						 <label><input type="radio"
-													 name="availableAnsB"
-													 ng-model="chosenAnswer"
-													 ng-value="'B'">
-							 B) {{quizQuestion1.availableAns[1].content}}
-						 </label>
-					 </div>
-					 <div class="radio">
-						 <label><input type="radio"
-													 name="availableAnsC"
-													 ng-model="chosenAnswer"
-													 ng-value="'C'">
-							 C) {{quizQuestion1.availableAns[2].content}}
-						 </label>
-					 </div>
-			 	 </div>
-
-			 <button type="button"
-							 class="btn btn-primary"
-			 	       ng-click="submitAnswer()">Submit</button>
-			 </div>
-    </div>
+				<div id="question">
+					<p>{{ quizQuestion1.question }}</p>
+				</div>
+				<div id="choices">
+					<div class="radio">
+						<label>
+							<input type="radio"
+								   name="availableAnsA"
+								   ng-model="chosenAnswer"
+								   ng-value="'A'">
+							A) {{quizQuestion1.availableAns[0].content}}
+						</label>
+					</div>
+					<div class="radio">
+						<label>
+							<input type="radio"
+								   name="availableAnsB"
+								   ng-model="chosenAnswer"
+								   ng-value="'B'">
+							B) {{quizQuestion1.availableAns[1].content}}
+						</label>
+					</div>
+					<div class="radio">
+						<label>
+							<input type="radio"
+								   name="availableAnsC"
+								   ng-model="chosenAnswer"
+								   ng-value="'C'">
+							C) {{quizQuestion1.availableAns[2].content}}
+						</label>
+					</div>
+				</div>
+				<button type="button"
+						class="btn btn-primary"
+						ng-click="submitAnswer()">
+					Submit
+				</button>
+			</div>
+		</div>
 	</div>
-</div>
+	<!-- QUIZ RESULTS CHART -->
+	<div class="container quiz-results-container">
+		<div class="ct-chart ct-major-tenth"></div>
+	</div>
 
-<div class="container quiz-results-container">
-	<!-- QUIZ RESULTS CHART -->
-	    <div class="ct-chart ct-major-tenth"></div>
-	<!-- QUIZ RESULTS CHART -->
-	<!-- <pre>
-		LikeVotes: {{ intervalLikeVotes }} <br>
-		Like Line Arr: {{ likeLine }} <br>
-		DislikeVotes: {{ intervalDislikeVotes }} <br>
-		Dislike Line Arr: {{ dislikeLine }} <br>
-	</pre> -->
 </div>
 
 
 
+
+
+
+
+
+
+
+
+<!-- QUESTIONS TO PRESENTER -->
 <div class="container panel question-container">
 
 	<!-- ask question area - input filed and btn -->
 	<form role="form">
 		<div class="form-group">
 			<textarea class="form-control question-input-field"
-								rows="3"
-								id="comment"
-								ng-model="questionContent"
-                type="text"
-                placeholder="Ask a question and the audience will up or down vote it..."
-      		      ng-keydown="addQuestionKeyDown($event)">
-      </textarea>
+					  rows="3"
+					  id="comment"
+					  ng-model="questionContent"
+					  type="text"
+					  placeholder="Ask a question and the audience will up or down vote it..."
+					  ng-keydown="addQuestionKeyDown($event)">
+			</textarea>
 			<!-- <span class="input-group-addon btn btn-success">Send</span> -->
 			<div class="clearfix">
 				<button class="btn btn-success pull-right askbutton"
-								type="button"
-								ng-click="addQuestionClick()">
-								Send
+						type="button"
+						ng-click="addQuestionClick()">
+					Send
 				</button>
 			</div>
-
 		</div>
 	</form>
 
 	<ul class="list-group questions">
-	  <li class="list-group-item"
-				ng-repeat="(key, questionToPresenter) in questionsToPresenter | orderBy: '-counter'">
+		<li class="list-group-item"
+			ng-repeat="(key, questionToPresenter) in questionsToPresenter | orderBy: '-counter'">
 			{{ questionToPresenter.content }}
 			<p>Votes: {{ questionToPresenter.counter }}</p>
-	    <span>
+			<span>
 				<button class="btn btn-sm btn-default" ng-click="voteQuestionUp(questionToPresenter)">
 					<i class="fa fa-chevron-up"></i>
 				</button>
 				<button class="btn btn-sm btn-default" ng-click="voteQuestionDown(questionToPresenter)">
 					<i class="fa fa-chevron-down"></i>
 				</button>
-				<button class="btn btn-sm btn-default" ng-click="removeQuestion(key)">X</button>
+				<button class="btn btn-sm btn-default" ng-click="removeQuestion(key)">&times;</button>
 	    </span>
 	  </li>
 	</ul>
 </div>
 
-<pre>
-  These are all the questions asked: {{ questionsToPresenter | json }}
-</pre>
-
-	</div>
+<!--<pre>-->
+  <!--These are all the questions asked: {{ questionsToPresenter | json }}-->
+<!--</pre>-->

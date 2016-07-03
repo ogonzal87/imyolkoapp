@@ -181,35 +181,39 @@ function PresenterCtrl($scope, $interval, VotesService, QuestionsService, DataAt
   $scope.isCorrectAnsB = false;
   $scope.isCorrectAnsC = false;
   $scope.pushQuestion = function() {
-    var randomKey = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 8);
-    var questionData = {
-      question: $scope.questionContent,
-      availableAns: [
-        {
-          value: 'a',
-          content: $scope.choiceA,
-          isCorrectAns: $scope.isCorrectAnsA
-        },
-        {
-          value: 'b',
-          content: $scope.choiceB,
-          isCorrectAns: $scope.isCorrectAnsB
-        },
-        {
-          value: 'c',
-          content: $scope.choiceC,
-          isCorrectAns: $scope.isCorrectAnsC
-        }
-      ],
-      key: randomKey
-    };
+	  var randomKey = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 8);
+	  var questionData = {
+		  question: $scope.questionContent,
+		  availableAns: [
+			  {
+				  value: 'a',
+				  content: $scope.choiceA,
+				  isCorrectAns: $scope.isCorrectAnsA
+			  },
+			  {
+				  value: 'b',
+				  content: $scope.choiceB,
+				  isCorrectAns: $scope.isCorrectAnsB
+			  },
+			  {
+				  value: 'c',
+				  content: $scope.choiceC,
+				  isCorrectAns: $scope.isCorrectAnsC
+			  }
+		  ],
+		  key: randomKey
+	  };
 
-    // Figure out which is thw correct answer from the data in Firebase and store in a variable
-    questionData.correctAns =  _.findWhere(questionData.availableAns, {isCorrectAns: true});
+	  // Figure out which is thw correct answer from the data in Firebase and store in a variable
+	  questionData.correctAns =  _.findWhere(questionData.availableAns, {isCorrectAns: true});
 
-// Set the question in Firebase
-    QuizService.quizQuestion1Url.set(questionData);
-    console.log("Question: ", questionData );
+	  console.log("Question: ", questionData.question );
+
+	  // Set the question in Firebase
+	  QuizService.quizQuestion1Url.set(questionData);
+
+	  // Make the Pop Quiz show on the Meeting Page UI
+	  $scope.showPopQuiz = true;
   };
 
 
