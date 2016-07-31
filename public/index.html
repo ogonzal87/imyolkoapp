@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html ng-app="YolkoApp">
+  <head>
+	  <meta charset="utf-8">
+	  <title>OG | Productions</title>
+
+	  <!--dependencies CSS-->
+	  <!--build:css css/deps.min.css -->
+	  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" title="no title" charset="utf-8">
+	  <link rel="stylesheet" href="../bower_components/chartist/dist/chartist.min.css" title="no title" charset="utf-8"> <!-- Chart Library CSS -->
+	  <link rel="stylesheet" href="assets/buttons/custom-buttons.css" title="no title" charset="utf-8"> <!-- custom buttons -->
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"> <!-- font awesome -->
+	  <!-- endbuild -->
+
+	  <!-- My custom css -->
+	  <!--build:css css/main.min.css -->
+	  <link rel="stylesheet" href="views/landing-page/landing-page.css" title="no title" charset="utf-8" />
+	  <link rel="stylesheet" href="views/meeting-page/meeting-page.css" title="no title" charset="utf-8" />
+	  <link rel="stylesheet" href="views/dashboard-page/dashboard-page.css"  title="no title" charset="utf-8" />
+	  <link rel="stylesheet" href="components/quiz-chart/quiz-chart.css"  title="no title" charset="utf-8" />
+	  <link rel="stylesheet" href="views/app-styles.css" title="no title" charset="utf-8">
+	  <!-- endbuild -->
+
+	  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'> <!-- fonts -->
+
+  </head>
+
+
+  <body >
+  	  <!-- Nav bar -->
+	  <header>
+		  <!-- <nav ng-include="'views/templates/_top-nav.html'"></nav> -->
+	  </header>
+
+	  <!-- injecting the views on the app -->
+	  <ui-view></ui-view>
+
+	  <!--dependencies JS-->
+	  <!--build:js js/deps.min.js -->
+	  <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+	  <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+	  <script src="../node_modules/angular/angular.min.js"></script>
+	  <script src="../bower_components/firebase/firebase.js"></script>
+	  <script src="../node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+	  <script src="../node_modules/angularfire/dist/angularfire.min.js"></script>
+	  <script src="../node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
+	  <script src="../node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+	  <script src="../node_modules/underscore/underscore-min.js"></script>
+	  <script src="../bower_components/chartist/dist/chartist.min.js"></script>
+	  <!-- endbuild -->
+
+	  <!--build:js js/main.min.js -->
+	  <!-- routing and app init -->
+	  <script src="app.js"></script>
+	  <!-- components -->
+	  <script src="components/quiz/quiz.service.js"></script>
+	  <script src="components/votes/votes.service.js"></script>
+	  <script src="components/questions/questions.service.js"></script>
+	  <script src="components/attendee/attendee.module.js"></script>
+	  <script src="components/attendee/attendee.controller.js"></script>
+	  <script src="components/attendee/services/data.attendee.service.js"></script>
+	  <script src="components/presenter/presenter.module.js"></script>
+	  <script src="components/presenter/presenter.controller.js"></script>
+	  <script src="components/presenter/services/reset.service.js"></script>
+	  <!-- endbuild -->
+  </body>
+</html>
