@@ -1,3 +1,15 @@
 body {
   font-family: 'Montserrat', sans-serif;
+	color: #242a36;
+}
+
+@font-face {
+	font-family: 'Sensei';
+	src: url('../assets/fonts/Sensei-Medium.otf');
+	src: url('../assets/fonts/Sensei-Medium.ttf');
+}
+
+h1, h2, h3 {
+	font-family: 'Sensei', 'Montserrat';
+	text-transform: uppercase;
 }

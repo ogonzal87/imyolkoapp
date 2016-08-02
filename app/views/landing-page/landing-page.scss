@@ -1,7 +1,10 @@
+
+
 .jumbotronhome {
-  height: 60vh;
-  background: url(../../assets/backgrounds/landing.png);
-  color: #ffffff;
+
+	background: url(../../assets/backgrounds/Rectangle.png) no-repeat;
+	background-size: 100% 100%;
+	color: #ffffff;
   min-height: 700px;
   display: flex;
   justify-content: center;
@@ -14,6 +17,7 @@
     width: 100%;
     padding-top: 12px;
     padding-bottom:12px;
+	  background-color: #43c9c6;
   }
 }
 
@@ -34,5 +38,6 @@
 
   .padding-paragraph {
     padding-top: 50px;
+	  color: #624DD6;
   }
 }
