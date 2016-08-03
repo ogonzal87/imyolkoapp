@@ -3,11 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="8dfa04c0-729e-474a-9e07-ae9c23f3895e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/components/attendee/attendee.controller.js" afterPath="$PROJECT_DIR$/app/components/attendee/attendee.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/components/presenter/presenter.controller.js" afterPath="$PROJECT_DIR$/app/components/presenter/presenter.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/components/presenter/services/reset.service.js" afterPath="$PROJECT_DIR$/app/components/presenter/services/reset.service.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/dashboard-page/dashboard-page.html" afterPath="$PROJECT_DIR$/app/views/dashboard-page/dashboard-page.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/app-styles.css" afterPath="$PROJECT_DIR$/app/views/app-styles.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/app-styles.scss" afterPath="$PROJECT_DIR$/app/views/app-styles.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/landing-page/landing-page.css" afterPath="$PROJECT_DIR$/app/views/landing-page/landing-page.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/landing-page/landing-page.html" afterPath="$PROJECT_DIR$/app/views/landing-page/landing-page.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/landing-page/landing-page.scss" afterPath="$PROJECT_DIR$/app/views/landing-page/landing-page.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/meeting-page/meeting-page.css" afterPath="$PROJECT_DIR$/app/views/meeting-page/meeting-page.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/meeting-page/meeting-page.html" afterPath="$PROJECT_DIR$/app/views/meeting-page/meeting-page.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/meeting-page/meeting-page.scss" afterPath="$PROJECT_DIR$/app/views/meeting-page/meeting-page.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/views/landing-page/landing-page.html" afterPath="$PROJECT_DIR$/public/views/landing-page/landing-page.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/views/meeting-page/meeting-page.html" afterPath="$PROJECT_DIR$/public/views/meeting-page/meeting-page.html" />
     </list>
     <ignored path="imyolkoapp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,8 +36,58 @@
       <file leaf-file-name="meeting-page.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/meeting-page/meeting-page.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="704">
-              <caret line="44" column="4" selection-start-line="41" selection-start-column="8" selection-end-line="46" selection-end-column="0" />
+            <state relative-caret-position="432">
+              <caret line="27" column="18" selection-start-line="27" selection-start-column="18" selection-end-line="27" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="landing-page.scss" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/landing-page/landing-page.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="8" column="11" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app-styles.scss" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/app-styles.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="224">
+              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="landing-page.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/landing-page/landing-page.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="160">
+              <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="meeting-page.scss" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/meeting-page/meeting-page.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-240">
+              <caret line="22" column="20" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="attendee.controller.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/components/attendee/attendee.controller.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="224">
+              <caret line="14" column="26" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -46,12 +101,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/views/meeting-page/meeting-page.scss" />
         <option value="$PROJECT_DIR$/app/components/quiz/quiz.service.js" />
         <option value="$PROJECT_DIR$/app/views/templates/_top-nav.html" />
         <option value="$PROJECT_DIR$/app/components/questions/questions.service.js" />
-        <option value="$PROJECT_DIR$/app/components/attendee/attendee.controller.js" />
-        <option value="$PROJECT_DIR$/app/views/meeting-page/meeting-page.html" />
         <option value="$PROJECT_DIR$/app/components/presenter/presenter.controller.js" />
         <option value="$PROJECT_DIR$/app/components/presenter/services/reset.service.js" />
         <option value="$PROJECT_DIR$/app/views/dashboard-page/dashboard-page.html" />
@@ -61,6 +113,12 @@
         <option value="$PROJECT_DIR$/public/index.html" />
         <option value="$PROJECT_DIR$/app/index.html" />
         <option value="$PROJECT_DIR$/app/app.js" />
+        <option value="$PROJECT_DIR$/app/components/attendee/attendee.controller.js" />
+        <option value="$PROJECT_DIR$/app/views/meeting-page/meeting-page.scss" />
+        <option value="$PROJECT_DIR$/app/views/landing-page/landing-page.scss" />
+        <option value="$PROJECT_DIR$/app/views/landing-page/landing-page.html" />
+        <option value="$PROJECT_DIR$/app/views/app-styles.scss" />
+        <option value="$PROJECT_DIR$/app/views/meeting-page/meeting-page.html" />
       </list>
     </option>
   </component>
@@ -117,7 +175,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
+    <option name="x" value="-1907" />
+    <option name="y" value="30" />
     <option name="width" value="1680" />
     <option name="height" value="1023" />
   </component>
@@ -146,6 +205,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -218,14 +279,30 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="imyolkoapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="imyolkoapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.SCSS" />
     <property name="JavaScriptPreferStrict" value="false" />
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
@@ -243,7 +320,10 @@
       <recent name="$PROJECT_DIR$/app" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JavaScript Debug.meeting-page.html">
+    <configuration default="false" name="meeting-page.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/imyolkoapp/app/views/meeting-page/meeting-page.html">
+      <method />
+    </configuration>
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <method />
     </configuration>
@@ -297,6 +377,14 @@
       <recursive>false</recursive>
       <method />
     </configuration>
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.meeting-page.html" />
+    </list>
+    <recent_temporary>
+      <list size="1">
+        <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.meeting-page.html" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
@@ -325,12 +413,14 @@
       <workItem from="1467037682626" duration="730000" />
       <workItem from="1467048731209" duration="562000" />
       <workItem from="1467054529225" duration="14360000" />
-      <workItem from="1469930039186" duration="738000" />
+      <workItem from="1469930039186" duration="1965000" />
+      <workItem from="1470052576061" duration="826000" />
+      <workItem from="1470092299464" duration="3498000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="71792000" />
+    <option name="totallyTimeSpent" value="77343000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -342,7 +432,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1680" height="1023" extended-state="6" />
+    <frame x="-1907" y="30" width="1680" height="1023" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16183574" sideWeight="0.50884956" order="4" side_tool="true" content_ui="tabs" />
@@ -383,27 +473,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/views/meeting-page/meeting-page.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
-          <caret line="45" column="21" selection-start-line="45" selection-start-column="21" selection-end-line="45" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gulpfile.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="10" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/templates/_top-nav.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="38" selection-start-line="12" selection-start-column="38" selection-end-line="12" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/components/attendee/attendee.controller.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2100">
@@ -496,13 +565,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/meeting-page/meeting-page.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="784">
-          <caret line="59" column="24" selection-start-line="59" selection-start-column="24" selection-end-line="59" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/components/attendee/services/data.attendee.service.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="495">
@@ -514,13 +576,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="83" selection-start-line="5" selection-start-column="83" selection-end-line="5" selection-end-column="83" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/components/attendee/attendee.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="150" column="47" selection-start-line="150" selection-start-column="43" selection-end-line="150" selection-end-column="47" />
         </state>
       </provider>
     </entry>
@@ -594,15 +649,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="16">
           <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/landing-page/landing-page.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="9" column="80" selection-start-line="9" selection-start-column="73" selection-end-line="9" selection-end-column="80" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -610,7 +656,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="224">
           <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -618,7 +663,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="16">
           <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -626,14 +670,60 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="352">
           <caret line="22" column="32" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/components/attendee/attendee.module.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/components/attendee/attendee.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="14" column="26" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/landing-page/landing-page.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="8" column="11" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/landing-page/landing-page.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/meeting-page/meeting-page.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-240">
+          <caret line="22" column="20" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/app-styles.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/meeting-page/meeting-page.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="704">
-          <caret line="44" column="4" selection-start-line="41" selection-start-column="8" selection-end-line="46" selection-end-column="0" />
+        <state relative-caret-position="432">
+          <caret line="27" column="18" selection-start-line="27" selection-start-column="18" selection-end-line="27" selection-end-column="18" />
           <folding />
         </state>
       </provider>
