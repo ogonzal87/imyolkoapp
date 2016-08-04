@@ -1,6 +1,5 @@
 .meetingjumbotronn {
   position: relative;
-  height: 75vh;
   background: url(../../assets/backgrounds/Rectangle.png);
   background-repeat: no-repeat;
   background-size: cover;
@@ -9,7 +8,7 @@
   align-items: center;
   flex-direction: column;
   text-align: center;
-  padding: 20px;
+  padding: 20px 20px 0 20px;
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.3) 0 1px 3px; }
   .meetingjumbotronn .container {
@@ -21,18 +20,22 @@
       align-items: center;
       justify-content: center; }
       .meetingjumbotronn .container .votebtns-container .votebtn {
-        margin: 20px 10px;
-        padding: 25px; }
+        margin: 20px 10px 30px 10px;
+        padding: 25px 35px;
+        background-color: #43c9c6; }
+        .meetingjumbotronn .container .votebtns-container .votebtn .icon-flipped {
+          transform: scaleX(-1);
+          -moz-transform: scaleX(-1);
+          -webkit-transform: scaleX(-1);
+          -ms-transform: scaleX(-1); }
   .meetingjumbotronn .attendee-buttons-panel {
-    position: absolute;
     background: rgba(34, 34, 34, 0.25);
-    box-shadow: 0 3px -6px rgba(0, 0, 0, 0.3), inset 0 -3px 3px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    padding: 15px 15px 20px 15px;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-    margin-bottom: 0px; }
+    padding: 15px; }
+    .meetingjumbotronn .attendee-buttons-panel .btn-secondary-outline {
+      background-color: transparent; }
+      .meetingjumbotronn .attendee-buttons-panel .btn-secondary-outline:hover {
+        color: #43c9c6;
+        text-decoration: none; }
 
 .question-container {
   max-width: 1000px;
@@ -41,7 +44,9 @@
   background-color: #ecf0f1; }
   .question-container .askbutton {
     margin-top: 20px;
-    padding: 10px 20px; }
+    padding: 10px 20px;
+    background-color: #43c9c6;
+    color: white; }
   .question-container .questions {
     margin-bottom: 20px; }
 
@@ -51,3 +56,13 @@
     margin: 0; }
   .quiz-container button {
     margin: 20px; }
+
+.questions .items-in-list {
+  display: flex;
+  flex-direction: row; }
+  .questions .items-in-list .question-content {
+    width: 60%; }
+  .questions .items-in-list .question-counter {
+    width: 20%; }
+  .questions .items-in-list .question-voting-controls {
+    width: 20%; }

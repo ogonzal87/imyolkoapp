@@ -1,6 +1,5 @@
 .meetingjumbotronn {
   position: relative;
-  height: 75vh;
   background: url(../../assets/backgrounds/Rectangle.png);
   background-repeat: no-repeat;
   background-size: cover;
@@ -9,8 +8,8 @@
   align-items: center;
   flex-direction: column;
   text-align: center;
-  padding: 20px;
-  border-radius: 5px;
+	padding: 20px 20px 0 20px;
+	border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.3) 0 1px 3px;
 
   .container {
@@ -25,22 +24,32 @@
       justify-content: center;
 
       .votebtn {
-        margin: 20px 10px;
-        padding: 25px;
+        margin: 20px 10px 30px 10px;
+        padding: 25px 35px;
+	      background-color: #43c9c6;
+
+	      .icon-flipped {
+		      transform: scaleX(-1);
+		      -moz-transform: scaleX(-1);
+		      -webkit-transform: scaleX(-1);
+		      -ms-transform: scaleX(-1);
+	      }
       }
     }
   }
 
   .attendee-buttons-panel {
-    position: absolute;
     background: rgba(34,34,34,0.25);
-    box-shadow: 0 3px -6px rgba(0,0,0,0.3), inset 0 -3px 3px rgba(0,0,0,0.1);
-    border-radius: 5px;
-    padding: 15px 15px 20px 15px;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-    margin-bottom: 0px;
+    padding: 15px;
+
+	  .btn-secondary-outline {
+		  background-color: transparent;
+
+		  &:hover {
+			  color: #43c9c6;
+			  text-decoration: none;
+		  }
+	  }
   }
 }
 
@@ -54,6 +63,8 @@
   .askbutton {
     margin-top: 20px;
     padding: 10px 20px;
+	  background-color: #43c9c6;
+	  color: white;
   }
 
   .questions {
@@ -71,4 +82,23 @@
   button {
     margin: 20px;
   }
+}
+
+.questions {
+	.items-in-list {
+		display: flex;
+		flex-direction: row;
+
+		.question-content {
+			width: 60%;
+		}
+
+		.question-counter{
+			width: 20%;
+		}
+
+		.question-voting-controls{
+			width: 20%;
+		}
+	}
 }

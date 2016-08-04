@@ -47,16 +47,16 @@
 		<!-- Vote bottons -->
 		<div class="votebtns-container">
 			<!-- vote up -->
-			<button class="btn btn-lg btn-success votebtn"
+			<button class="btn btn-lg  votebtn"
 					ng-click="voteLike()"
 					ng-disabled="disableLikeBtn">
-				<i class="fa fa-thumbs-up fa-3x"></i>
+				<i class="fa fa-thumbs-o-up fa-3x"></i>
 			</button>
 			<!-- vote down -->
-			<button class="btn btn-lg btn-danger votebtn"
+			<button class="btn btn-lg  votebtn"
 					ng-click="voteDislike()"
 					ng-disabled="disableDislikeBtn">
-				<i class="fa fa-thumbs-down fa-3x"></i>
+				<i class="fa fa-thumbs-o-down icon-flipped  fa-3x"></i>
 			</button>
 		</div>
 	</div>
@@ -73,7 +73,7 @@
 						title="Press if you can't hear!"
 						ng-class="{ 'btn-warning': attendee.volumeUp == 'yes' }"
 						ng-click='attendee.volumeUp = "yes"'>
-					<i class="fa fa-volume-up fa-3x"></i>
+					<i class="fa fa-deafness fa-3x"></i>
 				</button>
 			</div>
 
@@ -101,7 +101,7 @@
                 		title="Press if you are lost!"
                 		ng-show="attendee.feeling ==='fine'"
                 		ng-click='panicButton(attendee)'>
-					<i class="fa fa-fire-extinguisher fa-3x"></i>
+					<i class="fa fa-bullhorn fa-3x"></i>
 				</button>
 				<button class="btn btn-success"
                 		title="I am fine now!"
@@ -216,21 +216,26 @@
 			</textarea>
 			<!-- <span class="input-group-addon btn btn-success">Send</span> -->
 			<div class="clearfix">
-				<button class="btn btn-success pull-right askbutton"
+				<button class="btn pull-right askbutton"
 						type="button"
 						ng-click="addQuestionClick()">
-					Send
+					<span><i class="fa fa-comment" style="margin-right: 10px;"></i></span>
+					 ASK
 				</button>
 			</div>
 		</div>
 	</form>
 
 	<ul class="list-group questions">
-		<li class="list-group-item"
+		<li class="list-group-item items-in-list"
 			ng-repeat="(key, questionToPresenter) in questionsToPresenter | orderBy: '-counter'">
-			{{ questionToPresenter.content }}
-			<p>Votes: {{ questionToPresenter.counter }}</p>
-			<span>
+			<div class="question-content">
+				{{ questionToPresenter.content }}
+			</div>
+			<div class="question-counter">
+				<p>Votes: {{ questionToPresenter.counter }}</p>
+			</div>
+			<div>
 				<button class="btn btn-sm btn-default" ng-click="voteQuestionUp(questionToPresenter)">
 					<i class="fa fa-chevron-up"></i>
 				</button>
@@ -238,7 +243,7 @@
 					<i class="fa fa-chevron-down"></i>
 				</button>
 				<button class="btn btn-sm btn-default" ng-click="removeQuestion(key)">&times;</button>
-	    </span>
+	    	</div>
 	  </li>
 	</ul>
 </div>
