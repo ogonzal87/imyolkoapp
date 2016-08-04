@@ -97,7 +97,8 @@ function AttendeeCtrl($scope, FIREBASE_URL, $timeout, DataAttendeeService, Votes
 		if (event.keyCode === 13 && $scope.questionContent) {
 			$scope.questionsToPresenter.$add({
 				content: $scope.questionContent, 
-				counter: 0
+				counter: 0,
+				time: Firebase.ServerValue.TIMESTAMP
 			});
 			$scope.questionContent = "";
 		}
@@ -107,7 +108,8 @@ function AttendeeCtrl($scope, FIREBASE_URL, $timeout, DataAttendeeService, Votes
 		if($scope.questionContent) {
 			$scope.questionsToPresenter.$add({
 				content: $scope.questionContent, 
-				counter: 0
+				counter: 0,
+				time: Firebase.ServerValue.TIMESTAMP
 			});
 		}
 		$scope.questionContent = "";

@@ -4,10 +4,12 @@
 	background: url(../../assets/backgrounds/Rectangle.png) no-repeat;
 	background-size: 100% 100%;
 	color: #ffffff;
-  min-height: 700px;
+  min-height: 650px;
   display: flex;
   justify-content: center;
   align-items: center;
+	-webkit-clip-path: polygon(0 0, 1900px 0, 1900px 80%, 0 100%);
+	clip-path: polygon(0 0, 1600px 0, 1600px 87%, 0 100%);
 
 
   .btn-xlg {

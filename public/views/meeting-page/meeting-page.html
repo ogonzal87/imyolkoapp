@@ -211,7 +211,7 @@
 					  id="comment"
 					  ng-model="questionContent"
 					  type="text"
-					  placeholder="Ask a question and the audience will up or down vote it..."
+					  placeholder="Ask a question and the audience will vote for it..."
 					  ng-keydown="addQuestionKeyDown($event)">
 			</textarea>
 			<!-- <span class="input-group-addon btn btn-success">Send</span> -->
@@ -231,18 +231,22 @@
 			ng-repeat="(key, questionToPresenter) in questionsToPresenter | orderBy: '-counter'">
 			<div class="question-content">
 				{{ questionToPresenter.content }}
+				<div class="question-content-time">
+					{{ questionToPresenter.time | date: 'h:mm:ss a' }}
+				</div>
 			</div>
-			<div class="question-counter">
-				<p>Votes: {{ questionToPresenter.counter }}</p>
-			</div>
-			<div>
+			<div class="question-voting-controls">
 				<button class="btn btn-sm btn-default" ng-click="voteQuestionUp(questionToPresenter)">
-					<i class="fa fa-chevron-up"></i>
+					<i class="fa fa-chevron-up fa-2x"></i>
+					<div class="question-voting-controls-text">
+						{{ questionToPresenter.counter }}
+					</div>
 				</button>
-				<button class="btn btn-sm btn-default" ng-click="voteQuestionDown(questionToPresenter)">
-					<i class="fa fa-chevron-down"></i>
-				</button>
-				<button class="btn btn-sm btn-default" ng-click="removeQuestion(key)">&times;</button>
+
+				<!--<button class="btn btn-sm btn-default" ng-click="voteQuestionDown(questionToPresenter)">-->
+					<!--<i class="fa fa-chevron-down"></i>-->
+				<!--</button>-->
+				<!--<button class="btn btn-sm btn-default" ng-click="removeQuestion(key)">&times;</button>-->
 	    	</div>
 	  </li>
 	</ul>

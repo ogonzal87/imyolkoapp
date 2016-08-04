@@ -13,3 +13,7 @@ h1, h2, h3 {
 	font-family: 'Sensei', 'Montserrat';
 	text-transform: uppercase;
 }
+
+button:focus {
+	outline: 0;
+}
