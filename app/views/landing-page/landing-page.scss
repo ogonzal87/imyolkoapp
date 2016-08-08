@@ -1,5 +1,3 @@
-
-
 .jumbotronhome {
 	background: url(../../assets/backgrounds/Rectangle.png) no-repeat;
 	background-size: 100% 100%;
@@ -8,9 +6,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-	-webkit-clip-path: polygon(0 0, 1900px 0, 1900px 80%, 0 100%);
 	clip-path: polygon(0 0, 1600px 0, 1600px 87%, 0 100%);
 
+	.yolko-greeting {
+		font-size: 80px;
+	}
 
   .btn-xlg {
     font-size: 30px;

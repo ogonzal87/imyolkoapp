@@ -56,7 +56,7 @@
 			<button class="btn btn-lg  votebtn"
 					ng-click="voteDislike()"
 					ng-disabled="disableDislikeBtn">
-				<i class="fa fa-thumbs-o-down icon-flipped  fa-3x"></i>
+				<i class="fa fa-thumbs-o-down icon-flipped fa-3x"></i>
 			</button>
 		</div>
 	</div>
@@ -71,9 +71,10 @@
 			<div class="col-sm-4 attendee-buttons">
 				<button class="btn btn-secondary-outline"
 						title="Press if you can't hear!"
-						ng-class="{ 'btn-warning': attendee.volumeUp == 'yes' }"
-						ng-click='attendee.volumeUp = "yes"'>
-					<i class="fa fa-deafness fa-3x"></i>
+						ng-class="{ 'btn-control-active': attendee.volumeUp == 'yes' }"
+						ng-click="attendee.volumeUp = 'yes'">
+					<i class="fa fa-deafness fa-3x"
+					   ng-class="{ 'icon-control-active': attendee.volumeUp == 'yes' }"></i>
 				</button>
 			</div>
 
@@ -82,16 +83,18 @@
 				<!-- SLOW DOWN-->
 				<button class="btn btn-secondary-outline slow-down-button"
                 		title="Press if you want the speaker to go slower"
-                		ng-class="{ 'btn-success': attendee.speed == -1 }"
-                		ng-click='attendee.speed = -1'>
-					<i class="fa fa-fast-backward fa-3x"></i>
+                		ng-class="{ 'btn-control-active': attendee.speed == -1 }"
+                		ng-click="attendee.speed = -1">
+					<i class="fa fa-fast-backward fa-3x"
+					   ng-class="{ 'icon-control-active': attendee.speed == -1 }"></i>
 				</button>
 				<!-- SPEED  UP -->
 				<button class="btn btn-secondary-outline go-faster-button"
                 		title="Press if you want the speaker to go faster"
-                		ng-class="{ 'btn-success': attendee.speed == 1 }"
-                		ng-click='attendee.speed = 1'>
-					<i class="fa fa-fast-forward fa-3x"></i>
+                		ng-class="{ 'btn-control-active': attendee.speed == 1 }"
+                		ng-click="attendee.speed = 1">
+					<i class="fa fa-fast-forward fa-3x"
+					   ng-class="{ 'icon-control-active': attendee.speed == 1 }"></i>
 				</button>
 			</div>
 
@@ -100,14 +103,14 @@
 				<button class="btn btn-secondary-outline"
                 		title="Press if you are lost!"
                 		ng-show="attendee.feeling ==='fine'"
-                		ng-click='panicButton(attendee)'>
+                		ng-click="panicButton(attendee)">
 					<i class="fa fa-bullhorn fa-3x"></i>
 				</button>
-				<button class="btn btn-success"
+				<button class="btn btn-secondary-outline btn-control-active"
                 		title="I am fine now!"
                 		ng-show="attendee.feeling === 'panic'"
-                		ng-click='panicButton(attendee)'>
-					<i class="fa fa-check-circle-o fa-3x"></i>
+                		ng-click="panicButton(attendee)">
+					<i class="fa fa-check-circle-o fa-3x icon-control-active"></i>
 				</button>
 			</div>
 		</div>
@@ -115,9 +118,6 @@
 </div>
 
 <!--End of Jumbotron-->
-
-
-
 
 <!-- Button trigger modal -->
 <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
@@ -133,7 +133,7 @@
 				<h4 class="modal-title" id="myModalLabel">Modal title</h4>
 			</div>
 			<div class="modal-body">
-				Here are the Availabel answers. The user selects something here and is diplayed in the
+				Here are the Available answers. The user selects something here and is diplayed in the
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -142,9 +142,6 @@
 		</div>
 	</div>
 </div>
-
-
-
 
 <!-- POP QUIZ -->
 <div class="container quiz-container" ng-show="showQuiz">

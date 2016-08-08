@@ -38,6 +38,10 @@
         text-decoration: none; }
       .meetingjumbotronn .attendee-buttons-panel .btn-secondary-outline:focus {
         outline: 0; }
+    .meetingjumbotronn .attendee-buttons-panel .btn-control-active {
+      box-shadow: inset 0 3px 15px 3px rgba(0, 0, 0, 0.125); }
+      .meetingjumbotronn .attendee-buttons-panel .btn-control-active .icon-control-active {
+        color: #43c9c6; }
 
 .question-container {
   max-width: 1000px;
