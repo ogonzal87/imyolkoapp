@@ -18,7 +18,7 @@
   margin: 20px 5px;
   background-color: #ecf0f1; }
   .panels-dashboard .panel-body {
-    padding: 5px; }
+    padding: 5px 0; }
     .panels-dashboard .panel-body .icons-dashboard-center {
       display: flex;
       align-items: center;
@@ -27,8 +27,8 @@
         padding-top: 25px; }
     .panels-dashboard .panel-body .reset-btns {
       display: inline-block;
-      opacity: .3;
-      border-top: 1px solid grey;
+      opacity: .2;
+      border-top: 1px solid lightgray;
       margin-top: 15px;
       width: 100%;
       text-align: center; }
@@ -37,9 +37,6 @@
         border: none;
         padding: 6px 24px;
         width: 100%; }
-        .panels-dashboard .panel-body .reset-btns .resetbutton:hover {
-          border: 1px solid grey;
-          border-radius: 3px; }
 
 .panel-start-stop-btns {
   background-color: #ecf0f1;

@@ -6,7 +6,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-	clip-path: polygon(0 0, 1600px 0, 1600px 87%, 0 100%);
+	clip-path: polygon(0 0, 4600px 0, 4600px 87%, 0 100%);
+	-webkit-clip-path: polygon(0 0, 4900px 0, 4900px 80%, 0 100%);
 
 	.yolko-greeting {
 		font-size: 80px;

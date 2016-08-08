@@ -1,11 +1,11 @@
 angular.module('Presenter')
 .controller('PresenterCtrl', PresenterCtrl);
 
-function PresenterCtrl($scope, $interval, VotesService, QuestionsService, DataAttendeeService, ResetService, QuizService) {
+function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsService, DataAttendeeService, ResetService, QuizService) {
 	//LOAD ATTENDEES
 	$scope.attendees         = DataAttendeeService.attendees;
 	// LOAD QUESTIONS
-    $scope.questions         = QuestionsService.questions;
+	$scope.questions         = QuestionsService.questions;
 	//LOAD VOTES
 	$scope.votes             = VotesService.votes;
 	//LOAD LIKE VOTES
@@ -24,18 +24,28 @@ function PresenterCtrl($scope, $interval, VotesService, QuestionsService, DataAt
 	// for the snapshots I want to use to populale on the Chart with both a
 	// Like and a Dislike Lines.
     $scope.startPresentation = function() {
-        var interval = $interval(function() {
-	        $scope.intervalLikeVotes.push($scope.likeVotesArray.length);
-	        $scope.intervalDislikeVotes.push($scope.dislikeVotesArray.length);
-	        pushToLikeLineLineArr();
-	        pushToDislikeLineLineArr();
-	        // interval duration is set to 1 minute by default
-	        // TODO: need to establish a varibale so that the presented can dictate
-	        // the interval themselves.
-        }, 10000);
-	    // TODO: I need to take this stopPresetnation function out side on the Start Presentation function.
-	    // Create a way to stop the Presetation and Intevals
+	    $scope.tickInterval = 1000; //seconds
 
+	    var tick = function () {
+		    $scope.clock = Date.now(); // get the current time
+		    $timeout(tick, $scope.tickInterval); // reset the timer
+	    };
+
+	    // Start the timer
+	    $timeout(tick, $scope.tickInterval);
+
+	    var interval = $interval(function() {
+		    $scope.tickInterval = 1000; //seconds
+		    $scope.intervalLikeVotes.push($scope.likeVotesArray.length);
+		    $scope.intervalDislikeVotes.push($scope.dislikeVotesArray.length);
+		    pushToLikeLineLineArr();
+		    pushToDislikeLineLineArr();
+		    // interval duration is set to 1 minute by default
+		    // TODO: need to establish a variable so that the presented can dictate the interval themselves.
+	    }, 5000);
+
+	    // Create a way to stop the Presetation and Intevals
+	    // TODO: I need to take this stopPresetnation function out side on the Start Presentation function.
 	    $scope.stopPresentation = function() {
 		    $interval.cancel(interval);
 		    console.log("Stopped the meeting and canceled the interval");

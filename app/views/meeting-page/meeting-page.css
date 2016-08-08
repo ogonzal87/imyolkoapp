@@ -61,9 +61,27 @@
 .quiz-container {
   margin-bottom: 40px; }
   .quiz-container h1 {
-    margin: 0; }
+    font-size: 45px;
+    margin: 0 0 25px 0;
+    color: #624DD6; }
+  .quiz-container .pop-question {
+    font-size: 30px;
+    text-align: center; }
+  .quiz-container .pop-choice {
+    display: inline-block;
+    background-color: #ddd;
+    padding: 10px 20px;
+    width: 100%;
+    font-size: 16px; }
+  .quiz-container input[type="radio"] {
+    display: none; }
+  .quiz-container input[type="radio"]:checked + label {
+    background-color: #624DD6;
+    color: white; }
   .quiz-container button {
-    margin: 20px; }
+    background-color: #43c9c6;
+    border: none;
+    color: white; }
     .quiz-container button:focus {
       outline: 0; }
 

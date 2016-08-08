@@ -3,7 +3,7 @@
 
   <div class="row">
 	  <div class="col-md-3 col-sm-6">
-		  <!-- START WIDGET -->
+		  <!-- PANEL WIDGET -->
 		  <div class="panel panels-dashboard">
 			  <div class="panel-body">
 				  <div class="col-xs-4 icons-dashboard-center">
@@ -15,11 +15,8 @@
 				  </div>
 
 				  <div class="reset-btns">
-					  <button uib-popover="This resets the Yolko Avatar"
-							  class="resetbutton"
-							  ng-click="resetYolko()">
-						  <!--popover-trigger="mouseenter"-->
-						  Reset Yolko
+					  <button class="resetbutton" ng-click="resetYolko()">
+						  RESET YOLKO
 					  </button>
 				  </div>
 			  </div>
@@ -27,7 +24,7 @@
 	  </div>
 
 	  <div class="col-md-3 col-sm-6">
-		  <!-- START WIDGET -->
+		  <!-- PANEL WIDGET -->
 		  <div class="panel panels-dashboard"
 			   ng-class="volumeUpPercent.class">
 			  <div class="panel-body">
@@ -42,11 +39,8 @@
 				  </div>
 
 				  <div class="reset-btns">
-					  <button class="resetbutton"
-							  ng-click="resetVolumeTracker()"
-							  uib-popover="This resets the Volume">
-						  <!--popover-trigger="mouseenter"-->
-						  Reset
+					  <button class="resetbutton" ng-click="resetVolumeTracker()">
+						  RESET
 					  </button>
 				  </div>
 			  </div>
@@ -54,7 +48,7 @@
 	  </div>
 
 	  <div class="col-md-3 col-sm-6 ">
-		  <!-- START WIDGET -->
+		  <!-- PANEL WIDGET -->
 		  <div class="panel panels-dashboard "
 			   ng-class="speedPercent.class">
 			  <div class="panel-body">
@@ -69,11 +63,8 @@
 				  </div>
 
 				  <div class="reset-btns">
-					  <button class="resetbutton"
-							  ng-click="resetSpeedTracker()"
-							  uib-popover="This resets the Speed">
-							  <!--popover-trigger="mouseenter"-->
-						  Reset
+					  <button class="resetbutton" ng-click="resetSpeedTracker()">
+						  RESET
 					  </button>
 				  </div>
 			  </div>
@@ -82,7 +73,7 @@
 
 
 	  <div class="col-md-3 col-sm-6">
-		  <!-- START WIDGET -->
+		  <!-- PANEL WIDGET -->
 		  <div class="panel panels-dashboard" ng-class="panicPercent.class">
 			  <div class="panel-body">
 				  <div class="col-xs-4 icons-dashboard-center">
@@ -96,11 +87,8 @@
 				  </div>
 
 				  <div class="reset-btns">
-					  <button class="resetbutton"
-							  ng-click="resetPanicTracker()"
-							  uib-popover="This resets the Panic">
-						  <!--popover-trigger="mouseenter"-->
-						  Reset
+					  <button class="resetbutton" ng-click="resetPanicTracker()">
+						  RESET
 					  </button>
 				  </div>
 			  </div>
@@ -118,19 +106,16 @@
 			Reset Everything
 		</button>
 
+		{{ clock | date: 'h:mm:ss a'}}
+
 		<button class="btn btn-success btns"
 				ng-click="startPresentation()">
-			Start the Meeting
+			<i class="fa fa-play"></i>
 		</button>
 
 		<button class="btn btn-danger btns"
             	ng-click="stopPresentation()">
-      		Stop the Meeting
-		</button>
-
-		<button class="btn btn-info"
-            	ng-click="deleteEverything()">
-      		Start New Presentation
+			<i class="fa fa-stop"></i>
 		</button>
 	</div>
 </div>
@@ -246,3 +231,9 @@
   	</div>
 </div>
 <!--   QUESTIONS END -->
+
+
+<button class="btn btn-info"
+		ng-click="deleteEverything()">
+	Start New Presentation
+</button>

@@ -53,7 +53,7 @@
 				<i class="fa fa-thumbs-o-up fa-3x"></i>
 			</button>
 			<!-- vote down -->
-			<button class="btn btn-lg  votebtn"
+			<button class="btn btn-lg votebtn"
 					ng-click="voteDislike()"
 					ng-disabled="disableDislikeBtn">
 				<i class="fa fa-thumbs-o-down icon-flipped fa-3x"></i>
@@ -144,45 +144,62 @@
 </div>
 
 <!-- POP QUIZ -->
-<div class="container quiz-container" ng-show="showQuiz">
+<div class="container quiz-container" ng-show="showQuiz = true">
 	<div class="row">
 		<div class="col-md-12 well">
 			<h1 class="text-center">Pop Quiz</h1>
 			<div id="quiz">
-				<div id="question">
+				<div id="question" class="pop-question">
 					<p>{{ quizQuestion1.question }}</p>
 				</div>
-				<div id="choices">
+				<div id="choices" class="pop-choices">
 					<div class="radio">
-						<label>
-							<input type="radio"
-								   name="availableAnsA"
-								   ng-model="chosenAnswer"
-								   ng-value="'A'">
+						<input type="radio"
+							   id="availableAnsA"
+							   name="availableAnsA"
+							   ng-model="chosenAnswer"
+							   ng-value="'A'">
+						<label class="pop-choice" for="availableAnsA">
 							A) {{quizQuestion1.availableAns[0].content}}
 						</label>
 					</div>
 					<div class="radio">
-						<label>
-							<input type="radio"
-								   name="availableAnsB"
-								   ng-model="chosenAnswer"
-								   ng-value="'B'">
+						<input type="radio"
+							   name="availableAnsB"
+							   id="availableAnsB"
+							   ng-model="chosenAnswer"
+							   ng-value="'B'"
+							   class="pop-choice">
+						<label class="pop-choice" for="availableAnsB">
 							B) {{quizQuestion1.availableAns[1].content}}
 						</label>
 					</div>
 					<div class="radio">
-						<label>
-							<input type="radio"
-								   name="availableAnsC"
-								   ng-model="chosenAnswer"
-								   ng-value="'C'">
+
+						<input type="radio"
+							   name="availableAnsC"
+							   id="availableAnsC"
+							   ng-model="chosenAnswer"
+							   ng-value="'C'"
+							   class="pop-choice">
+						<label class="pop-choice" for="availableAnsC">
 							C) {{quizQuestion1.availableAns[2].content}}
+						</label>
+					</div>
+					<div class="radio">
+						<input type="radio"
+							   name="availableAnsD"
+							   id="availableAnsD"
+							   ng-model="chosenAnswer"
+							   ng-value="'D'"
+							   class="pop-choice">
+						<label class="pop-choice" for="availableAnsD">
+							D) {{quizQuestion1.availableAns[3].content}}
 						</label>
 					</div>
 				</div>
 				<button type="button"
-						class="btn btn-primary"
+						class="btn "
 						ng-click="submitAnswer()">
 					Submit
 				</button>

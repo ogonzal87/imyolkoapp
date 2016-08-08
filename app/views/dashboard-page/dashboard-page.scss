@@ -20,7 +20,7 @@
   background-color: #ecf0f1;
 
   .panel-body {
-    padding: 5px;
+    padding: 5px 0;
 
     .icons-dashboard-center{
       display: flex;
@@ -34,8 +34,8 @@
     
     .reset-btns {
       display: inline-block;
-      opacity: .3;
-      border-top: 1px solid grey;
+      opacity: .2;
+      border-top: 1px solid lightgray;
       margin-top: 15px;
       width: 100%;
       text-align: center;
@@ -47,8 +47,7 @@
         width: 100%;
 
         &:hover {
-          border: 1px solid grey;
-          border-radius: 3px;
+
         }
       }
     }
