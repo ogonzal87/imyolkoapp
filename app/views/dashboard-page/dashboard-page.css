@@ -11,6 +11,9 @@
 .ct-series-b .ct-point {
   stroke: red; }
 
+.ct-label {
+  font-size: 1.3rem; }
+
 /***** Panels Styles *****/
 .panels-dashboard {
   width: 280px;

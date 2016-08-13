@@ -1,3 +1,6 @@
+.ct-label {
+  font-size: 1.3rem; }
+
 .meetingjumbotronn {
   position: relative;
   background: url(../../assets/backgrounds/Rectangle.png);
@@ -78,12 +81,16 @@
   .quiz-container input[type="radio"]:checked + label {
     background-color: #624DD6;
     color: white; }
-  .quiz-container button {
+  .quiz-container .pop-submit-btn {
     background-color: #43c9c6;
     border: none;
-    color: white; }
-    .quiz-container button:focus {
+    color: white;
+    font-size: 25px;
+    width: 100%; }
+    .quiz-container .pop-submit-btn:focus {
       outline: 0; }
+    .quiz-container .pop-submit-btn:hover {
+      color: white; }
 
 .questions .items-in-list {
   display: flex;

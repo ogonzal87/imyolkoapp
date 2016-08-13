@@ -1,7 +1,7 @@
 angular.module('Attendee')
 .controller("AttendeeCtrl", AttendeeCtrl);
 
-function AttendeeCtrl($scope, FIREBASE_URL, $timeout, DataAttendeeService, VotesService, QuestionsService, QuizService, $firebaseObject) {
+function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, QuestionsService, QuizService) {
 
 // LOAD ATTENDEES
 	$scope.attendees            = DataAttendeeService.attendees;
@@ -31,11 +31,13 @@ function AttendeeCtrl($scope, FIREBASE_URL, $timeout, DataAttendeeService, Votes
 	$scope.voteLike = function() {
 		$scope.attendee.vote = 'like';
 		$scope.likeVotesArray.$add({
-			user: DataAttendeeService.defaultAttendee.key, 
+			user: $scope.attendee.$id,
 			vote: 'like', 
 			value: 1, 
 			timestamp: Firebase.ServerValue.TIMESTAMP
 		});
+		console.log(DataAttendeeService.defaultAttendee.key);
+		console.log($scope.attendee.$id);
 		// I have to disable to btn so people so not submit more than 1 vote per
 		// interval
         $scope.disableLikeBtn = true;
@@ -48,7 +50,7 @@ function AttendeeCtrl($scope, FIREBASE_URL, $timeout, DataAttendeeService, Votes
 	$scope.voteDislike = function() {
 		$scope.attendee.vote = 'dislike';
 		$scope.dislikeVotesArray.$add({
-			user: DataAttendeeService.defaultAttendee.key, 
+			user: $scope.attendee.$id,
 			vote: 'dislike', 
 			value: 0, 
 			timestamp: Firebase.ServerValue.TIMESTAMP
@@ -75,17 +77,26 @@ function AttendeeCtrl($scope, FIREBASE_URL, $timeout, DataAttendeeService, Votes
 
 
   $scope.$watch('quizQuestion1', function(newVals, oldVals) {
-	  // var quizChart = QuizChartService.chart;
 	  var answersA = QuizService.quizAnswers1A.length;
 	  var answersB = QuizService.quizAnswers1B.length;
 	  var answersC = QuizService.quizAnswers1C.length;
-	  
-	  new Chartist.Bar('.ct-chart', {
-		  labels: ['A', 'B', 'C'], 
+
+	  var chartAllData = {
+		  labels: ['A', 'B', 'C'],
 		  series: [answersA, answersB, answersC]
-	  }, {
-		  distributeSeries: true
-	  });
+	  };
+
+	  var chartBarOptions = {
+		  distributeSeries: true,
+		  axisY: {
+			  onlyInteger: true
+		  }
+	  };
+
+	  // Create a new bar chart object where as first parameter we pass in a selector
+	  // that is resolving to our chart container element. The Second parameter
+	  // is the actual data object and the third the options.
+	  new Chartist.Bar('.ct-chart', chartAllData, chartBarOptions);
 
 	  //Shows the quiz on the UI of the attendee when the Pop Qui is fired from the Dashboard
 	  $scope.showQuiz = $scope.quizQuestion1.isShowing;

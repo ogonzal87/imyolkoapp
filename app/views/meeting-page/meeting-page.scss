@@ -1,3 +1,7 @@
+.ct-label {
+	font-size: 1.3rem;
+}
+
 .meetingjumbotronn {
   position: relative;
   background: url(../../assets/backgrounds/Rectangle.png);
@@ -118,15 +122,19 @@
 		background-color: #624DD6;
 		color: white;
 	}
-
-
-	button {
+	
+	.pop-submit-btn {
 	  background-color: #43c9c6;
 	  border: none;
 	  color: white;
+		font-size: 25px;
+		width: 100%;
 	  &:focus {
 		  outline: 0;
 	  }
+		&:hover {
+			color: white;
+		}
   }
 }
 

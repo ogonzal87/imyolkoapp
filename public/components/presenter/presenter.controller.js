@@ -76,7 +76,7 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 	$scope.dislikeLine = dislikeLine;
 	// Watch for events in the line arrays and dray the lines in the chart dinamically.
 	$scope.$watch('likeLine', function(newVals, oldVals) {
-		var allData = {
+		var chartAllData = {
 			// A labels array that can contain any sort of values
 			labels: ['1min', '2min', '3min', '4min', '5min', '6min', '7min', '8min', '9min', '10min', '11min', '12min', '13min', '14min', '15min'],
 			// Series array that contains series objects or in this case series data arrays
@@ -94,7 +94,7 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 
 		// As options we currently only set a static size of 300x200 px. We can also omit this and use aspect ratio containers
 		// as you saw in the previous example
-		var options = {
+		var chartLineOptions = {
 			low: 0,
 			axisY: {
 				onlyInteger: true
@@ -108,8 +108,8 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 		};
 		// Create a new line chart object where as first parameter we pass in a selector
 		// that is resolving to our chart container element. The Second parameter
-		// is the actual data object.
-		new Chartist.Line('.ct-chart', allData, options);
+		// is the actual data object and the third the options.
+		new Chartist.Line('.ct-chart', chartAllData, chartLineOptions);
 	}, true);
 
 
