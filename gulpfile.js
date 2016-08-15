@@ -1,125 +1,100 @@
-var gulp        = require('gulp');
-var browserSync = require('browser-sync');
-var sass        = require('gulp-sass');
-var concat      = require('gulp-concat');
-var uglify      = require('gulp-uglify');
-var runSequence = require('run-sequence');
-var gulpIf      = require('gulp-if');
-var useref      = require('gulp-useref');
-var cssnano     = require('gulp-cssnano');
-var imagemin    = require('gulp-imagemin');
-var cache       = require('gulp-cache');
-var del         = require('del');
-
-
-/////////////////////////// Development Tasks ////////////////////////////
-
-///////// Start browserSync server ///////////
-// ---------------
-gulp.task('browserSync', function() {
-  browserSync({
-    server: {
-      baseDir: 'app',
-      routes: {
-        "/node_modules": "node_modules",
-        "/bower_components": "bower_components"
-      }
-    }
-  })
-});
-
-
-gulp.task('sass', function () {
-  return gulp.src('./app/**/*.scss')
-    .pipe(sass())
-    .pipe(gulp.dest('./app/'))
-    .pipe(browserSync.reload({
-      stream: true
-    }));
-});
-
+var gulp = require('gulp');
+var sass = require('gulp-sass');
+var uglify = require('gulp-uglify');
+var rename = require('gulp-rename');
+var server = require('gulp-connect');
+var plumber = require('gulp-plumber');
+var autoprefixer = require('gulp-autoprefixer');
+var del = require('del');
 
 gulp.task('html', function() {
-	return gulp.src('./app/**/*.html')
-		.pipe(gulp.dest('./public/'));
+	return gulp.src('app/**/*.html')
+		.pipe(server.reload());
 });
 
 gulp.task('js', function() {
-	return gulp.src('./app/**/*.js')
-		.pipe(gulp.dest('./public/'));
+	return gulp.src(['app/**/*.js', '!app/**/*.min.js'])
+		.pipe(plumber())
+		.pipe(rename({suffix:'.min'}))
+		.pipe(uglify())
+		.pipe(gulp.dest('app'))
+		.pipe(server.reload());
+});
+
+gulp.task('sass', function() {
+	return gulp.src('app/**/*.scss')
+		.pipe(plumber())
+		.pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+		.pipe(autoprefixer('last 2 versions'))
+		.pipe(gulp.dest('app'))
+		.pipe(server.reload());
+});
+
+gulp.task('watch', function() {
+	gulp.watch('app/**/*.html', ['html']);
+	gulp.watch('app/**/*.js', ['js']);
+	gulp.watch('app/**/*.scss', ['sass']);
 });
 
 
+gulp.task('server', function() {
+	server.server({
+		root: '',
+		livereload: true,
+		port: 3000
+	});
+});
 
-///////// Watchers ///////////
-// ---------------
-gulp.task('watch', ['browserSync', 'sass'], function (){
-  gulp.watch('./app/**/*.scss', ['sass']);
-  gulp.watch(['./app/**/*.html', '**/*.html'], ['html'], browserSync.reload);
-  gulp.watch('./app/**/*.js', ['js'], browserSync.reload);
+gulp.task('default', ['html', 'js', 'sass', 'watch', 'server']);
+
+
+
+
+
+
+
+
+
+
+
+
+/////////////////
+// Build Tasks
+/////////////////
+
+// clear all the files and folders from build folder
+gulp.task('build:cleanfolder', function() {
+	del([
+		'public/**'
+	]);
 });
 
 
-
-/////////////////////////////// Optimization Tasks ////////////////////////
-
-
-///////// Optimizing CSS and JavaScript ///////////
-// ---------------
-gulp.task('useref', function(){
-  return gulp.src('app/*.html')
-    .pipe(useref())
-    .pipe(gulpIf('*.js', uglify()))
-    // Minifies only if it's a CSS file
-    .pipe(gulpIf('*.css', cssnano()))
-    .pipe(gulp.dest('public'))
+// task to create build directory for all files
+gulp.task('build:copy',  ['build:cleanfolder'], function() {
+	return gulp.src('app/**/*')
+		.pipe(gulp.dest('public'))
 });
 
-
-
-///////// Optimizing Assets/Images ///////////
-// ---------------
-gulp.task('assets', function(){
-  return gulp.src('app/assets/**/*.+(png|jpg|gif|svg)')
-    .pipe(imagemin())
-    // Caching images that ran through imagemin
-    .pipe(cache(imagemin({
-      interlaced: true
-    })))
-    .pipe(gulp.dest('public/assets'))
+// task to remove unwanted build files
+// list all files and directories here that you don't want to include
+gulp.task('build:remove',  ['build:copy'], function(callback) {
+	del([
+		'public/**/*.scss'
+		// 'public/**/!(*.min.js)'
+	], callback);
 });
 
-
-
-///////// Cleaning ///////////
-// ---------------
-gulp.task('clean', function() {
-  return del.sync('public').then(function(cb) {
-    return cache.clearAll(cb);
-  });
-})
-
-gulp.task('clean:public', function() {
-  return del.sync('public');
+//task to run build for testing final app
+gulp.task('build:server', function() {
+	server.server({
+		root: 'public',
+		livereload: true,
+		port: 3001
+	});
 });
 
+// run this whenever you want to deploy your site
+gulp.task('build', ['build:copy', 'build:remove']);
 
 
-//////////////////////////// Build Sequences /////////////////////////////
-
-
-gulp.task('default', function(callback) {
-  runSequence(
-    'sass',
-    'html',
-    'browserSync',
-    'watch',
-    callback);
-});
-
-gulp.task('build', function (callback) {
-  runSequence('clean:public',
-    ['sass', 'useref', 'assets'],
-    callback
-  )
-});

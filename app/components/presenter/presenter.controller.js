@@ -192,6 +192,7 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 	$scope.isCorrectAnsA = false;
 	$scope.isCorrectAnsB = false;
 	$scope.isCorrectAnsC = false;
+	$scope.isCorrectAnsD = false;
 	$scope.pushQuestion = function() {
 		var randomKey = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 8);
 		var questionData = {
@@ -211,6 +212,11 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 					value: 'c',
 					content: $scope.choiceC,
 					isCorrectAns: $scope.isCorrectAnsC
+				},
+				{
+					value: 'd',
+					content: $scope.choiceD,
+					isCorrectAns: $scope.isCorrectAnsD
 				}
 			],
 			key: randomKey,
@@ -234,8 +240,8 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 	// /////////////////////////////////////////////////////////////////////////
 	$scope.resetVolumeTracker  = ResetService.resetVolumeTracker; //sets to default values
 	$scope.resetSpeedTracker   = ResetService.resetSpeedTracker; //sets to default values
-    $scope.resetYolko          = ResetService.resetYolko; //deletes the Votes node
-    $scope.resetPanicTracker   = ResetService.resetPanicTracker; //sets to default values
-    $scope.resetEverything     = ResetService.resetEverything; //deletes the Votes and Questionn nodes in the database but sets the values of the attendees back to start
-    $scope.deleteEverything    = ResetService.deleteEverything; //delets all the nodes in the Database
+  $scope.resetYolko          = ResetService.resetYolko; //deletes the Votes node
+  $scope.resetPanicTracker   = ResetService.resetPanicTracker; //sets to default values
+  $scope.resetEverything     = ResetService.resetEverything; //deletes the Votes and Questionn nodes in the database but sets the values of the attendees back to start
+  $scope.deleteEverything    = ResetService.deleteEverything; //delets all the nodes in the Database
 }
