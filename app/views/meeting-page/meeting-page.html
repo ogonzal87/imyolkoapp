@@ -119,34 +119,10 @@
 
 <!--End of Jumbotron-->
 
-<!-- Button trigger modal -->
-<!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-	Launch demo modal
-</button> -->
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Modal title</h4>
-			</div>
-			<div class="modal-body">
-				Here are the Available answers. The user selects something here and is diplayed in the
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
-			</div>
-		</div>
-	</div>
-</div>
-
 <!-- POP QUIZ -->
-<div class="container quiz-container" ng-show="showQuiz = true">
+<div class="container " ng-show="showQuiz = true">
 	<div class="row">
-		<div class="col-md-12 well">
+		<div class="col-md-12 well quiz-container">
 			<h1 class="text-center">Pop Quiz</h1>
 			<div id="quiz">
 				<div id="question" class="pop-question">
@@ -160,7 +136,8 @@
 						   ng-value="'A'"
 						   class="pop-choice" >
 					<label class="pop-choice" for="availableAnsA">
-						A) {{quizQuestion1.availableAns[0].content}}
+						<span class="pop-choice-letter">A</span>
+						{{quizQuestion1.availableAns[0].content}}
 					</label>
 
 					<input type="radio"
@@ -170,7 +147,8 @@
 						   ng-value="'B'"
 						   class="pop-choice">
 					<label class="pop-choice" for="availableAnsB">
-						B) {{quizQuestion1.availableAns[1].content}}
+						<span class="pop-choice-letter">B</span>
+						{{quizQuestion1.availableAns[1].content}}
 					</label>
 
 					<input type="radio"
@@ -180,7 +158,8 @@
 						   ng-value="'C'"
 						   class="pop-choice">
 					<label class="pop-choice" for="availableAnsC">
-						C) {{quizQuestion1.availableAns[2].content}}
+						<span class="pop-choice-letter">C</span>
+						{{quizQuestion1.availableAns[2].content}}
 					</label>
 
 					<input type="radio"
@@ -190,13 +169,14 @@
 						   ng-value="'D'"
 						   class="pop-choice">
 					<label class="pop-choice" for="availableAnsD">
-						D) {{quizQuestion1.availableAns[3].content}}
+						<span class="pop-choice-letter">D</span>
+						{{quizQuestion1.availableAns[3].content}}
 					</label>
 
 				</div>
 				<button class="btn pop-submit-btn"
 						ng-click="submitAnswer()">
-					Submit
+					Submit Answer
 				</button>
 			</div>
 		</div>

@@ -1,7 +1,3 @@
-.ct-label {
-	font-size: 1.3rem;
-}
-
 .meetingjumbotronn {
   position: relative;
   background: url(../../assets/backgrounds/Rectangle.png);
@@ -93,7 +89,8 @@
 }
 
 .quiz-container {
-  margin-bottom: 40px;
+	text-align: center;
+	padding: 50px;
 
   h1 {
     font-size: 45px;
@@ -103,15 +100,27 @@
 
 	.pop-question {
 		font-size: 30px;
-		text-align: center;
+		margin-bottom: 30px;
 	}
 
 	.pop-choice {
+		word-wrap: break-word;
 		display:inline-block;
 		background-color:#ddd;
-		padding: 25px;
+		height: 80px;
+		line-height: 80px;
 		width: 100%;
 		font-size:16px;
+		text-align: left;
+
+		.pop-choice-letter {
+			padding: 20px 30px;
+			border-right: 1px solid white;
+			margin-right: 20px;
+			font-size: 25px;
+			color: #333;
+			opacity: .4;
+		}
 	}
 
 	input[type="radio"] {
@@ -119,7 +128,12 @@
 	}
 	input[type="radio"]:checked + label {
 		background-color: #624DD6;
-		color: white;
+		color: #fff;
+
+		.pop-choice-letter {
+			color: #fff;
+			opacity: 1;
+		}
 	}
 	
 	.pop-submit-btn {
@@ -127,7 +141,9 @@
 	  border: none;
 	  color: white;
 		font-size: 25px;
-		width: 100%;
+		padding: 15px;
+		margin-top: 30px;
+		width: 50%;
 	  &:focus {
 		  outline: 0;
 	  }
@@ -135,6 +151,23 @@
 			color: white;
 		}
   }
+}
+
+// chart styles
+.ct-label {
+	font-size: 1.3rem;
+}
+.ct-series-a .ct-bar {
+	stroke: #624DD6;
+}
+.ct-series-b .ct-bar {
+	stroke: #ddd;
+}
+.ct-series-c .ct-bar {
+	stroke: #43c9c6;
+}
+.ct-series-d .ct-bar {
+	stroke: #242a36;
 }
 
 .questions {

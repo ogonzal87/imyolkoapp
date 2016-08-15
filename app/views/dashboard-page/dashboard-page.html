@@ -211,6 +211,22 @@
 				</label>
 			</div>
 		</div>
+		<div class="form-group">
+			<label for="choice-d">D</label>
+			<input type="text"
+				   class="form-control"
+				   id="choice-d"
+				   placeholder="I'm a choice option"
+				   ng-model="choiceD">
+			<div class="checkbox">
+				<label>
+					<input type="checkbox"
+						   ng-model="correctAnsD"
+						   ng-click="isCorrectAnsD = !isCorrectAnsD">
+					Correct Answer
+				</label>
+			</div>
+		</div>
 		<button ng-click="pushQuestion()" class="btn btn-default">Submit</button>
 	  </form>
 </div>
