@@ -153,7 +153,7 @@
 		</button>
 	</div>
 
-	<form role="form" ng-show="showQuizForm">
+	<form role="form" ng-show="showQuizForm = true">
 		<div class="form-group">
 			<br>
 			<label for="question">Question:</label>
@@ -207,6 +207,22 @@
 					<input type="checkbox"
 						   ng-model="correctAnsC"
 						   ng-click="isCorrectAnsC = !isCorrectAnsC">
+					Correct Answer
+				</label>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="choice-d">D</label>
+			<input type="text"
+				   class="form-control"
+				   id="choice-d"
+				   placeholder="I'm a choice option"
+				   ng-model="choiceD">
+			<div class="checkbox">
+				<label>
+					<input type="checkbox"
+						   ng-model="correctAnsD"
+						   ng-click="isCorrectAnsD = !isCorrectAnsD">
 					Correct Answer
 				</label>
 			</div>

@@ -82,10 +82,11 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 	  var answersA = QuizService.quizAnswers1A.length;
 	  var answersB = QuizService.quizAnswers1B.length;
 	  var answersC = QuizService.quizAnswers1C.length;
+	  var answersD = QuizService.quizAnswers1D.length;
 
 	  var chartAllData = {
-		  labels: ['A', 'B', 'C'],
-		  series: [answersA, answersB, answersC]
+		  labels: ['A', 'B', 'C', 'D'],
+		  series: [answersA, answersB, answersC, answersD]
 	  };
 
 	  var chartBarOptions = {

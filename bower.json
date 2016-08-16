@@ -1,0 +1,21 @@
+{
+  "name": "imyolko",
+  "description": "Real Time Feedback App",
+  "main": "",
+  "authors": [
+    "Oscar Gonzalez"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/ogonzal87/imyolkoapp",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "chartist": "^0.9.8",
+    "firebase": "^2.4.2"
+  }
+}
