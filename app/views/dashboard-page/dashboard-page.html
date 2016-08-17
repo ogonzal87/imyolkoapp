@@ -1,101 +1,105 @@
 <!--   DASHBOARD -->
-<div class="container">
+<div class="row panels-dashboard">
+	<div class="col-md-4 col-sm-6" style="padding:0">
+		<div class=" main-panel">
+		<!-- PANEL WIDGET -->
+			<div class="col-sm-4">
+				<img class="profile-image-round"
+					 ng-src="https://randomuser.me/api/portraits/women/8.jpg">
+			</div>
+			<div class="col-xs-8">
+				<h3>Attendees</h3>
+				<h4>{{ numAttendees || 0}}</h4>
+			</div>
+		</div>
+	</div>
 
-  <div class="row">
-	  <div class="col-md-3 col-sm-6">
-		  <!-- PANEL WIDGET -->
-		  <div class="panel panels-dashboard">
-			  <div class="panel-body">
-				  <div class="col-xs-4 icons-dashboard-center">
-					  <i class="fa fa-user fa-3x icon"></i>
-				  </div>
-				  <div class="col-xs-8">
-					  <h3>Attendees</h3>
-					  <h4>{{ numAttendees || 0}}</h4>
-				  </div>
+	<div class="col-md-8 col-sm-6" style="padding:0">
+		<div class="col-md-3 col-sm-6 panel-dashboard"
+			 ng-class="volumeUpPercent.class">
+			<!-- PANEL WIDGET -->
+			<div class="col-xs-4 icons-dashboard-center">
+				<i class="fa fa-volume-off fa-3x icon"></i>
+			</div>
+			<div class="col-sm-8">
+				<h3>Can't Hear</h3>
+				<h4 ng-if="volumeUpPercent.content  || 'We are good!'">
+					{{ volumeUpPercent.content|| 'We are good!'}}
+				</h4>
+			</div>
 
-				  <div class="reset-btns">
-					  <button class="resetbutton" ng-click="resetYolko()">
-						  RESET YOLKO
-					  </button>
-				  </div>
-			  </div>
-		  </div>
-	  </div>
+			<div class="reset-btns">
+				<button class="resetbutton" ng-click="resetVolumeTracker()">
+					RESET
+				</button>
+			</div>
+		</div>
 
-	  <div class="col-md-3 col-sm-6">
-		  <!-- PANEL WIDGET -->
-		  <div class="panel panels-dashboard"
-			   ng-class="volumeUpPercent.class">
-			  <div class="panel-body">
-				  <div class="col-xs-4 icons-dashboard-center">
-					  <i class="fa fa-volume-off fa-3x icon"></i>
-				  </div>
-				  <div class="col-xs-8">
-					  <h3>Can't Hear</h3>
-					  <h4 ng-if="volumeUpPercent.content  || 'We are good!'">
-						  {{ volumeUpPercent.content|| 'We are good!'}}
-					  </h4>
-				  </div>
+		<div class="col-md-3 col-sm-6 panel-dashboard"
+			 ng-class="speedPercent.class">
+			<!-- PANEL WIDGET -->
+			<div class="col-sm-4 icons-dashboard-center">
+				<i class="fa fa-rocket fa-3x icon"></i>
+			</div>
+			<div class="col-xs-8">
+				<h3>Speed</h3>
+				<h4 ng-if="speedPercent.content || 'We are good!'">
+					{{ speedPercent.content || 'We are good!'}}
+				</h4>
+			</div>
 
-				  <div class="reset-btns">
-					  <button class="resetbutton" ng-click="resetVolumeTracker()">
-						  RESET
-					  </button>
-				  </div>
-			  </div>
-		  </div>
-	  </div>
-
-	  <div class="col-md-3 col-sm-6 ">
-		  <!-- PANEL WIDGET -->
-		  <div class="panel panels-dashboard "
-			   ng-class="speedPercent.class">
-			  <div class="panel-body">
-				  <div class="col-xs-4 icons-dashboard-center">
-					  <i class="fa fa-rocket fa-3x icon"></i>
-				  </div>
-				  <div class="col-xs-8">
-					  <h3>Speed</h3>
-					  <h4 ng-if="speedPercent.content || 'We are good!'">
-						  {{ speedPercent.content || 'We are good!'}}
-					  </h4>
-				  </div>
-
-				  <div class="reset-btns">
-					  <button class="resetbutton" ng-click="resetSpeedTracker()">
-						  RESET
-					  </button>
-				  </div>
-			  </div>
-		  </div>
-	  </div>
+			<div class="reset-btns">
+				<button class="resetbutton" ng-click="resetSpeedTracker()">
+					RESET
+				</button>
+			</div>
+		</div>
 
 
-	  <div class="col-md-3 col-sm-6">
-		  <!-- PANEL WIDGET -->
-		  <div class="panel panels-dashboard" ng-class="panicPercent.class">
-			  <div class="panel-body">
-				  <div class="col-xs-4 icons-dashboard-center">
-					  <i class="fa fa-fire-extinguisher fa-3x icon"></i>
-				  </div>
-				  <div class="col-xs-8">
-					  <h3>Lost</h3>
-					  <h4 ng-if="panicPercent.content || 'We are good!'">
-						  {{ panicPercent.content || 'We are good!'}}
-					  </h4>
-				  </div>
+		<div class="col-md-3 col-sm-6 panel-dashboard"
+			 ng-class="panicPercent.class">
+			<!-- PANEL WIDGET -->
+			<div class="col-sm-4 icons-dashboard-center">
+				<i class="fa fa-fire-extinguisher fa-3x icon"></i>
+			</div>
+			<div class="col-xs-8">
+				<h3>Lost</h3>
+				<h4 ng-if="panicPercent.content || 'We are good!'">
+					{{ panicPercent.content || 'We are good!'}}
+				</h4>
+			</div>
 
-				  <div class="reset-btns">
-					  <button class="resetbutton" ng-click="resetPanicTracker()">
-						  RESET
-					  </button>
-				  </div>
-			  </div>
-		  </div>
-	  </div>
+			<div class="reset-btns">
+				<button class="resetbutton" ng-click="resetPanicTracker()">
+					RESET
+				</button>
+			</div>
+		</div>
+
+		<div class="col-md-3 col-sm-6 main-panel"
+			 ng-class="panicPercent.class">
+			<!-- PANEL WIDGET -->
+			<div class="col-sm-4 icons-dashboard-center">
+				<!--<i class="fa fa-fire-extinguisher fa-3x icon"></i>-->
+			</div>
+			<div class="col-xs-8">
+				<!--<h3>Lost</h3>-->
+				<!--<h4 ng-if="panicPercent.content || 'We are good!'">-->
+					<!--{{ panicPercent.content || 'We are good!'}}-->
+				<!--</h4>-->
+			</div>
+
+			<!--<div class="reset-btns">-->
+				<!--<button class="resetbutton" ng-click="resetPanicTracker()">-->
+					<!--RESET-->
+				<!--</button>-->
+			<!--</div>-->
+		</div>
+	</div>
+
+
   </div>
-</div>
+
 
 
 
