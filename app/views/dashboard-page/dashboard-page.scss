@@ -1,16 +1,46 @@
+//Variables
+$base-background-color:           #242a36;
+$base-background-color-secondary: #43c9c6;
+$base-background-color-light:     #fff;
+
+$base-font-color-light:           #fff;
+$base-font-color-dark:            #242a36;
+
+$line-color-likes:                green;
+$line-color-dislikes:             red;
+
+$border-dark-color:               #44474c;
+$border-light-color:              #fff;
+
+
+$panel-bad-background-color:      #d9534f;
+$panel-bad-border-color:          #d43f3a;
+$panel-bad-font-color:            $base-font-color-light;
+
+$panel-soso-background-color:      #f0ad4e;
+$panel-soso-border-color:          #eea236;
+$panel-soso-font-color:            $base-font-color-light;
+
+
+
 /***** Chart Styles *****/
 .ct-series-a .ct-line {
-  stroke: green;
+  stroke: $line-color-likes;
 }
 .ct-series-a .ct-point {
-  stroke: green;
+  stroke: $line-color-likes;
 }
 .ct-series-b .ct-line {
-  stroke: red;
+  stroke: $line-color-dislikes;
 }
 .ct-series-b .ct-point {
-  stroke: red;
+  stroke: $line-color-dislikes;
 }
+
+.ct-bar {
+	stroke-width: 100px;
+}
+
 
 .ct-label {
 	font-size: 1.3rem;
@@ -20,116 +50,211 @@
 /***** Panels Styles *****/
 
 .panels-dashboard {
+	width: 100%;
+	margin: 0;
 
 	.main-panel {
+		position: relative;
+		display: flex;
+		flex-direction: row;
 		height: 200px;
 		margin: 0;
-		background-color: #242a36;
-		color: #fff;
-		padding: 5px 0;
+		background-color: $base-background-color;
+		color: $base-font-color-light;
 		border-radius: 0;
-		border-right: #fff solid 1px;
-		border-bottom: #fff solid 1px;
 
-		.profile-image-round {
-			border-radius: 50%;
+		.profile-image {
+			padding: 0;
+			width: 200px;
+			height: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-direction: column;
+
+			.profile-image-round {
+				border-radius: 50%;
+				border: $border-light-color solid 4px;
+				width: 90px;
+				box-sizing: content-box;
+			}
+			.presentor-name {
+				margin-top: 10px;
+				font-size: 1.8rem;
+			}
+		}
+
+		.main-panel-content {
+			display: flex;
+			align-items: baseline;
+			flex-direction: row;
+			padding: 40px 0 0 40px;
+			height: 100%;
+			width: 200px;
+
+			.likes-container {
+				text-align: left;
+				display: flex;
+				flex-direction: column;
+				.num-likes {
+					height: 80px;
+					font-size: 7rem;
+				}
+				label {
+					padding-left: 25px;
+					opacity: .3;
+				}
+			}
+
+			.dislikes-container {
+				text-align: left;
+				display: flex;
+				flex-direction: column;
+
+				.num-dislikes {
+					height: 40px;
+					font-size: 2.5rem;
+					opacity: .3;
+				}
+			}
+		}
+
+		.counts {
+			position: absolute;
+			right: 0;
+			height: 100%;
+			display: block;
+			flex-direction: column;
+			background-color: transparent;
+			width: 90px;
+
+			div {
+				display: flex;
+				flex-direction: row;
+				justify-content: center;
+				align-items: center;
+				height: 66px;
+				border: solid 1px $border-dark-color;
+				width: 100%;
+				margin: 0;
+				font-size: 20px;
+
+				i {
+					margin-right: 10px;
+				}
+			}
 		}
 	}
 
-
 	.panel-dashboard {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
 		height: 200px;
 		margin: 0;
-		background-color: #43c9 c6;
-		color: #fff;
+		background-color: $base-background-color-secondary;
+		color: #242a36;
 		padding: 5px 0;
 		border-radius: 0;
-		border-right: #9d9d9d solid 1px;
-		border-bottom: #9d9d9d solid 1px;
+		text-align: center;
 
-		.icons-dashboard-center{
+		.resetbutton {
+			position: absolute;
+			text-align: right;
+			bottom: 0;
+			left: 0;
+			background-color: transparent;
+			border: none;
+			padding: 0 10px 5px;
+			font-size: small;
+			opacity: .3;
+		}
+	}
+
+	.control-panel {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		position: relative;
+		height: 200px;
+		margin: 0;
+		padding: 0;
+		background-color: #242a36;
+		color: $base-font-color-light;
+		border-radius: 0;
+
+		.stopwatch {
+			height: 50px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 25px;
+		}
+
+		.play-pause-stop-btns {
 			display: flex;
 			align-items: center;
 			justify-content: center;
 
-			.icon {
-				padding-top: 25px;
+			.play-pause-stop-btn {
+				background-color: transparent;
+				color: #43c9c6;
+				font-size: 25px;
+				padding-bottom: 20px;
 			}
 		}
-	}
 
-	.reset-btns {
-		display: inline-block;
-		opacity: .2;
-		border-top: 1px solid lightgray;
-		margin-top: 15px;
-		width: 100%;
-		text-align: center;
-
-		.resetbutton {
-			background-color: transparent;
-			border: none;
-			padding: 6px 24px;
-			width: 100%;
-
-			&:hover {
-
-			}
+		.reset-btns-main-panel {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			position: absolute;
+			padding: 0;
+			bottom:0;
+			left:0;
+			height: 60px;
+			margin-top: 15px;
+			text-align: center;
+			opacity: .1;
+			cursor: pointer;
 		}
 	}
+}
 
+.results {
+	margin: 50px 0;
 
-
+	.chart {
+		font-size: 25px;
+		padding-left: 30px;
+	}
 }
 
 
-.panel-start-stop-btns{
-  background-color: #ecf0f1;
-  padding-bottom: 5px;
-
-  .start-stop-meeting-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    .btns {
-      margin: 15px;
-    }
-  }
+.dashboard-tab {
+	width: 50%;
+	text-align: center;
+	text-decoration: none;
 }
 
-
-
-
-.reset-btns-container{
-  margin: 30px 0 50px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-
-  .resetbutton{
-    margin: 10px;
-  }
-
-  .start-new-meeting-button {
-    margin-top: 40px;
-  }
+.tab-content {
+	background-color: $base-background-color-light;
 }
 
 .panel-dashboard-bad {
-  background-color: #d9534f;
-  border-color: #d43f3a;
-  color: #fff;
+  background-color: $panel-bad-background-color;
+  border-color: $panel-bad-border-color;
+  color: $panel-bad-font-color;
 }
 
 .panel-dashboard-middle {
-  background-color: #f0ad4e;
-  border-color: #eea236;
-  color: #fff;
+  background-color: $panel-soso-background-color;
+  border-color: $panel-soso-border-color;
+  color: $panel-soso-font-color;
 }
 
 
-.quiz-dashboard {
-	margin-bottom: 30px;
+.background-below-chart {
+	background-color: $base-background-color;
+	color: $panel-bad-font-color;
 }

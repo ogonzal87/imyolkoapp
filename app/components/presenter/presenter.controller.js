@@ -3,15 +3,16 @@ angular.module('Presenter')
 
 function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsService, DataAttendeeService, ResetService, QuizService) {
 	//LOAD ATTENDEES
-	$scope.attendees         = DataAttendeeService.attendees;
+	$scope.attendees                 = DataAttendeeService.attendees;
 	// LOAD QUESTIONS
-	$scope.questions         = QuestionsService.questions;
+	$scope.allQuestionsFromAttendees = QuestionsService.questions;
 	//LOAD VOTES
-	$scope.votes             = VotesService.votes;
+	$scope.votes                     = VotesService.votes;
 	//LOAD LIKE VOTES
-	$scope.likeVotesArray    = VotesService.likeVotesArray;
+	$scope.likeVotesArray            = VotesService.likeVotesArray;
 	//LOAD DISLIKE VOTES
-	$scope.dislikeVotesArray = VotesService.dislikeVotesArray;
+	$scope.dislikeVotesArray         = VotesService.dislikeVotesArray;
+
 
 	// arrays that keep track of all the votes --> this arrays are populated each time the interval is triggered
 	$scope.intervalLikeVotes    = [];
@@ -99,8 +100,8 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 			axisY: {
 				onlyInteger: true
 			},
-			// width: 600,
-			// height: 300,
+			// width: 1200,
+			// height: 500,
 			// Handle holes (if people did not have any votes in a certain minute) in data
 			lineSmooth: Chartist.Interpolation.cardinal({
 				fillHoles: true
@@ -141,18 +142,20 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 		$scope.feelingValues = feelingValues.length;
 		$scope.panicPercent = panic(Math.round((feelingValues.length / $scope.numAttendees) * 100));
 
-		//QUESTIONS
+		//QUESTIONS TO PRESENTER
 		// /////////////////////////////////////////////////////////////////////////
-		// Create a watch to watch othe what happens on the Attendees node
-		$scope.allQuestionsFromAttendees = [];
-		_.each($scope.attendees, function(attendee) {
-			_.each(attendee.questions, function(question) {
-				$scope.allQuestionsFromAttendees.push({
-					content: question.content,
-					name: attendee.name
-				});
-			});
-		});
+
+		$scope.questionsToPresenter = $scope.allQuestionsFromAttendees;
+
+
+		// _.each($scope.attendees, function(attendee) {
+		// 	_.each(attendee.questions, function(question) {
+		// 		$scope.allQuestionsFromAttendees.push({
+		// 			content: question.content,
+		// 			name: attendee.name
+		// 		});
+		// 	});
+		// });
 	}, true);
 
 

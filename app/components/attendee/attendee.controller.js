@@ -135,13 +135,11 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 	
 	$scope.voteQuestionUp = function(questionToPresenter) {
         questionToPresenter.counter++;
-        console.log(questionToPresenter);
         QuestionsService.questions.$save(questionToPresenter);
 	};
 	
 	$scope.voteQuestionDown = function(questionToPresenter) {
 		questionToPresenter.counter--;
-		console.log(questionToPresenter);
 		QuestionsService.questions.$save(questionToPresenter);
 	};
 	
