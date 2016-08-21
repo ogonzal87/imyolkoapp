@@ -1,7 +1,7 @@
 angular.module('Presenter')
 .controller('PresenterCtrl', PresenterCtrl);
 
-function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsService, DataAttendeeService, ResetService, QuizService) {
+function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsService, DataAttendeeService, ResetService, QuizService, StopwatchService) {
 	//LOAD ATTENDEES
 	$scope.attendees                 = DataAttendeeService.attendees;
 	// LOAD QUESTIONS
@@ -23,37 +23,89 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 	var likeLine = [];
 	var dislikeLine = [];
 
+	//////////////////////////////////////////////////////////////////////////////////////
+// STOPWATCH TODO: Need to syncronize the crart with the stopwatch a little bit better -> Stop Presentation should delete all the chart data and start from scratch
+	//////////////////////////////////////////////////////////////////////////////////////
+	var clsStopwatch = StopwatchService.clsStopwatch;
+	var x = new clsStopwatch();
+	var clocktimer;
+
+	function pad(num, size) {
+		var s = "0000" + num;
+		return s.substr(s.length - size);
+	}
+
+	function formatTime(time) {
+		var h = m = s = ms = 0;
+		var newTime = '';
+
+		h = Math.floor( time / (60 * 60 * 1000) );
+		time = time % (60 * 60 * 1000);
+		m = Math.floor( time / (60 * 1000) );
+		time = time % (60 * 1000);
+		s = Math.floor( time / 1000 );
+
+		newTime = pad(h, 2) + ':' + pad(m, 2) + ':' + pad(s, 2)
+		return newTime;
+	}
+
+	$scope.showStopwatch = function() {
+		$scope.updateStopwatch();
+	};
+
+	$scope.updateStopwatch = function() {
+		$scope.stopWatch = formatTime(x.time());
+	};
+
+	var startStopwatch = function() {
+		clocktimer = $interval($scope.updateStopwatch, 1);
+		x.start();
+	};
+
+	var stopStopwatch = function() {
+		x.stop();
+		clearInterval(clocktimer);
+	};
+
+	var resetStopWatch = function() {
+		stopStopwatch();
+		x.reset();
+		$scope.updateStopwatch();
+	};
+
 	//create a function that starts the Presentation and creates an interval
 	// for the snapshots I want to use to populale on the Chart with both a
 	// Like and a Dislike Lines.
-    $scope.startPresentation = function() {
+	var intervalChart;
+  $scope.startPresentation = function() {
+    startStopwatch();
+    intervalChart = $interval(function() {
 	    $scope.tickInterval = 1000; //seconds
+	    $scope.intervalLikeVotes.push($scope.likeVotesArray.length);
+	    $scope.intervalDislikeVotes.push($scope.dislikeVotesArray.length);
+	    pushToLikeLineLineArr();
+	    pushToDislikeLineLineArr();
+	    // interval duration is set to 1 minute by default
+	    // TODO: need to establish a variable so that the presented can dictate the interval themselves.
+    }, 5000);
 
-	    var tick = function () {
-		    $scope.clock = Date.now(); // get the current time
-		    $timeout(tick, $scope.tickInterval); // reset the timer
-	    };
+    // Create a way to stop the Presetation and Intevals
+    // TODO: I need to take this stopPresetnation function out side on the Start Presentation function.
+  };
 
-	    // Start the timer
-	    $timeout(tick, $scope.tickInterval);
+  $scope.pausePresentation = function() {
+	  stopStopwatch();
+	  $interval.cancel(intervalChart);
+	  console.log("Paused the meeting");
+  };
 
-	    var interval = $interval(function() {
-		    $scope.tickInterval = 1000; //seconds
-		    $scope.intervalLikeVotes.push($scope.likeVotesArray.length);
-		    $scope.intervalDislikeVotes.push($scope.dislikeVotesArray.length);
-		    pushToLikeLineLineArr();
-		    pushToDislikeLineLineArr();
-		    // interval duration is set to 1 minute by default
-		    // TODO: need to establish a variable so that the presented can dictate the interval themselves.
-	    }, 5000);
+	$scope.stopPresentation = function() {
+		resetStopWatch();
+		$interval.cancel(intervalChart);
+		console.log("Stopped the meeting");
+	};
 
-	    // Create a way to stop the Presetation and Intevals
-	    // TODO: I need to take this stopPresetnation function out side on the Start Presentation function.
-	    $scope.stopPresentation = function() {
-		    $interval.cancel(interval);
-		    console.log("Stopped the meeting and canceled the interval");
-	    };
-    };
+
 
 	// functions that take the last 2 values of the interval arrays and
 	// substracts them to come up of the number of clicks by interval
@@ -155,6 +207,10 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 		// /////////////////////////////////////////////////////////////////////////
 
 		$scope.questionsToPresenter = $scope.allQuestionsFromAttendees;
+
+		$scope.removeQuestion = function(key) {
+			$scope.questionsToPresenter.$remove(key);
+		};
 
 
 		// _.each($scope.attendees, function(attendee) {

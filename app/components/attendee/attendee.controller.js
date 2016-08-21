@@ -128,6 +128,7 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 		}
 		$scope.questionContent = "";
 	};
+
 	$scope.removeQuestion = function(key) {
 		$scope.questionsToPresenter.$remove(key);
 	};

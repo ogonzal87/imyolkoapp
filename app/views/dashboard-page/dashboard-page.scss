@@ -64,8 +64,8 @@ $panel-soso-font-color:            $base-font-color-light;
 		border-radius: 0;
 
 		.profile-image {
+			width: 50%;
 			padding: 0;
-			width: 200px;
 			height: 100%;
 			display: flex;
 			align-items: center;
@@ -85,15 +85,14 @@ $panel-soso-font-color:            $base-font-color-light;
 		}
 
 		.main-panel-content {
+			width: 30%;
 			display: flex;
 			align-items: baseline;
 			flex-direction: row;
-			padding: 40px 0 0 40px;
+			padding: 45px 0 0 0;
 			height: 100%;
-			width: 200px;
 
 			.likes-container {
-				text-align: left;
 				display: flex;
 				flex-direction: column;
 				.num-likes {
@@ -126,22 +125,23 @@ $panel-soso-font-color:            $base-font-color-light;
 		}
 
 		.counts {
-			position: absolute;
-			right: 0;
-			height: 100%;
-			display: block;
+			display: flex;
 			flex-direction: column;
+			justify-content: space-around;
+			align-items: flex-end;
 			background-color: transparent;
-			width: 90px;
+			width: 20%;
 
 			div {
+				//position: absolute;
+				right: 0;
+				width:90px;
 				display: flex;
 				flex-direction: row;
 				justify-content: center;
 				align-items: center;
 				height: 66px;
 				border: solid 1px $border-dark-color;
-				width: 100%;
 				margin: 0;
 				font-size: 20px;
 
@@ -210,7 +210,7 @@ $panel-soso-font-color:            $base-font-color-light;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		position: relative;
+		//position: relative;
 		height: 200px;
 		margin: 0;
 		padding: 0;
@@ -243,15 +243,14 @@ $panel-soso-font-color:            $base-font-color-light;
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			position: absolute;
-			padding: 0;
-			bottom:0;
-			left:0;
-			height: 60px;
-			margin-top: 15px;
+			height: 20px;
 			text-align: center;
-			opacity: .1;
+			opacity: .2;
 			cursor: pointer;
+
+			div {
+				padding:10px;
+			}
 		}
 	}
 }
@@ -267,7 +266,7 @@ $panel-soso-font-color:            $base-font-color-light;
 
 .background-below-chart {
 	background-color: $base-background-color;
-	min-height: 800px;
+	height: 100%;
 
 	.dashboard-tabs {
 		color: $base-font-color-light;
@@ -284,7 +283,7 @@ $panel-soso-font-color:            $base-font-color-light;
 			cursor: pointer;
 
 			&.active {
-				border-bottom: 8px solid $base-background-color-secondary;
+				border-bottom: 12px solid $base-background-color-secondary;
 			}
 			&:hover {
 				background-color: $base-background-color-secondary;
@@ -296,6 +295,7 @@ $panel-soso-font-color:            $base-font-color-light;
 
 	.dashboard-tab-content {
 		color: $base-font-color-dark;
+		margin-bottom: 100px;
 
 		.question-list-container {
 			padding: 0;
@@ -333,6 +333,7 @@ $panel-soso-font-color:            $base-font-color-light;
 		.pop-quiz-container {
 			padding: 0;
 			background-color: $base-background-color-light;
+			margin-bottom: 100px;
 
 			.quiz-question-container {
 				display: flex;
@@ -388,7 +389,7 @@ $panel-soso-font-color:            $base-font-color-light;
 				color: white;
 				font-size: 25px;
 				padding: 15px;
-				margin: 30px;
+				margin: 20px;
 				width: 50%;
 				&:focus {
 					outline: 0;

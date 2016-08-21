@@ -116,8 +116,8 @@
 		</div>
 
 		<div class="col-md-3 col-sm-6 control-panel">
-			<div class="stopwatch">
-				{{ clock | date: 'h:mm:ss a' }}
+			<div class="stopwatch" ng-init="showStopwatch()">
+				{{ stopWatch | date: 'h:mm:ss a' }}
 			</div>
 
 			<div class="play-pause-stop-btns">
@@ -126,7 +126,7 @@
 					<i class="fa fa-play"></i>
 				</div>
 				<div class="btn play-pause-stop-btn"
-					 ng-click="stopPresentation()">
+					 ng-click="pausePresentation()">
 					<i class="fa fa-pause"></i>
 				</div>
 				<div class="btn play-pause-stop-btn"
@@ -231,10 +231,10 @@
 
 
 		<div ng-show="tab2IsActive" class="container pop-quiz-container">
-			<form novalidate class="container">
+			<form novalidate class="container" style="padding: 20px 60px;">
 				<div class="form-group">
 					<br>
-					<label for="question">Question:</label>
+					<h4 for="question">Question</h4>
 					<textarea class="form-control"
 							  id="question"
 							  placeholder="What would you like to ask everyone?"
