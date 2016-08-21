@@ -2,10 +2,10 @@
 $base-background-color:           #242a36;
 $base-background-color-secondary: #43c9c6;
 $base-background-color-light:     #fff;
-$base-background-color-purple:           #624DD6;
+$base-background-color-purple:    #624DD6;
 
 $base-font-color-light:           #fff;
-$base-font-color-dark:            #242a36;
+$base-font-color-dark:            #555;
 
 $line-color-likes:                green;
 $line-color-dislikes:             red;
@@ -385,6 +385,22 @@ $panel-soso-font-color:            $base-font-color-light;
 
 			.fire-quiz-btn {
 				background-color: $base-background-color-purple;
+				border: none;
+				color: white;
+				font-size: 25px;
+				padding: 15px;
+				margin: 20px;
+				width: 50%;
+				&:focus {
+					outline: 0;
+				}
+				&:hover {
+					color: white;
+				}
+			}
+
+			.reveal-results-btn {
+				background-color: $base-background-color-secondary;
 				border: none;
 				color: white;
 				font-size: 25px;

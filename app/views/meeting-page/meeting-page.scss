@@ -1,3 +1,27 @@
+//Variables
+$base-background-color:           #242a36;
+$base-background-color-secondary: #43c9c6;
+$base-background-color-light:     #fff;
+$base-background-color-purple:    #624DD6;
+
+$base-font-color-light:           #fff;
+$base-font-color-dark:            #555;
+
+$line-color-likes:                green;
+$line-color-dislikes:             red;
+
+$border-dark-color:               #44474c;
+$border-light-color:              #fff;
+
+
+$panel-bad-background-color:      #d9534f;
+$panel-bad-border-color:          #d43f3a;
+$panel-bad-font-color:            $base-font-color-light;
+
+$panel-soso-background-color:      #f0ad4e;
+$panel-soso-border-color:          #eea236;
+$panel-soso-font-color:            $base-font-color-light;
+
 .meetingjumbotronn {
   position: relative;
   background: url(../../assets/backgrounds/Rectangle.png);
@@ -11,6 +35,7 @@
 	padding: 20px 20px 0 20px;
 	border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.3) 0 1px 3px;
+	margin: 0;
 
   .container {
     color: #ffffff;
@@ -68,20 +93,30 @@
 
 .question-container {
   max-width: 1000px;
-  margin: 0 auto 50px;;
+  margin: 30px auto 50px;
   padding: 30px 40px 10px 40px;
   background-color: #ecf0f1;
 
-  .askbutton {
-    margin-top: 20px;
-    padding: 10px 20px;
-	  background-color: #43c9c6;
-	  color: white;
+	.ask-button-container {
+		display: flex;
+		align-items: center;
+		justify-content: center;
 
-	  &:focus {
-		  outline: 0;
-	  }
-  }
+		.askbutton {
+			height: 50%;
+			width: 534px;
+			margin-top: 20px;
+			padding: 10px 20px;
+			background-color: $base-background-color-purple;
+			color: white;
+			font-size: 25px;
+
+			&:focus {
+				outline: 0;
+			}
+		}
+	}
+
 
   .questions {
     margin-bottom: 20px;
@@ -90,17 +125,18 @@
 
 .quiz-container {
 	text-align: center;
-	padding: 50px;
+	padding: 15px 50px 50px 50px;
 
-  h1 {
-    font-size: 45px;
-	  margin: 0 0 25px 0;
+  h2 {
+    font-size: 35px;
+	  font-weight: 900;
 	  color: #624DD6;
   }
 
 	.pop-question {
 		font-size: 30px;
 		margin-bottom: 30px;
+		text-align: left;
 	}
 
 	.pop-choice {
@@ -137,7 +173,7 @@
 	}
 	
 	.pop-submit-btn {
-	  background-color: #43c9c6;
+	  background-color: $base-background-color-purple;
 	  border: none;
 	  color: white;
 		font-size: 25px;
@@ -167,7 +203,7 @@
 	stroke: #43c9c6;
 }
 .ct-series-d .ct-bar {
-	stroke: #242a36;
+	stroke: #555;
 }
 
 .questions {

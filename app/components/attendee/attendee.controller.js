@@ -15,8 +15,6 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 	$scope.dislikeVotesArray    = VotesService.dislikeVotesArray;
 	//LOAD QUIZ QUESTIONS
 	$scope.quizQuestion1        = QuizService.quizQuestion1;
-	$scope.quizQuestion2        = QuizService.quizQuestion2;
-	$scope.quizQuestion3        = QuizService.quizQuestion3;
 
 	// bind the obj to the database in Firebase
 	// any changes that happen in the view will be updated automatically in Firebase and viceversa
@@ -36,8 +34,6 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 			value: 1,
 			timestamp: Firebase.ServerValue.TIMESTAMP
 		});
-		console.log(DataAttendeeService.defaultAttendee.key);
-		console.log($scope.attendee.$id);
 		// I have to disable to btn so people so not submit more than 1 vote per
 		// interval
 		$scope.disableLikeBtn = true;
@@ -75,6 +71,13 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 		} else if ($scope.attendee.chosenAnswer === "D") {
 			QuizService.quizAnswers1D.$add(1);
 		}
+		//disbale all other answers after attendee submits their answers
+		if($scope.attendee.chosenAnswer) {
+			$scope.disableAllChoices = true;
+		} else {
+			alert('Hey! Choose an option... ')
+		}
+
 	};
 
 
@@ -102,7 +105,10 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 		new Chartist.Bar('.ct-chart', chartAllData, chartBarOptions);
 
 		//Shows the quiz on the UI of the attendee when the Pop Qui is fired from the Dashboard
-		$scope.showQuiz = $scope.quizQuestion1.isShowing;
+		$scope.showQuiz = $scope.quizQuestion1.isShowingQuiz;
+		//Shows the quiz on the UI of the attendee when the Pop Qui is fired from the Dashboard
+		console.log('Meeting View', QuizService.quizQuestion1.isShowingResultsToAttendees);
+		$scope.isShowingResultsToPresenter = $scope.quizQuestion1.isShowingResultsToPresenter;
 	}, true);
 
 	//QUESTIONS TO THE PRESENTER

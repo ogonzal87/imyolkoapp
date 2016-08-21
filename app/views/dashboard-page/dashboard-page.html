@@ -323,8 +323,19 @@
 					</label>
 				</div>
 
-				<div class="fire-quiz-btn-container">
+				<div class="fire-quiz-btn-container" ng-show="showFireQuizBtn">
 					<button ng-click="fireQuizToAttendees()" class="btn fire-quiz-btn">FIRE QUESTION</button>
+				</div>
+
+				<div class="fire-quiz-btn-container" ng-show="showRevealResultsBtn">
+					<button ng-click="quizQuestion1.isShowingResultsToAttendees = true" class="btn reveal-results-btn">REVEAL RESULTS</button>
+				</div>
+
+				<pre>quizQuestion1.isShowingResultsToAttendees : {{quizQuestion1.isShowingResultsToAttendees}}</pre>
+
+				<!-- QUIZ RESULTS CHART -->
+				<div class="container quiz-results-container" ng-show="isShowingResultsToPresenter">
+					<div class="ct-chart-quiz ct-major-tenth"></div>
 				</div>
 			</form>
 		</div>

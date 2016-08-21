@@ -15,6 +15,9 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 	//LOAD QUIZ QUESTION OBJECT
 	$scope.quizQuestion1             = QuizService.quizQuestion1;
 
+	// bind the obj to the database in Firebase
+	// any changes that happen in the view will be updated automatically in Firebase and viceversa
+	QuizService.quizQuestion1.$bindTo($scope, 'quizQuestion1');
 
 	// arrays that keep track of all the votes --> this arrays are populated each time the interval is triggered
 	$scope.intervalLikeVotes    = [];
@@ -168,16 +171,9 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 	}, true);
 
 
-	$scope.$watch('quizQuestion1', function(newVal, oldVal) {
-		$scope.numOfAnswersFromAttendees = QuizService.quizAnswers1A.length + QuizService.quizAnswers1B.length + QuizService.quizAnswers1C.length + QuizService.quizAnswers1D.length;
-	}, true);
-
-
-
 	//+++++++++++++++++++++++++++++++++//FIREBASE WATCHING ALL EVENTS+++++++++++++++++++++++++++++++//
 	$scope.$watch('attendees', function(newVal, oldVal) {
 		$scope.numAttendees = $scope.attendees.length;
-
 
 		//VOLUME
 		// /////////////////////////////////////////////////////////////////////////
@@ -255,13 +251,29 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 		}
 	}
 
+	// toggle tabs in dashboard
+	// /////////////////////////////////////////////////////////////////////////
+	$scope.tab1IsActive = true;
+	$scope.tab2IsActive = false;
+	$scope.toggleTabs = function(tab) {
+		if (tab === 'tab1IsActive') {
+			$scope.tab1IsActive = true;
+			$scope.tab2IsActive = false;
+		}
+		if (tab === 'tab2IsActive' ) {
+			$scope.tab2IsActive = true;
+			$scope.tab1IsActive = false;
+		}
+	};
 
-	//Quiz
+
+	//Quiz Maker
 	// /////////////////////////////////////////////////////////////////////////
 	$scope.isCorrectAnsA = false;
 	$scope.isCorrectAnsB = false;
 	$scope.isCorrectAnsC = false;
 	$scope.isCorrectAnsD = false;
+	$scope.showFireQuizBtn = true;
 	$scope.fireQuizToAttendees = function() {
 		var randomKey = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 8);
 		var questionData = {
@@ -290,33 +302,60 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 			],
 			key: randomKey,
 			// Make the Pop Quiz show on the Meeting Page UI
-			// TODO: this is not the bes approach. Need to come up with a better one.
-			isShowing: true
+			// TODO: this is not the best approach. Need to come up with a better one.
+			isShowingQuiz: true,
+			isShowingResultsToAttendees: false,
+			isShowingResultsToPresenter: true,
 		};
 
+		//show 'Reveal Quiz Results' btn
+		$scope.showRevealResultsBtn = true;
+		//hide 'Submit Quiz' btn
+		$scope.showFireQuizBtn = false;
 		// Figure out which is thw correct answer from the data in Firebase and store in a variable
 		questionData.correctAns =  _.findWhere(questionData.availableAns, {isCorrectAns: true});
-
-		console.log("Question: ", questionData.questionContent );
-
-
 		// Set the question in Firebase
 		QuizService.quizQuestion1Url.set(questionData);
 	};
 
-	// toggle tabs in dashboard
-	$scope.tab1IsActive = true;
-	$scope.tab2IsActive = false;
-	$scope.toggleTabs = function(tab) {
-		if (tab === 'tab1IsActive') {
-			$scope.tab1IsActive = true;
-			$scope.tab2IsActive = false;
-		}
-		if (tab === 'tab2IsActive' ) {
-			$scope.tab2IsActive = true;
-			$scope.tab1IsActive = false;
-		}
-	};
+	// Results
+	// /////////////////////////////////////////////////////////////////////////
+	$scope.$watch('quizQuestion1', function(newVals, oldVals) {
+		$scope.numOfAnswersFromAttendees = QuizService.quizAnswers1A.length + QuizService.quizAnswers1B.length + QuizService.quizAnswers1C.length + QuizService.quizAnswers1D.length;
+
+		var answersA = QuizService.quizAnswers1A.length;
+		var answersB = QuizService.quizAnswers1B.length;
+		var answersC = QuizService.quizAnswers1C.length;
+		var answersD = QuizService.quizAnswers1D.length;
+
+		console.log($scope.quizQuestion1.isShowingResultsToAttendees)
+
+		var chartAllData = {
+			labels: ['A', 'B', 'C', 'D'],
+			series: [answersA, answersB, answersC, answersD]
+		};
+
+		var chartBarOptions = {
+			distributeSeries: true,
+			axisY: {
+				onlyInteger: true
+			},
+			width: 900,
+			height: 400,
+		};
+
+		// Create a new bar chart object where as first parameter we pass in a selector
+		// that is resolving to our chart container element. The Second parameter
+		// is the actual data object and the third the options.
+		new Chartist.Bar('.ct-chart-quiz', chartAllData, chartBarOptions);
+
+		//Shows the quiz on the UI of the attendee when the Pop Qui is fired from the Dashboard
+		$scope.showQuiz = $scope.quizQuestion1.isShowingQuiz;
+		//Shows the quiz on the UI of the attendee when the Pop Qui is fired from the Dashboard
+		$scope.isShowingResultsToPresenter = $scope.quizQuestion1.isShowingResultsToPresenter;
+	}, true);
+
+
 
 
 	//RESET

@@ -123,10 +123,10 @@
 <div class="container " ng-show="showQuiz">
 	<div class="row">
 		<div class="col-md-12 well quiz-container">
-			<h1 class="text-center">Pop Quiz</h1>
+			<h2 class="text-center">POP QUIZ</h2>
 			<div id="quiz">
 				<div id="question" class="pop-question">
-					<p>{{ quizQuestion1.question }}</p>
+					<p>{{ quizQuestion1.questionContent }}</p>
 				</div>
 				<div id="choices" class="pop-choices">
 					<input type="radio"
@@ -175,14 +175,15 @@
 
 				</div>
 				<button class="btn pop-submit-btn"
-						ng-click="submitAnswer()">
-					Submit Answer
+						ng-click="submitAnswer()"
+						ng-disabled="disableAllChoices">
+					SUBMIT ANSWER
 				</button>
 			</div>
 		</div>
 	</div>
 	<!-- QUIZ RESULTS CHART -->
-	<div class="container quiz-results-container">
+	<div class="container quiz-results-container" ng-show="quizQuestion1.isShowingResultsToAttendees">
 		<div class="ct-chart ct-major-tenth"></div>
 	</div>
 
@@ -196,7 +197,7 @@
 	<form role="form">
 		<div class="form-group">
 			<textarea class="form-control question-input-field"
-					  rows="3"
+					  rows="4"
 					  id="comment"
 					  ng-model="questionContent"
 					  type="text"
@@ -204,8 +205,8 @@
 					  ng-keydown="addQuestionKeyDown($event)">
 			</textarea>
 			<!-- <span class="input-group-addon btn btn-success">Send</span> -->
-			<div class="clearfix">
-				<button class="btn pull-right askbutton"
+			<div class="ask-button-container">
+				<button class="btn askbutton"
 						type="button"
 						ng-click="addQuestionClick()">
 					<span><i class="fa fa-comment" style="margin-right: 10px;"></i></span>
