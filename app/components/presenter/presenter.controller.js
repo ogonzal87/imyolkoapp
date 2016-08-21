@@ -12,6 +12,8 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 	$scope.likeVotesArray            = VotesService.likeVotesArray;
 	//LOAD DISLIKE VOTES
 	$scope.dislikeVotesArray         = VotesService.dislikeVotesArray;
+	//LOAD QUIZ QUESTION OBJECT
+	$scope.quizQuestion1             = QuizService.quizQuestion1;
 
 
 	// arrays that keep track of all the votes --> this arrays are populated each time the interval is triggered
@@ -114,9 +116,16 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 	}, true);
 
 
+	$scope.$watch('quizQuestion1', function(newVal, oldVal) {
+		$scope.numOfAnswersFromAttendees = QuizService.quizAnswers1A.length + QuizService.quizAnswers1B.length + QuizService.quizAnswers1C.length + QuizService.quizAnswers1D.length;
+	}, true);
+
+
+
 	//+++++++++++++++++++++++++++++++++//FIREBASE WATCHING ALL EVENTS+++++++++++++++++++++++++++++++//
 	$scope.$watch('attendees', function(newVal, oldVal) {
 		$scope.numAttendees = $scope.attendees.length;
+
 
 		//VOLUME
 		// /////////////////////////////////////////////////////////////////////////
@@ -170,15 +179,15 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 
 	function speed(percent) {
 		if (percent > 20) {
-			return { value: percent, content: 'Too Slow!', class: 'panel-dashboard-bad' };
+			return { value: percent, content: 'TOO SLOW', class: 'panel-dashboard-bad' };
 		} else if (percent > 10) {
-			return { value: percent, content: 'Go Faster', class: 'panel-dashboard-middle' };
+			return { value: percent, content: 'GO FASTER', class: 'panel-dashboard-middle' };
 		} else if (percent < -20) {
-			return { value: percent, content: 'Too Fast!', class: 'panel-dashboard-bad' };
+			return { value: percent, content: 'TOO FAST!', class: 'panel-dashboard-bad' };
 		} else if (percent < -10) {
-			return { value: percent, content: 'Go Slower', class: 'panel-dashboard-middle' };
+			return { value: percent, content: 'GO SLOWER', class: 'panel-dashboard-middle' };
 		} else {
-			return { value: percent, content: "We are good!", class: 'panel' };
+			return { value: percent, content: "WE ARE GOOD", class: 'panel' };
 		}
 	}
 
@@ -190,16 +199,17 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 		}
 	}
 
+
 	//Quiz
 	// /////////////////////////////////////////////////////////////////////////
 	$scope.isCorrectAnsA = false;
 	$scope.isCorrectAnsB = false;
 	$scope.isCorrectAnsC = false;
 	$scope.isCorrectAnsD = false;
-	$scope.pushQuestion = function() {
+	$scope.fireQuizToAttendees = function() {
 		var randomKey = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 8);
 		var questionData = {
-			question: $scope.questionContent,
+			questionContent: $scope.popQuizQuestionContent,
 			availableAns: [
 				{
 					value: 'a',
@@ -231,11 +241,25 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 		// Figure out which is thw correct answer from the data in Firebase and store in a variable
 		questionData.correctAns =  _.findWhere(questionData.availableAns, {isCorrectAns: true});
 
-		console.log("Question: ", questionData.question );
+		console.log("Question: ", questionData.questionContent );
 
 
 		// Set the question in Firebase
 		QuizService.quizQuestion1Url.set(questionData);
+	};
+
+	// toggle tabs in dashboard
+	$scope.tab1IsActive = true;
+	$scope.tab2IsActive = false;
+	$scope.toggleTabs = function(tab) {
+		if (tab === 'tab1IsActive') {
+			$scope.tab1IsActive = true;
+			$scope.tab2IsActive = false;
+		}
+		if (tab === 'tab2IsActive' ) {
+			$scope.tab2IsActive = true;
+			$scope.tab1IsActive = false;
+		}
 	};
 
 

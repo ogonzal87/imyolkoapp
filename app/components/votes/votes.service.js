@@ -8,20 +8,20 @@ function VotesService(FIREBASE_URL, $firebaseArray, $firebaseObject) {
 
 	// create an Array with all the attendees in the database with theis keys
 	var votes = $firebaseArray(allVotesApiUrl);
-    var likeVotesArray = $firebaseArray(allLikeVotesApiUrl);
-    var dislikeVotesArray = $firebaseArray(allDislikeVotesApiUrl);
+	var likeVotesArray = $firebaseArray(allLikeVotesApiUrl);
+	var dislikeVotesArray = $firebaseArray(allDislikeVotesApiUrl);
 
-    return {
-        allVotesApiUrl: allVotesApiUrl,
-        votes: votes,
+  return {
+	  allVotesApiUrl: allVotesApiUrl,
+	  votes: votes,
 
-        //Likes
-        allLikeVotesApiUrl: allLikeVotesApiUrl,
-        likeVotesArray: likeVotesArray,
+	  //Likes
+	  allLikeVotesApiUrl: allLikeVotesApiUrl,
+	  likeVotesArray: likeVotesArray,
 
-        //Dislikes
-        allDislikeVotesApiUrl: allDislikeVotesApiUrl,
-        dislikeVotesArray: dislikeVotesArray,
-
-    };
+	  //Dislikes
+	  allDislikeVotesApiUrl: allDislikeVotesApiUrl,
+	  dislikeVotesArray: dislikeVotesArray,
+	  dislikeVotesArray: dislikeVotesArray,
+  };
 }

@@ -2,6 +2,7 @@
 $base-background-color:           #242a36;
 $base-background-color-secondary: #43c9c6;
 $base-background-color-light:     #fff;
+$base-background-color-purple:           #624DD6;
 
 $base-font-color-light:           #fff;
 $base-font-color-dark:            #242a36;
@@ -54,7 +55,6 @@ $panel-soso-font-color:            $base-font-color-light;
 	margin: 0;
 
 	.main-panel {
-		position: relative;
 		display: flex;
 		flex-direction: row;
 		height: 200px;
@@ -97,12 +97,18 @@ $panel-soso-font-color:            $base-font-color-light;
 				display: flex;
 				flex-direction: column;
 				.num-likes {
-					height: 80px;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					height: 60px;
+					padding: 0 10px;
+					margin: 10px;
 					font-size: 7rem;
+					border-right: 1px #fff solid
 				}
 				label {
-					padding-left: 25px;
 					opacity: .3;
+					text-align: center;
 				}
 			}
 
@@ -112,7 +118,7 @@ $panel-soso-font-color:            $base-font-color-light;
 				flex-direction: column;
 
 				.num-dislikes {
-					height: 40px;
+					//height: 40px;
 					font-size: 2.5rem;
 					opacity: .3;
 				}
@@ -147,6 +153,7 @@ $panel-soso-font-color:            $base-font-color-light;
 	}
 
 	.panel-dashboard {
+		position: relative;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -158,17 +165,45 @@ $panel-soso-font-color:            $base-font-color-light;
 		border-radius: 0;
 		text-align: center;
 
+		.refresh-overlay {
+			opacity: 0;
+		}
+
+		&:hover {
+			.refresh-overlay {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				opacity: 1;
+			}
+			.panel-content {
+				filter: blur(3px);
+			}
+		}
+
 		.resetbutton {
+			color: #fff;
 			position: absolute;
-			text-align: right;
-			bottom: 0;
-			left: 0;
+			bottom: 40px;
 			background-color: transparent;
 			border: none;
-			padding: 0 10px 5px;
-			font-size: small;
-			opacity: .3;
+			font-size: 60px;
 		}
+
+
+		&.panel-dashboard-middle {
+			background-color: $panel-soso-background-color;
+			border-color: $panel-soso-border-color;
+			color: $panel-soso-font-color;
+		}
+
+		&.panel-dashboard-bad {
+			background-color: $panel-bad-background-color;
+			border-color: $panel-bad-border-color;
+			color: $panel-bad-font-color;
+		}
+
+
 	}
 
 	.control-panel {
@@ -230,31 +265,142 @@ $panel-soso-font-color:            $base-font-color-light;
 	}
 }
 
-
-.dashboard-tab {
-	width: 50%;
-	text-align: center;
-	text-decoration: none;
-}
-
-.tab-content {
-	background-color: $base-background-color-light;
-}
-
-.panel-dashboard-bad {
-  background-color: $panel-bad-background-color;
-  border-color: $panel-bad-border-color;
-  color: $panel-bad-font-color;
-}
-
-.panel-dashboard-middle {
-  background-color: $panel-soso-background-color;
-  border-color: $panel-soso-border-color;
-  color: $panel-soso-font-color;
-}
-
-
 .background-below-chart {
 	background-color: $base-background-color;
-	color: $panel-bad-font-color;
+	min-height: 800px;
+
+	.dashboard-tabs {
+		color: $base-font-color-light;
+		font-size: 25px;
+		display: flex;
+		flex-direction: row;
+		padding: 0;
+
+		.dashboard-tab {
+			width: 50%;
+			text-align: center;
+			padding: 20px;
+			box-sizing: content-box;
+			cursor: pointer;
+
+			&.active {
+				border-bottom: 8px solid $base-background-color-secondary;
+			}
+			&:hover {
+				background-color: $base-background-color-secondary;
+				color: $base-font-color-dark;
+
+			}
+		}
+	}
+
+	.dashboard-tab-content {
+		color: $base-font-color-dark;
+
+		.question-list-container {
+			padding: 0;
+
+			.no-questions-container {
+				color: #fff;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+				.no-questions-message {
+					background-color: $base-background-color-light;
+					text-align: center;
+					color: $base-font-color-dark;
+					width: 100%;
+					padding:  70px 0;
+				}
+			}
+
+			.question-voting-controls {
+				display: flex;
+				flex-direction: row;
+				justify-content: space-around;
+				align-items: center;
+
+				.btn-delete {
+					border: 1px solid grey;
+					padding: 5px 10px;
+					font-size: 12px;
+					background-color: $base-background-color;
+					color: $base-font-color-light
+				}
+			}
+		}
+		.pop-quiz-container {
+			padding: 0;
+			background-color: $base-background-color-light;
+
+			.quiz-question-container {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				margin: 15px 0;
+
+				.letter {
+					font-size: 25px;
+					padding: 8px 15px;
+					background-color: $base-background-color-purple;
+					margin: 0;
+					color: $base-font-color-light
+				}
+
+				.input-text {
+					height: 51px;
+					border-radius: 0;
+				}
+
+				input[type=checkbox] {
+					display: none;
+				}
+
+				label {
+					margin: 0;
+				}
+
+				.notchecked {
+					padding: 10px 10px 0 10px;
+					height: 51px;
+					background-color: lightgray;
+					color: $base-font-color-light;
+				}
+
+				.checked {
+					padding: 10px 10px 0 10px;
+					height: 51px;
+					background-color: $base-background-color-purple;
+					color: $base-background-color-secondary;
+				}
+			}
+
+			.fire-quiz-btn-container {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.fire-quiz-btn {
+				background-color: $base-background-color-purple;
+				border: none;
+				color: white;
+				font-size: 25px;
+				padding: 15px;
+				margin: 30px;
+				width: 50%;
+				&:focus {
+					outline: 0;
+				}
+				&:hover {
+					color: white;
+				}
+			}
+		}
+	}
+
+
 }
+
+

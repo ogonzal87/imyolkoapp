@@ -5,28 +5,36 @@
 		<!-- PANEL WIDGET -->
 			<div class="profile-image">
 				<img class="profile-image-round"
-					 ng-src="https://randomuser.me/api/portraits/women/8.jpg">
+					 src="assets/avatars/profile_pic.png">
 				<span class="presentor-name">Oscar Gonzalez</span>
 			</div>
 			<div class="main-panel-content">
 				<div class="likes-container">
-					<span class="num-likes ">
-						64<span style="opacity: .3; font-size: smaller">/</span>
+					<span class="num-likes">
+						{{ likeVotesArray.length }}
 					</span>
 					<label>LIKES</label>
 				</div>
 
 				<div class="dislikes-container">
 					<span class="num-dislikes">
-						12
+						{{ dislikeVotesArray.length }}
 					</span>
 					<!--<label>Dislikes</label>-->
 				</div>
 			</div>
 			<div class="counts">
-				<div><i class="fa fa-user"></i> {{ numAttendees }}</div>
-				<div><i class="fa fa-question-circle-o"></i> 2</div>
-				<div><i class="fa fa-pencil"></i> 3</div>
+				<div>
+					<i class="fa fa-user"></i> {{ numAttendees }}
+				</div>
+				<div>
+					<i class="fa fa-question-circle-o"></i>
+					{{ allQuestionsFromAttendees.length }}
+				</div>
+				<div>
+					<i class="fa fa-pencil"></i>
+					{{ numOfAnswersFromAttendees  }}
+				</div>
 			</div>
 		</div>
 	</div>
@@ -35,56 +43,76 @@
 		<div class="col-md-3 col-sm-6 panel-dashboard"
 			 ng-class="volumeUpPercent.class">
 			<!-- PANEL WIDGET -->
-			<div class="icons-dashboard-center">
-				<i class="fa fa-volume-up fa-3x icon"></i>
+			<div class="panel-content" >
+				<div class="icons-dashboard-center">
+					<i class="fa fa-deafness fa-3x icon"></i>
+				</div>
+				VOLUME
+				<div class="">
+					<h4 ng-if="volumeUpPercent.content > 0">
+						{{ volumeUpPercent.content }} %
+					</h4>
+					<h4 ng-if="volumeUpPercent.content === 0 ">
+						WE ARE GOOD
+					</h4>
+				</div>
 			</div>
-			VOLUME
-			<div class="">
-				<h4 ng-if="volumeUpPercent.content || 'WE ARE GOOD'">
-					{{ volumeUpPercent.content || 'WE ARE GOOD'}}
-				</h4>
+			<div class="refresh-overlay">
+				<button class="resetbutton" ng-click="resetVolumeTracker()">
+					<i class="fa fa-refresh"></i>
+					<p style="font-size: 20px;">REFRESH</p>
+				</button>
 			</div>
-
-			<button class="resetbutton" ng-click="resetVolumeTracker()">
-				<i class="fa fa-refresh"></i>
-			</button>
 		</div>
 
 		<div class="col-md-3 col-sm-6 panel-dashboard"
 			 ng-class="speedPercent.class">
 			<!-- PANEL WIDGET -->
-			<div class="icons-dashboard-center">
-				<i class="fa fa-rocket fa-3x icon"></i>
-			</div>
-			SPEED
-			<div class="">
-				<h4 ng-if="speedPercent.content || 'WE ARE GOOD'">
-					{{ speedPercent.content || 'WE ARE GOOD'}}
-				</h4>
+			<div class="panel-content" >
+				<div class="icons-dashboard-center">
+					<i class="fa fa-rocket fa-3x icon"></i>
+				</div>
+				SPEED
+				<div class="">
+					<h4 ng-if="speedPercent.content">
+						{{ speedPercent.content}}
+					</h4>
+				</div>
 			</div>
 
-			<button class="resetbutton" ng-click="resetSpeedTracker()">
-				<i class="fa fa-refresh"></i>
-			</button>
+			<div class="refresh-overlay">
+				<button class="resetbutton" ng-click="resetSpeedTracker()">
+					<i class="fa fa-refresh"></i>
+					<p style="font-size: 20px;">REFRESH</p>
+				</button>
+			</div>
 		</div>
 
 
 		<div class="col-md-3 col-sm-6 panel-dashboard"
 			 ng-class="panicPercent.class">
 			<!-- PANEL WIDGET -->
-			<div class="icons-dashboard-center">
-				<i class="fa fa-fire-extinguisher fa-3x icon"></i>
+			<div class="panel-content">
+				<div>
+					<i class="fa fa-fire-extinguisher fa-3x icon"></i>
+				</div>
+				PANIC
+				<div class="">
+					<h4 ng-if="panicPercent.content > 0">
+						{{ panicPercent.content }}
+ %					</h4>
+					<h4 ng-if="panicPercent.content === 0">
+						WE ARE GOOD
+					</h4>
+				</div>
 			</div>
-			PANIC
-			<div class="">
-				<h4 ng-if="panicPercent.content || 'WE ARE GOOD'">
-					{{ panicPercent.content || 'WE ARE GOOD'}}
-				</h4>
+			<div class="refresh-overlay">
+				<button class="resetbutton" ng-click="resetPanicTracker()">
+					<i class="fa fa-refresh"></i>
+					<p style="font-size: 20px;">REFRESH</p>
+				</button>
 			</div>
 
-			<button class="resetbutton" ng-click="resetPanicTracker()">
-				<i class="fa fa-refresh"></i>
-			</button>
 		</div>
 
 		<div class="col-md-3 col-sm-6 control-panel">
@@ -135,7 +163,7 @@
 <div class=" results">
 
 	<div class="chart container">
-		<p>LIVE DATA COMING IN</p>
+		<p style="padding-left: 50px;">LIVE DATA COMING IN</p>
 
 		<!-- CHART -->
 		<div class="ct-chart ct-major-tenth"></div>
@@ -152,105 +180,153 @@
 </div><!-- container results end -->
 
 
-<div class="background-below-chart">
-	<form name="outerForm" class="tab-content container">
-		<uib-tabset active="activeForm">
-			<uib-tab index="1" heading="QUESTIONS" class="dashboard-tab">
-				<!--   QUESTIONS -->
-				<div class="panel panel-default" ng-if="allQuestionsFromAttendees.length > 0">
-					<div class="panel-body">
-						<ul class="list-group">
-							<li class="list-group-item" ng-repeat="(key, question) in allQuestionsFromAttendees | orderBy: '-counter'">
-								{{ question.content }}
-								<span>
-					<!-- <button class="btn btn-sm btn-default alignright" ng-click="removeQuestion(question)">X</button> -->
-				</span>
-							</li>
-						</ul>
+<div class="background-below-chart ">
+	<div class="dashboard-tabs container">
+		<div class="dashboard-tab"
+			 ng-class="{'active': tab1IsActive}"
+			 ng-click="toggleTabs('tab1IsActive')">
+			QUESTIONS
+		</div>
+		<div class="dashboard-tab"
+			 ng-class="{'active': tab2IsActive}"
+			 ng-click="toggleTabs('tab2IsActive')">
+			POP QUIZ
+		</div>
+	</div>
+
+	<div class="dashboard-tab-content">
+		<div ng-show="tab1IsActive" class="container question-list-container">
+			<!--   QUESTIONS -->
+			<ul class="list-group questions">
+				<div ng-if="questionsToPresenter.length === 0" class="no-questions-container">
+					<div class="no-questions-message">
+						<h2>Great Job! There are no questions yet...</h2>
 					</div>
 				</div>
-				<!--   QUESTIONS END -->
-			</uib-tab>
-			<uib-tab index="0" heading="POP QUIZ" class="dashboard-tab">
-				<ng-form role="form" name="nestedForm">
-					<div class="form-group">
-						<br>
-						<label for="question">Question:</label>
-						<textarea type="text"
-								  class="form-control"
-								  id="question"
-								  placeholder="What would you like to ask everyone?"
-								  ng-model="questionContent"
-								  rows="4">
-						</textarea>
-					</div>
-					<div class="form-group">
-						<label for="choice-a">A</label>
-						<input type="text"
-							   class="form-control"
-							   id="choice-a"
-							   placeholder="I'm a choice option"
-							   ng-model="choiceA">
-						<div class="checkbox">
-							<label>
-								<input type="checkbox"
-									   ng-model="correctAnsA"
-									   ng-click="isCorrectAnsA = !isCorrectAnsA">
-								Correct Answer
-							</label>
+
+				<li class="list-group-item items-in-list"
+					ng-repeat="(key, questionToPresenter) in questionsToPresenter | orderBy: '-counter'">
+					<div class="question-content">
+						{{ questionToPresenter.content }}
+						<div class="question-content-time">
+							{{ questionToPresenter.time | date: 'h:mm:ss a' }}
 						</div>
 					</div>
-					<div class="form-group">
-						<label for="choice-b">B</label>
-						<input type="text"
-							   class="form-control"
-							   id="choice-b"
-							   placeholder="I'm a choice option"
-							   ng-model="choiceB">
-						<div class="checkbox">
-							<label>
-								<input type="checkbox"
-									   ng-model="correctAnsB"
-									   ng-click="isCorrectAnsB = !isCorrectAnsB">
-								Correct Answer
-							</label>
+					<div class="question-voting-controls">
+						<span style="">VOTES</span>
+						<div class="question-voting-controls-text">
+							{{ questionToPresenter.counter }}
 						</div>
+
+						<!--<button class="btn btn-sm btn-default" ng-click="voteQuestionDown(questionToPresenter)">-->
+						<!--<i class="fa fa-chevron-down"></i>-->
+						<!--</button>-->
+						<button class="btn btn-delete" ng-click="removeQuestion(key)">&times;</button>
 					</div>
-					<div class="form-group">
-						<label for="choice-c">C</label>
-						<input type="text"
-							   class="form-control"
-							   id="choice-c"
-							   placeholder="I'm a choice option"
-							   ng-model="choiceC">
-						<div class="checkbox">
-							<label>
-								<input type="checkbox"
-									   ng-model="correctAnsC"
-									   ng-click="isCorrectAnsC = !isCorrectAnsC">
-								Correct Answer
-							</label>
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="choice-d">D</label>
-						<input type="text"
-							   class="form-control"
-							   id="choice-d"
-							   placeholder="I'm a choice option"
-							   ng-model="choiceD">
-						<div class="checkbox">
-							<label>
-								<input type="checkbox"
-									   ng-model="correctAnsD"
-									   ng-click="isCorrectAnsD = !isCorrectAnsD">
-								Correct Answer
-							</label>
-						</div>
-					</div>
-					<button ng-click="pushQuestion()" class="btn btn-default">Submit</button>
-				</ng-form>
-			</uib-tab>
-		</uib-tabset>
-	</form>
+				</li>
+			</ul>
+			<!--   QUESTIONS END -->
+		</div>
+
+
+
+		<div ng-show="tab2IsActive" class="container pop-quiz-container">
+			<form novalidate class="container">
+				<div class="form-group">
+					<br>
+					<label for="question">Question:</label>
+					<textarea class="form-control"
+							  id="question"
+							  placeholder="What would you like to ask everyone?"
+							  ng-model="popQuizQuestionContent"
+							  rows="4">
+					</textarea>
+				</div>
+
+				<div class="form-group quiz-question-container">
+					<label for="choice-a" class="letter">A</label>
+					<input type="text"
+						   class="form-control input-text"
+						   id="choice-a"
+						   placeholder="I'm a choice option"
+						   ng-model="choiceA">
+
+					<input type="checkbox"
+						   id="choicea"
+						   ng-model="correctAnsA"
+						   ng-click="isCorrectAnsA = !isCorrectAnsA">
+					<label for="choicea" class="notchecked" ng-if="!isCorrectAnsA">
+						<i class="fa fa-check fa-2x"></i>
+					</label>
+					<label for="choicea" class="checked" ng-if="isCorrectAnsA">
+						<i class="fa fa-check fa-2x"></i>
+					</label>
+				</div>
+
+				<div class="form-group quiz-question-container">
+					<label for="choice-b" class="letter">B</label>
+					<input type="text"
+						   class="form-control input-text"
+						   id="choice-b"
+						   placeholder="I'm a choice option"
+						   ng-model="choiceB">
+
+					<input type="checkbox"
+						   id="choiceb"
+						   ng-model="correctAnsB"
+						   ng-click="isCorrectAnsB = !isCorrectAnsB">
+					<label for="choiceb" class="notchecked" ng-if="!isCorrectAnsB">
+						<i class="fa fa-check fa-2x"></i>
+					</label>
+					<label for="choiceb" class="checked" ng-if="isCorrectAnsB">
+						<i class="fa fa-check fa-2x"></i>
+					</label>
+				</div>
+
+				<div class="form-group quiz-question-container">
+					<label for="choice-c" class="letter">C</label>
+					<input type="text"
+						   class="form-control input-text"
+						   id="choice-c"
+						   placeholder="I'm a choice option"
+						   ng-model="choiceC">
+
+					<input type="checkbox"
+						   id="choicec"
+						   ng-model="correctAnsC"
+						   ng-click="isCorrectAnsC = !isCorrectAnsC">
+					<label for="choicec" class="notchecked" ng-if="!isCorrectAnsC">
+						<i class="fa fa-check fa-2x"></i>
+					</label>
+					<label for="choicec" class="checked" ng-if="isCorrectAnsC">
+						<i class="fa fa-check fa-2x"></i>
+					</label>
+				</div>
+
+				<div class="form-group quiz-question-container">
+					<label for="choice-d" class="letter">D</label>
+					<input type="text"
+						   class="form-control input-text"
+						   id="choice-d"
+						   placeholder="I'm a choice option"
+						   ng-model="choiceD">
+
+					<input type="checkbox"
+						   id="choiced"
+						   ng-model="correctAnsD"
+						   ng-click="isCorrectAnsD = !isCorrectAnsD">
+					<label for="choiced" class="notchecked" ng-if="!isCorrectAnsD">
+						<i class="fa fa-check fa-2x"></i>
+					</label>
+					<label for="choiced" class="checked" ng-if="isCorrectAnsD">
+						<i class="fa fa-check fa-2x"></i>
+					</label>
+				</div>
+
+				<div class="fire-quiz-btn-container">
+					<button ng-click="fireQuizToAttendees()" class="btn fire-quiz-btn">FIRE QUESTION</button>
+				</div>
+			</form>
+		</div>
+	</div>
 </div>

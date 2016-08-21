@@ -1,5 +1,5 @@
 angular.module('Attendee')
-.controller("AttendeeCtrl", AttendeeCtrl);
+	.controller("AttendeeCtrl", AttendeeCtrl);
 
 function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, QuestionsService, QuizService) {
 
@@ -17,7 +17,7 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 	$scope.quizQuestion1        = QuizService.quizQuestion1;
 	$scope.quizQuestion2        = QuizService.quizQuestion2;
 	$scope.quizQuestion3        = QuizService.quizQuestion3;
-	
+
 	// bind the obj to the database in Firebase
 	// any changes that happen in the view will be updated automatically in Firebase and viceversa
 	DataAttendeeService.currentAttendeeSyncObj.$bindTo($scope, 'attendee');
@@ -32,37 +32,37 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 		$scope.attendee.vote = 'like';
 		$scope.likeVotesArray.$add({
 			user: $scope.attendee.$id,
-			vote: 'like', 
-			value: 1, 
+			vote: 'like',
+			value: 1,
 			timestamp: Firebase.ServerValue.TIMESTAMP
 		});
 		console.log(DataAttendeeService.defaultAttendee.key);
 		console.log($scope.attendee.$id);
 		// I have to disable to btn so people so not submit more than 1 vote per
 		// interval
-        $scope.disableLikeBtn = true;
-        $timeout(function() {
-          $scope.disableLikeBtn = false;
-        }, 2000);
+		$scope.disableLikeBtn = true;
+		$timeout(function() {
+			$scope.disableLikeBtn = false;
+		}, 2000);
 	};
-	
+
 	// Create a function that when is clicked creates a DISLIKE vote Object in Firebase this is stored in an array
 	$scope.voteDislike = function() {
 		$scope.attendee.vote = 'dislike';
 		$scope.dislikeVotesArray.$add({
 			user: $scope.attendee.$id,
-			vote: 'dislike', 
-			value: 0, 
+			vote: 'dislike',
+			value: 0,
 			timestamp: Firebase.ServerValue.TIMESTAMP
 		});
 		// I have to disable to btn so people so not submit more than 1 vote per
 		// interval
-        $scope.disableDislikeBtn = true;
-        $timeout(function() {
-        $scope.disableDislikeBtn = false;
-        }, 2000);
+		$scope.disableDislikeBtn = true;
+		$timeout(function() {
+			$scope.disableDislikeBtn = false;
+		}, 2000);
 	};
-	
+
 	//QUIZ
 	// ///////////////////////////////////////////////////////////////////////
 	$scope.submitAnswer = function () {
@@ -78,50 +78,50 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 	};
 
 
-  $scope.$watch('quizQuestion1', function(newVals, oldVals) {
-	  var answersA = QuizService.quizAnswers1A.length;
-	  var answersB = QuizService.quizAnswers1B.length;
-	  var answersC = QuizService.quizAnswers1C.length;
-	  var answersD = QuizService.quizAnswers1D.length;
+	$scope.$watch('quizQuestion1', function(newVals, oldVals) {
+		var answersA = QuizService.quizAnswers1A.length;
+		var answersB = QuizService.quizAnswers1B.length;
+		var answersC = QuizService.quizAnswers1C.length;
+		var answersD = QuizService.quizAnswers1D.length;
 
-	  var chartAllData = {
-		  labels: ['A', 'B', 'C', 'D'],
-		  series: [answersA, answersB, answersC, answersD]
-	  };
+		var chartAllData = {
+			labels: ['A', 'B', 'C', 'D'],
+			series: [answersA, answersB, answersC, answersD]
+		};
 
-	  var chartBarOptions = {
-		  distributeSeries: true,
-		  axisY: {
-			  onlyInteger: true
-		  }
-	  };
+		var chartBarOptions = {
+			distributeSeries: true,
+			axisY: {
+				onlyInteger: true
+			}
+		};
 
-	  // Create a new bar chart object where as first parameter we pass in a selector
-	  // that is resolving to our chart container element. The Second parameter
-	  // is the actual data object and the third the options.
-	  new Chartist.Bar('.ct-chart', chartAllData, chartBarOptions);
+		// Create a new bar chart object where as first parameter we pass in a selector
+		// that is resolving to our chart container element. The Second parameter
+		// is the actual data object and the third the options.
+		new Chartist.Bar('.ct-chart', chartAllData, chartBarOptions);
 
-	  //Shows the quiz on the UI of the attendee when the Pop Qui is fired from the Dashboard
-	  $scope.showQuiz = $scope.quizQuestion1.isShowing;
-  }, true);
-	
+		//Shows the quiz on the UI of the attendee when the Pop Qui is fired from the Dashboard
+		$scope.showQuiz = $scope.quizQuestion1.isShowing;
+	}, true);
+
 	//QUESTIONS TO THE PRESENTER
 	// ///////////////////////////////////////////////////////////////////////
 	$scope.addQuestionKeyDown = function(event) {
 		if (event.keyCode === 13 && $scope.questionContent) {
 			$scope.questionsToPresenter.$add({
-				content: $scope.questionContent, 
+				content: $scope.questionContent,
 				counter: 0,
 				time: Firebase.ServerValue.TIMESTAMP
 			});
 			$scope.questionContent = "";
 		}
 	};
-	
+
 	$scope.addQuestionClick = function() {
 		if($scope.questionContent) {
 			$scope.questionsToPresenter.$add({
-				content: $scope.questionContent, 
+				content: $scope.questionContent,
 				counter: 0,
 				time: Firebase.ServerValue.TIMESTAMP
 			});
@@ -132,22 +132,22 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 		$scope.questionsToPresenter.$remove(key);
 	};
 
-	
+
 	$scope.voteQuestionUp = function(questionToPresenter) {
-        questionToPresenter.counter++;
-        QuestionsService.questions.$save(questionToPresenter);
+		questionToPresenter.counter++;
+		QuestionsService.questions.$save(questionToPresenter);
 	};
-	
+
 	$scope.voteQuestionDown = function(questionToPresenter) {
 		questionToPresenter.counter--;
 		QuestionsService.questions.$save(questionToPresenter);
 	};
-	
+
 	//WATCHING ATTENDEE OBJECT
 	// ///////////////////////////////////////////////////////////////////////
 	// Create a watch to watch what happens on the Attendees node
 	$scope.$watch('attendees', function(newVal, oldVal) {
-		
+
 		// Panic Button Logic
 		$scope.panicButton = function(attendee) {
 			if ($scope.attendee.feeling == "fine") {
@@ -158,34 +158,34 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 		};// Panic Button Logic
 		displayYolko();
 	}, true);
-	
-	
-	
+
+
+
 	//TODO: I need to come up with better math here...
 	// Create a watch to watch what happens on the Votes node
 	$scope.$watch('votes', function(newVal, oldVal) {
 		var numVotes = ($scope.likeVotesArray.length + $scope.dislikeVotesArray.length);
 		var numDislikeVotes = $scope.dislikeVotesArray.length;
 
-        //console.log('Total # of votes: ' + numVotes);
-        //console.log('Total # of dislike votes: ' + numDislikeVotes);
+		//console.log('Total # of votes: ' + numVotes);
+		//console.log('Total # of dislike votes: ' + numDislikeVotes);
 
-        $scope.dislikePercent = Math.round((numDislikeVotes / $scope.attendees.length) * 100);
-        displayYolko();
-    }, true);
+		$scope.dislikePercent = Math.round((numDislikeVotes / $scope.attendees.length) * 100);
+		displayYolko();
+	}, true);
 
 
-    //Displaying Yolko
-    function displayYolko() {
-        $scope.burnt              = $scope.dislikePercent >= 76;
-        $scope.shocked            = $scope.dislikePercent >= 64 && $scope.dislikePercent <= 75.999999999999;
-        $scope.idontgetit         = $scope.dislikePercent >= 56 && $scope.dislikePercent <= 63.999999999999;
-        $scope.startingtonotgetit = $scope.dislikePercent >= 48 && $scope.dislikePercent <= 55.999999999999;
-        $scope.tastey             = $scope.dislikePercent >= 40 && $scope.dislikePercent <= 47.999999999999;
-        $scope.want               = $scope.dislikePercent >= 32 && $scope.dislikePercent <= 39.999999999999;
-        $scope.confident          = $scope.dislikePercent >= 24 && $scope.dislikePercent <= 31.999999999999;
-        $scope.igotthis           = $scope.dislikePercent >= 16 && $scope.dislikePercent <= 23.999999999999;
-        $scope.badass             = $scope.dislikePercent >= 8 && $scope.dislikePercent <= 15.999999999999;
-        $scope.zzz                = $scope.dislikePercent < 7.999999999999 || null;
-    }
+	//Displaying Yolko
+	function displayYolko() {
+		$scope.burnt              = $scope.dislikePercent >= 76;
+		$scope.shocked            = $scope.dislikePercent >= 64 && $scope.dislikePercent <= 75.999999999999;
+		$scope.idontgetit         = $scope.dislikePercent >= 56 && $scope.dislikePercent <= 63.999999999999;
+		$scope.startingtonotgetit = $scope.dislikePercent >= 48 && $scope.dislikePercent <= 55.999999999999;
+		$scope.tastey             = $scope.dislikePercent >= 40 && $scope.dislikePercent <= 47.999999999999;
+		$scope.want               = $scope.dislikePercent >= 32 && $scope.dislikePercent <= 39.999999999999;
+		$scope.confident          = $scope.dislikePercent >= 24 && $scope.dislikePercent <= 31.999999999999;
+		$scope.igotthis           = $scope.dislikePercent >= 16 && $scope.dislikePercent <= 23.999999999999;
+		$scope.badass             = $scope.dislikePercent >= 8 && $scope.dislikePercent <= 15.999999999999;
+		$scope.zzz                = $scope.dislikePercent < 7.999999999999 || null;
+	}
 }
