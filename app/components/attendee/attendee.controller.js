@@ -22,7 +22,6 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 	// create the attendee on page arrival - Push the user to the database and start the session
 	DataAttendeeService.currentAttendeeApiUrl.set(DataAttendeeService.defaultAttendee);
 
-
 	//VOTES
 	/////////////////////////////////////////////////////////////////////////
 	// Create a function that when is clicked creates a LIKE vote Object in Firebase this is stored in an array
@@ -77,9 +76,7 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 		} else {
 			alert('Hey! Choose an option... ')
 		}
-
 	};
-
 
 	$scope.$watch('quizQuestion1', function(newVals, oldVals) {
 		var answersA = QuizService.quizAnswers1A.length;
