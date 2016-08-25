@@ -104,7 +104,6 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 		//Shows the quiz on the UI of the attendee when the Pop Qui is fired from the Dashboard
 		$scope.showQuiz = $scope.quizQuestion1.isShowingQuiz;
 		//Shows the quiz on the UI of the attendee when the Pop Qui is fired from the Dashboard
-		console.log('Meeting View', QuizService.quizQuestion1.isShowingResultsToAttendees);
 		$scope.isShowingResultsToPresenter = $scope.quizQuestion1.isShowingResultsToPresenter;
 	}, true);
 
