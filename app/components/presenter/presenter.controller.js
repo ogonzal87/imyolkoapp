@@ -136,7 +136,7 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 	$scope.$watch('likeLine', function(newVals, oldVals) {
 		var chartAllData = {
 			// A labels array that can contain any sort of values
-			labels: ['1min', '2min', '3min', '4min', '5min', '6min', '7min', '8min', '9min', '10min', '11min', '12min', '13min', '14min', '15min'],
+			labels: ['5min', '10min', '15min', '20min'],
 			// Series array that contains series objects or in this case series data arrays
 			series: [
 				{

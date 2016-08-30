@@ -27,7 +27,7 @@ $panel-soso-font-color:            $base-font-color-light;
   background: url(../../assets/backgrounds/Rectangle.png);
   background-repeat: no-repeat;
   background-size: cover;
-  min-height: 400px;
+  min-height: 600px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -96,6 +96,10 @@ $panel-soso-font-color:            $base-font-color-light;
   margin: 30px auto 50px;
   padding: 30px 40px 10px 40px;
   background-color: #ecf0f1;
+
+	textarea {
+		resize: none;
+	}
 
 	.ask-button-container {
 		display: flex;

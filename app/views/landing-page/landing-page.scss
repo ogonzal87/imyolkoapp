@@ -2,12 +2,20 @@
 	background: url(../../assets/backgrounds/Rectangle.png) no-repeat;
 	background-size: 100% 100%;
 	color: #ffffff;
-  min-height: 650px;
+  min-height: 110vh;
   display: flex;
   justify-content: center;
   align-items: center;
-	clip-path: polygon(0 0, 4600px 0, 4600px 87%, 0 100%);
-	-webkit-clip-path: polygon(0 0, 4900px 0, 4900px 80%, 0 100%);
+	clip-path: polygon(0 0, 5600px 0, 5600px 87%, 0 100%);
+	-webkit-clip-path: polygon(0 0, 5900px 0, 5900px 80%, 0 100%);
+
+	h1 {
+		font-size: 200px;
+	}
+
+	p {
+		opacity: 1;
+	}
 
 	.yolko-greeting {
 		font-size: 130px;

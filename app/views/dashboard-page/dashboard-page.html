@@ -49,12 +49,12 @@
 				</div>
 				VOLUME
 				<div class="">
-					<h4 ng-if="volumeUpPercent.content > 0">
+					<h3 ng-if="volumeUpPercent.content > 0">
 						{{ volumeUpPercent.content }} %
-					</h4>
-					<h4 ng-if="volumeUpPercent.content === 0 ">
+					</h3>
+					<h3 ng-if="volumeUpPercent.content === 0 ">
 						WE ARE GOOD
-					</h4>
+					</h3>
 				</div>
 			</div>
 			<div class="refresh-overlay">
@@ -74,9 +74,9 @@
 				</div>
 				SPEED
 				<div class="">
-					<h4 ng-if="speedPercent.content">
+					<h3 ng-if="speedPercent.content">
 						{{ speedPercent.content}}
-					</h4>
+					</h3>
 				</div>
 			</div>
 
@@ -98,12 +98,12 @@
 				</div>
 				PANIC
 				<div class="">
-					<h4 ng-if="panicPercent.content > 0">
+					<h3 ng-if="panicPercent.content > 0">
 						{{ panicPercent.content }}
- %					</h4>
-					<h4 ng-if="panicPercent.content === 0">
+ %					</h3>
+					<h3 ng-if="panicPercent.content === 0">
 						WE ARE GOOD
-					</h4>
+					</h3>
 				</div>
 			</div>
 			<div class="refresh-overlay">
@@ -163,7 +163,7 @@
 <div class=" results">
 
 	<div class="chart container">
-		<p style="padding-left: 50px;">LIVE DATA COMING IN</p>
+		<h3 style="padding-left: 50px;">LIVE DATA COMING IN</h3>
 
 		<!-- CHART -->
 		<div class="ct-chart ct-major-tenth"></div>
@@ -234,7 +234,7 @@
 			<form novalidate class="container" style="padding: 20px 60px;">
 				<div class="form-group">
 					<br>
-					<h4 for="question">Question</h4>
+					<h3 for="question">Question</h3>
 					<textarea class="form-control"
 							  id="question"
 							  placeholder="What would you like to ask everyone?"
