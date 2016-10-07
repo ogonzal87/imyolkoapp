@@ -5,11 +5,11 @@
 
 		<!-- YOLKO BEHAVIOR -->
 		<div class="avatar-container">
-			<div ng-if="zzz || votes.length === 0">
-				<img src="assets/avatars/zzz.png"/>
-			</div>
-			<div ng-if="badass">
-				<img src="assets/avatars/badass.png"/>
+			<!--<div ng-if="zzz || votes.length === 0">-->
+				<!--<img src="assets/avatars/zzz.png"/>-->
+			<!--</div>-->
+			<div ng-if="laughing">
+				<img src="assets/avatars/laughing.png"/>
 			</div>
 			<div ng-if="igotthis">
 				<img src="assets/avatars/igotthis.png"/>
@@ -38,11 +38,13 @@
 		</div>
 		<!-- YOLKO BEHAVIOR -->
 
-		<!--<pre>-->
-			<!--Dislike Percent: {{ dislikePercent }} %-->
-			<!--Num Attendees: {{ attendees.length }}-->
-			<!--Num Dislike Votes: {{ dislikeVotesArray.length }}-->
-		<!--</pre>-->
+		<pre>
+			Dislike Percent: {{ dislikePercent }} %
+			Num Attendees: {{ attendees.length }}
+			Num Dislike Votes: {{ dislikeVotesArray.length }}
+			NumOfPeopleWithVoteAttribute: {{ numOfPeopleWithVoteAttribute.length }}
+			numOfPeopleWithDislikeVotes: {{ numOfPeopleWithDislikeVotes.length }}
+		</pre>
 
 		<!-- Vote bottons -->
 		<div class="votebtns-container">

@@ -170,10 +170,18 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 		var numVotes = ($scope.likeVotesArray.length + $scope.dislikeVotesArray.length);
 		var numDislikeVotes = $scope.dislikeVotesArray.length;
 
-		//console.log('Total # of votes: ' + numVotes);
+		console.log('Total # of votes: ' + numVotes);
 		//console.log('Total # of dislike votes: ' + numDislikeVotes);
 
-		$scope.dislikePercent = Math.round((numDislikeVotes / $scope.attendees.length) * 100);
+		$scope.numOfPeopleWithVoteAttribute = _.filter($scope.attendees, function(attendee) {
+			return attendee.vote;
+		});
+
+		$scope.numOfPeopleWithDislikeVotes = _.filter($scope.attendees, function(attendee) {
+			return attendee.vote === 'dislike';
+		});
+
+		$scope.dislikePercent = Math.round(($scope.numOfPeopleWithDislikeVotes.length / $scope.numOfPeopleWithVoteAttribute.length) * 100);
 		displayYolko();
 	}, true);
 
@@ -188,7 +196,7 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 		$scope.want               = $scope.dislikePercent >= 32 && $scope.dislikePercent <= 39.999999999999;
 		$scope.confident          = $scope.dislikePercent >= 24 && $scope.dislikePercent <= 31.999999999999;
 		$scope.igotthis           = $scope.dislikePercent >= 16 && $scope.dislikePercent <= 23.999999999999;
-		$scope.badass             = $scope.dislikePercent >= 8 && $scope.dislikePercent <= 15.999999999999;
-		$scope.zzz                = $scope.dislikePercent < 7.999999999999 || null;
+		$scope.laughing             = $scope.dislikePercent < 15.999999999999 || 'NaN';
+		// $scope.zzz                = $scope.dislikePercent === 0 || 'NaN';
 	}
 }
