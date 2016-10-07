@@ -170,7 +170,7 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 		var numVotes = ($scope.likeVotesArray.length + $scope.dislikeVotesArray.length);
 		var numDislikeVotes = $scope.dislikeVotesArray.length;
 
-		console.log('Total # of votes: ' + numVotes);
+		// console.log('Total # of votes: ' + numVotes);
 		//console.log('Total # of dislike votes: ' + numDislikeVotes);
 
 		$scope.numOfPeopleWithVoteAttribute = _.filter($scope.attendees, function(attendee) {
@@ -196,7 +196,7 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 		$scope.want               = $scope.dislikePercent >= 32 && $scope.dislikePercent <= 39.999999999999;
 		$scope.confident          = $scope.dislikePercent >= 24 && $scope.dislikePercent <= 31.999999999999;
 		$scope.igotthis           = $scope.dislikePercent >= 16 && $scope.dislikePercent <= 23.999999999999;
-		$scope.laughing             = $scope.dislikePercent < 15.999999999999 || 'NaN';
+		$scope.laughing           = $scope.dislikePercent < 15.999999999999 || isNaN($scope.dislikePercent);
 		// $scope.zzz                = $scope.dislikePercent === 0 || 'NaN';
 	}
 }
