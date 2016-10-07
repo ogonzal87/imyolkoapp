@@ -142,9 +142,11 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 				{
 					name: 'likes',
 					data: likeLine
+					// data: [1, 4, 6, 9]
 				},
 				{
 					name: 'dislikes',
+					// data: [1, 3, 4, 2]
 					data: dislikeLine
 				}
 			]
@@ -153,22 +155,48 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 		// As options we currently only set a static size of 300x200 px. We can also omit this and use aspect ratio containers
 		// as you saw in the previous example
 		var chartLineOptions = {
-			low: 0,
+
+			seriesBarDistance: 30,
+			axisX: {
+			},
 			axisY: {
 				onlyInteger: true
-			},
-			// width: 1200,
-			// height: 500,
-			// Handle holes (if people did not have any votes in a certain minute) in data
-			lineSmooth: Chartist.Interpolation.cardinal({
-				fillHoles: true
-			})
+			}
+			// low: 0,
+			// axisY: {
+			// 	onlyInteger: true
+			// },
+			// // width: 1200,
+			// // height: 500,
+			// // Handle holes (if people did not have any votes in a certain minute) in data
+			// lineSmooth: Chartist.Interpolation.cardinal({
+			// 	fillHoles: true
+			// })
 		};
 		// Create a new line chart object where as first parameter we pass in a selector
 		// that is resolving to our chart container element. The Second parameter
 		// is the actual data object and the third the options.
-		new Chartist.Line('.ct-chart', chartAllData, chartLineOptions);
+		new Chartist.Bar('.ct-chart', chartAllData, chartLineOptions);
 	}, true);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 	//+++++++++++++++++++++++++++++++++//FIREBASE WATCHING ALL EVENTS+++++++++++++++++++++++++++++++//

@@ -7,8 +7,8 @@ $base-background-color-purple:    #624DD6;
 $base-font-color-light:           #fff;
 $base-font-color-dark:            #555;
 
-$line-color-likes:                green;
-$line-color-dislikes:             red;
+$line-color-likes:                $base-background-color-purple;
+$line-color-dislikes:             #dddddd;
 
 $border-dark-color:               #44474c;
 $border-light-color:              #fff;
@@ -25,26 +25,27 @@ $panel-soso-font-color:            $base-font-color-light;
 
 
 /***** Chart Styles *****/
-.ct-series-a .ct-line {
+.ct-series-a .ct-bar {
   stroke: $line-color-likes;
 }
-.ct-series-a .ct-point {
-  stroke: $line-color-likes;
-}
+
 .ct-series-b .ct-line {
-  stroke: $line-color-dislikes;
-}
-.ct-series-b .ct-point {
   stroke: $line-color-dislikes;
 }
 
 .ct-bar {
-	stroke-width: 100px;
+	stroke-width: 30px;
 }
 
 
 .ct-label {
 	font-size: 1.3rem;
+}
+
+.ct-chart-bar {
+	.ct-label.ct-horizontal.ct-end {
+		justify-content: flex-end;
+	}
 }
 
 
