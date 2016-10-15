@@ -25,6 +25,7 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 	//initializing the dislike and like line arrays that will be used to populate the chart
 	var likeLine = [];
 	var dislikeLine = [];
+	var chartLabels = ['5min'];
 
 	//////////////////////////////////////////////////////////////////////////////////////
 // STOPWATCH TODO: Need to syncronize the crart with the stopwatch a little bit better -> Stop Presentation should delete all the chart data and start from scratch
@@ -88,9 +89,10 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 	    $scope.intervalDislikeVotes.push($scope.dislikeVotesArray.length);
 	    pushToLikeLineLineArr();
 	    pushToDislikeLineLineArr();
+	    pushToChartLabelsArr();
 	    // interval duration is set to 1 minute by default
 	    // TODO: need to establish a variable so that the presented can dictate the interval themselves.
-    }, 5000);
+    }, 10000);
 
     // Create a way to stop the Presetation and Intevals
     // TODO: I need to take this stopPresetnation function out side on the Start Presentation function.
@@ -107,7 +109,6 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 		$interval.cancel(intervalChart);
 		console.log("Stopped the meeting");
 	};
-
 
 
 	// functions that take the last 2 values of the interval arrays and
@@ -129,6 +130,11 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 		dislikeLine.push(b);
 	}
 
+	function pushToChartLabelsArr() {
+
+		return chartLabels
+	}
+
 	// Only doing this to see the values on the PRE tag on the page
 	$scope.likeLine = likeLine;
 	$scope.dislikeLine = dislikeLine;
@@ -136,18 +142,18 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 	$scope.$watch('likeLine', function(newVals, oldVals) {
 		var chartAllData = {
 			// A labels array that can contain any sort of values
-			labels: ['5min', '10min', '15min', '20min'],
+			labels: chartLabels,
 			// Series array that contains series objects or in this case series data arrays
 			series: [
 				{
 					name: 'likes',
-					data: likeLine
-					// data: [1, 4, 6, 9]
+					// data: likeLine
+					data: [9]
 				},
 				{
 					name: 'dislikes',
-					// data: [1, 3, 4, 2]
-					data: dislikeLine
+					data: [1]
+					// data: dislikeLine
 				}
 			]
 		};
@@ -156,22 +162,21 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 		// as you saw in the previous example
 		var chartLineOptions = {
 
-			seriesBarDistance: 30,
+			// seriesBarDistance: 30,
 			axisX: {
+
+				// If labels should be shown or not
+				showLabel: true,
+				// If the axis grid should be drawn or not
+				showGrid: true,
+				// Use only integer values (whole numbers) for the scale steps
+				onlyInteger: true
 			},
 			axisY: {
 				onlyInteger: true
-			}
-			// low: 0,
-			// axisY: {
-			// 	onlyInteger: true
-			// },
-			// // width: 1200,
-			// // height: 500,
-			// // Handle holes (if people did not have any votes in a certain minute) in data
-			// lineSmooth: Chartist.Interpolation.cardinal({
-			// 	fillHoles: true
-			// })
+			},
+			distributeSeries: false,
+			stackMode: 'accumulate',
 		};
 		// Create a new line chart object where as first parameter we pass in a selector
 		// that is resolving to our chart container element. The Second parameter

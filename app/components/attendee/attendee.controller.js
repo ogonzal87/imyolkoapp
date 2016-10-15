@@ -35,10 +35,10 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 		});
 		// I have to disable to btn so people so not submit more than 1 vote per
 		// interval
-		$scope.disableLikeBtn = true;
-		$timeout(function() {
-			$scope.disableLikeBtn = false;
-		}, 2000);
+		// $scope.disableLikeBtn = true;
+		// $timeout(function() {
+		// 	$scope.disableLikeBtn = false;
+		// }, 2000);
 	};
 
 	// Create a function that when is clicked creates a DISLIKE vote Object in Firebase this is stored in an array
@@ -52,11 +52,74 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 		});
 		// I have to disable to btn so people so not submit more than 1 vote per
 		// interval
-		$scope.disableDislikeBtn = true;
-		$timeout(function() {
-			$scope.disableDislikeBtn = false;
-		}, 2000);
+		// $scope.disableDislikeBtn = true;
+		// $timeout(function() {
+		// 	$scope.disableDislikeBtn = false;
+		// }, 2000);
 	};
+
+
+
+
+	//WATCHING ATTENDEE OBJECT
+	// ///////////////////////////////////////////////////////////////////////
+	// Create a watch to watch what happens on the Attendees node
+	$scope.$watch('attendees', function(newVal, oldVal) {
+
+		// Panic Button Logic
+		$scope.panicButton = function(attendee) {
+			if ($scope.attendee.feeling == "fine") {
+				$scope.attendee.feeling = "panic";
+			} else if ($scope.attendee.feeling == "panic") {
+				$scope.attendee.feeling = "fine";
+			}
+		};// Panic Button Logic
+
+
+
+		$scope.numOfPeopleWithVoteAttribute = _.filter($scope.attendees, function(attendee) {
+			return attendee.vote;
+		});
+
+		$scope.numOfPeopleWithDislikeVotes = _.filter($scope.attendees, function(attendee) {
+			return attendee.vote === 'dislike';
+		});
+
+		if(!$scope.dislikePercent) { $scope.dislikePercent = 0 }
+
+		$scope.dislikePercent = Math.round(($scope.numOfPeopleWithDislikeVotes.length / $scope.numOfPeopleWithVoteAttribute.length) * 100);
+		displayYolko()
+	}, true);
+
+
+	// Create a watch to watch what happens on the Votes node
+	$scope.$watch('votes', function(newVal, oldVal) {
+
+		//TODO: Have to put logoc to make sure that if there is only one person participating I still see a good face.
+		// Start counting the dislikePercentage() when there are more than 5 people with Vote Attribute
+
+
+		// displayYolko();
+	}, true);
+
+
+	//Displaying Yolko
+	function displayYolko() {
+		$scope.burnt              = $scope.dislikePercent >= 76;
+		$scope.shocked            = $scope.dislikePercent >= 64 && $scope.dislikePercent <= 75.999999999999;
+		$scope.idontgetit         = $scope.dislikePercent >= 56 && $scope.dislikePercent <= 63.999999999999;
+		$scope.startingtonotgetit = $scope.dislikePercent >= 48 && $scope.dislikePercent <= 55.999999999999;
+		$scope.tastey             = $scope.dislikePercent >= 40 && $scope.dislikePercent <= 47.999999999999;
+		$scope.want               = $scope.dislikePercent >= 32 && $scope.dislikePercent <= 39.999999999999;
+		$scope.confident          = $scope.dislikePercent >= 24 && $scope.dislikePercent <= 31.999999999999;
+		$scope.igotthis           = $scope.dislikePercent >= 16 && $scope.dislikePercent <= 23.999999999999;
+		$scope.laughing           = $scope.dislikePercent < 15.999999999999 || isNaN($scope.dislikePercent);
+		// $scope.zzz                = $scope.dislikePercent === 0 || 'NaN';
+	}
+
+
+
+
 
 	//QUIZ
 	// ///////////////////////////////////////////////////////////////////////
@@ -146,57 +209,4 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 		QuestionsService.questions.$save(questionToPresenter);
 	};
 
-	//WATCHING ATTENDEE OBJECT
-	// ///////////////////////////////////////////////////////////////////////
-	// Create a watch to watch what happens on the Attendees node
-	$scope.$watch('attendees', function(newVal, oldVal) {
-
-		// Panic Button Logic
-		$scope.panicButton = function(attendee) {
-			if ($scope.attendee.feeling == "fine") {
-				$scope.attendee.feeling = "panic";
-			} else if ($scope.attendee.feeling == "panic") {
-				$scope.attendee.feeling = "fine";
-			}
-		};// Panic Button Logic
-		displayYolko();
-	}, true);
-
-
-
-	//TODO: I need to come up with better math here...
-	// Create a watch to watch what happens on the Votes node
-	$scope.$watch('votes', function(newVal, oldVal) {
-		var numVotes = ($scope.likeVotesArray.length + $scope.dislikeVotesArray.length);
-		var numDislikeVotes = $scope.dislikeVotesArray.length;
-
-		// console.log('Total # of votes: ' + numVotes);
-		//console.log('Total # of dislike votes: ' + numDislikeVotes);
-
-		$scope.numOfPeopleWithVoteAttribute = _.filter($scope.attendees, function(attendee) {
-			return attendee.vote;
-		});
-
-		$scope.numOfPeopleWithDislikeVotes = _.filter($scope.attendees, function(attendee) {
-			return attendee.vote === 'dislike';
-		});
-
-		$scope.dislikePercent = Math.round(($scope.numOfPeopleWithDislikeVotes.length / $scope.numOfPeopleWithVoteAttribute.length) * 100);
-		displayYolko();
-	}, true);
-
-
-	//Displaying Yolko
-	function displayYolko() {
-		$scope.burnt              = $scope.dislikePercent >= 76;
-		$scope.shocked            = $scope.dislikePercent >= 64 && $scope.dislikePercent <= 75.999999999999;
-		$scope.idontgetit         = $scope.dislikePercent >= 56 && $scope.dislikePercent <= 63.999999999999;
-		$scope.startingtonotgetit = $scope.dislikePercent >= 48 && $scope.dislikePercent <= 55.999999999999;
-		$scope.tastey             = $scope.dislikePercent >= 40 && $scope.dislikePercent <= 47.999999999999;
-		$scope.want               = $scope.dislikePercent >= 32 && $scope.dislikePercent <= 39.999999999999;
-		$scope.confident          = $scope.dislikePercent >= 24 && $scope.dislikePercent <= 31.999999999999;
-		$scope.igotthis           = $scope.dislikePercent >= 16 && $scope.dislikePercent <= 23.999999999999;
-		$scope.laughing           = $scope.dislikePercent < 15.999999999999 || isNaN($scope.dislikePercent);
-		// $scope.zzz                = $scope.dislikePercent === 0 || 'NaN';
-	}
 }

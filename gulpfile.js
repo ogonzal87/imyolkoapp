@@ -1,23 +1,16 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var uglify = require('gulp-uglify');
-var rename = require('gulp-rename');
-var server = require('gulp-connect');
-var plumber = require('gulp-plumber');
 var autoprefixer = require('gulp-autoprefixer');
 var del = require('del');
+var server = require('gulp-connect');
+var plumber = require('gulp-plumber');
+var rename = require('gulp-rename');
+
+
 
 gulp.task('html', function() {
 	return gulp.src('app/**/*.html')
-		.pipe(server.reload());
-});
-
-gulp.task('js', function() {
-	return gulp.src(['app/**/*.js', '!app/**/*.min.js'])
-		.pipe(plumber())
-		.pipe(rename({suffix:'.min'}))
-		.pipe(uglify())
-		.pipe(gulp.dest('app'))
 		.pipe(server.reload());
 });
 
@@ -30,10 +23,20 @@ gulp.task('sass', function() {
 		.pipe(server.reload());
 });
 
+gulp.task('js', function() {
+	return gulp.src(['app/**/*.js', '!app/**/*.min.js', '!app/node_modules/**/*.js'])
+		.pipe(plumber())
+		// .pipe(rename({suffix:'.min'}))
+		// .pipe(uglify())
+		// .pipe(gulp.dest('public'))
+		.pipe(server.reload());
+});
+
+
 gulp.task('watch', function() {
 	gulp.watch('app/**/*.html', ['html']);
-	gulp.watch('app/**/*.js', ['js']);
-	gulp.watch('app/**/*.scss', ['sass']);
+	gulp.watch(['app/**/*.js', '!app/node_modules/**/*.js'], ['js']);
+	gulp.watch(['app/**/*.scss', '!app/node_modules/**/*.scss'], ['sass']);
 });
 
 
@@ -45,7 +48,7 @@ gulp.task('server', function() {
 	});
 });
 
-gulp.task('default', ['html', 'js', 'sass', 'watch', 'server']);
+gulp.task('default', ['html', 'sass', 'js', 'watch', 'server']);
 
 
 
