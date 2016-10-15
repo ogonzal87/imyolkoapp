@@ -25,7 +25,7 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 	//initializing the dislike and like line arrays that will be used to populate the chart
 	var likeLine = [];
 	var dislikeLine = [];
-	var chartLabels = ['5min'];
+	var chartLabels = [];
 
 	//////////////////////////////////////////////////////////////////////////////////////
 // STOPWATCH TODO: Need to syncronize the crart with the stopwatch a little bit better -> Stop Presentation should delete all the chart data and start from scratch
@@ -77,7 +77,7 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 		$scope.updateStopwatch();
 	};
 
-	//create a function that starts the Presentation and creates an interval
+	// create a function that starts the Presentation and creates an interval
 	// for the snapshots I want to use to populale on the Chart with both a
 	// Like and a Dislike Lines.
 	var intervalChart;
@@ -89,10 +89,13 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 	    $scope.intervalDislikeVotes.push($scope.dislikeVotesArray.length);
 	    pushToLikeLineLineArr();
 	    pushToDislikeLineLineArr();
-	    pushToChartLabelsArr();
+	    pushToChartLabelsArr(1);
+
+	    console.log('Interval Firing')
+
 	    // interval duration is set to 1 minute by default
 	    // TODO: need to establish a variable so that the presented can dictate the interval themselves.
-    }, 10000);
+    }, 5000);
 
     // Create a way to stop the Presetation and Intevals
     // TODO: I need to take this stopPresetnation function out side on the Start Presentation function.
@@ -130,8 +133,10 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 		dislikeLine.push(b);
 	}
 
-	function pushToChartLabelsArr() {
-
+	function pushToChartLabelsArr(num) {
+		console.log(chartLabels);
+		chartLabels.push(num);
+		// console.log(chartLabels);
 		return chartLabels
 	}
 
@@ -147,13 +152,13 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 			series: [
 				{
 					name: 'likes',
-					// data: likeLine
-					data: [9]
+					data: likeLine
+					// data: [9]
 				},
 				{
 					name: 'dislikes',
-					data: [1]
-					// data: dislikeLine
+					// data: [1]
+					data: dislikeLine
 				}
 			]
 		};
