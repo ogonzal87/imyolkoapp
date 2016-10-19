@@ -7,7 +7,7 @@ angular
 	// Angular Bootstrap
 	'ui.bootstrap'
 ])
-.constant('FIREBASE_URL', 'https://yolkoapp.firebaseio.com')
+.constant('FIREBASE_URL', 'https://yolkoapp-sandbox.firebaseio.com')
 .config(ApplicationConfig);
 
 // configure app and routing. this should be the only thing on this file
