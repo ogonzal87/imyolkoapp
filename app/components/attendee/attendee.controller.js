@@ -75,8 +75,6 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 			}
 		};// Panic Button Logic
 
-
-
 		$scope.numOfPeopleWithVoteAttribute = _.filter($scope.attendees, function(attendee) {
 			return attendee.vote;
 		});
