@@ -1,343 +1,105 @@
-<!--   DASHBOARD -->
-<div class="row panels-dashboard">
-	<div class="col-md-4 col-sm-6" style="padding:0">
-		<div class="main-panel">
-		<!-- PANEL WIDGET -->
-			<div class="profile-image">
-				<img class="profile-image-round"
-					 src="assets/avatars/profile_pic.png">
-				<span class="presentor-name">Oscar Gonzalez</span>
-			</div>
-			<div class="main-panel-content">
-				<div class="likes-container">
-					<span class="num-likes">
-						{{ likeVotesArray.length }}
-					</span>
-					<label>PROPS</label>
-				</div>
+<div class="dashboard-background">
 
-				<div class="dislikes-container">
-					<span class="num-dislikes">
-						{{ dislikeVotesArray.length }}
-					</span>
-					<!--<label>Dislikes</label>-->
-				</div>
+	<div class="">
+		<div class="dashboard--presentation-ctrls-container">
+			<div class="num-attendees-container">
+				<div class="num">27</div>
+				<div class="dashboard-label">ATTENDEES</div>
 			</div>
-			<div class="counts">
-				<div>
-					<i class="fa fa-user"></i> {{ numAttendees }}
-				</div>
-				<div>
-					<i class="fa fa-question-circle-o"></i>
-					{{ allQuestionsFromAttendees.length }}
-				</div>
-				<div>
-					<i class="fa fa-pencil"></i>
-					{{ numOfAnswersFromAttendees  }}
-				</div>
-			</div>
-		</div>
-	</div>
 
-	<div class="col-md-8 col-sm-6" style="padding:0">
-		<div class="col-md-3 col-sm-6 panel-dashboard"
-			 ng-class="volumeUpPercent.class">
-			<!-- PANEL WIDGET -->
-			<div class="panel-content" >
-				<div class="icons-dashboard-center">
-					<i class="fa fa-deafness fa-3x icon"></i>
+			<div class="stopwatch-container">
+				<div class="chronometer">
+					00:00:00
 				</div>
-				VOLUME
-				<div class="">
-					<h3 ng-if="volumeUpPercent.content > 0">
-						{{ volumeUpPercent.content }} %
-					</h3>
-					<h3 ng-if="volumeUpPercent.content === 0 ">
-						WE ARE GOOD
-					</h3>
+				<div class="media-controls">
+					Play Pause Stop
 				</div>
 			</div>
-			<div class="refresh-overlay">
-				<button class="resetbutton" ng-click="resetVolumeTracker()">
-					<i class="fa fa-refresh"></i>
-					<p style="font-size: 20px;">REFRESH</p>
-				</button>
+
+			<div class="dashboard--questions-container">
+				<div class="num">3</div>
+				<div class="dashboard-label">QUESTIONS</div>
 			</div>
 		</div>
 
-		<div class="col-md-3 col-sm-6 panel-dashboard"
-			 ng-class="speedPercent.class">
-			<!-- PANEL WIDGET -->
-			<div class="panel-content" >
-				<div class="icons-dashboard-center">
-					<i class="fa fa-rocket fa-3x icon"></i>
-				</div>
-				SPEED
-				<div class="">
-					<h3 ng-if="speedPercent.content">
-						{{ speedPercent.content}}
-					</h3>
-				</div>
+		<div class="dashboard--second-row-container">
+			<div class="likes-container">
+				<div class="num">63</div>
+				<div class="dashboard-label">LIKES</div>
 			</div>
 
-			<div class="refresh-overlay">
-				<button class="resetbutton" ng-click="resetSpeedTracker()">
-					<i class="fa fa-refresh"></i>
-					<p style="font-size: 20px;">REFRESH</p>
-				</button>
+			<div class="mood-container">
+				<div class="circles">
+					<div class="circle-mood"></div>
+					<div class="circle-mood non-filled"></div>
+					<div class="circle-mood non-filled"></div>
+				</div>
+				<div class="dashboard-label">MOOD</div>
+			</div>
+
+			<div class="dislikes-container">
+				<div class="num">24</div>
+				<div class="dashboard-label">DISLIKES</div>
 			</div>
 		</div>
 
+		<div class="dashboard--primary-graphs-container">
+			<div class="cant-hear-container">
+				<div class="cant-hear-graph">
 
-		<div class="col-md-3 col-sm-6 panel-dashboard"
-			 ng-class="panicPercent.class">
-			<!-- PANEL WIDGET -->
-			<div class="panel-content">
-				<div>
-					<i class="fa fa-fire-extinguisher fa-3x icon"></i>
+					<div class="ct-chart-volume"></div>
+
+
+
+					<!--<svg width="302px" height="320px" viewBox="70 600 302 320" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">-->
+						<!--<defs></defs>-->
+						<!--<g id="Can't-Hear-Indicator" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(94.000000, 614.000000)">-->
+							<!--<circle stroke="#5A48FC" stroke-width="39" cx="127.5" cy="137.5" r="105.5"></circle>-->
+							<!--<path d="M127.240998,243.010153 C185.746817,243.010153 233.175154,195.776194 233.175154,137.510153 C233.175154,79.2441118 185.746817,32.0101529 127.240998,32.0101529 C68.7351785,32.0101529 21.3068411,79.2441118 21.3068411,137.510153" id="Panic-Indicator" stroke="#6DEFFF" stroke-width="40" transform="translate(127.240998, 137.510153) rotate(823.000000) translate(-127.240998, -137.510153) "></path>-->
+							<!--<rect id="Rectangle-2" fill="#FBFBFB" x="127" y="0" width="138" height="138"></rect>-->
+							<!--<text id="17%" font-family="Avenir-Heavy, Avenir" font-size="48" font-weight="600" fill="#4A4A4A">-->
+								<!--<tspan x="87" y="156">17%</tspan>-->
+							<!--</text>-->
+						<!--</g>-->
+					<!--</svg>-->
 				</div>
-				PANIC
-				<div class="">
-					<h3 ng-if="panicPercent.content > 0">
-						{{ panicPercent.content }}
- %					</h3>
-					<h3 ng-if="panicPercent.content === 0">
-						WE ARE GOOD
-					</h3>
-				</div>
-			</div>
-			<div class="refresh-overlay">
-				<button class="resetbutton" ng-click="resetPanicTracker()">
-					<i class="fa fa-refresh"></i>
-					<p style="font-size: 20px;">REFRESH</p>
-				</button>
+				<div class="dashboard-label">CAN'T HEAR</div>
 			</div>
 
-		</div>
-
-		<div class="col-md-3 col-sm-6 control-panel">
-			<div class="stopwatch" ng-init="showStopwatch()">
-				{{ stopWatch | date: 'h:mm:ss a' }}
+			<div class="speed-container">
+				<div class="speed-graph">
+					<svg width="200px" height="253px" viewBox="618 667 200 253" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+						<defs></defs>
+						<g id="Speed-Indicator" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(618.000000, 667.000000)">
+							<rect id="Rectangle-3" fill="#D8D8D8" x="38" y="68" width="25" height="60"></rect>
+							<rect id="Rectangle-3" fill="#D8D8D8" x="0" y="68" width="25" height="60"></rect>
+							<rect id="Rectangle-3" fill="#D8D8D8" x="133" y="70" width="25" height="60"></rect>
+							<rect id="Rectangle-3" fill="#D8D8D8" x="175" y="70" width="25" height="60"></rect>
+							<rect id="Rectangle-3" fill="#6DEFFF" x="87" y="0" width="25" height="200"></rect>
+						</g>
+					</svg>
+				</div>
+				<div class="dashboard-label">SPEED</div>
 			</div>
 
-			<div class="play-pause-stop-btns">
-				<div class="btn play-pause-stop-btn"
-					 ng-click="startPresentation()">
-					<i class="fa fa-play"></i>
+			<div class="lost-container">
+				<div class="panic-graph">
+					<svg width="320px" height="342px" viewBox="1048 592 320 342" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+						<defs></defs>
+						<g id="Panic-Indicator" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(1073.000000, 617.000000)">
+							<ellipse stroke="#6DEFFF" stroke-width="39" cx="134.934156" cy="134.5" rx="105.934156" ry="105.5"></ellipse>
+							<path d="M134.934156,241 C193.439975,241 240.868313,193.766041 240.868313,135.5 C240.868313,77.2339589 193.439975,30 134.934156,30 C76.4283373,30 29,77.2339589 29,135.5" stroke="#5A48FC" stroke-width="40" transform="translate(134.934156, 135.500000) rotate(251.000000) translate(-134.934156, -135.500000) "></path>
+							<rect id="Rectangle-2" fill="#FBFBFB" x="135" y="3" width="138.567901" height="138"></rect>
+							<text id="67%" font-family="Avenir-Heavy, Avenir" font-size="48" font-weight="600" fill="#4A4A4A">
+								<tspan x="83" y="153">67%</tspan>
+							</text>
+						</g>
+					</svg>
 				</div>
-				<div class="btn play-pause-stop-btn"
-					 ng-click="pausePresentation()">
-					<i class="fa fa-pause"></i>
-				</div>
-				<div class="btn play-pause-stop-btn"
-					 ng-click="stopPresentation()">
-					<i class="fa fa-stop"></i>
-				</div>
+				<div class="dashboard-label">LOST</div>
 			</div>
 
-			<div class="reset-btns-main-panel">
-				<div class="play-pause-stop-btn"
-					 ng-click="resetEverything()">
-					RESET EVERYTHING
-				</div>
-
-				<div class="play-pause-stop-btn"
-					 ng-click="deleteEverything()">
-					NEW PRESENTATION
-				</div>
-			</div>
-		</div>
-	</div>
-  </div>
-
-
-
-<!-- <pre>
-  Speed Percent: {{speedPercent.value}}<br>
-  Volume up Percent: {{volumeUpPercent.value}}<br>
-  Dislike Percent: {{dislikePercent}}<br>
-</pre> -->
-
-
-
-<div class=" results">
-
-	<div class="chart container">
-		<h3 style="padding-left: 50px;">LIVE DATA COMING IN</h3>
-
-		<!-- CHART -->
-		<div class="ct-chart ct-major-tenth"></div>
-		<!-- CHART -->
-
-		<!-- <pre>
-      		LikeVotes: {{ intervalLikeVotes }} <br>
-      		Like Line Arr: {{ likeLine }} <br>
-      		DislikeVotes: {{ intervalDislikeVotes }} <br>
-      		Dislike Line Arr: {{ dislikeLine }} <br>
-    	</pre> -->
-	</div>
-
-</div><!-- container results end -->
-
-
-<div class="background-below-chart ">
-	<div class="dashboard-tabs container">
-		<div class="dashboard-tab"
-			 ng-class="{'active': tab1IsActive}"
-			 ng-click="toggleTabs('tab1IsActive')">
-			QUESTIONS
-		</div>
-		<div class="dashboard-tab"
-			 ng-class="{'active': tab2IsActive}"
-			 ng-click="toggleTabs('tab2IsActive')">
-			POP QUIZ
-		</div>
-	</div>
-
-	<div class="dashboard-tab-content">
-		<div ng-show="tab1IsActive" class="container question-list-container">
-			<!--   QUESTIONS -->
-			<ul class="list-group questions">
-				<div ng-if="questionsToPresenter.length === 0" class="no-questions-container">
-					<div class="no-questions-message">
-						<h2>Great Job! There are no questions yet...</h2>
-					</div>
-				</div>
-
-				<li class="list-group-item items-in-list"
-					ng-repeat="(key, questionToPresenter) in questionsToPresenter | orderBy: '-counter'">
-					<div class="question-content">
-						{{ questionToPresenter.content }}
-						<div class="question-content-time">
-							{{ questionToPresenter.time | date: 'h:mm:ss a' }}
-						</div>
-					</div>
-					<div class="question-voting-controls">
-						<span style="">VOTES</span>
-						<div class="question-voting-controls-text">
-							{{ questionToPresenter.counter }}
-						</div>
-
-						<!--<button class="btn btn-sm btn-default" ng-click="voteQuestionDown(questionToPresenter)">-->
-						<!--<i class="fa fa-chevron-down"></i>-->
-						<!--</button>-->
-						<button class="btn btn-delete" ng-click="removeQuestion(key)">&times;</button>
-					</div>
-				</li>
-			</ul>
-			<!--   QUESTIONS END -->
-		</div>
-
-
-
-		<div ng-show="tab2IsActive" class="container pop-quiz-container">
-			<form novalidate class="container" style="padding: 20px 60px;">
-				<div class="form-group">
-					<br>
-					<h3 for="question">Question</h3>
-					<textarea class="form-control"
-							  id="question"
-							  placeholder="What would you like to ask everyone?"
-							  ng-model="popQuizQuestionContent"
-							  rows="4">
-					</textarea>
-				</div>
-
-				<div class="form-group quiz-question-container">
-					<label for="choice-a" class="letter">A</label>
-					<input type="text"
-						   class="form-control input-text"
-						   id="choice-a"
-						   placeholder="I'm a choice option"
-						   ng-model="choiceA">
-
-					<input type="checkbox"
-						   id="choicea"
-						   ng-model="correctAnsA"
-						   ng-click="isCorrectAnsA = !isCorrectAnsA">
-					<label for="choicea" class="notchecked" ng-if="!isCorrectAnsA">
-						<i class="fa fa-check fa-2x"></i>
-					</label>
-					<label for="choicea" class="checked" ng-if="isCorrectAnsA">
-						<i class="fa fa-check fa-2x"></i>
-					</label>
-				</div>
-
-				<div class="form-group quiz-question-container">
-					<label for="choice-b" class="letter">B</label>
-					<input type="text"
-						   class="form-control input-text"
-						   id="choice-b"
-						   placeholder="I'm a choice option"
-						   ng-model="choiceB">
-
-					<input type="checkbox"
-						   id="choiceb"
-						   ng-model="correctAnsB"
-						   ng-click="isCorrectAnsB = !isCorrectAnsB">
-					<label for="choiceb" class="notchecked" ng-if="!isCorrectAnsB">
-						<i class="fa fa-check fa-2x"></i>
-					</label>
-					<label for="choiceb" class="checked" ng-if="isCorrectAnsB">
-						<i class="fa fa-check fa-2x"></i>
-					</label>
-				</div>
-
-				<div class="form-group quiz-question-container">
-					<label for="choice-c" class="letter">C</label>
-					<input type="text"
-						   class="form-control input-text"
-						   id="choice-c"
-						   placeholder="I'm a choice option"
-						   ng-model="choiceC">
-
-					<input type="checkbox"
-						   id="choicec"
-						   ng-model="correctAnsC"
-						   ng-click="isCorrectAnsC = !isCorrectAnsC">
-					<label for="choicec" class="notchecked" ng-if="!isCorrectAnsC">
-						<i class="fa fa-check fa-2x"></i>
-					</label>
-					<label for="choicec" class="checked" ng-if="isCorrectAnsC">
-						<i class="fa fa-check fa-2x"></i>
-					</label>
-				</div>
-
-				<div class="form-group quiz-question-container">
-					<label for="choice-d" class="letter">D</label>
-					<input type="text"
-						   class="form-control input-text"
-						   id="choice-d"
-						   placeholder="I'm a choice option"
-						   ng-model="choiceD">
-
-					<input type="checkbox"
-						   id="choiced"
-						   ng-model="correctAnsD"
-						   ng-click="isCorrectAnsD = !isCorrectAnsD">
-					<label for="choiced" class="notchecked" ng-if="!isCorrectAnsD">
-						<i class="fa fa-check fa-2x"></i>
-					</label>
-					<label for="choiced" class="checked" ng-if="isCorrectAnsD">
-						<i class="fa fa-check fa-2x"></i>
-					</label>
-				</div>
-
-				<div class="fire-quiz-btn-container" ng-show="showFireQuizBtn">
-					<button ng-click="fireQuizToAttendees()" class="btn fire-quiz-btn">FIRE QUESTION</button>
-				</div>
-
-				<div class="fire-quiz-btn-container" ng-show="showRevealResultsBtn">
-					<button ng-click="quizQuestion1.isShowingResultsToAttendees = true" class="btn reveal-results-btn">REVEAL RESULTS</button>
-				</div>
-
-				<!--<pre>quizQuestion1.isShowingResultsToAttendees : {{quizQuestion1.isShowingResultsToAttendees}}</pre>-->
-
-				<!-- QUIZ RESULTS CHART -->
-				<div class="container quiz-results-container" ng-show="isShowingResultsToPresenter">
-					<div class="ct-chart-quiz ct-major-tenth"></div>
-				</div>
-			</form>
 		</div>
 	</div>
 </div>
+

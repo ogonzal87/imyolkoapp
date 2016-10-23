@@ -186,7 +186,7 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 		// Create a new line chart object where as first parameter we pass in a selector
 		// that is resolving to our chart container element. The Second parameter
 		// is the actual data object and the third the options.
-		new Chartist.Bar('.ct-chart', chartAllData, chartLineOptions);
+		new Chartist.Bar('.ct-chart-timeline', chartAllData, chartLineOptions);
 	}, true);
 
 
@@ -255,6 +255,45 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 		// 		});
 		// 	});
 		// });
+
+		//show chart for the VOLUME
+		new Chartist.Pie('.ct-chart-volume', {
+			series: [75, 100]
+		}, {
+			donut: true,
+			donutWidth: 40,
+			startAngle: 270,
+			height: 254,
+			width: 254,
+			total: 100,
+			showLabel: false
+		});
+
+		//show chart for the SPEED
+		new Chartist.Pie('.ct-chart-speed', {
+			series: [75, 100]
+		}, {
+			donut: true,
+			donutWidth: 40,
+			startAngle: 270,
+			height: 254,
+			width: 254,
+			total: 100,
+			showLabel: false
+		});
+
+		//show chart for the LOST
+		new Chartist.Pie('.ct-chart-speed', {
+			series: [75, 100]
+		}, {
+			donut: true,
+			donutWidth: 40,
+			startAngle: 270,
+			height: 254,
+			width: 254,
+			total: 100,
+			showLabel: false
+		});
 	}, true);
 
 
@@ -392,8 +431,6 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 		//Shows the quiz on the UI of the attendee when the Pop Qui is fired from the Dashboard
 		$scope.isShowingResultsToPresenter = $scope.quizQuestion1.isShowingResultsToPresenter;
 	}, true);
-
-
 
 
 	//RESET
