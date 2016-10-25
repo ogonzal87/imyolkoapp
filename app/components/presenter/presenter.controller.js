@@ -153,11 +153,9 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 				{
 					name: 'likes',
 					data: likeLine
-					// data: [9]
 				},
 				{
 					name: 'dislikes',
-					// data: [1]
 					data: dislikeLine
 				}
 			]
@@ -218,34 +216,41 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 		var volumeUpAttendees = _.filter($scope.attendees, function(attendee) {
 			return attendee.volumeUp == "yes";
 		});
-		$scope.volumeUpAttendees = volumeUpAttendees.length;
 		$scope.volumeUpPercent = volume(Math.round((volumeUpAttendees.length / $scope.numAttendees) * 100));
-
 
 		//SPEED
 		///////////////////////////////////////////////////////////////////////////
-		$scope.speedValue = _.reduce($scope.attendees, function(memo, attendee) {
+		var speedValue = _.reduce($scope.attendees, function(memo, attendee) {
 			return memo + attendee.speed;
 		}, 0);
-		$scope.speedPercent = speed(Math.round(($scope.speedValue / $scope.numAttendees) * 100));
+		$scope.speedPercent = speed(Math.round((speedValue / $scope.numAttendees) * 100));
 
-		//FEELING
+		//LOST
 		// /////////////////////////////////////////////////////////////////////////
-		var feelingValues = _.filter($scope.attendees, function(attendee) {
+		var lostValues = _.filter($scope.attendees, function(attendee) {
 			return attendee.feeling == "panic";
 		});
-		$scope.feelingValues = feelingValues.length;
-		$scope.panicPercent = panic(Math.round((feelingValues.length / $scope.numAttendees) * 100));
+		$scope.panicPercent = panic(Math.round((lostValues.length / $scope.numAttendees) * 100));
+
+		//DISLIKE PERCENTAGE
+		// /////////////////////////////////////////////////////////////////////////
+		$scope.numOfPeopleWithVoteAttribute = _.filter($scope.attendees, function(attendee) {
+			return attendee.vote;
+		});
+		$scope.numOfPeopleWithDislikeVotes = _.filter($scope.attendees, function(attendee) {
+			return attendee.vote === 'dislike';
+		});
+		if(!$scope.dislikePercent) { $scope.dislikePercent = 0 }
+
+		$scope.dislikePercent = Math.round(($scope.numOfPeopleWithDislikeVotes.length / $scope.numOfPeopleWithVoteAttribute.length) * 100);
 
 		//QUESTIONS TO PRESENTER
 		// /////////////////////////////////////////////////////////////////////////
-
 		$scope.questionsToPresenter = $scope.allQuestionsFromAttendees;
 
 		$scope.removeQuestion = function(key) {
 			$scope.questionsToPresenter.$remove(key);
 		};
-
 
 		// _.each($scope.attendees, function(attendee) {
 		// 	_.each(attendee.questions, function(question) {
@@ -258,11 +263,11 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 
 		//show chart for the VOLUME
 		new Chartist.Pie('.ct-chart-volume', {
-			series: [75, 100]
+			series: [$scope.volumeUpPercent, 100]
 		}, {
 			donut: true,
 			donutWidth: 40,
-			startAngle: 270,
+			startAngle: 0,
 			height: 254,
 			width: 254,
 			total: 100,
@@ -271,11 +276,11 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 
 		//show chart for the SPEED
 		new Chartist.Pie('.ct-chart-speed', {
-			series: [75, 100]
+			series: [45, 100]
 		}, {
 			donut: true,
 			donutWidth: 40,
-			startAngle: 270,
+			startAngle: 0,
 			height: 254,
 			width: 254,
 			total: 100,
@@ -283,12 +288,12 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 		});
 
 		//show chart for the LOST
-		new Chartist.Pie('.ct-chart-speed', {
-			series: [75, 100]
+		new Chartist.Pie('.ct-chart-lost', {
+			series: [$scope.panicPercent.content, 100]
 		}, {
 			donut: true,
 			donutWidth: 40,
-			startAngle: 270,
+			startAngle: 0,
 			height: 254,
 			width: 254,
 			total: 100,
@@ -299,9 +304,9 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 
 	function volume(percent) {
 		if (percent > 10) {
-			return { value: percent, content: percent, class: 'panel-dashboard-bad' };
+			return { value: percent, content: percent, class: 'dashboard-bad-color' };
 		} else {
-			return { value: percent, content: percent, class: 'panel' };
+			return { value: percent, content: percent, class: '' };
 		}
 	}
 
@@ -322,9 +327,9 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 
 	function panic(percent) {
 		if (percent > 25) {
-			return { content: percent, class: 'panel-dashboard-bad' };
+			return { content: percent };
 		} else {
-			return { content: percent, class: 'panel' };
+			return { content: percent };
 		}
 	}
 
@@ -404,8 +409,6 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 		var answersB = QuizService.quizAnswers1B.length;
 		var answersC = QuizService.quizAnswers1C.length;
 		var answersD = QuizService.quizAnswers1D.length;
-
-		console.log($scope.quizQuestion1.isShowingResultsToAttendees)
 
 		var chartAllData = {
 			labels: ['A', 'B', 'C', 'D'],
