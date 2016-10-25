@@ -1,9 +1,9 @@
 <div class="dashboard-background">
 
-	<div class="">
+	<div class="container">
 		<div class="dashboard--presentation-ctrls-container">
 			<div class="num-attendees-container">
-				<div class="num">27</div>
+				<div class="num">{{numAttendees}}</div>
 				<div class="dashboard-label">ATTENDEES</div>
 			</div>
 
@@ -17,84 +17,58 @@
 			</div>
 
 			<div class="dashboard--questions-container">
-				<div class="num">3</div>
+				<div class="num">{{allQuestionsFromAttendees.length}}</div>
 				<div class="dashboard-label">QUESTIONS</div>
 			</div>
 		</div>
+		{{dislikePercent}}
 
 		<div class="dashboard--second-row-container">
 			<div class="likes-container">
-				<div class="num">63</div>
+				<div class="num">{{likeVotesArray.length}}</div>
 				<div class="dashboard-label">LIKES</div>
 			</div>
 
 			<div class="mood-container">
 				<div class="circles">
-					<div class="circle-mood"></div>
-					<div class="circle-mood non-filled"></div>
-					<div class="circle-mood non-filled"></div>
+					<div class="circle-mood" ng-class="{'is-pulsing': dislikePercent > 50}"></div>
 				</div>
 				<div class="dashboard-label">MOOD</div>
 			</div>
 
+
 			<div class="dislikes-container">
-				<div class="num">24</div>
+				<div class="num">{{dislikeVotesArray.length}}</div>
 				<div class="dashboard-label">DISLIKES</div>
 			</div>
 		</div>
 
 		<div class="dashboard--primary-graphs-container">
+
 			<div class="cant-hear-container">
 				<div class="cant-hear-graph">
-
 					<div class="ct-chart-volume"></div>
-
-
-
-					<!--<svg width="302px" height="320px" viewBox="70 600 302 320" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">-->
-						<!--<defs></defs>-->
-						<!--<g id="Can't-Hear-Indicator" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(94.000000, 614.000000)">-->
-							<!--<circle stroke="#5A48FC" stroke-width="39" cx="127.5" cy="137.5" r="105.5"></circle>-->
-							<!--<path d="M127.240998,243.010153 C185.746817,243.010153 233.175154,195.776194 233.175154,137.510153 C233.175154,79.2441118 185.746817,32.0101529 127.240998,32.0101529 C68.7351785,32.0101529 21.3068411,79.2441118 21.3068411,137.510153" id="Panic-Indicator" stroke="#6DEFFF" stroke-width="40" transform="translate(127.240998, 137.510153) rotate(823.000000) translate(-127.240998, -137.510153) "></path>-->
-							<!--<rect id="Rectangle-2" fill="#FBFBFB" x="127" y="0" width="138" height="138"></rect>-->
-							<!--<text id="17%" font-family="Avenir-Heavy, Avenir" font-size="48" font-weight="600" fill="#4A4A4A">-->
-								<!--<tspan x="87" y="156">17%</tspan>-->
-							<!--</text>-->
-						<!--</g>-->
-					<!--</svg>-->
+					<div class="percentage" ng-class="volumeUpPercent.class">
+						{{volumeUpPercent
+						.content}}%
+					</div>
 				</div>
 				<div class="dashboard-label">CAN'T HEAR</div>
 			</div>
 
 			<div class="speed-container">
 				<div class="speed-graph">
-					<svg width="200px" height="253px" viewBox="618 667 200 253" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-						<defs></defs>
-						<g id="Speed-Indicator" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(618.000000, 667.000000)">
-							<rect id="Rectangle-3" fill="#D8D8D8" x="38" y="68" width="25" height="60"></rect>
-							<rect id="Rectangle-3" fill="#D8D8D8" x="0" y="68" width="25" height="60"></rect>
-							<rect id="Rectangle-3" fill="#D8D8D8" x="133" y="70" width="25" height="60"></rect>
-							<rect id="Rectangle-3" fill="#D8D8D8" x="175" y="70" width="25" height="60"></rect>
-							<rect id="Rectangle-3" fill="#6DEFFF" x="87" y="0" width="25" height="200"></rect>
-						</g>
-					</svg>
+					<div></div>
+					<div></div>
+					<div></div>
 				</div>
 				<div class="dashboard-label">SPEED</div>
 			</div>
 
 			<div class="lost-container">
 				<div class="panic-graph">
-					<svg width="320px" height="342px" viewBox="1048 592 320 342" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-						<defs></defs>
-						<g id="Panic-Indicator" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(1073.000000, 617.000000)">
-							<ellipse stroke="#6DEFFF" stroke-width="39" cx="134.934156" cy="134.5" rx="105.934156" ry="105.5"></ellipse>
-							<path d="M134.934156,241 C193.439975,241 240.868313,193.766041 240.868313,135.5 C240.868313,77.2339589 193.439975,30 134.934156,30 C76.4283373,30 29,77.2339589 29,135.5" stroke="#5A48FC" stroke-width="40" transform="translate(134.934156, 135.500000) rotate(251.000000) translate(-134.934156, -135.500000) "></path>
-							<rect id="Rectangle-2" fill="#FBFBFB" x="135" y="3" width="138.567901" height="138"></rect>
-							<text id="67%" font-family="Avenir-Heavy, Avenir" font-size="48" font-weight="600" fill="#4A4A4A">
-								<tspan x="83" y="153">67%</tspan>
-							</text>
-						</g>
-					</svg>
+					<div class="ct-chart-lost"></div>
+					<div class="percentage">{{panicPercent.content}}%</div>
 				</div>
 				<div class="dashboard-label">LOST</div>
 			</div>
