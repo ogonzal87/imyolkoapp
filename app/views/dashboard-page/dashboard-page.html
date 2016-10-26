@@ -8,12 +8,7 @@
 	<div class="">
 		<div class="dashboard--presentation-ctrls-container row">
 
-			<div class="num-attendees-container col-xs-6 col-md-4">
-				<div class="num">{{numAttendees}}</div>
-				<div class="dashboard-label">ATTENDEES</div>
-			</div>
-
-			<div class="stopwatch-container col-xs-12 col-md-4">
+			<div class="stopwatch-container col-sm-6 col-sm-push-3">
 				<div class="chronometer" ng-init="showStopwatch()">
 					{{ stopWatch | date: 'h:mm:ss a' }}
 				</div>
@@ -34,45 +29,39 @@
 				</div>
 			</div>
 
-			<div class="dashboard--questions-container col-xs-6 col-md-4">
+			<div class="num-attendees-container col-sm-3 col-sm-pull-6">
+				<div class="num">{{numAttendees}}</div>
+				<div class="dashboard-label">ATTENDEES</div>
+			</div>
+
+			<div class="dashboard--questions-container col-sm-3 ">
 				<div class="num">{{allQuestionsFromAttendees.length}}</div>
 				<div class="dashboard-label">QUESTIONS</div>
 			</div>
 		</div>
 
-		<div class="dashboard--second-row-container">
-			<div class="likes-container">
-				<div class="num">{{likeVotesArray.length}}</div>
-				<div class="dashboard-label">LIKES</div>
-			</div>
-
-			<div class="mood-container">
+		<div class="dashboard--second-row-container row">
+			<div class="mood-container col-sm-6 col-sm-push-3">
 				<div class="circles">
 					<div class="circle-mood" ng-class="{'is-pulsing': dislikePercent > 50}"></div>
 				</div>
 				<div class="dashboard-label">MOOD</div>
 			</div>
 
+			<div class="likes-container col-sm-3 col-sm-pull-6">
+				<div class="num">{{likeVotesArray.length}}</div>
+				<div class="dashboard-label">LIKES</div>
+			</div>
 
-			<div class="dislikes-container">
+			<div class="dislikes-container col-sm-3">
 				<div class="num">{{dislikeVotesArray.length}}</div>
 				<div class="dashboard-label">DISLIKES</div>
 			</div>
 		</div>
 
-		<div class="dashboard--primary-graphs-container">
+		<div class="dashboard--primary-graphs-container row">
 
-			<div class="cant-hear-container">
-				<div class="cant-hear-graph">
-					<div class="ct-chart-volume"></div>
-					<div class="percentage" ng-class="volumeUpPercent.class">
-						{{volumeUpPercent.content}}%
-					</div>
-				</div>
-				<div class="dashboard-label">CAN'T HEAR</div>
-			</div>
-
-			<div class="speed-container">
+			<div class="speed-container col-sm-6 col-sm-push-3">
 				<div class="speed-graph-message-container">
 					<div class="message">{{speedPercent.content | uppercase}}</div>
 					<div class="graph-container">
@@ -92,7 +81,17 @@
 				<div class="dashboard-label">SPEED</div>
 			</div>
 
-			<div class="lost-container">
+			<div class="cant-hear-container col-sm-3 col-sm-pull-6">
+				<div class="cant-hear-graph">
+					<div class="ct-chart-volume"></div>
+					<div class="percentage" ng-class="volumeUpPercent.class">
+						{{volumeUpPercent.content}}%
+					</div>
+				</div>
+				<div class="dashboard-label">CAN'T HEAR</div>
+			</div>
+
+			<div class="lost-container col-sm-3">
 				<div class="panic-graph">
 					<div class="ct-chart-lost"></div>
 					<div class="percentage">{{panicPercent.content}}%</div>
