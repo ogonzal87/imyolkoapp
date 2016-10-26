@@ -164,7 +164,7 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 		// As options we currently only set a static size of 300x200 px. We can also omit this and use aspect ratio containers
 		// as you saw in the previous example
 		var chartLineOptions = {
-
+			height: 300,
 			// seriesBarDistance: 30,
 			axisX: {
 
@@ -312,17 +312,30 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 
 
 	function speed(percent) {
+
 		if (percent > 20) {
-			return { value: percent, content: 'TOO SLOW', class: 'panel-dashboard-bad' };
+			return { value: percent, content: 'Go Way Faster', class: 'is-active-circle-too-fast' };
 		} else if (percent > 10) {
-			return { value: percent, content: 'GO FASTER', class: 'panel-dashboard-middle' };
+			return { value: percent, content: 'Go Faster', class: 'is-active-circle-go-slower' };
 		} else if (percent < -20) {
-			return { value: percent, content: 'TOO FAST!', class: 'panel-dashboard-bad' };
+			return { value: percent,  content: 'Go way Slower', class: 'is-active-circle-too-slow' };
 		} else if (percent < -10) {
-			return { value: percent, content: 'GO SLOWER', class: 'panel-dashboard-middle' };
+			return { value: percent, content: 'Go Slower', class: 'is-active-circle-go-faster' };
 		} else {
-			return { value: percent, content: "WE ARE GOOD", class: 'panel' };
+			return { value: percent, content: "We are good", class: 'is-active-circle-we-good' };
 		}
+
+		// if (percent > 20) {
+		// 	return { value: percent, content: 'Too Slow', class: 'is-active-circle-too-slow' };
+		// } else if (percent > 10) {
+		// 	return { value: percent, content: 'Go Faster', class: 'is-active-circle-go-faster' };
+		// } else if (percent < -20) {
+		// 	return { value: percent, content: 'Too Fast!', class: 'is-active-circle-too-fast' };
+		// } else if (percent < -10) {
+		// 	return { value: percent, content: 'Go Slower', class: 'is-active-circle-go-slower' };
+		// } else {
+		// 	return { value: percent, content: "We are good!", class: 'is-active-circle-we-good' };
+		// }
 	}
 
 	function panic(percent) {
@@ -335,7 +348,7 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 
 	// toggle tabs in dashboard
 	// /////////////////////////////////////////////////////////////////////////
-	$scope.tab1IsActive = true;
+	$scope.tab1IsActive = false;
 	$scope.tab2IsActive = false;
 	$scope.toggleTabs = function(tab) {
 		if (tab === 'tab1IsActive') {

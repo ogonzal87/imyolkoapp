@@ -1,27 +1,44 @@
 <div class="dashboard-background">
 
-	<div class="container">
-		<div class="dashboard--presentation-ctrls-container">
-			<div class="num-attendees-container">
+	<div class="yolko-navbar">
+		<div class="fa fa-bars burger-bars" ui-sref="meeting"></div>
+		<img class="user-avatar" src="assets/avatars/profile_pic.png">
+	</div>
+
+	<div class="">
+		<div class="dashboard--presentation-ctrls-container row">
+
+			<div class="num-attendees-container col-xs-6 col-md-4">
 				<div class="num">{{numAttendees}}</div>
 				<div class="dashboard-label">ATTENDEES</div>
 			</div>
 
-			<div class="stopwatch-container">
-				<div class="chronometer">
-					00:00:00
+			<div class="stopwatch-container col-xs-12 col-md-4">
+				<div class="chronometer" ng-init="showStopwatch()">
+					{{ stopWatch | date: 'h:mm:ss a' }}
 				</div>
 				<div class="media-controls">
-					Play Pause Stop
+
+					<div class="play-icon">
+						<img src="assets/icons/play.png" ng-click="startPresentation()">
+					</div>
+
+					<div class="pause-icon">
+						<img src="assets/icons/pause.png" ng-click="pausePresentation()">
+					</div>
+
+					<div class="stop-icon">
+						<img src="assets/icons/stop.png" ng-click="stopPresentation()">
+					</div>
+
 				</div>
 			</div>
 
-			<div class="dashboard--questions-container">
+			<div class="dashboard--questions-container col-xs-6 col-md-4">
 				<div class="num">{{allQuestionsFromAttendees.length}}</div>
 				<div class="dashboard-label">QUESTIONS</div>
 			</div>
 		</div>
-		{{dislikePercent}}
 
 		<div class="dashboard--second-row-container">
 			<div class="likes-container">
@@ -49,18 +66,28 @@
 				<div class="cant-hear-graph">
 					<div class="ct-chart-volume"></div>
 					<div class="percentage" ng-class="volumeUpPercent.class">
-						{{volumeUpPercent
-						.content}}%
+						{{volumeUpPercent.content}}%
 					</div>
 				</div>
 				<div class="dashboard-label">CAN'T HEAR</div>
 			</div>
 
 			<div class="speed-container">
-				<div class="speed-graph">
-					<div></div>
-					<div></div>
-					<div></div>
+				<div class="speed-graph-message-container">
+					<div class="message">{{speedPercent.content | uppercase}}</div>
+					<div class="graph-container">
+						<!--<div class="sm-circle" ng-class="{'is-active-circle-too-slow': 	speedPercent.class === 'is-active-circle-too-slow'}"></div>-->
+						<!--<div class="sm-circle" ng-class="{'is-active-circle-go-faster': speedPercent.class === 'is-active-circle-go-faster'}"></div>-->
+						<!--<div class="bg-circle" ng-class="{'is-active-circle-we-good': 	speedPercent.class === 'is-active-circle-we-good'}"></div>-->
+						<!--<div class="sm-circle" ng-class="{'is-active-circle-go-slower': speedPercent.class === 'is-active-circle-go-slower'}"></div>-->
+						<!--<div class="sm-circle" ng-class="{'is-active-circle-too-fast ': speedPercent.class === 'is-active-circle-too-fast'}"></div>-->
+
+						<div class="fa fa-caret-left triangle" ng-class="{'is-active-circle-too-slow': 	speedPercent.class === 'is-active-circle-too-slow'}"></div>
+						<div class="fa fa-caret-left triangle" ng-class="{'is-active-circle-go-faster': speedPercent.class === 'is-active-circle-go-faster'}"></div>
+						<div class="bg-circle" ng-class="{'is-active-circle-we-good': 	speedPercent.class === 'is-active-circle-we-good'}"></div>
+						<div class="fa fa-caret-right triangle" ng-class="{'is-active-circle-go-slower': speedPercent.class === 'is-active-circle-go-slower'}"></div>
+						<div class="fa fa-caret-right triangle" ng-class="{'is-active-circle-too-fast ': speedPercent.class === 'is-active-circle-too-fast'}"></div>
+					</div>
 				</div>
 				<div class="dashboard-label">SPEED</div>
 			</div>
@@ -77,3 +104,180 @@
 	</div>
 </div>
 
+
+<div class="questions-and-quiz-container">
+	<div class="dashboard-tabs container">
+		<div class="dashboard-tab"
+			 ng-class="{'active': tab1IsActive}"
+			 ng-click="toggleTabs('tab1IsActive')">
+			QUESTIONS
+			<span class="notification-indicator" ng-if="questionsToPresenter.length > 0"></span>
+		</div>
+		<div class="dashboard-tab"
+			 ng-class="{'active': tab2IsActive}"
+			 ng-click="toggleTabs('tab2IsActive')">
+			POP QUIZ
+		</div>
+	</div>
+
+	<div class="dashboard-tab-content">
+		<div ng-show="tab1IsActive" class="container question-list-container">
+			<!--   QUESTIONS -->
+			<ul class="list-group questions">
+				<div ng-if="questionsToPresenter.length === 0" class="no-questions-container">
+					<div class="no-questions-message">
+						<h2>Great Job! There are no questions yet...</h2>
+					</div>
+				</div>
+
+				<li class="list-group-item items-in-list"
+					ng-repeat="(key, questionToPresenter) in questionsToPresenter | orderBy: '-counter'">
+					<div class="question-content">
+						{{ questionToPresenter.content }}
+						<div class="question-content-time">
+							{{ questionToPresenter.time | date: 'h:mm:ss a' }}
+						</div>
+					</div>
+					<div class="question-voting-controls">
+						<span style="">VOTES</span>
+						<div class="question-voting-controls-text">
+							{{ questionToPresenter.counter }}
+						</div>
+
+						<!--<button class="btn btn-sm btn-default" ng-click="voteQuestionDown(questionToPresenter)">-->
+						<!--<i class="fa fa-chevron-down"></i>-->
+						<!--</button>-->
+						<button class="btn btn-delete" ng-click="removeQuestion(key)">&times;</button>
+					</div>
+				</li>
+			</ul>
+			<!--   QUESTIONS END -->
+		</div>
+
+
+
+		<div ng-show="tab2IsActive" class="container pop-quiz-container">
+			<form novalidate class="container" style="padding: 20px 60px;">
+				<div class="form-group">
+					<br>
+					<!--<h4 for="question">QUESTION</h4>-->
+					<textarea class="form-control"
+							  id="question"
+							  placeholder="What would you like to ask everyone?"
+							  ng-model="popQuizQuestionContent"
+							  rows="4">
+					</textarea>
+				</div>
+
+				<div class="form-group quiz-question-container">
+					<label for="choice-a" class="letter">A</label>
+					<input type="text"
+						   class="form-control input-text"
+						   id="choice-a"
+						   placeholder="I'm a choice option"
+						   ng-model="choiceA">
+
+					<input type="checkbox"
+						   id="choicea"
+						   ng-model="correctAnsA"
+						   ng-click="isCorrectAnsA = !isCorrectAnsA">
+					<label for="choicea" class="notchecked" ng-if="!isCorrectAnsA">
+						<i class="fa fa-check fa-2x"></i>
+					</label>
+					<label for="choicea" class="checked" ng-if="isCorrectAnsA">
+						<i class="fa fa-check fa-2x"></i>
+					</label>
+				</div>
+
+				<div class="form-group quiz-question-container">
+					<label for="choice-b" class="letter">B</label>
+					<input type="text"
+						   class="form-control input-text"
+						   id="choice-b"
+						   placeholder="I'm a choice option"
+						   ng-model="choiceB">
+
+					<input type="checkbox"
+						   id="choiceb"
+						   ng-model="correctAnsB"
+						   ng-click="isCorrectAnsB = !isCorrectAnsB">
+					<label for="choiceb" class="notchecked" ng-if="!isCorrectAnsB">
+						<i class="fa fa-check fa-2x"></i>
+					</label>
+					<label for="choiceb" class="checked" ng-if="isCorrectAnsB">
+						<i class="fa fa-check fa-2x"></i>
+					</label>
+				</div>
+
+				<div class="form-group quiz-question-container">
+					<label for="choice-c" class="letter">C</label>
+					<input type="text"
+						   class="form-control input-text"
+						   id="choice-c"
+						   placeholder="I'm a choice option"
+						   ng-model="choiceC">
+
+					<input type="checkbox"
+						   id="choicec"
+						   ng-model="correctAnsC"
+						   ng-click="isCorrectAnsC = !isCorrectAnsC">
+					<label for="choicec" class="notchecked" ng-if="!isCorrectAnsC">
+						<i class="fa fa-check fa-2x"></i>
+					</label>
+					<label for="choicec" class="checked" ng-if="isCorrectAnsC">
+						<i class="fa fa-check fa-2x"></i>
+					</label>
+				</div>
+
+				<div class="form-group quiz-question-container">
+					<label for="choice-d" class="letter">D</label>
+					<input type="text"
+						   class="form-control input-text"
+						   id="choice-d"
+						   placeholder="I'm a choice option"
+						   ng-model="choiceD">
+
+					<input type="checkbox"
+						   id="choiced"
+						   ng-model="correctAnsD"
+						   ng-click="isCorrectAnsD = !isCorrectAnsD">
+					<label for="choiced" class="notchecked" ng-if="!isCorrectAnsD">
+						<i class="fa fa-check fa-2x"></i>
+					</label>
+					<label for="choiced" class="checked" ng-if="isCorrectAnsD">
+						<i class="fa fa-check fa-2x"></i>
+					</label>
+				</div>
+
+				<div class="fire-quiz-btn-container" ng-show="showFireQuizBtn">
+					<button ng-click="fireQuizToAttendees()" class="btn fire-quiz-btn">FIRE QUESTION</button>
+				</div>
+
+				<div class="fire-quiz-btn-container" ng-show="showRevealResultsBtn">
+					<button ng-click="quizQuestion1.isShowingResultsToAttendees = true" class="btn reveal-results-btn">REVEAL RESULTS</button>
+				</div>
+
+				<!--<pre>quizQuestion1.isShowingResultsToAttendees : {{quizQuestion1.isShowingResultsToAttendees}}</pre>-->
+
+				<!-- QUIZ RESULTS CHART -->
+				<div class="container quiz-results-container" ng-show="isShowingResultsToPresenter">
+					<div class="ct-chart-quiz ct-major-tenth"></div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+<div class="live-chart">
+	<!-- CHART -->
+	<div class="ct-chart-timeline"></div>
+	<!-- CHART -->
+	<h3 style="text-align: center;">LIVE DATA COMING IN</h3>
+	<!-- <pre>
+		  LikeVotes: {{ intervalLikeVotes }} <br>
+		  Like Line Arr: {{ likeLine }} <br>
+		  DislikeVotes: {{ intervalDislikeVotes }} <br>
+		  Dislike Line Arr: {{ dislikeLine }} <br>
+	</pre> -->
+</div>
