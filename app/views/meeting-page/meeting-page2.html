@@ -1,0 +1,248 @@
+<div class="jumbotron meetingjumbotronn">
+
+	<div class="container">
+		<h1>Yolko, how are you feeling?</h1>
+
+		<!-- YOLKO BEHAVIOR -->
+		<div class="avatar-container">
+			<div ng-if="laughing">
+				<img src="assets/avatars/laughing.png"/>
+			</div>
+			<div ng-if="igotthis">
+				<img src="assets/avatars/igotthis.png"/>
+			</div>
+			<div ng-if="confident">
+				<img src="assets/avatars/confident.png"/>
+			</div>
+			<div ng-if="want">
+				<img src="assets/avatars/want.png"/>
+			</div>
+			<div ng-if="tastey">
+				<img src="assets/avatars/tastey.png"/>
+			</div>
+			<div ng-if="startingtonotgetit">
+				<img src="assets/avatars/startingtonotgetit.png"/>
+			</div>
+			<div ng-if="idontgetit">
+				<img src="assets/avatars/idontgetit.png"/>
+			</div>
+			<div ng-if="shocked">
+				<img src="assets/avatars/shocked.png"/>
+			</div>
+			<div ng-if="burnt">
+				<img src="assets/avatars/burnt.png"/>
+			</div>
+		</div>
+		<!-- YOLKO BEHAVIOR -->
+
+		<!--<pre style="font-size: 20px;">-->
+		<!--# People With Dislike Votes: =====> {{ numOfPeopleWithDislikeVotes.length }}-->
+		<!-- -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+		<!--# People With Vote Attribute =====> {{ numOfPeopleWithVoteAttribute.length }}-->
+
+
+		<!--Dislike Percent: {{ dislikePercent }} %-->
+		<!--&lt;!&ndash;Num Attendees: {{ attendees.length }}&ndash;&gt;-->
+		<!--</pre>-->
+
+		<!-- Vote bottons -->
+		<div class="votebtns-container">
+			<!-- vote up -->
+			<button class="btn btn-lg  votebtn"
+					ng-click="voteLike()"
+					ng-disabled="disableLikeBtn">
+				<i class="fa fa-thumbs-o-up fa-3x"></i>
+			</button>
+			<!-- vote down -->
+			<button class="btn btn-lg votebtn"
+					ng-click="voteDislike()"
+					ng-disabled="disableDislikeBtn">
+				<i class="fa fa-thumbs-o-down icon-flipped fa-3x"></i>
+			</button>
+		</div>
+	</div>
+
+	<!--row of bottons-->
+
+	<div class="container attendee-buttons-panel">
+
+		<div class="row">
+
+			<!-- Volume Up Button-->
+			<div class="col-sm-4 attendee-buttons">
+				<button class="btn btn-secondary-outline"
+						title="Press if you can't hear!"
+						ng-class="{ 'btn-control-active': attendee.volumeUp == 'yes' }"
+						ng-click="attendee.volumeUp = 'yes'">
+					<i class="fa fa-deafness fa-3x"
+					   ng-class="{ 'icon-control-active': attendee.volumeUp == 'yes' }"></i>
+				</button>
+			</div>
+
+			<!-- Speed Buttons -->
+			<div class="col-sm-4 attendee-buttons">
+				<!-- SLOW DOWN-->
+				<button class="btn btn-secondary-outline slow-down-button"
+                		title="Press if you want the speaker to go slower"
+                		ng-class="{ 'btn-control-active': attendee.speed == -1 }"
+                		ng-click="attendee.speed = -1">
+					<i class="fa fa-fast-backward fa-3x"
+					   ng-class="{ 'icon-control-active': attendee.speed == -1 }"></i>
+				</button>
+				<!-- SPEED  UP -->
+				<button class="btn btn-secondary-outline go-faster-button"
+                		title="Press if you want the speaker to go faster"
+                		ng-class="{ 'btn-control-active': attendee.speed == 1 }"
+                		ng-click="attendee.speed = 1">
+					<i class="fa fa-fast-forward fa-3x"
+					   ng-class="{ 'icon-control-active': attendee.speed == 1 }"></i>
+				</button>
+			</div>
+
+			<!-- Panic Button-->
+			<div class="col-sm-4 attendee-buttons">
+				<button class="btn btn-secondary-outline"
+                		title="Press if you are lost!"
+                		ng-show="attendee.feeling ==='fine'"
+                		ng-click="panicButton(attendee)">
+					<i class="fa fa-bullhorn fa-3x"></i>
+				</button>
+				<button class="btn btn-secondary-outline btn-control-active"
+                		title="I am fine now!"
+                		ng-show="attendee.feeling === 'panic'"
+                		ng-click="panicButton(attendee)">
+					<i class="fa fa-check-circle-o fa-3x icon-control-active"></i>
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--End of Jumbotron-->
+
+<!-- POP QUIZ -->
+<div class="container " ng-show="showQuiz">
+	<div class="row">
+		<div class="col-md-12 well quiz-container">
+			<h2 class="text-center">POP QUIZ</h2>
+			<div id="quiz">
+				<div id="question" class="pop-question">
+					<p>{{ quizQuestion1.questionContent }}</p>
+				</div>
+				<div id="choices" class="pop-choices">
+					<input type="radio"
+						   id="availableAnsA"
+						   name="availableAnsA"
+						   ng-model="attendee.chosenAnswer"
+						   ng-value="'A'"
+						   class="pop-choice" >
+					<label class="pop-choice" for="availableAnsA">
+						<span class="pop-choice-letter">A</span>
+						{{quizQuestion1.availableAns[0].content}}
+					</label>
+
+					<input type="radio"
+						   name="availableAnsB"
+						   id="availableAnsB"
+						   ng-model="attendee.chosenAnswer"
+						   ng-value="'B'"
+						   class="pop-choice">
+					<label class="pop-choice" for="availableAnsB">
+						<span class="pop-choice-letter">B</span>
+						{{quizQuestion1.availableAns[1].content}}
+					</label>
+
+					<input type="radio"
+						   name="availableAnsC"
+						   id="availableAnsC"
+						   ng-model="attendee.chosenAnswer"
+						   ng-value="'C'"
+						   class="pop-choice">
+					<label class="pop-choice" for="availableAnsC">
+						<span class="pop-choice-letter">C</span>
+						{{quizQuestion1.availableAns[2].content}}
+					</label>
+
+					<input type="radio"
+						   name="availableAnsD"
+						   id="availableAnsD"
+						   ng-model="attendee.chosenAnswer"
+						   ng-value="'D'"
+						   class="pop-choice">
+					<label class="pop-choice" for="availableAnsD">
+						<span class="pop-choice-letter">D</span>
+						{{quizQuestion1.availableAns[3].content}}
+					</label>
+
+				</div>
+				<button class="btn pop-submit-btn"
+						ng-click="submitAnswer()"
+						ng-disabled="disableAllChoices">
+					SUBMIT ANSWER
+				</button>
+			</div>
+		</div>
+	</div>
+	<!-- QUIZ RESULTS CHART -->
+	<div class="container quiz-results-container" ng-show="quizQuestion1.isShowingResultsToAttendees">
+		<div class="ct-chart ct-major-tenth"></div>
+	</div>
+
+</div>
+
+
+<!-- QUESTIONS TO PRESENTER -->
+<div class="container panel question-container">
+
+	<!-- ask question area - input filed and btn -->
+	<form role="form">
+		<div class="form-group">
+			<textarea class="form-control question-input-field"
+					  rows="4"
+					  id="comment"
+					  ng-model="questionContent"
+					  type="text"
+					  placeholder="Ask a question and the audience will vote for it..."
+					  ng-keydown="addQuestionKeyDown($event)">
+			</textarea>
+			<!-- <span class="input-group-addon btn btn-success">Send</span> -->
+			<div class="ask-button-container">
+				<button class="btn askbutton"
+						type="button"
+						ng-click="addQuestionClick()">
+					<span><i class="fa fa-comment" style="margin-right: 10px;"></i></span>
+					 ASK
+				</button>
+			</div>
+		</div>
+	</form>
+
+	<ul class="list-group questions">
+		<li class="list-group-item items-in-list"
+			ng-repeat="(key, questionToPresenter) in questionsToPresenter | orderBy: '-counter'">
+			<div class="question-content">
+				{{ questionToPresenter.content }}
+				<div class="question-content-time">
+					{{ questionToPresenter.time | date: 'h:mm:ss a' }}
+				</div>
+			</div>
+			<div class="question-voting-controls">
+				<button class="btn btn-sm btn-default" ng-click="voteQuestionUp(questionToPresenter)">
+					<i class="fa fa-chevron-up fa-2x"></i>
+					<div class="question-voting-controls-text">
+						{{ questionToPresenter.counter }}
+					</div>
+				</button>
+
+				<!--<button class="btn btn-sm btn-default" ng-click="voteQuestionDown(questionToPresenter)">-->
+					<!--<i class="fa fa-chevron-down"></i>-->
+				<!--</button>-->
+				<!--<button class="btn btn-sm btn-default" ng-click="removeQuestion(key)">&times;</button>-->
+	    	</div>
+	  </li>
+	</ul>
+</div>
+
+<!--<pre>-->
+  <!--These are all the questions asked: {{ questionsToPresenter | json }}-->
+<!--</pre>-->

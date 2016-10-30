@@ -15,15 +15,15 @@
 				<div class="media-controls">
 
 					<div class="play-icon">
-						<img src="assets/icons/play.png" ng-click="startPresentation()">
+						<img src="assets/icons/play.svg" ng-click="startPresentation()">
 					</div>
 
 					<div class="pause-icon">
-						<img src="assets/icons/pause.png" ng-click="pausePresentation()">
+						<img src="assets/icons/pause.svg" ng-click="pausePresentation()">
 					</div>
 
 					<div class="stop-icon">
-						<img src="assets/icons/stop.png" ng-click="stopPresentation()">
+						<img src="assets/icons/stop.svg" ng-click="stopPresentation()">
 					</div>
 
 				</div>
@@ -42,9 +42,17 @@
 
 		<div class="dashboard--second-row-container row">
 			<div class="mood-container col-sm-6 col-sm-push-3">
+
+
 				<div class="circles">
-					<div class="circle-mood" ng-class="{'is-pulsing': dislikePercent > 50}"></div>
+					<img ng-src="{{ avatarDashboard.face }}" class="face">
 				</div>
+
+
+
+				<!--<div class="circles">-->
+					<!--<div class="circle-mood" ng-class="{'is-pulsing': dislikePercent > 50}"></div>-->
+				<!--</div>-->
 				<div class="dashboard-label">MOOD</div>
 			</div>
 
@@ -65,12 +73,6 @@
 				<div class="speed-graph-message-container">
 					<div class="message">{{speedPercent.content | uppercase}}</div>
 					<div class="graph-container">
-						<!--<div class="sm-circle" ng-class="{'is-active-circle-too-slow': 	speedPercent.class === 'is-active-circle-too-slow'}"></div>-->
-						<!--<div class="sm-circle" ng-class="{'is-active-circle-go-faster': speedPercent.class === 'is-active-circle-go-faster'}"></div>-->
-						<!--<div class="bg-circle" ng-class="{'is-active-circle-we-good': 	speedPercent.class === 'is-active-circle-we-good'}"></div>-->
-						<!--<div class="sm-circle" ng-class="{'is-active-circle-go-slower': speedPercent.class === 'is-active-circle-go-slower'}"></div>-->
-						<!--<div class="sm-circle" ng-class="{'is-active-circle-too-fast ': speedPercent.class === 'is-active-circle-too-fast'}"></div>-->
-
 						<div class="fa fa-caret-left triangle" ng-class="{'is-active-circle-too-slow': 	speedPercent.class === 'is-active-circle-too-slow'}"></div>
 						<div class="fa fa-caret-left triangle" ng-class="{'is-active-circle-go-faster': speedPercent.class === 'is-active-circle-go-faster'}"></div>
 						<div class="bg-circle" ng-class="{'is-active-circle-we-good': 	speedPercent.class === 'is-active-circle-we-good'}"></div>
@@ -101,6 +103,43 @@
 
 		</div>
 	</div>
+	<div class="reset-btn-container">
+
+		<div class="fab" ng-click="openFab()" ng-class="{'open': isActive}">
+			<div class="option reply" ng-class="{'open': isActive}">
+				<i class="material-icons">chart</i>
+			</div>
+			<div class="option love" ng-class="{'open': isActive}">
+				<i class="material-icons">refresh</i>
+			</div>
+			<div class="option delete" ng-class="{'open': isActive}">
+				<i class="material-icons">present_to_all</i>
+			</div>
+			<div class="option panic" ng-class="{'open': isActive}">
+				<i class="material-icons">fiber_new</i>
+			</div>
+			<div class="close">
+				<i class="material-icons cached">close</i>
+			</div>
+		</div>
+
+		<!--<button class="reset-control-btn">-->
+			<!--<i class="fa fa-refresh"></i>-->
+		<!--</button>-->
+		<!--<button class="reset-control-btn">-->
+			<!--<i class="fa fa-refresh"></i>-->
+		<!--</button>-->
+		<!--<button class="reset-control-btn">-->
+			<!--<i class="fa fa-refresh"></i>-->
+		<!--</button>-->
+		<!--<button class="reset-control-btn">-->
+			<!--<i class="fa fa-refresh"></i>-->
+		<!--</button>-->
+		<!--<button class="reset-control-btn">-->
+			<!--<i class="fa fa-refresh"></i>-->
+		<!--</button>-->
+	</div>
+
 </div>
 
 

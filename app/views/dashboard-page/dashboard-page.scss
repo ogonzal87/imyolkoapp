@@ -35,16 +35,17 @@ $label-font-size: 18px;
 
 .dashboard-background {
 	background-color: #FBFBFB;
-	min-height: 85vh;
+	min-height: 80vh;
+	position: relative;
 
 	.yolko-navbar {
 		height: 80px;
-		padding: 0 100px;
 		position: relative;
 
 		.burger-bars {
 			position: absolute;
 			top: 50%;
+			left: 10%;
 			transform: translate(-50%, -50%);
 			float: left;
 			color: $base-background-color-purple;
@@ -75,6 +76,7 @@ $label-font-size: 18px;
 	.dashboard--presentation-ctrls-container {
 		font-weight: $font-weight;
 		padding-top: 40px;
+		margin-bottom: 40px;
 
 		.num-attendees-container {
 			height: $fisrt-row-container-height;
@@ -118,6 +120,7 @@ $label-font-size: 18px;
 	.dashboard--second-row-container{
 		font-size: 64px;
 		font-weight: $font-weight;
+		margin-bottom: 40px;
 
 		.likes-container {
 			height: $second-row-container-height;
@@ -141,26 +144,30 @@ $label-font-size: 18px;
 				justify-content: center;
 				padding: 20px;
 
-				.circle-mood {
-					height: 62px;
-					width: 62px;
-					background-color: transparent;
-					border: 6px solid #5A48FC;
-					border-radius: 50%;
+				.face {
+
 				}
 
-				.is-pulsing {
-					width: 62px;
-					height: 62px;
-					border-radius: 50%;
-					animation: pulsing 1.5s infinite ease-out;
-					background: #5A48FC;
-				}
-
-				@keyframes pulsing {
-					0% {box-shadow: 0px 0px 0px 0px #5A48FC;}
-					100% {box-shadow: 0px 0px 0px 50px rgba(0, 0, 0, 0.0);}
-				}
+				//.circle-mood {
+				//	height: 62px;
+				//	width: 62px;
+				//	background-color: transparent;
+				//	border: 6px solid #5A48FC;
+				//	border-radius: 50%;
+				//}
+				//
+				//.is-pulsing {
+				//	width: 62px;
+				//	height: 62px;
+				//	border-radius: 50%;
+				//	animation: pulsing 1.5s infinite ease-out;
+				//	background: #5A48FC;
+				//}
+				//
+				//@keyframes pulsing {
+				//	0% {box-shadow: 0px 0px 0px 0px #5A48FC;}
+				//	100% {box-shadow: 0px 0px 0px 50px rgba(0, 0, 0, 0.0);}
+				//}
 			}
 		}
 
@@ -175,6 +182,7 @@ $label-font-size: 18px;
 
 	.dashboard--primary-graphs-container {
 		//padding:px 0 42px 0;
+		padding-bottom: 80px;
 
 		.cant-hear-container {
 			height: $third-row-container-height;
@@ -293,6 +301,148 @@ $label-font-size: 18px;
 					stroke: #e4e3e4;
 				}
 			}
+		}
+	}
+
+	.reset-btn-container {
+		position: fixed;
+		bottom: 30px;
+		right: 50px;
+		z-index: 999;
+
+		.reset-control-btn {
+			margin-left: 10px;
+			height: 44px;
+			width: 44px;
+			border-radius: 50%;
+			font-size: 24px;
+			border: none;
+		}
+
+
+		.fab {
+			width: 50px;
+			height: 50px;
+			border-radius: 50%;
+			position: relative;
+			background-color: #ccc;
+			cursor: pointer;
+			transition: .3s cubic-bezier(.41,-0.86,.76,1.89);
+
+			&.open {
+				width: 40px;
+				height: 40px;
+				transition: .3s cubic-bezier(.41,-0.86,.76,1.89);
+			}
+
+			.option {
+				width: 6px;
+				height: 6px;
+				overflow: hidden;
+				background-color: #fff;
+				border-radius: 50%;
+				position: absolute;
+				top: calc(50% - 3px);
+				transition: .3s cubic-bezier(.41,-0.86,.76,1.89);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+
+				&.reply {
+					left: calc((115% / 3) - 3px);
+				}
+
+				&.love {
+					left: calc(55% - 3px);
+				}
+
+				&.delete {
+					left: calc(((110% / 3) * 2) - 3px);
+				}
+
+				&.panic {
+					left: calc(((30% / 3) * 2) - 3px);
+				}
+
+				i {
+					font-size: 20px;
+					color: #fff;
+					transform: scale(0);
+					transition: .5s cubic-bezier(.41,-2,.76,2);
+				}
+
+				&.open {
+					width: 40px;
+					height: 40px;
+					background-color: rgba(0,0,0,.3);
+
+					&.reply {
+						transform: translate(-60px, -50px);
+					}
+
+					&.love {
+						transform: translate(-20px, -75px);
+					}
+
+					&.delete {
+						transform: translate(25px, -50px);
+					}
+
+					&.panic {
+						transform: translate(-50px, 10px);
+					}
+
+					i {
+						transform: scale(1);
+						transition: .5s cubic-bezier(.41,-2,.76,2);
+					}
+				}
+			}
+
+			.close {
+				width: 100%;
+				height: 100%;
+				left: 0;
+				top: 0;
+				position: absolute;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				border-radius: 50%;
+				overflow: hidden;
+
+				i {
+					color: #fff;
+					font-size: 20px;
+					transform: scale(0);
+				}
+
+				&.open {
+
+					i {
+						transform: scale(1);
+						transition: .5s cubic-bezier(.41,-2,.76,2);
+					}
+				}
+			}
+		}
+
+		.woba {
+			display: block;
+			position: absolute;
+			background: #fff;
+			border-radius: 100%;
+			transform: scale(0);
+			opacity: .5;
+		}
+
+		.woba.animate {
+			animation: ripple .5s linear forwards;
+		}
+
+		@keyframes ripple {
+			100% {opacity: 0; transform: scale(2.5);}
 		}
 	}
 

@@ -244,6 +244,10 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 
 		$scope.dislikePercent = Math.round(($scope.numOfPeopleWithDislikeVotes.length / $scope.numOfPeopleWithVoteAttribute.length) * 100);
 
+		// displays the mood of the class in the Dashboard with avatar's face
+		displayYolkoInDashboard();
+		console.log($scope.avatarDashboard)
+
 		//QUESTIONS TO PRESENTER
 		// /////////////////////////////////////////////////////////////////////////
 		$scope.questionsToPresenter = $scope.allQuestionsFromAttendees;
@@ -300,6 +304,24 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 			showLabel: false
 		});
 	}, true);
+
+	//Displaying Yolko
+	$scope.avatarDashboard = { face:'assets/icons/dash-great.svg', message: 'Yolko is great' };
+	function displayYolkoInDashboard() {
+		if($scope.dislikePercent >= 80) {
+			return $scope.avatarDashboard = {face: 'assets/icons/dash-tense.svg', message: 'Yolko is a little tense'};
+		} else if ($scope.dislikePercent >= 60 && $scope.dislikePercent <= 79.999999999999) {
+			return $scope.avatarDashboard = {face: 'assets/icons/dash-notsogood.svg', message: 'Yolko is not so good'};
+		} else if ($scope.dislikePercent >= 40 && $scope.dislikePercent <= 59.999999999999) {
+			return $scope.avatarDashboard = {face: 'assets/icons/dash-serious.svg', message: 'Yolko is ok'};
+		} else if ($scope.dislikePercent >= 20 && $scope.dislikePercent <= 39.999999999999) {
+			return $scope.avatarDashboard = {face: 'assets/icons/dash-great.svg', message: 'Yolko is great'};
+		} else if ($scope.dislikePercent >= 1 && $scope.dislikePercent <= 29.999999999999) {
+			return $scope.avatarDashboard = {face: 'assets/icons/dash-motivated.svg', message: 'Yolko is motivated!'};
+		} else {
+			return $scope.avatarDashboard = { face:'assets/icons/dash-great.svg', message: 'Yolko is great' };
+		}
+	}
 
 
 	function volume(percent) {
@@ -451,6 +473,14 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 
 	//RESET
 	// /////////////////////////////////////////////////////////////////////////
+
+	$scope.openFab = function() {
+		$scope.isActive = !$scope.isActive;
+
+	};
+
+
+
 	$scope.resetVolumeTracker  = ResetService.resetVolumeTracker; //sets to default values
 	$scope.resetSpeedTracker   = ResetService.resetSpeedTracker; //sets to default values
   $scope.resetYolko          = ResetService.resetYolko; //deletes the Votes node

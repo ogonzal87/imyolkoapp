@@ -102,18 +102,50 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 
 
 	//Displaying Yolko
+	$scope.avatar = { face:'assets/avatars/great-icon.svg', message: 'Yolko is great' };
+
 	function displayYolko() {
-		$scope.burnt              = $scope.dislikePercent >= 76;
-		$scope.shocked            = $scope.dislikePercent >= 64 && $scope.dislikePercent <= 75.999999999999;
-		$scope.idontgetit         = $scope.dislikePercent >= 56 && $scope.dislikePercent <= 63.999999999999;
-		$scope.startingtonotgetit = $scope.dislikePercent >= 48 && $scope.dislikePercent <= 55.999999999999;
-		$scope.tastey             = $scope.dislikePercent >= 40 && $scope.dislikePercent <= 47.999999999999;
-		$scope.want               = $scope.dislikePercent >= 32 && $scope.dislikePercent <= 39.999999999999;
-		$scope.confident          = $scope.dislikePercent >= 24 && $scope.dislikePercent <= 31.999999999999;
-		$scope.igotthis           = $scope.dislikePercent >= 16 && $scope.dislikePercent <= 23.999999999999;
-		$scope.laughing           = $scope.dislikePercent < 15.999999999999 || isNaN($scope.dislikePercent);
+		if($scope.dislikePercent >= 80) {
+				return $scope.avatar = {face: 'assets/avatars/tense-icon.svg', message: 'Yolko is a little tense', backgroundColor: 'red'};
+		} else if ($scope.dislikePercent >= 60 && $scope.dislikePercent <= 79.999999999999) {
+				return $scope.avatar = {face: 'assets/avatars/notsogood-icon.svg', message: 'Yolko is not so good', backgroundColor: 'blue'};
+		} else if ($scope.dislikePercent >= 40 && $scope.dislikePercent <= 59.999999999999) {
+				return $scope.avatar = {face: 'assets/avatars/serious-icon.svg', message: 'Yolko is ok', backgroundColor: 'green'};
+		} else if ($scope.dislikePercent >= 20 && $scope.dislikePercent <= 39.999999999999) {
+				return $scope.avatar = {face: 'assets/avatars/great-icon.svg', message: 'Yolko is great', backgroundColor: 'red'};
+		} else if ($scope.dislikePercent >= 1 && $scope.dislikePercent <= 29.999999999999) {
+				return $scope.avatar = {face: 'assets/avatars/motivated.svg', message: 'Yolko is motivated!', backgroundColor: 'green'};
+		} else {
+			return $scope.avatar = { face:'assets/avatars/great-icon.svg', message: 'Yolko is great', backgroundColor: 'blue' };
+		}
+
+		// $scope.burnt              = $scope.dislikePercent >= 76;
+		// $scope.shocked            = $scope.dislikePercent >= 64 && $scope.dislikePercent <= 75.999999999999;
+		// $scope.idontgetit         = $scope.dislikePercent >= 56 && $scope.dislikePercent <= 63.999999999999;
+		// $scope.startingtonotgetit = $scope.dislikePercent >= 48 && $scope.dislikePercent <= 55.999999999999;
+		// $scope.tastey             = $scope.dislikePercent >= 40 && $scope.dislikePercent <= 47.999999999999;
+		// $scope.want               = $scope.dislikePercent >= 32 && $scope.dislikePercent <= 39.999999999999;
+		// $scope.confident          = $scope.dislikePercent >= 24 && $scope.dislikePercent <= 31.999999999999;
+		// $scope.igotthis           = $scope.dislikePercent >= 16 && $scope.dislikePercent <= 23.999999999999;
+		// $scope.laughing           = $scope.dislikePercent < 15.999999999999 || isNaN($scope.dislikePercent);
 		// $scope.zzz                = $scope.dislikePercent === 0 || 'NaN';
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,124 +1,101 @@
-<div class="jumbotron meetingjumbotronn">
+<div class="avatar-and-controls-background" ng-class="avatar.backgroundColor">
+{{avatar.backgroundColor}}
+	<div class="yolko-navbar">
+		<div class="fa fa-bars burger-bars" ui-sref="dashboard"></div>
+		<img class="user-avatar" src="assets/avatars/profile_pic.png">
+	</div>
 
-	<div class="container">
-		<h1>Yolko, how are you feeling?</h1>
+	<span class="notification-indicator" ng-if="questionsToPresenter.length > 0"></span>
 
-		<!-- YOLKO BEHAVIOR -->
-		<div class="avatar-container">
-			<div ng-if="laughing">
-				<img src="assets/avatars/laughing.png"/>
-			</div>
-			<div ng-if="igotthis">
-				<img src="assets/avatars/igotthis.png"/>
-			</div>
-			<div ng-if="confident">
-				<img src="assets/avatars/confident.png"/>
-			</div>
-			<div ng-if="want">
-				<img src="assets/avatars/want.png"/>
-			</div>
-			<div ng-if="tastey">
-				<img src="assets/avatars/tastey.png"/>
-			</div>
-			<div ng-if="startingtonotgetit">
-				<img src="assets/avatars/startingtonotgetit.png"/>
-			</div>
-			<div ng-if="idontgetit">
-				<img src="assets/avatars/idontgetit.png"/>
-			</div>
-			<div ng-if="shocked">
-				<img src="assets/avatars/shocked.png"/>
-			</div>
-			<div ng-if="burnt">
-				<img src="assets/avatars/burnt.png"/>
-			</div>
-		</div>
-		<!-- YOLKO BEHAVIOR -->
-
-		<!--<pre style="font-size: 20px;">-->
-		<!--# People With Dislike Votes: =====> {{ numOfPeopleWithDislikeVotes.length }}-->
-		<!-- -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
-		<!--# People With Vote Attribute =====> {{ numOfPeopleWithVoteAttribute.length }}-->
-
-
-		<!--Dislike Percent: {{ dislikePercent }} %-->
-		<!--&lt;!&ndash;Num Attendees: {{ attendees.length }}&ndash;&gt;-->
-		<!--</pre>-->
-
-		<!-- Vote bottons -->
-		<div class="votebtns-container">
-			<!-- vote up -->
-			<button class="btn btn-lg  votebtn"
-					ng-click="voteLike()"
-					ng-disabled="disableLikeBtn">
-				<i class="fa fa-thumbs-o-up fa-3x"></i>
-			</button>
-			<!-- vote down -->
-			<button class="btn btn-lg votebtn"
-					ng-click="voteDislike()"
-					ng-disabled="disableDislikeBtn">
-				<i class="fa fa-thumbs-o-down icon-flipped fa-3x"></i>
-			</button>
+	<div class="second-row row">
+		<div class="message-container">
+			{{ avatar.message }}
 		</div>
 	</div>
 
-	<!--row of bottons-->
 
-	<div class="container attendee-buttons-panel">
+	<div class="row">
+		<div class="first-row container">
+			<div class="avatar-container">
+				<!--<i class="fa fa-smile-o" aria-hidden="true"></i>-->
+				<img ng-src="{{ avatar.face }}"/>
+			</div>
+		</div>
+	</div>
 
-		<div class="row">
 
-			<!-- Volume Up Button-->
-			<div class="col-sm-4 attendee-buttons">
-				<button class="btn btn-secondary-outline"
+	<div class="row">
+
+		<div class="third-row">
+			<div class="control-btns-container2 col-sm-6 col-sm-push-3">
+
+				<div class="like-button-container">
+					<button class="sentiment-btn control-btn mobile-btn desktop-btn"
+							ng-click="voteLike()"
+							ng-disabled="disableLikeBtn">
+						<img src="assets/icons/good-mood-icon.svg">
+						<!--<i class="fa fa-smile-o" aria-hidden="true"></i>-->
+					</button>
+				</div>
+
+				<div class="dislike-button-container">
+					<button class="sentiment-btn control-btn mobile-btn desktop-btn"
+							ng-click="voteDislike()"
+							ng-disabled="disableDislikeBtn">
+						<img src="assets/icons/bad-mood-icon.svg">
+						<!--<i class="fa fa-frown-o" aria-hidden="true"></i>-->
+					</button>
+				</div>
+
+			</div>
+
+
+
+			<div class="control-btns-container1 col-sm-3 col-sm-pull-6">
+				<button class="control-btn"
 						title="Press if you can't hear!"
 						ng-class="{ 'btn-control-active': attendee.volumeUp == 'yes' }"
 						ng-click="attendee.volumeUp = 'yes'">
-					<i class="fa fa-deafness fa-3x"
-					   ng-class="{ 'icon-control-active': attendee.volumeUp == 'yes' }"></i>
+					<img src="assets/icons/volume-up-icon.svg"
+					   ng-class="{ 'icon-control-active': attendee.volumeUp == 'yes' }">
+				</button>
+
+				<button class="control-btn"
+						title="Press if you are lost!"
+						ng-show="attendee.feeling ==='fine'"
+						ng-click="panicButton(attendee)">
+					<img src="assets/icons/panic-icon.svg">
 				</button>
 			</div>
 
-			<!-- Speed Buttons -->
-			<div class="col-sm-4 attendee-buttons">
-				<!-- SLOW DOWN-->
-				<button class="btn btn-secondary-outline slow-down-button"
-                		title="Press if you want the speaker to go slower"
-                		ng-class="{ 'btn-control-active': attendee.speed == -1 }"
-                		ng-click="attendee.speed = -1">
-					<i class="fa fa-fast-backward fa-3x"
-					   ng-class="{ 'icon-control-active': attendee.speed == -1 }"></i>
-				</button>
-				<!-- SPEED  UP -->
-				<button class="btn btn-secondary-outline go-faster-button"
-                		title="Press if you want the speaker to go faster"
-                		ng-class="{ 'btn-control-active': attendee.speed == 1 }"
-                		ng-click="attendee.speed = 1">
-					<i class="fa fa-fast-forward fa-3x"
-					   ng-class="{ 'icon-control-active': attendee.speed == 1 }"></i>
-				</button>
-			</div>
 
-			<!-- Panic Button-->
-			<div class="col-sm-4 attendee-buttons">
-				<button class="btn btn-secondary-outline"
-                		title="Press if you are lost!"
-                		ng-show="attendee.feeling ==='fine'"
-                		ng-click="panicButton(attendee)">
-					<i class="fa fa-bullhorn fa-3x"></i>
+			<div class="control-btns-container3 col-sm-3">
+
+
+
+				<button class="control-btn"
+						title="Press if you want the speaker to go slower"
+						ng-class="{ 'btn-control-active': attendee.speed == -1 }"
+						ng-click="attendee.speed = -1">
+					<img src="assets/icons/back-forward-icon.svg">
+					<!--<i class="fa fa-fast-backward" aria-hidden="true"-->
+					   <!--ng-class="{ 'icon-control-active': attendee.speed == -1 }"></i>-->
 				</button>
-				<button class="btn btn-secondary-outline btn-control-active"
-                		title="I am fine now!"
-                		ng-show="attendee.feeling === 'panic'"
-                		ng-click="panicButton(attendee)">
-					<i class="fa fa-check-circle-o fa-3x icon-control-active"></i>
+
+				<button class="control-btn"
+						title="Press if you want the speaker to go faster"
+						ng-class="{ 'btn-control-active': attendee.speed == 1 }"
+						ng-click="attendee.speed = 1">
+					<img src="assets/icons/fast-forward-icon.svg">
+					<!--<i class="fa fa-fast-forward" aria-hidden="true"-->
+					   <!--ng-class="{ 'icon-control-active': attendee.speed == 1 }"></i>-->
 				</button>
+
 			</div>
 		</div>
 	</div>
 </div>
 
-<!--End of Jumbotron-->
 
 <!-- POP QUIZ -->
 <div class="container " ng-show="showQuiz">
@@ -211,7 +188,7 @@
 						type="button"
 						ng-click="addQuestionClick()">
 					<span><i class="fa fa-comment" style="margin-right: 10px;"></i></span>
-					 ASK
+					ASK
 				</button>
 			</div>
 		</div>
@@ -235,14 +212,14 @@
 				</button>
 
 				<!--<button class="btn btn-sm btn-default" ng-click="voteQuestionDown(questionToPresenter)">-->
-					<!--<i class="fa fa-chevron-down"></i>-->
+				<!--<i class="fa fa-chevron-down"></i>-->
 				<!--</button>-->
 				<!--<button class="btn btn-sm btn-default" ng-click="removeQuestion(key)">&times;</button>-->
-	    	</div>
-	  </li>
+			</div>
+		</li>
 	</ul>
 </div>
 
 <!--<pre>-->
-  <!--These are all the questions asked: {{ questionsToPresenter | json }}-->
+<!--These are all the questions asked: {{ questionsToPresenter | json }}-->
 <!--</pre>-->

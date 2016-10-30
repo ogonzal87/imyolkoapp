@@ -2,7 +2,7 @@
 $base-background-color:           #242a36;
 $base-background-color-secondary: #43c9c6;
 $base-background-color-light:     #fff;
-$base-background-color-purple:    #624DD6;
+$base-background-color-purple:    #715CFF;
 
 $base-font-color-light:           #fff;
 $base-font-color-dark:            #555;
@@ -22,80 +22,244 @@ $panel-soso-background-color:      #f0ad4e;
 $panel-soso-border-color:          #eea236;
 $panel-soso-font-color:            $base-font-color-light;
 
-.meetingjumbotronn {
-  position: relative;
-  background: url(../../assets/backgrounds/Rectangle.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-  min-height: 600px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
-	padding: 20px 20px 0 20px;
-	border-radius: 5px;
-  box-shadow: rgba(0, 0, 0, 0.3) 0 1px 3px;
-	margin: 0;
+// bootstrap needs a container when you use a row. If not it adds 15px on the sides of the row for margin
+.row { margin: 0}
 
-  .container {
-    color: #ffffff;
-    .avatar-container {
-      height:300px;
-    }
 
-    .votebtns-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+.avatar-and-controls-background {
+	position: relative;
+	background-color: $base-background-color-purple;
+	min-height: 100vh;
+	width: 100%;
+	color: white;
 
-      .votebtn {
-        margin: 20px 10px 30px 10px;
-        padding: 25px 35px;
-	      background-color: #43c9c6;
+	&.red  {
+		background-color: #d7d9d8;
+	}
 
-	      .icon-flipped {
-		      transform: scaleX(-1);
-		      -moz-transform: scaleX(-1);
-		      -webkit-transform: scaleX(-1);
-		      -ms-transform: scaleX(-1);
-	      }
-      }
-    }
-  }
+	&.green {
+		background-color: #52cdfd;
+	}
 
-  .attendee-buttons-panel {
-    background: rgba(34,34,34,0.25);
-    padding: 15px;
+	&.blue {
+		background-color: #7459fc;
+	}
 
-	  .btn-secondary-outline {
-		  background-color: transparent;
+	.yolko-navbar {
+		height: 80px;
+		position: relative;
 
-		  &:hover {
-			  color: #43c9c6;
-			  text-decoration: none;
-		  }
+		.burger-bars {
+			position: absolute;
+			top: 50%;
+			left: 10%;
+			transform: translate(-50%, -50%);
+			float: left;
+			color: $base-background-color-secondary;
+			font-size: 40px;
+		}
 
-		  &:focus {
-			  outline: 0;
-		  }
-	  }
+		.user-avatar {
+			height: 50px;
+			width: 50px;
+			background-color: #ccc;
+			border-radius: 50%;
+			position: absolute;
+			top:50%;
+			left: 90%;
+			transform: translate(-50%, -50%);
+			float: right;
+		}
+	}
 
-		.btn-control-active {
-			box-shadow: inset 0 3px 15px 3px rgba(0,0,0,.125);
+	.first-row {
+		display: flex;
+		align-items: center;
+		justify-content: center;
 
-			.icon-control-active {
-				color: #43c9c6;
+		.avatar-container {
+			padding: 70px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 80%;
+			height: auto;
+
+			@media screen and (max-width: 767px) {
+				margin-top: 40px;
+				padding: 0
+			}
+
+			img {
+				width: 60%;
+				height: auto;
 			}
 		}
 
-  }
+		.like-button-container {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.dislike-button-container {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+		}
+	}
+
+	.second-row {
+		padding: 50px;
+		.message-container {
+			font-size: 48px;
+			text-align: center;
+
+			@media screen and (max-width: 767px) {
+				font-size: 30px;
+			}
+		}
+	}
+	
+
+
+	.third-row {
+		padding: 60px 50px;
+		bottom:0;
+		width: 100%;
+		position: absolute;
+
+		@media screen and (max-width: 767px) {
+			position: relative;
+		}
+
+		.control-btn {
+			background-color: #907FFE;
+			color: #715CFF;
+			border-radius: 50%;
+			border: none;
+			font-size: 57px;
+			height: 100px;
+			width: 100px;
+			margin: 15px 5px;
+
+			@media screen and (max-width: 767px) {
+				height: 70px;
+				width: 70px;
+				margin: 25px 20px;
+			}
+		}
+
+		.control-btns-container1 {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			img {
+				padding: 0 10px 10px 10px;
+				height: 65px;
+
+				@media screen and (max-width: 767px) {
+					padding: 0;
+					margin: 0 20px 20px 10px;
+					height: 45px;
+				}
+			}
+		}
+
+		.control-btns-container2 {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-direction: row;
+
+			.like-button-container {
+				.sentiment-btn {
+					background-color: #4FCDFE;
+					border-radius: 50%;
+					border: none;
+					font-size: 57px;
+					box-shadow: 0px 0px 6px 2px rgba(0,0,0,0.16);
+
+					img {
+						padding: 0 10px 10px 10px;
+						height: 65px;
+
+						@media screen and (max-width: 767px) {
+							padding: 0;
+							margin: 0 20px 20px 10px;
+							height: 45px;
+						}
+					}
+				}
+
+			}
+
+			.dislike-button-container {
+				.sentiment-btn {
+					background-color: #4FCDFE;
+					border-radius: 50%;
+					border: none;
+					font-size: 57px;
+					box-shadow: 0px 0px 6px 2px rgba(0,0,0,0.16);
+
+					img {
+						padding: 0 10px 10px 10px;
+						height: 55px;
+
+
+						@media screen and (max-width: 767px) {
+							padding: 0;
+							margin:0 10px 25px 8px;
+							height: 35px;
+						}
+					}
+				}
+			}
+		}
+
+		.control-btns-container3 {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			img {
+				padding: 0 10px 10px 10px;
+				height: 65px;
+
+				@media screen and (max-width: 767px) {
+					padding: 0;
+					margin: 0 20px 20px 10px;
+					height: 45px;
+				}
+			}
+		}
+	}
+
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
 .question-container {
-  max-width: 1000px;
-  margin: 30px auto 50px;
-  padding: 30px 40px 10px 40px;
-  background-color: #ecf0f1;
+	max-width: 1000px;
+	margin: 30px auto 50px;
+	padding: 70px 60px 50px 60px;
+	background-color: #ecf0f1;
+
+	@media screen and (max-width: 767px) {
+		padding: 50px 20px 50px 20px;
+	}
 
 	textarea {
 		resize: none;
@@ -122,20 +286,20 @@ $panel-soso-font-color:            $base-font-color-light;
 	}
 
 
-  .questions {
-    margin-bottom: 20px;
-  }
+	.questions {
+		margin-bottom: 20px;
+	}
 }
 
 .quiz-container {
 	text-align: center;
 	padding: 15px 50px 50px 50px;
 
-  h2 {
-    font-size: 35px;
-	  font-weight: 900;
-	  color: #624DD6;
-  }
+	h2 {
+		font-size: 35px;
+		font-weight: 900;
+		color: #624DD6;
+	}
 
 	.pop-question {
 		font-size: 30px;
@@ -175,22 +339,22 @@ $panel-soso-font-color:            $base-font-color-light;
 			opacity: 1;
 		}
 	}
-	
+
 	.pop-submit-btn {
-	  background-color: $base-background-color-purple;
-	  border: none;
-	  color: white;
+		background-color: $base-background-color-purple;
+		border: none;
+		color: white;
 		font-size: 25px;
 		padding: 15px;
 		margin-top: 30px;
 		width: 50%;
-	  &:focus {
-		  outline: 0;
-	  }
+		&:focus {
+			outline: 0;
+		}
 		&:hover {
 			color: white;
 		}
-  }
+	}
 }
 
 // chart styles
@@ -253,5 +417,24 @@ $panel-soso-font-color:            $base-font-color-light;
 				font-size: 25px;
 			}
 		}
+	}
+}
+
+
+.notification-indicator {
+	height: 8px;
+	width: 8px;
+	position: fixed;
+	bottom: 15px;
+	right: 20px;
+	background-color: red;
+	opacity: .5;
+	border-radius: 50%;
+	z-index: 999;
+	animation: pulsing-attendees 1.5s infinite ease-out;
+
+	@keyframes pulsing-attendees {
+		0% {box-shadow: 0px 0px 0px 0px #d43f3a;}
+		100% {box-shadow: 0px 0px 0px 10px rgba(0, 0, 0, 0.0);}
 	}
 }
