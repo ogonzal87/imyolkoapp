@@ -35,10 +35,10 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 		});
 		// I have to disable to btn so people so not submit more than 1 vote per
 		// interval
-		// $scope.disableLikeBtn = true;
-		// $timeout(function() {
-		// 	$scope.disableLikeBtn = false;
-		// }, 2000);
+		$scope.disableLikeBtn = true;
+		$timeout(function() {
+			$scope.disableLikeBtn = false;
+		}, 5000);
 	};
 
 	// Create a function that when is clicked creates a DISLIKE vote Object in Firebase this is stored in an array
@@ -52,10 +52,10 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 		});
 		// I have to disable to btn so people so not submit more than 1 vote per
 		// interval
-		// $scope.disableDislikeBtn = true;
-		// $timeout(function() {
-		// 	$scope.disableDislikeBtn = false;
-		// }, 2000);
+		$scope.disableDislikeBtn = true;
+		$timeout(function() {
+			$scope.disableDislikeBtn = false;
+		}, 5000);
 	};
 
 
@@ -67,13 +67,13 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 	$scope.$watch('attendees', function(newVal, oldVal) {
 
 		// Panic Button Logic
-		$scope.panicButton = function(attendee) {
-			if ($scope.attendee.feeling == "fine") {
-				$scope.attendee.feeling = "panic";
-			} else if ($scope.attendee.feeling == "panic") {
-				$scope.attendee.feeling = "fine";
-			}
-		};// Panic Button Logic
+		// $scope.panicButton = function(attendee) {
+		// 	if ($scope.attendee.feeling == "fine") {
+		// 		$scope.attendee.feeling = "panic";
+		// 	} else if ($scope.attendee.feeling == "panic") {
+		// 		$scope.attendee.feeling = "fine";
+		// 	}
+		// };// Panic Button Logic
 
 		$scope.numOfPeopleWithVoteAttribute = _.filter($scope.attendees, function(attendee) {
 			return attendee.vote;

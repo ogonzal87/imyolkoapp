@@ -82,6 +82,13 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 	// Like and a Dislike Lines.
 	var intervalChart;
   $scope.startPresentation = function() {
+
+  	//logic to toggle active class for the Media btns
+	  $scope.activePlayBtn = true;
+	  $scope.activePauseBtn = false;
+	  $scope.activeStopBtn = false;
+
+
     startStopwatch();
     intervalChart = $interval(function() {
 	    $scope.tickInterval = 1000; //seconds
@@ -90,8 +97,6 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 	    pushToLikeLineLineArr();
 	    pushToDislikeLineLineArr();
 	    pushToChartLabelsArr(1);
-
-	    console.log('Interval Firing')
 
 	    // interval duration is set to 1 minute by default
 	    // TODO: need to establish a variable so that the presented can dictate the interval themselves.
@@ -102,12 +107,22 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
   };
 
   $scope.pausePresentation = function() {
+	  //logic to toggle active class for the Media btns
+	  $scope.activePlayBtn = false;
+	  $scope.activePauseBtn = true;
+	  $scope.activeStopBtn = false;
+
 	  stopStopwatch();
 	  $interval.cancel(intervalChart);
 	  console.log("Paused the meeting");
   };
 
 	$scope.stopPresentation = function() {
+		//logic to toggle active class for the Media btns
+		$scope.activePlayBtn = false;
+		$scope.activePauseBtn = false;
+		$scope.activeStopBtn = true;
+
 		resetStopWatch();
 		$interval.cancel(intervalChart);
 		console.log("Stopped the meeting");
@@ -246,7 +261,6 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 
 		// displays the mood of the class in the Dashboard with avatar's face
 		displayYolkoInDashboard();
-		console.log($scope.avatarDashboard)
 
 		//QUESTIONS TO PRESENTER
 		// /////////////////////////////////////////////////////////////////////////

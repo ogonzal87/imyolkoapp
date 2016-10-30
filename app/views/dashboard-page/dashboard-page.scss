@@ -99,10 +99,15 @@ $label-font-size: 18px;
 			}
 
 			.media-controls {
+				font-size: 30px;
 				width: 140px;
 				display: flex;
 				align-items: center;
 				justify-content: space-between;
+
+				.active-media-btn {
+					color:$base-background-color-purple;
+				}
 			}
 		}
 
@@ -189,6 +194,7 @@ $label-font-size: 18px;
 			display: flex;
 			align-items: center;
 			flex-direction: column;
+			position: relative;
 
 
 			.percentage {
@@ -291,6 +297,7 @@ $label-font-size: 18px;
 			}
 
 			.panic-graph {
+				position: relative;
 				display: flex;
 				align-items: center;
 				justify-content: center;

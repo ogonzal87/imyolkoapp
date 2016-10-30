@@ -72,27 +72,26 @@ $panel-soso-font-color:            $base-font-color-light;
 		}
 	}
 
+	// Avatar
 	.first-row {
 		display: flex;
 		align-items: center;
 		justify-content: center;
 
 		.avatar-container {
-			padding: 70px;
+			margin: 70px;
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			width: 80%;
-			height: auto;
 
 			@media screen and (max-width: 767px) {
-				margin-top: 40px;
-				padding: 0
-			}
+				margin: 40px;
 
-			img {
-				width: 60%;
-				height: auto;
+				img {
+					width: 60%;
+					height: auto;
+				}
 			}
 		}
 
@@ -110,6 +109,7 @@ $panel-soso-font-color:            $base-font-color-light;
 		}
 	}
 
+	// Yolko Message
 	.second-row {
 		padding: 50px;
 		.message-container {
@@ -121,11 +121,10 @@ $panel-soso-font-color:            $base-font-color-light;
 			}
 		}
 	}
-	
 
-
+	//Control Buttons
 	.third-row {
-		padding: 60px 50px;
+		padding-bottom: 25px;
 		bottom:0;
 		width: 100%;
 		position: absolute;
@@ -135,19 +134,37 @@ $panel-soso-font-color:            $base-font-color-light;
 		}
 
 		.control-btn {
-			background-color: #907FFE;
-			color: #715CFF;
+			background-color: transparent;
+			color: #fff;
 			border-radius: 50%;
-			border: none;
-			font-size: 57px;
-			height: 100px;
+			border: 5px solid #fff;
+			font-size: 55px;
 			width: 100px;
-			margin: 15px 5px;
+			height: 100px;
+			margin: 0 10px;
+			outline: none;
+
+			&.btn-control-active {
+				box-shadow: inset  0 0 25px  rgba(0,0,0,0.6);
+			}
+
 
 			@media screen and (max-width: 767px) {
+				font-size: 34px;
 				height: 70px;
 				width: 70px;
 				margin: 25px 20px;
+			}
+		}
+
+		.btns-and-label-container{
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-direction: column;
+
+			h4 {
+				font-size: 15px;
 			}
 		}
 
@@ -155,17 +172,7 @@ $panel-soso-font-color:            $base-font-color-light;
 			display: flex;
 			align-items: center;
 			justify-content: center;
-
-			img {
-				padding: 0 10px 10px 10px;
-				height: 65px;
-
-				@media screen and (max-width: 767px) {
-					padding: 0;
-					margin: 0 20px 20px 10px;
-					height: 45px;
-				}
-			}
+			flex-direction: row;
 		}
 
 		.control-btns-container2 {
@@ -174,48 +181,28 @@ $panel-soso-font-color:            $base-font-color-light;
 			justify-content: center;
 			flex-direction: row;
 
-			.like-button-container {
-				.sentiment-btn {
-					background-color: #4FCDFE;
-					border-radius: 50%;
-					border: none;
-					font-size: 57px;
-					box-shadow: 0px 0px 6px 2px rgba(0,0,0,0.16);
-
-					img {
-						padding: 0 10px 10px 10px;
-						height: 65px;
-
-						@media screen and (max-width: 767px) {
-							padding: 0;
-							margin: 0 20px 20px 10px;
-							height: 45px;
-						}
-					}
-				}
-
+			h4 {
+				font-size: 25px;
+				font-weight: 900;
+				padding-top: 10px;
 			}
 
-			.dislike-button-container {
+			.sentiment-btns-container {
+				display: flex;
+				align-items: center;
+				flex-direction: row;
+
 				.sentiment-btn {
 					background-color: #4FCDFE;
 					border-radius: 50%;
 					border: none;
-					font-size: 57px;
 					box-shadow: 0px 0px 6px 2px rgba(0,0,0,0.16);
 
-					img {
-						padding: 0 10px 10px 10px;
-						height: 55px;
-
-
-						@media screen and (max-width: 767px) {
-							padding: 0;
-							margin:0 10px 25px 8px;
-							height: 35px;
-						}
+					&:disabled {
+						opacity: .3;
 					}
 				}
+
 			}
 		}
 
@@ -223,21 +210,31 @@ $panel-soso-font-color:            $base-font-color-light;
 			display: flex;
 			align-items: center;
 			justify-content: center;
-
-			img {
-				padding: 0 10px 10px 10px;
-				height: 65px;
-
-				@media screen and (max-width: 767px) {
-					padding: 0;
-					margin: 0 20px 20px 10px;
-					height: 45px;
-				}
-			}
 		}
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -422,19 +419,19 @@ $panel-soso-font-color:            $base-font-color-light;
 
 
 .notification-indicator {
-	height: 8px;
-	width: 8px;
+	height: 20px;
+	width: 20px;
 	position: fixed;
-	bottom: 15px;
-	right: 20px;
-	background-color: red;
+	top: 30px;
+	right: 50%;
+	background-color: lightcoral;
 	opacity: .5;
 	border-radius: 50%;
 	z-index: 999;
 	animation: pulsing-attendees 1.5s infinite ease-out;
 
 	@keyframes pulsing-attendees {
-		0% {box-shadow: 0px 0px 0px 0px #d43f3a;}
-		100% {box-shadow: 0px 0px 0px 10px rgba(0, 0, 0, 0.0);}
+		0% {box-shadow: 0px 0px 0px 0px lightcoral;}
+		100% {box-shadow: 0px 0px 0px 20px rgba(0, 0, 0, 0.0);}
 	}
 }

@@ -14,16 +14,19 @@
 				</div>
 				<div class="media-controls">
 
-					<div class="play-icon">
-						<img src="assets/icons/play.svg" ng-click="startPresentation()">
+					<div class="play-icon" ng-class="{'active-media-btn': activePlayBtn}">
+						<i class="fa fa-play" aria-hidden="true" ng-click="startPresentation()"></i>
+						<!--<img src="assets/icons/play.svg" ng-click="startPresentation()">-->
 					</div>
 
-					<div class="pause-icon">
-						<img src="assets/icons/pause.svg" ng-click="pausePresentation()">
+					<div class="pause-icon" ng-class="{'active-media-btn': activePauseBtn}">
+						<i class="fa fa-pause" aria-hidden="true" ng-click="pausePresentation()"></i>
+						<!--<img src="assets/icons/pause.svg" ng-click="pausePresentation()">-->
 					</div>
 
-					<div class="stop-icon">
-						<img src="assets/icons/stop.svg" ng-click="stopPresentation()">
+					<div class="stop-icon" ng-class="{'active-media-btn': activeStopBtn}">
+						<i class="fa fa-stop" aria-hidden="true" ng-click="stopPresentation()"></i>
+						<!--<img src="assets/icons/stop.svg" ng-click="pausePresentation()">-->
 					</div>
 
 				</div>
