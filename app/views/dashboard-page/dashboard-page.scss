@@ -26,7 +26,7 @@ $panel-soso-font-color:            $base-font-color-light;
 $fisrt-row-container-height: 200px;
 $second-row-container-height: 200px;
 $third-row-container-height: 284px;
-$speed-graph-container-width: 284px;
+$speed-graph-container-width: 180px;
 
 
 
@@ -233,7 +233,6 @@ $label-font-size: 18px;
 				justify-content: center;
 				height: 100%;
 
-
 				.graph-container {
 					display: flex;
 					flex-direction: row;
@@ -242,7 +241,7 @@ $label-font-size: 18px;
 					width: $speed-graph-container-width;
 
 					.triangle {
-						font-size: 50px;
+						font-size: 80px;
 						color: #ccc;
 					}
 

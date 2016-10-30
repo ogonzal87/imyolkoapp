@@ -13,6 +13,17 @@
 	</div>
 
 
+	<!--<pre style="font-size: 20px;">-->
+	<!--# People With Dislike Votes: =====> {{ numOfPeopleWithDislikeVotes.length }}-->
+	  <!-- -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+	<!--# People With Vote Attribute =====> {{ numOfPeopleWithVoteAttribute.length }}-->
+
+
+	<!--Dislike Percent: {{ dislikePercent }} %-->
+	<!--&lt;!&ndash;Num Attendees: {{ attendees.length }}&ndash;&gt;-->
+	<!--</pre>-->
+
+
 	<div class="row">
 		<div class="first-row container">
 			<div class="avatar-container">
@@ -104,7 +115,7 @@
 							ng-class="{ 'btn-control-active': attendee.speed == -1 }"
 							ng-click="attendee.speed = -1">
 						<!--<img src="assets/icons/back-forward-icon.svg">-->
-						<i class="fa fa-backward" aria-hidden="true"
+						<i class="fa fa-backward go-slower-fa-icon" aria-hidden="true"
 						   ng-class="{ 'icon-control-active': attendee.speed == -1 }"></i>
 					</button>
 					<h4>SLOWER</h4>
@@ -118,7 +129,7 @@
 							ng-class="{ 'btn-control-active': attendee.speed == 1 }"
 							ng-click="attendee.speed = 1">
 						<!--<img src="assets/icons/fast-forward-icon.svg">-->
-						<i class="fa fa-forward" aria-hidden="true"
+						<i class="fa fa-forward go-faster-fa-icon" aria-hidden="true"
 						   ng-class="{ 'icon-control-active': attendee.speed == 1 }"></i>
 					</button>
 					<h4>FASTER</h4>

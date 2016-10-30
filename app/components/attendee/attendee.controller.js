@@ -106,17 +106,17 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 
 	function displayYolko() {
 		if($scope.dislikePercent >= 80) {
-				return $scope.avatar = {face: 'assets/avatars/tense-icon.svg', message: 'Yolko is a little tense', backgroundColor: 'red'};
+				return $scope.avatar = {face: 'assets/avatars/tense-full-face.svg', message: 'Yolko is a little tense', backgroundColor: 'lever-5-mood-color'};
 		} else if ($scope.dislikePercent >= 60 && $scope.dislikePercent <= 79.999999999999) {
-				return $scope.avatar = {face: 'assets/avatars/notsogood-icon.svg', message: 'Yolko is not so good', backgroundColor: 'blue'};
+				return $scope.avatar = {face: 'assets/avatars/notsogood-full-face.svg', message: 'Yolko is not so good', backgroundColor: 'lever-4-mood-color'};
 		} else if ($scope.dislikePercent >= 40 && $scope.dislikePercent <= 59.999999999999) {
-				return $scope.avatar = {face: 'assets/avatars/serious-icon.svg', message: 'Yolko is ok', backgroundColor: 'green'};
+				return $scope.avatar = {face: 'assets/avatars/serious-full-face.svg', message: 'Yolko is ok', backgroundColor: 'lever-3-mood-color'};
 		} else if ($scope.dislikePercent >= 20 && $scope.dislikePercent <= 39.999999999999) {
-				return $scope.avatar = {face: 'assets/avatars/great-icon.svg', message: 'Yolko is great', backgroundColor: 'red'};
+				return $scope.avatar = {face: 'assets/avatars/great-full-face.svg', message: 'Yolko is great', backgroundColor: 'lever-2-mood-color'};
 		} else if ($scope.dislikePercent >= 1 && $scope.dislikePercent <= 29.999999999999) {
-				return $scope.avatar = {face: 'assets/avatars/motivated.svg', message: 'Yolko is motivated!', backgroundColor: 'green'};
+				return $scope.avatar = {face: 'assets/avatars/motivated-full-face.svg', message: 'Yolko is motivated!', backgroundColor: 'lever-1-mood-color'};
 		} else {
-			return $scope.avatar = { face:'assets/avatars/great-icon.svg', message: 'Yolko is great', backgroundColor: 'blue' };
+			return $scope.avatar = { face:'assets/avatars/great-full-face.svg', message: 'Yolko is great', backgroundColor: 'lever-2-mood-color' };
 		}
 
 		// $scope.burnt              = $scope.dislikePercent >= 76;

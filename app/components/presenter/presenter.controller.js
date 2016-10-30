@@ -350,16 +350,24 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 	function speed(percent) {
 
 		if (percent > 20) {
-			return { value: percent, content: 'Go Way Faster', class: 'is-active-circle-too-fast' };
-		} else if (percent > 10) {
-			return { value: percent, content: 'Go Faster', class: 'is-active-circle-go-slower' };
+			return { value: percent, content: 'Go Faster', class: 'is-active-circle-too-fast' };
 		} else if (percent < -20) {
-			return { value: percent,  content: 'Go way Slower', class: 'is-active-circle-too-slow' };
-		} else if (percent < -10) {
-			return { value: percent, content: 'Go Slower', class: 'is-active-circle-go-faster' };
+			return { value: percent,  content: 'Go Slower', class: 'is-active-circle-too-slow' };
 		} else {
 			return { value: percent, content: "We are good", class: 'is-active-circle-we-good' };
 		}
+		//
+		// if (percent > 20) {
+		// 	return { value: percent, content: 'Go Way Faster', class: 'is-active-circle-too-fast' };
+		// } else if (percent > 10) {
+		// 	return { value: percent, content: 'Go Faster', class: 'is-active-circle-go-slower' };
+		// } else if (percent < -20) {
+		// 	return { value: percent,  content: 'Go way Slower', class: 'is-active-circle-too-slow' };
+		// } else if (percent < -10) {
+		// 	return { value: percent, content: 'Go Slower', class: 'is-active-circle-go-faster' };
+		// } else {
+		// 	return { value: percent, content: "We are good", class: 'is-active-circle-we-good' };
+		// }
 
 		// if (percent > 20) {
 		// 	return { value: percent, content: 'Too Slow', class: 'is-active-circle-too-slow' };
