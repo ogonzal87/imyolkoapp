@@ -34,6 +34,10 @@ $panel-soso-font-color:            $base-font-color-light;
 	width: 100%;
 	color: white;
 
+	@media screen and (max-width: 767px) {
+		padding-bottom: 50px;
+	}
+
 	&.lever-5-mood-color  {
 		background-color: #f28495;
 	}
@@ -83,9 +87,6 @@ $panel-soso-font-color:            $base-font-color-light;
 				top: 0;
 				right: -85%;
 				width: 80px;
-
-
-
 
 				@media screen and (max-width: 767px) {
 					left: 70%;
