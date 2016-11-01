@@ -1,5 +1,5 @@
 <div class="dashboard-background" ng-class="avatarDashboard.backgroundColor">
-{{dislikePercent}}
+
 	<div class="yolko-navbar">
 		<div class="fa fa-bars burger-bars" ui-sref="meeting"></div>
 		<img class="user-avatar" src="assets/avatars/profile_pic.png">
@@ -56,7 +56,7 @@
 				<!--<div class="circles">-->
 					<!--<div class="circle-mood" ng-class="{'is-pulsing': dislikePercent > 50}"></div>-->
 				<!--</div>-->
-				<div class="dashboard-label">MOOD</div>
+				<div class="dashboard-label avatar-message">{{avatarDashboard.message}}</div>
 			</div>
 
 			<div class="likes-container col-sm-3 col-sm-pull-6">
