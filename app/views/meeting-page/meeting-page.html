@@ -124,11 +124,15 @@
 
 					<button class="control-btn btn"
 							title="Press if you want the speaker to go slower"
-							ng-class="{ 'btn-control-active': attendee.speed == -1 }"
+							ng-show="attendee.speed === 0 || attendee.speed === 1 || !attendee.speed"
 							ng-click="attendee.speed = -1">
-						<!--<img src="assets/icons/back-forward-icon.svg">-->
-						<i class="fa fa-backward go-slower-fa-icon" aria-hidden="true"
-						   ng-class="{ 'icon-control-active': attendee.speed == -1 }"></i>
+						<i class="fa fa-backward go-slower-fa-icon" aria-hidden="true"></i>
+					</button>
+					<button class="control-btn btn btn-control-active"
+							title="Press if you are fine now"
+							ng-show="attendee.speed === -1"
+							ng-click="attendee.speed = 0">
+						<i class="fa fa-check-circle-o"></i>
 					</button>
 					<h4>SLOWER</h4>
 
@@ -138,11 +142,16 @@
 
 					<button class="control-btn btn"
 							title="Press if you want the speaker to go faster"
-							ng-class="{ 'btn-control-active': attendee.speed == 1 }"
+							ng-show="attendee.speed === 0 || attendee.speed === -1|| !attendee.speed"
 							ng-click="attendee.speed = 1">
 						<!--<img src="assets/icons/fast-forward-icon.svg">-->
-						<i class="fa fa-forward go-faster-fa-icon" aria-hidden="true"
-						   ng-class="{ 'icon-control-active': attendee.speed == 1 }"></i>
+						<i class="fa fa-forward go-faster-fa-icon" aria-hidden="true"></i>
+						<button class="control-btn btn btn-control-active"
+								title="Press if you are fine now"
+								ng-show="attendee.speed === 1"
+								ng-click="attendee.speed = 0">
+							<i class="fa fa-check-circle-o"></i>
+						</button>
 					</button>
 					<h4>FASTER</h4>
 

@@ -382,10 +382,10 @@ $label-font-size: 18px;
 			}
 
 			.option {
-				width: 6px;
-				height: 6px;
-				overflow: hidden;
-				background-color: #fff;
+				//width: 6px;
+				//height: 6px;
+				//overflow: hidden;
+				//background-color: #fff;
 				border-radius: 50%;
 				position: absolute;
 				top: calc(50% - 3px);
@@ -395,19 +395,19 @@ $label-font-size: 18px;
 				justify-content: center;
 
 
-				&.reply {
+				&.yolko-reset-btn {
 					left: calc((115% / 3) - 3px);
 				}
 
-				&.love {
+				&.hearing-reset-btn {
 					left: calc(55% - 3px);
 				}
 
-				&.delete {
+				&.lost-reset-btn {
 					left: calc(((110% / 3) * 2) - 3px);
 				}
 
-				&.panic {
+				&.new-presentation-reset-btn {
 					left: calc(((30% / 3) * 2) - 3px);
 				}
 
@@ -423,19 +423,19 @@ $label-font-size: 18px;
 					height: 40px;
 					background-color: rgba(0,0,0,.3);
 
-					&.reply {
+					&.yolko-reset-btn {
 						transform: translate(-60px, -50px);
 					}
 
-					&.love {
+					&.hearing-reset-btn {
 						transform: translate(-20px, -75px);
 					}
 
-					&.delete {
+					&.lost-reset-btn {
 						transform: translate(25px, -50px);
 					}
 
-					&.panic {
+					&.new-presentation-reset-btn {
 						transform: translate(-50px, 10px);
 					}
 
@@ -458,38 +458,38 @@ $label-font-size: 18px;
 				border-radius: 50%;
 				overflow: hidden;
 
-				i {
-					color: #fff;
-					font-size: 20px;
-					transform: scale(0);
-				}
+				//i {
+				//	color: #fff;
+				//	font-size: 20px;
+				//	transform: scale(0);
+				//}
 
 				&.open {
 
-					i {
-						transform: scale(1);
-						transition: .5s cubic-bezier(.41,-2,.76,2);
-					}
+					//i {
+					//	transform: scale(1);
+					//	transition: .5s cubic-bezier(.41,-2,.76,2);
+					//}
 				}
 			}
 		}
 
-		.woba {
-			display: block;
-			position: absolute;
-			background: #fff;
-			border-radius: 100%;
-			transform: scale(0);
-			opacity: .5;
-		}
+		//.woba {
+		//	display: block;
+		//	position: absolute;
+		//	background: #fff;
+		//	border-radius: 100%;
+		//	transform: scale(0);
+		//	opacity: .5;
+		//}
 
-		.woba.animate {
-			animation: ripple .5s linear forwards;
-		}
-
-		@keyframes ripple {
-			100% {opacity: 0; transform: scale(2.5);}
-		}
+		//.woba.animate {
+		//	animation: ripple .5s linear forwards;
+		//}
+		//
+		//@keyframes ripple {
+		//	100% {opacity: 0; transform: scale(2.5);}
+		//}
 	}
 
 }

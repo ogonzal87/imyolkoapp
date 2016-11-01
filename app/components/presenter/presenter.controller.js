@@ -96,7 +96,7 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 	    $scope.intervalDislikeVotes.push($scope.dislikeVotesArray.length);
 	    pushToLikeLineLineArr();
 	    pushToDislikeLineLineArr();
-	    pushToChartLabelsArr(1);
+	    pushToChartLabelsArr('5min');
 
 	    // interval duration is set to 1 minute by default
 	    // TODO: need to establish a variable so that the presented can dictate the interval themselves.

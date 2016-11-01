@@ -34,6 +34,10 @@ $panel-soso-font-color:            $base-font-color-light;
 	width: 100%;
 	color: white;
 
+	@media screen and (max-width: 767px) {
+		padding-bottom: 50px;
+	}
+
 	&.lever-5-mood-color  {
 		background-color: #f28495;
 	}
@@ -60,6 +64,7 @@ $panel-soso-font-color:            $base-font-color-light;
 		width: 100%;
 		position: fixed;
 		top:0;
+		background-color: #fff;
 		z-index: 998;
 
 		.yolko-navbar-container {
@@ -83,9 +88,6 @@ $panel-soso-font-color:            $base-font-color-light;
 				top: 0;
 				right: -85%;
 				width: 80px;
-
-
-
 
 				@media screen and (max-width: 767px) {
 					left: 70%;
@@ -434,7 +436,7 @@ $panel-soso-font-color:            $base-font-color-light;
 		font-size: 25px;
 		padding: 15px;
 		margin-top: 30px;
-		width: 50%;
+		min-width: 50%;
 		&:focus {
 			outline: 0;
 		}
