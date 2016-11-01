@@ -18,7 +18,13 @@ function ResetService(DataAttendeeService, VotesService, QuestionsService, QuizS
     };
 
     var resetYolko = function() {
-	    VotesService.allVotesApiUrl.remove();
+	    _.each(DataAttendeeService.attendees, function(attendee) {
+		    if (attendee.vote) {
+			    attendee.vote = null;
+		    }
+		    DataAttendeeService.attendees.$save(attendee);
+	    });
+
     };
 
     var resetPanicTracker = function() {
@@ -38,6 +44,7 @@ function ResetService(DataAttendeeService, VotesService, QuestionsService, QuizS
 		    QuizService.quizQuestion1Url.remove();
 		    QuestionsService.allQuestionsApiUrl.remove();
 		    VotesService.allVotesApiUrl.remove();
+		    QuizService.quizQuestion1Url.remove();
 	    });
     };
 
