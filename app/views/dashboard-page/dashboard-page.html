@@ -1,5 +1,5 @@
-<div class="dashboard-background">
-
+<div class="dashboard-background" ng-class="avatarDashboard.backgroundColor">
+{{dislikePercent}}
 	<div class="yolko-navbar">
 		<div class="fa fa-bars burger-bars" ui-sref="meeting"></div>
 		<img class="user-avatar" src="assets/avatars/profile_pic.png">
@@ -87,7 +87,7 @@
 			</div>
 
 			<div class="cant-hear-container col-sm-3 col-sm-pull-6">
-				<div class="cant-hear-graph">
+				<div class="cant-hear-graph" ng-class="{'cant-hear-graph-bg-white': avatarDashboard.backgroundColor }">
 					<div class="ct-chart-volume"></div>
 					<div class="percentage" ng-class="volumeUpPercent.class">
 						{{volumeUpPercent.content}}%
@@ -97,7 +97,7 @@
 			</div>
 
 			<div class="lost-container col-sm-3">
-				<div class="panic-graph">
+				<div class="panic-graph" ng-class="{'panic-graph-bg-white': avatarDashboard.backgroundColor === 'lever-1-mood-color' || 'lever-5-mood-color'}">
 					<div class="ct-chart-lost"></div>
 					<div class="percentage">{{panicPercent.content}}%</div>
 				</div>
@@ -118,7 +118,7 @@
 			<div class="option delete" ng-class="{'open': isActive}">
 				<i class="material-icons">present_to_all</i>
 			</div>
-			<div class="option panic" ng-class="{'open': isActive}">
+			<div class="option panic" ng-class="{'open': isActive}" ng-click="deleteEverything()">
 				<i class="material-icons">fiber_new</i>
 			</div>
 			<div class="close">

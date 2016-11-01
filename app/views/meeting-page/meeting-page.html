@@ -1,7 +1,9 @@
 <div class="avatar-and-controls-background" ng-class="avatar.backgroundColor">
 	<div class="yolko-navbar">
-		<div class="fa fa-bars burger-bars" ui-sref="dashboard"></div>
-		<img class="user-avatar" src="assets/avatars/profile_pic.png">
+		<div class="yolko-navbar-container">
+			<div class="fa fa-bars burger-bars" ui-sref="dashboard"></div>
+			<img class="user-avatar" src="assets/avatars/profile_pic.png">
+		</div>
 	</div>
 
 	<span class="notification-indicator" ng-if="questionsToPresenter.length > 0"></span>
