@@ -35,9 +35,9 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 		});
 		// I have to disable to btn so people so not submit more than 1 vote per
 		// interval
-		$scope.disableLikeBtn = true;
+		$scope.disableSentimentBtns = true;
 		$timeout(function() {
-			$scope.disableLikeBtn = false;
+			$scope.disableSentimentBtns = false;
 		}, 5000);
 	};
 
@@ -52,9 +52,9 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 		});
 		// I have to disable to btn so people so not submit more than 1 vote per
 		// interval
-		$scope.disableDislikeBtn = true;
+		$scope.disableSentimentBtns = true;
 		$timeout(function() {
-			$scope.disableDislikeBtn = false;
+			$scope.disableSentimentBtns = false;
 		}, 5000);
 	};
 
@@ -86,6 +86,7 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 		if(!$scope.dislikePercent) { $scope.dislikePercent = 0 }
 
 		$scope.dislikePercent = Math.round(($scope.numOfPeopleWithDislikeVotes.length / $scope.numOfPeopleWithVoteAttribute.length) * 100);
+
 		displayYolko()
 	}, true);
 
@@ -95,8 +96,6 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 
 		//TODO: Have to put logoc to make sure that if there is only one person participating I still see a good face.
 		// Start counting the dislikePercentage() when there are more than 5 people with Vote Attribute
-
-
 		// displayYolko();
 	}, true);
 
@@ -207,7 +206,8 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 			$scope.questionsToPresenter.$add({
 				content: $scope.questionContent,
 				counter: 0,
-				time: Firebase.ServerValue.TIMESTAMP
+				time: Firebase.ServerValue.TIMESTAMP,
+				disabledQuestion: $scope.attendee.questionToPresenterIsDisabled
 			});
 			$scope.questionContent = "";
 		}
@@ -218,7 +218,8 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 			$scope.questionsToPresenter.$add({
 				content: $scope.questionContent,
 				counter: 0,
-				time: Firebase.ServerValue.TIMESTAMP
+				time: Firebase.ServerValue.TIMESTAMP,
+				disabledQuestion: $scope.attendee.questionToPresenterIsDisabled
 			});
 		}
 		$scope.questionContent = "";
@@ -232,11 +233,12 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 	$scope.voteQuestionUp = function(questionToPresenter) {
 		questionToPresenter.counter++;
 		QuestionsService.questions.$save(questionToPresenter);
+		console.log('questionToPresenter', questionToPresenter)
 	};
 
-	$scope.voteQuestionDown = function(questionToPresenter) {
-		questionToPresenter.counter--;
-		QuestionsService.questions.$save(questionToPresenter);
-	};
+	// $scope.voteQuestionDown = function(questionToPresenter) {
+	// 	questionToPresenter.counter--;
+	// 	QuestionsService.questions.$save(questionToPresenter);
+	// };
 
 }
