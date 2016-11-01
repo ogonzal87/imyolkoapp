@@ -206,8 +206,7 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 			$scope.questionsToPresenter.$add({
 				content: $scope.questionContent,
 				counter: 0,
-				time: Firebase.ServerValue.TIMESTAMP,
-				disabledQuestion: $scope.attendee.questionToPresenterIsDisabled
+				time: Firebase.ServerValue.TIMESTAMP
 			});
 			$scope.questionContent = "";
 		}
@@ -218,8 +217,7 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 			$scope.questionsToPresenter.$add({
 				content: $scope.questionContent,
 				counter: 0,
-				time: Firebase.ServerValue.TIMESTAMP,
-				disabledQuestion: $scope.attendee.questionToPresenterIsDisabled
+				time: Firebase.ServerValue.TIMESTAMP
 			});
 		}
 		$scope.questionContent = "";
