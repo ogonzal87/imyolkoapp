@@ -64,6 +64,7 @@ $panel-soso-font-color:            $base-font-color-light;
 		width: 100%;
 		position: fixed;
 		top:0;
+		background-color: #fff;
 		z-index: 998;
 
 		.yolko-navbar-container {
@@ -435,7 +436,7 @@ $panel-soso-font-color:            $base-font-color-light;
 		font-size: 25px;
 		padding: 15px;
 		margin-top: 30px;
-		width: 50%;
+		min-width: 50%;
 		&:focus {
 			outline: 0;
 		}
