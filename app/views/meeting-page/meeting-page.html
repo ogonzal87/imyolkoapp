@@ -1,10 +1,14 @@
 <div class="avatar-and-controls-background" ng-class="avatar.backgroundColor">
 	<div class="yolko-navbar">
-		<div class="fa fa-bars burger-bars" ui-sref="dashboard"></div>
-		<img class="user-avatar" src="assets/avatars/profile_pic.png">
-	</div>
+		<div class="yolko-navbar-container">
+			<div class="fa fa-bars burger-bars" ui-sref="dashboard"></div>
+			<div class="right-side-nav">
+				<div class="notification-indicator" ng-if="questionsToPresenter.length > 0"></div>
+				<img class="user-avatar" src="assets/avatars/profile_pic.png">
+			</div>
 
-	<span class="notification-indicator" ng-if="questionsToPresenter.length > 0"></span>
+		</div>
+	</div>
 
 	<div class="second-row row">
 		<div class="message-container">
@@ -40,18 +44,26 @@
 				<div class="btns-and-label-container">
 					<div class="sentiment-btns-container">
 						<div class="dislike-button-container">
-							<button class="sentiment-btn control-btn btn"
+							<button class="sentiment-btn control-btn btn likesBtn"
 									ng-click="voteDislike()"
-									ng-disabled="disableDislikeBtn">
+									ng-disabled="disableSentimentBtns">
 								<!--<img src="assets/icons/bad-mood-icon.svg">-->
 								<i class="fa fa-frown-o" aria-hidden="true"></i>
 							</button>
 						</div>
 
+						<span>
+							<div class="vote-submitted-feedback-icon"
+								 ng-class="{'vote-submitted-feedback-icon-active': disableSentimentBtns}"
+								 ng-if="disableSentimentBtns">
+								<i class="fa fa-check-circle-o" aria-hidden="true"></i>
+							</div>
+						</span>
+
 						<div class="like-button-container">
-							<button class="sentiment-btn control-btn btn"
+							<button class="sentiment-btn control-btn btn dislikesBtn"
 									ng-click="voteLike()"
-									ng-disabled="disableLikeBtn">
+									ng-disabled="disableSentimentBtns">
 								<!--<img src="assets/icons/good-mood-icon.svg">-->
 								<i class="fa fa-smile-o" aria-hidden="true"></i>
 							</button>
@@ -249,7 +261,8 @@
 				</div>
 			</div>
 			<div class="question-voting-controls">
-				<button class="btn btn-sm btn-default" ng-click="voteQuestionUp(questionToPresenter)">
+				<button class="btn btn-sm btn-default"
+						ng-click="voteQuestionUp(questionToPresenter)">
 					<i class="fa fa-chevron-up fa-2x"></i>
 					<div class="question-voting-controls-text">
 						{{ questionToPresenter.counter }}

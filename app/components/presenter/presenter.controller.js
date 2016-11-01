@@ -323,17 +323,17 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 	$scope.avatarDashboard = { face:'assets/icons/dash-great.svg', message: 'Yolko is great' };
 	function displayYolkoInDashboard() {
 		if($scope.dislikePercent >= 80) {
-			return $scope.avatarDashboard = {face: 'assets/icons/dash-tense.svg', message: 'Yolko is a little tense'};
+			return $scope.avatarDashboard = {face: 'assets/icons/dash-tense.svg', message: 'Yolko is a little tense', backgroundColor: 'lever-5-mood-color'};
 		} else if ($scope.dislikePercent >= 60 && $scope.dislikePercent <= 79.999999999999) {
-			return $scope.avatarDashboard = {face: 'assets/icons/dash-notsogood.svg', message: 'Yolko is not so good'};
+			return $scope.avatarDashboard = {face: 'assets/icons/dash-notsogood.svg', message: 'Yolko is not so good', backgroundColor: 'lever-4-mood-color'};
 		} else if ($scope.dislikePercent >= 40 && $scope.dislikePercent <= 59.999999999999) {
-			return $scope.avatarDashboard = {face: 'assets/icons/dash-serious.svg', message: 'Yolko is ok'};
+			return $scope.avatarDashboard = {face: 'assets/icons/dash-serious.svg', message: 'Yolko is ok', backgroundColor: 'lever-3-mood-color'};
 		} else if ($scope.dislikePercent >= 20 && $scope.dislikePercent <= 39.999999999999) {
-			return $scope.avatarDashboard = {face: 'assets/icons/dash-great.svg', message: 'Yolko is great'};
-		} else if ($scope.dislikePercent >= 1 && $scope.dislikePercent <= 29.999999999999) {
-			return $scope.avatarDashboard = {face: 'assets/icons/dash-motivated.svg', message: 'Yolko is motivated!'};
+			return $scope.avatarDashboard = {face: 'assets/icons/dash-great.svg', message: 'Yolko is great', backgroundColor: ''};
+		} else if ($scope.dislikePercent >= 0 && $scope.dislikePercent <= 29.999999999999) {
+			return $scope.avatarDashboard = {face: 'assets/icons/dash-motivated.svg', message: 'Yolko is motivated!', backgroundColor: 'lever-1-mood-color'};
 		} else {
-			return $scope.avatarDashboard = { face:'assets/icons/dash-great.svg', message: 'Yolko is great' };
+			return $scope.avatarDashboard = { face:'assets/icons/dash-great.svg', message: 'Yolko is great', backgroundColor: '' };
 		}
 	}
 
