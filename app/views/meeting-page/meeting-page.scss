@@ -55,28 +55,34 @@ $panel-soso-font-color:            $base-font-color-light;
 
 	.yolko-navbar {
 		height: 80px;
-		position: relative;
+		width: 100%;
+		position: fixed;
+		top:0;
 
-		.burger-bars {
-			position: absolute;
-			top: 50%;
-			left: 10%;
-			transform: translate(-50%, -50%);
-			float: left;
-			color: #372b7b;
-			font-size: 40px;
-		}
+		.yolko-navbar-container {
+			height: 80px;
+			position: relative;
+			.burger-bars {
+				position: absolute;
+				top: 50%;
+				left: 10%;
+				transform: translate(-50%, -50%);
+				float: left;
+				color: #372b7b;
+				font-size: 40px;
+			}
 
-		.user-avatar {
-			height: 50px;
-			width: 50px;
-			background-color: #ccc;
-			border-radius: 50%;
-			position: absolute;
-			top:50%;
-			left: 90%;
-			transform: translate(-50%, -50%);
-			float: right;
+			.user-avatar {
+				height: 50px;
+				width: 50px;
+				background-color: #ccc;
+				border-radius: 50%;
+				position: absolute;
+				top:50%;
+				left: 90%;
+				transform: translate(-50%, -50%);
+				float: right;
+			}
 		}
 	}
 
@@ -120,7 +126,7 @@ $panel-soso-font-color:            $base-font-color-light;
 
 	// Yolko Message
 	.second-row {
-		padding-top: 20px;
+		padding-top: 100px;
 
 		.message-container {
 			font-size: 48px;

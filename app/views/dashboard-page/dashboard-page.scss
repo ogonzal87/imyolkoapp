@@ -34,9 +34,29 @@ $font-weight: 100;
 $label-font-size: 18px;
 
 .dashboard-background {
-	background-color: #FBFBFB;
+	background-color: #eee;
 	min-height: 80vh;
 	position: relative;
+
+	&.lever-5-mood-color  {
+		background-color: #f28495;
+	}
+
+	&.lever-4-mood-color {
+		background-color: #fdcc71;
+	}
+
+	&.lever-3-mood-color {
+		background-color: #17c6eb;
+	}
+
+	&.lever-2-mood-color {
+		background-color: $base-background-color-purple;
+	}
+
+	&.lever-1-mood-color {
+		background-color: #A0EC70;
+	}
 
 	.yolko-navbar {
 		height: 80px;
@@ -186,7 +206,6 @@ $label-font-size: 18px;
 	}
 
 	.dashboard--primary-graphs-container {
-		//padding:px 0 42px 0;
 		padding-bottom: 80px;
 
 		.cant-hear-container {
@@ -215,7 +234,7 @@ $label-font-size: 18px;
 					stroke: #5a48fc;
 				}
 				.ct-series-b .ct-slice-donut{
-					stroke: #e4e3e4;
+					stroke: #fff;
 				}
 			}
 		}
@@ -242,7 +261,7 @@ $label-font-size: 18px;
 
 					.triangle {
 						font-size: 80px;
-						color: #ccc;
+						color: #fff;
 					}
 
 					.bg-circle {
@@ -305,6 +324,19 @@ $label-font-size: 18px;
 				}
 				.ct-series-b .ct-slice-donut{
 					stroke: #e4e3e4;
+				}
+			}
+
+			.panic-graph-bg-white {
+				position: relative;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				.ct-series-a .ct-slice-donut{
+					stroke: #5a48fc;
+				}
+				.ct-series-b .ct-slice-donut{
+					stroke: #fff;
 				}
 			}
 		}
