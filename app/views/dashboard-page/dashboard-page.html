@@ -109,20 +109,24 @@
 	<div class="reset-btn-container">
 
 		<div class="fab" ng-click="openFab()" ng-class="{'open': isActive}">
-			<div class="option reply" ng-class="{'open': isActive}">
-				<i class="material-icons">chart</i>
+			<div class="option yolko-reset-btn" ng-class="{'open': isActive}" ng-click="resetYolko()">
+				<!--<i class="material-icons">autorenew</i>-->
+				<i class="material-icons">insert_emoticon</i>
 			</div>
-			<div class="option love" ng-class="{'open': isActive}">
-				<i class="material-icons">refresh</i>
+			<div class="option hearing-reset-btn" ng-class="{'open': isActive}" ng-click="resetVolumeTracker()">
+				<!--<i class="material-icons">refresh</i>-->
+				<i class="material-icons">hearing</i>
 			</div>
-			<div class="option delete" ng-class="{'open': isActive}">
-				<i class="material-icons">present_to_all</i>
+			<div class="option lost-reset-btn" ng-class="{'open': isActive}" ng-click="resetPanicTracker()">
+				<!--<i class="material-icons">present_to_all</i>-->
+				<!--<i class="material-icons">flash_on</i>-->
+				<i class="material-icons">warning</i>
 			</div>
-			<div class="option panic" ng-class="{'open': isActive}" ng-click="deleteEverything()">
+			<div class="option new-presentation-reset-btn" ng-class="{'open': isActive}" ng-click="deleteEverything()">
 				<i class="material-icons">fiber_new</i>
 			</div>
 			<div class="close">
-				<i class="material-icons cached">close</i>
+				<i class="material-icons">autorenew</i>
 			</div>
 		</div>
 
