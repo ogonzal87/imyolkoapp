@@ -1,191 +1,162 @@
-<!--   DASHBOARD -->
-<div class="row panels-dashboard">
-	<div class="col-md-4 col-sm-6" style="padding:0">
-		<div class="main-panel">
-		<!-- PANEL WIDGET -->
-			<div class="profile-image">
-				<img class="profile-image-round"
-					 src="assets/avatars/profile_pic.png">
-				<span class="presentor-name">Oscar Gonzalez</span>
-			</div>
-			<div class="main-panel-content">
-				<div class="likes-container">
-					<span class="num-likes">
-						{{ likeVotesArray.length }}
-					</span>
-					<label>PROPS</label>
-				</div>
+<div class="dashboard-background" ng-class="avatarDashboard.backgroundColor">
 
-				<div class="dislikes-container">
-					<span class="num-dislikes">
-						{{ dislikeVotesArray.length }}
-					</span>
-					<!--<label>Dislikes</label>-->
-				</div>
-			</div>
-			<div class="counts">
-				<div>
-					<i class="fa fa-user"></i> {{ numAttendees }}
-				</div>
-				<div>
-					<i class="fa fa-question-circle-o"></i>
-					{{ allQuestionsFromAttendees.length }}
-				</div>
-				<div>
-					<i class="fa fa-pencil"></i>
-					{{ numOfAnswersFromAttendees  }}
-				</div>
-			</div>
-		</div>
+	<div class="yolko-navbar">
+		<div class="fa fa-bars burger-bars" ui-sref="meeting"></div>
+		<img class="user-avatar" src="assets/avatars/profile_pic.png">
 	</div>
 
-	<div class="col-md-8 col-sm-6" style="padding:0">
-		<div class="col-md-3 col-sm-6 panel-dashboard"
-			 ng-class="volumeUpPercent.class">
-			<!-- PANEL WIDGET -->
-			<div class="panel-content" >
-				<div class="icons-dashboard-center">
-					<i class="fa fa-deafness fa-3x icon"></i>
-				</div>
-				VOLUME
-				<div class="">
-					<h3 ng-if="volumeUpPercent.content > 0">
-						{{ volumeUpPercent.content }} %
-					</h3>
-					<h3 ng-if="volumeUpPercent.content === 0 ">
-						WE ARE GOOD
-					</h3>
-				</div>
-			</div>
-			<div class="refresh-overlay">
-				<button class="resetbutton" ng-click="resetVolumeTracker()">
-					<i class="fa fa-refresh"></i>
-					<p style="font-size: 20px;">REFRESH</p>
-				</button>
-			</div>
-		</div>
+	<div class="">
+		<div class="dashboard--presentation-ctrls-container row">
 
-		<div class="col-md-3 col-sm-6 panel-dashboard"
-			 ng-class="speedPercent.class">
-			<!-- PANEL WIDGET -->
-			<div class="panel-content" >
-				<div class="icons-dashboard-center">
-					<i class="fa fa-rocket fa-3x icon"></i>
+			<div class="stopwatch-container col-sm-6 col-sm-push-3">
+				<div class="chronometer" ng-init="showStopwatch()">
+					{{ stopWatch | date: 'h:mm:ss a' }}
 				</div>
-				SPEED
-				<div class="">
-					<h3 ng-if="speedPercent.content">
-						{{ speedPercent.content}}
-					</h3>
+				<div class="media-controls">
+
+					<div class="play-icon" ng-class="{'active-media-btn': activePlayBtn}">
+						<i class="fa fa-play" aria-hidden="true" ng-click="startPresentation()"></i>
+						<!--<img src="assets/icons/play.svg" ng-click="startPresentation()">-->
+					</div>
+
+					<div class="pause-icon" ng-class="{'active-media-btn': activePauseBtn}">
+						<i class="fa fa-pause" aria-hidden="true" ng-click="pausePresentation()"></i>
+						<!--<img src="assets/icons/pause.svg" ng-click="pausePresentation()">-->
+					</div>
+
+					<div class="stop-icon" ng-class="{'active-media-btn': activeStopBtn}">
+						<i class="fa fa-stop" aria-hidden="true" ng-click="stopPresentation()"></i>
+						<!--<img src="assets/icons/stop.svg" ng-click="pausePresentation()">-->
+					</div>
+
 				</div>
 			</div>
 
-			<div class="refresh-overlay">
-				<button class="resetbutton" ng-click="resetSpeedTracker()">
-					<i class="fa fa-refresh"></i>
-					<p style="font-size: 20px;">REFRESH</p>
-				</button>
+			<div class="num-attendees-container col-sm-3 col-sm-pull-6">
+				<div class="num">{{numAttendees}}</div>
+				<div class="dashboard-label">ATTENDEES</div>
+			</div>
+
+			<div class="dashboard--questions-container col-sm-3 ">
+				<div class="num">{{allQuestionsFromAttendees.length}}</div>
+				<div class="dashboard-label">QUESTIONS</div>
 			</div>
 		</div>
 
+		<div class="dashboard--second-row-container row">
+			<div class="mood-container col-sm-6 col-sm-push-3">
 
-		<div class="col-md-3 col-sm-6 panel-dashboard"
-			 ng-class="panicPercent.class">
-			<!-- PANEL WIDGET -->
-			<div class="panel-content">
-				<div>
-					<i class="fa fa-fire-extinguisher fa-3x icon"></i>
+
+				<div class="circles">
+					<img ng-src="{{ avatarDashboard.face }}" class="face">
 				</div>
-				PANIC
-				<div class="">
-					<h3 ng-if="panicPercent.content > 0">
-						{{ panicPercent.content }}
- %					</h3>
-					<h3 ng-if="panicPercent.content === 0">
-						WE ARE GOOD
-					</h3>
-				</div>
-			</div>
-			<div class="refresh-overlay">
-				<button class="resetbutton" ng-click="resetPanicTracker()">
-					<i class="fa fa-refresh"></i>
-					<p style="font-size: 20px;">REFRESH</p>
-				</button>
+
+
+
+				<!--<div class="circles">-->
+					<!--<div class="circle-mood" ng-class="{'is-pulsing': dislikePercent > 50}"></div>-->
+				<!--</div>-->
+				<div class="dashboard-label avatar-message">{{avatarDashboard.message}}</div>
 			</div>
 
+			<div class="likes-container col-sm-3 col-sm-pull-6">
+				<div class="num">{{likeVotesArray.length}}</div>
+				<div class="dashboard-label">LIKES</div>
+			</div>
+
+			<div class="dislikes-container col-sm-3">
+				<div class="num">{{dislikeVotesArray.length}}</div>
+				<div class="dashboard-label">DISLIKES</div>
+			</div>
 		</div>
 
-		<div class="col-md-3 col-sm-6 control-panel">
-			<div class="stopwatch" ng-init="showStopwatch()">
-				{{ stopWatch | date: 'h:mm:ss a' }}
+		<div class="dashboard--primary-graphs-container row">
+
+			<div class="speed-container col-sm-6 col-sm-push-3">
+				<div class="speed-graph-message-container">
+					<div class="message">{{speedPercent.content | uppercase}}</div>
+					<div class="graph-container">
+						<div class="fa fa-caret-left triangle" ng-class="{'is-active-circle-too-slow': 	speedPercent.class === 'is-active-circle-too-slow'}"></div>
+						<!--<div class="fa fa-caret-left triangle" ng-class="{'is-active-circle-go-faster': speedPercent.class === 'is-active-circle-go-faster'}"></div>-->
+						<div class="bg-circle" ng-class="{'is-active-circle-we-good': speedPercent.class === 'is-active-circle-we-good'}"></div>
+						<!--<div class="fa fa-caret-right triangle" ng-class="{'is-active-circle-go-slower': speedPercent.class === 'is-active-circle-go-slower'}"></div>-->
+						<div class="fa fa-caret-right triangle" ng-class="{'is-active-circle-too-fast ': speedPercent.class === 'is-active-circle-too-fast'}"></div>
+					</div>
+				</div>
+				<div class="dashboard-label">SPEED</div>
 			</div>
 
-			<div class="play-pause-stop-btns">
-				<div class="btn play-pause-stop-btn"
-					 ng-click="startPresentation()">
-					<i class="fa fa-play"></i>
+			<div class="cant-hear-container col-sm-3 col-sm-pull-6">
+				<div class="cant-hear-graph" ng-class="{'cant-hear-graph-bg-white': avatarDashboard.backgroundColor }">
+					<div class="ct-chart-volume"></div>
+					<div class="percentage" ng-class="volumeUpPercent.class">
+						{{volumeUpPercent.content}}%
+					</div>
 				</div>
-				<div class="btn play-pause-stop-btn"
-					 ng-click="pausePresentation()">
-					<i class="fa fa-pause"></i>
-				</div>
-				<div class="btn play-pause-stop-btn"
-					 ng-click="stopPresentation()">
-					<i class="fa fa-stop"></i>
-				</div>
+				<div class="dashboard-label">CAN'T HEAR</div>
 			</div>
 
-			<div class="reset-btns-main-panel">
-				<div class="play-pause-stop-btn"
-					 ng-click="resetEverything()">
-					RESET EVERYTHING
+			<div class="lost-container col-sm-3">
+				<div class="panic-graph" ng-class="{'panic-graph-bg-white': avatarDashboard.backgroundColor === 'lever-1-mood-color' || 'lever-5-mood-color'}">
+					<div class="ct-chart-lost"></div>
+					<div class="percentage">{{panicPercent.content}}%</div>
 				</div>
-
-				<div class="play-pause-stop-btn"
-					 ng-click="deleteEverything()">
-					NEW PRESENTATION
-				</div>
+				<div class="dashboard-label">LOST</div>
 			</div>
+
 		</div>
 	</div>
-  </div>
+	<div class="reset-btn-container">
 
+		<div class="fab" ng-click="openFab()" ng-class="{'open': isActive}">
+			<div class="option yolko-reset-btn" ng-class="{'open': isActive}" ng-click="resetYolko()">
+				<!--<i class="material-icons">autorenew</i>-->
+				<i class="material-icons">insert_emoticon</i>
+			</div>
+			<div class="option hearing-reset-btn" ng-class="{'open': isActive}" ng-click="resetVolumeTracker()">
+				<!--<i class="material-icons">refresh</i>-->
+				<i class="material-icons">hearing</i>
+			</div>
+			<div class="option lost-reset-btn" ng-class="{'open': isActive}" ng-click="resetPanicTracker()">
+				<!--<i class="material-icons">present_to_all</i>-->
+				<!--<i class="material-icons">flash_on</i>-->
+				<i class="material-icons">warning</i>
+			</div>
+			<div class="option new-presentation-reset-btn" ng-class="{'open': isActive}" ng-click="deleteEverything()">
+				<i class="material-icons">fiber_new</i>
+			</div>
+			<div class="close">
+				<i class="material-icons">autorenew</i>
+			</div>
+		</div>
 
-
-<!-- <pre>
-  Speed Percent: {{speedPercent.value}}<br>
-  Volume up Percent: {{volumeUpPercent.value}}<br>
-  Dislike Percent: {{dislikePercent}}<br>
-</pre> -->
-
-
-
-<div class=" results">
-
-	<div class="chart container">
-		<h3 style="padding-left: 50px;">LIVE DATA COMING IN</h3>
-
-		<!-- CHART -->
-		<div class="ct-chart ct-major-tenth"></div>
-		<!-- CHART -->
-
-		<!-- <pre>
-      		LikeVotes: {{ intervalLikeVotes }} <br>
-      		Like Line Arr: {{ likeLine }} <br>
-      		DislikeVotes: {{ intervalDislikeVotes }} <br>
-      		Dislike Line Arr: {{ dislikeLine }} <br>
-    	</pre> -->
+		<!--<button class="reset-control-btn">-->
+			<!--<i class="fa fa-refresh"></i>-->
+		<!--</button>-->
+		<!--<button class="reset-control-btn">-->
+			<!--<i class="fa fa-refresh"></i>-->
+		<!--</button>-->
+		<!--<button class="reset-control-btn">-->
+			<!--<i class="fa fa-refresh"></i>-->
+		<!--</button>-->
+		<!--<button class="reset-control-btn">-->
+			<!--<i class="fa fa-refresh"></i>-->
+		<!--</button>-->
+		<!--<button class="reset-control-btn">-->
+			<!--<i class="fa fa-refresh"></i>-->
+		<!--</button>-->
 	</div>
 
-</div><!-- container results end -->
+</div>
 
 
-<div class="background-below-chart ">
+<div class="questions-and-quiz-container">
 	<div class="dashboard-tabs container">
 		<div class="dashboard-tab"
 			 ng-class="{'active': tab1IsActive}"
 			 ng-click="toggleTabs('tab1IsActive')">
 			QUESTIONS
+			<span class="notification-indicator" ng-if="questionsToPresenter.length > 0"></span>
 		</div>
 		<div class="dashboard-tab"
 			 ng-class="{'active': tab2IsActive}"
@@ -234,7 +205,7 @@
 			<form novalidate class="container" style="padding: 20px 60px;">
 				<div class="form-group">
 					<br>
-					<h3 for="question">Question</h3>
+					<!--<h4 for="question">QUESTION</h4>-->
 					<textarea class="form-control"
 							  id="question"
 							  placeholder="What would you like to ask everyone?"
@@ -340,4 +311,18 @@
 			</form>
 		</div>
 	</div>
+</div>
+
+
+<div class="live-chart">
+	<!-- CHART -->
+	<div class="ct-chart-timeline"></div>
+	<!-- CHART -->
+	<h3 style="text-align: center;">LIVE DATA COMING IN</h3>
+	<!-- <pre>
+		  LikeVotes: {{ intervalLikeVotes }} <br>
+		  Like Line Arr: {{ likeLine }} <br>
+		  DislikeVotes: {{ intervalDislikeVotes }} <br>
+		  Dislike Line Arr: {{ dislikeLine }} <br>
+	</pre> -->
 </div>

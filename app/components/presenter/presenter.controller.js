@@ -82,6 +82,13 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 	// Like and a Dislike Lines.
 	var intervalChart;
   $scope.startPresentation = function() {
+
+  	//logic to toggle active class for the Media btns
+	  $scope.activePlayBtn = true;
+	  $scope.activePauseBtn = false;
+	  $scope.activeStopBtn = false;
+
+
     startStopwatch();
     intervalChart = $interval(function() {
 	    $scope.tickInterval = 1000; //seconds
@@ -89,9 +96,7 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 	    $scope.intervalDislikeVotes.push($scope.dislikeVotesArray.length);
 	    pushToLikeLineLineArr();
 	    pushToDislikeLineLineArr();
-	    pushToChartLabelsArr(1);
-
-	    console.log('Interval Firing')
+	    pushToChartLabelsArr('5min');
 
 	    // interval duration is set to 1 minute by default
 	    // TODO: need to establish a variable so that the presented can dictate the interval themselves.
@@ -102,12 +107,22 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
   };
 
   $scope.pausePresentation = function() {
+	  //logic to toggle active class for the Media btns
+	  $scope.activePlayBtn = false;
+	  $scope.activePauseBtn = true;
+	  $scope.activeStopBtn = false;
+
 	  stopStopwatch();
 	  $interval.cancel(intervalChart);
 	  console.log("Paused the meeting");
   };
 
 	$scope.stopPresentation = function() {
+		//logic to toggle active class for the Media btns
+		$scope.activePlayBtn = false;
+		$scope.activePauseBtn = false;
+		$scope.activeStopBtn = true;
+
 		resetStopWatch();
 		$interval.cancel(intervalChart);
 		console.log("Stopped the meeting");
@@ -153,11 +168,9 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 				{
 					name: 'likes',
 					data: likeLine
-					// data: [9]
 				},
 				{
 					name: 'dislikes',
-					// data: [1]
 					data: dislikeLine
 				}
 			]
@@ -166,7 +179,7 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 		// As options we currently only set a static size of 300x200 px. We can also omit this and use aspect ratio containers
 		// as you saw in the previous example
 		var chartLineOptions = {
-
+			height: 300,
 			// seriesBarDistance: 30,
 			axisX: {
 
@@ -186,7 +199,7 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 		// Create a new line chart object where as first parameter we pass in a selector
 		// that is resolving to our chart container element. The Second parameter
 		// is the actual data object and the third the options.
-		new Chartist.Bar('.ct-chart', chartAllData, chartLineOptions);
+		new Chartist.Bar('.ct-chart-timeline', chartAllData, chartLineOptions);
 	}, true);
 
 
@@ -218,34 +231,44 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 		var volumeUpAttendees = _.filter($scope.attendees, function(attendee) {
 			return attendee.volumeUp == "yes";
 		});
-		$scope.volumeUpAttendees = volumeUpAttendees.length;
 		$scope.volumeUpPercent = volume(Math.round((volumeUpAttendees.length / $scope.numAttendees) * 100));
-
 
 		//SPEED
 		///////////////////////////////////////////////////////////////////////////
-		$scope.speedValue = _.reduce($scope.attendees, function(memo, attendee) {
+		var speedValue = _.reduce($scope.attendees, function(memo, attendee) {
 			return memo + attendee.speed;
 		}, 0);
-		$scope.speedPercent = speed(Math.round(($scope.speedValue / $scope.numAttendees) * 100));
+		$scope.speedPercent = speed(Math.round((speedValue / $scope.numAttendees) * 100));
 
-		//FEELING
+		//LOST
 		// /////////////////////////////////////////////////////////////////////////
-		var feelingValues = _.filter($scope.attendees, function(attendee) {
+		var lostValues = _.filter($scope.attendees, function(attendee) {
 			return attendee.feeling == "panic";
 		});
-		$scope.feelingValues = feelingValues.length;
-		$scope.panicPercent = panic(Math.round((feelingValues.length / $scope.numAttendees) * 100));
+		$scope.panicPercent = panic(Math.round((lostValues.length / $scope.numAttendees) * 100));
+
+		//DISLIKE PERCENTAGE
+		// /////////////////////////////////////////////////////////////////////////
+		$scope.numOfPeopleWithVoteAttribute = _.filter($scope.attendees, function(attendee) {
+			return attendee.vote;
+		});
+		$scope.numOfPeopleWithDislikeVotes = _.filter($scope.attendees, function(attendee) {
+			return attendee.vote === 'dislike';
+		});
+		if(!$scope.dislikePercent) { $scope.dislikePercent = 0 }
+
+		$scope.dislikePercent = Math.round(($scope.numOfPeopleWithDislikeVotes.length / $scope.numOfPeopleWithVoteAttribute.length) * 100);
+
+		// displays the mood of the class in the Dashboard with avatar's face
+		displayYolkoInDashboard();
 
 		//QUESTIONS TO PRESENTER
 		// /////////////////////////////////////////////////////////////////////////
-
 		$scope.questionsToPresenter = $scope.allQuestionsFromAttendees;
 
 		$scope.removeQuestion = function(key) {
 			$scope.questionsToPresenter.$remove(key);
 		};
-
 
 		// _.each($scope.attendees, function(attendee) {
 		// 	_.each(attendee.questions, function(question) {
@@ -255,43 +278,121 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 		// 		});
 		// 	});
 		// });
+
+		//show chart for the VOLUME
+		new Chartist.Pie('.ct-chart-volume', {
+			series: [$scope.volumeUpPercent, 100]
+		}, {
+			donut: true,
+			donutWidth: 40,
+			startAngle: 0,
+			height: 254,
+			width: 254,
+			total: 100,
+			showLabel: false
+		});
+
+		//show chart for the SPEED
+		new Chartist.Pie('.ct-chart-speed', {
+			series: [45, 100]
+		}, {
+			donut: true,
+			donutWidth: 40,
+			startAngle: 0,
+			height: 254,
+			width: 254,
+			total: 100,
+			showLabel: false
+		});
+
+		//show chart for the LOST
+		new Chartist.Pie('.ct-chart-lost', {
+			series: [$scope.panicPercent.content, 100]
+		}, {
+			donut: true,
+			donutWidth: 40,
+			startAngle: 0,
+			height: 254,
+			width: 254,
+			total: 100,
+			showLabel: false
+		});
 	}, true);
+
+	//Displaying Yolko
+	$scope.avatarDashboard = { face:'assets/icons/dash-great.svg', message: 'Yolko is great' };
+	function displayYolkoInDashboard() {
+		if($scope.dislikePercent >= 80) {
+			return $scope.avatarDashboard = {face: 'assets/icons/dash-tense.svg', message: 'Yolko is a little tense', backgroundColor: 'lever-5-mood-color'};
+		} else if ($scope.dislikePercent >= 60 && $scope.dislikePercent <= 79.999999999999) {
+			return $scope.avatarDashboard = {face: 'assets/icons/dash-notsogood.svg', message: 'Yolko is not so good', backgroundColor: 'lever-4-mood-color'};
+		} else if ($scope.dislikePercent >= 40 && $scope.dislikePercent <= 59.999999999999) {
+			return $scope.avatarDashboard = {face: 'assets/icons/dash-serious.svg', message: 'Yolko is ok', backgroundColor: 'lever-3-mood-color'};
+		} else if ($scope.dislikePercent >= 20 && $scope.dislikePercent <= 39.999999999999) {
+			return $scope.avatarDashboard = {face: 'assets/icons/dash-great.svg', message: 'Yolko is great', backgroundColor: ''};
+		} else if ($scope.dislikePercent >= 0 && $scope.dislikePercent <= 29.999999999999) {
+			return $scope.avatarDashboard = {face: 'assets/icons/dash-motivated.svg', message: 'Yolko is motivated!', backgroundColor: 'lever-1-mood-color'};
+		} else {
+			return $scope.avatarDashboard = { face:'assets/icons/dash-great.svg', message: 'Yolko is great', backgroundColor: '' };
+		}
+	}
 
 
 	function volume(percent) {
 		if (percent > 10) {
-			return { value: percent, content: percent, class: 'panel-dashboard-bad' };
+			return { value: percent, content: percent, class: 'dashboard-bad-color' };
 		} else {
-			return { value: percent, content: percent, class: 'panel' };
+			return { value: percent, content: percent, class: '' };
 		}
 	}
 
 
 	function speed(percent) {
+
 		if (percent > 20) {
-			return { value: percent, content: 'TOO SLOW', class: 'panel-dashboard-bad' };
-		} else if (percent > 10) {
-			return { value: percent, content: 'GO FASTER', class: 'panel-dashboard-middle' };
+			return { value: percent, content: 'Go Faster', class: 'is-active-circle-too-fast' };
 		} else if (percent < -20) {
-			return { value: percent, content: 'TOO FAST!', class: 'panel-dashboard-bad' };
-		} else if (percent < -10) {
-			return { value: percent, content: 'GO SLOWER', class: 'panel-dashboard-middle' };
+			return { value: percent,  content: 'Go Slower', class: 'is-active-circle-too-slow' };
 		} else {
-			return { value: percent, content: "WE ARE GOOD", class: 'panel' };
+			return { value: percent, content: "We are good", class: 'is-active-circle-we-good' };
 		}
+		//
+		// if (percent > 20) {
+		// 	return { value: percent, content: 'Go Way Faster', class: 'is-active-circle-too-fast' };
+		// } else if (percent > 10) {
+		// 	return { value: percent, content: 'Go Faster', class: 'is-active-circle-go-slower' };
+		// } else if (percent < -20) {
+		// 	return { value: percent,  content: 'Go way Slower', class: 'is-active-circle-too-slow' };
+		// } else if (percent < -10) {
+		// 	return { value: percent, content: 'Go Slower', class: 'is-active-circle-go-faster' };
+		// } else {
+		// 	return { value: percent, content: "We are good", class: 'is-active-circle-we-good' };
+		// }
+
+		// if (percent > 20) {
+		// 	return { value: percent, content: 'Too Slow', class: 'is-active-circle-too-slow' };
+		// } else if (percent > 10) {
+		// 	return { value: percent, content: 'Go Faster', class: 'is-active-circle-go-faster' };
+		// } else if (percent < -20) {
+		// 	return { value: percent, content: 'Too Fast!', class: 'is-active-circle-too-fast' };
+		// } else if (percent < -10) {
+		// 	return { value: percent, content: 'Go Slower', class: 'is-active-circle-go-slower' };
+		// } else {
+		// 	return { value: percent, content: "We are good!", class: 'is-active-circle-we-good' };
+		// }
 	}
 
 	function panic(percent) {
 		if (percent > 25) {
-			return { content: percent, class: 'panel-dashboard-bad' };
+			return { content: percent };
 		} else {
-			return { content: percent, class: 'panel' };
+			return { content: percent };
 		}
 	}
 
 	// toggle tabs in dashboard
 	// /////////////////////////////////////////////////////////////////////////
-	$scope.tab1IsActive = true;
+	$scope.tab1IsActive = false;
 	$scope.tab2IsActive = false;
 	$scope.toggleTabs = function(tab) {
 		if (tab === 'tab1IsActive') {
@@ -366,8 +467,6 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 		var answersC = QuizService.quizAnswers1C.length;
 		var answersD = QuizService.quizAnswers1D.length;
 
-		console.log($scope.quizQuestion1.isShowingResultsToAttendees)
-
 		var chartAllData = {
 			labels: ['A', 'B', 'C', 'D'],
 			series: [answersA, answersB, answersC, answersD]
@@ -394,10 +493,16 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 	}, true);
 
 
-
-
 	//RESET
 	// /////////////////////////////////////////////////////////////////////////
+
+	$scope.openFab = function() {
+		$scope.isActive = !$scope.isActive;
+
+	};
+
+
+
 	$scope.resetVolumeTracker  = ResetService.resetVolumeTracker; //sets to default values
 	$scope.resetSpeedTracker   = ResetService.resetSpeedTracker; //sets to default values
   $scope.resetYolko          = ResetService.resetYolko; //deletes the Votes node

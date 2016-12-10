@@ -35,10 +35,10 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 		});
 		// I have to disable to btn so people so not submit more than 1 vote per
 		// interval
-		// $scope.disableLikeBtn = true;
-		// $timeout(function() {
-		// 	$scope.disableLikeBtn = false;
-		// }, 2000);
+		$scope.disableSentimentBtns = true;
+		$timeout(function() {
+			$scope.disableSentimentBtns = false;
+		}, 5000);
 	};
 
 	// Create a function that when is clicked creates a DISLIKE vote Object in Firebase this is stored in an array
@@ -52,10 +52,10 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 		});
 		// I have to disable to btn so people so not submit more than 1 vote per
 		// interval
-		// $scope.disableDislikeBtn = true;
-		// $timeout(function() {
-		// 	$scope.disableDislikeBtn = false;
-		// }, 2000);
+		$scope.disableSentimentBtns = true;
+		$timeout(function() {
+			$scope.disableSentimentBtns = false;
+		}, 5000);
 	};
 
 
@@ -67,13 +67,13 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 	$scope.$watch('attendees', function(newVal, oldVal) {
 
 		// Panic Button Logic
-		$scope.panicButton = function(attendee) {
-			if ($scope.attendee.feeling == "fine") {
-				$scope.attendee.feeling = "panic";
-			} else if ($scope.attendee.feeling == "panic") {
-				$scope.attendee.feeling = "fine";
-			}
-		};// Panic Button Logic
+		// $scope.panicButton = function(attendee) {
+		// 	if ($scope.attendee.feeling == "fine") {
+		// 		$scope.attendee.feeling = "panic";
+		// 	} else if ($scope.attendee.feeling == "panic") {
+		// 		$scope.attendee.feeling = "fine";
+		// 	}
+		// };// Panic Button Logic
 
 		$scope.numOfPeopleWithVoteAttribute = _.filter($scope.attendees, function(attendee) {
 			return attendee.vote;
@@ -86,6 +86,7 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 		if(!$scope.dislikePercent) { $scope.dislikePercent = 0 }
 
 		$scope.dislikePercent = Math.round(($scope.numOfPeopleWithDislikeVotes.length / $scope.numOfPeopleWithVoteAttribute.length) * 100);
+
 		displayYolko()
 	}, true);
 
@@ -95,25 +96,55 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 
 		//TODO: Have to put logoc to make sure that if there is only one person participating I still see a good face.
 		// Start counting the dislikePercentage() when there are more than 5 people with Vote Attribute
-
-
 		// displayYolko();
 	}, true);
 
 
 	//Displaying Yolko
+	$scope.avatar = { face:'assets/avatars/great-icon.svg', message: 'Yolko is great' };
+
 	function displayYolko() {
-		$scope.burnt              = $scope.dislikePercent >= 76;
-		$scope.shocked            = $scope.dislikePercent >= 64 && $scope.dislikePercent <= 75.999999999999;
-		$scope.idontgetit         = $scope.dislikePercent >= 56 && $scope.dislikePercent <= 63.999999999999;
-		$scope.startingtonotgetit = $scope.dislikePercent >= 48 && $scope.dislikePercent <= 55.999999999999;
-		$scope.tastey             = $scope.dislikePercent >= 40 && $scope.dislikePercent <= 47.999999999999;
-		$scope.want               = $scope.dislikePercent >= 32 && $scope.dislikePercent <= 39.999999999999;
-		$scope.confident          = $scope.dislikePercent >= 24 && $scope.dislikePercent <= 31.999999999999;
-		$scope.igotthis           = $scope.dislikePercent >= 16 && $scope.dislikePercent <= 23.999999999999;
-		$scope.laughing           = $scope.dislikePercent < 15.999999999999 || isNaN($scope.dislikePercent);
+		if($scope.dislikePercent >= 80) {
+				return $scope.avatar = {face: 'assets/avatars/tense-full-face.svg', message: 'Yolko is a little tense', backgroundColor: 'lever-5-mood-color'};
+		} else if ($scope.dislikePercent >= 60 && $scope.dislikePercent <= 79.999999999999) {
+				return $scope.avatar = {face: 'assets/avatars/notsogood-full-face.svg', message: 'Yolko is not so good', backgroundColor: 'lever-4-mood-color'};
+		} else if ($scope.dislikePercent >= 40 && $scope.dislikePercent <= 59.999999999999) {
+				return $scope.avatar = {face: 'assets/avatars/serious-full-face.svg', message: 'Yolko is ok', backgroundColor: 'lever-3-mood-color'};
+		} else if ($scope.dislikePercent >= 20 && $scope.dislikePercent <= 39.999999999999) {
+				return $scope.avatar = {face: 'assets/avatars/great-full-face.svg', message: 'Yolko is great', backgroundColor: 'lever-2-mood-color'};
+		} else if ($scope.dislikePercent >= 0 && $scope.dislikePercent <= 29.999999999999) {
+				return $scope.avatar = {face: 'assets/avatars/motivated-full-face.svg', message: 'Yolko is motivated!', backgroundColor: 'lever-1-mood-color'};
+		} else {
+			return $scope.avatar = { face:'assets/avatars/great-full-face.svg', message: 'Yolko is great', backgroundColor: 'lever-2-mood-color' };
+		}
+
+		// $scope.burnt              = $scope.dislikePercent >= 76;
+		// $scope.shocked            = $scope.dislikePercent >= 64 && $scope.dislikePercent <= 75.999999999999;
+		// $scope.idontgetit         = $scope.dislikePercent >= 56 && $scope.dislikePercent <= 63.999999999999;
+		// $scope.startingtonotgetit = $scope.dislikePercent >= 48 && $scope.dislikePercent <= 55.999999999999;
+		// $scope.tastey             = $scope.dislikePercent >= 40 && $scope.dislikePercent <= 47.999999999999;
+		// $scope.want               = $scope.dislikePercent >= 32 && $scope.dislikePercent <= 39.999999999999;
+		// $scope.confident          = $scope.dislikePercent >= 24 && $scope.dislikePercent <= 31.999999999999;
+		// $scope.igotthis           = $scope.dislikePercent >= 16 && $scope.dislikePercent <= 23.999999999999;
+		// $scope.laughing           = $scope.dislikePercent < 15.999999999999 || isNaN($scope.dislikePercent);
 		// $scope.zzz                = $scope.dislikePercent === 0 || 'NaN';
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -200,11 +231,12 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 	$scope.voteQuestionUp = function(questionToPresenter) {
 		questionToPresenter.counter++;
 		QuestionsService.questions.$save(questionToPresenter);
+		console.log('questionToPresenter', questionToPresenter)
 	};
 
-	$scope.voteQuestionDown = function(questionToPresenter) {
-		questionToPresenter.counter--;
-		QuestionsService.questions.$save(questionToPresenter);
-	};
+	// $scope.voteQuestionDown = function(questionToPresenter) {
+	// 	questionToPresenter.counter--;
+	// 	QuestionsService.questions.$save(questionToPresenter);
+	// };
 
 }
