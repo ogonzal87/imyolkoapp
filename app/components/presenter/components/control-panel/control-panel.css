@@ -1,0 +1,1 @@
+.control-panel-container{display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;-ms-flex-pack:distribute;justify-content:space-around;color:#515151;background-color:#ccc}.control-panel-container .control-panel{padding:20px}.control-panel-container .active{background-color:#5B00FB;color:#fff}

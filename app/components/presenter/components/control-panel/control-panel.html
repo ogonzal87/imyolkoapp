@@ -1,0 +1,33 @@
+<div class="control-panel-container">
+
+	<div class="control-panel"
+		 ng-class="{'active' : $ctrl.presenter.yolkoIsActive}"
+		 ng-click="$ctrl.presenter.yolkoIsActive = !$ctrl.presenter.yolkoIsActive">YOlKO
+	</div>
+
+	<div class="control-panel"
+		 ng-class="{'active' : $ctrl.presenter.lostIsActive}"
+		 ng-click="$ctrl.presenter.lostIsActive = !$ctrl.presenter.lostIsActive">LOST
+	</div>
+
+	<div class="control-panel"
+		 ng-class="{'active' : $ctrl.presenter.questionsIsActive}"
+		 ng-click="$ctrl.presenter.questionsIsActive = !$ctrl.presenter.questionsIsActive">QUESTIONS
+	</div>
+
+	<div class="control-panel"
+		 ng-class="{'active' : $ctrl.presenter.speedIsActive}"
+		 ng-click="$ctrl.presenter.speedIsActive = !$ctrl.presenter.speedIsActive">SPEED
+	</div>
+
+	<div class="control-panel"
+		 ng-class="{'active' : $ctrl.presenter.hearingIsActive}"
+		 ng-click="$ctrl.presenter.hearingIsActive = !$ctrl.presenter.hearingIsActive">HEARING
+	</div>
+
+	<div class="control-panel"
+		 ng-class="{'active' : $ctrl.presenter.customIsActive}"
+		 ng-click="$ctrl.presenter.customIsActive = !$ctrl.presenter.customIsActive">+
+	</div>
+
+</div>

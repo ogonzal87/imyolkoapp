@@ -1,0 +1,21 @@
+$control-panel-background-color: #ccc;
+$control-panel-background-color-active: #5B00FB;
+$control-panel-font-color: #515151;
+$control-panel-font-color-active: #fff;
+
+.control-panel-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	color: $control-panel-font-color;
+	background-color: $control-panel-background-color;
+
+	.control-panel {
+		padding: 20px;
+	}
+
+	.active {
+		background-color: $control-panel-background-color-active;
+		color: $control-panel-font-color-active;
+	}
+}
