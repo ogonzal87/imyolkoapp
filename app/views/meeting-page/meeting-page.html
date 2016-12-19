@@ -6,16 +6,14 @@
 				<div class="notification-indicator" ng-if="questionsToPresenter.length > 0"></div>
 				<img class="user-avatar" src="assets/avatars/profile_pic.png">
 			</div>
-
 		</div>
 	</div>
 
-	<div class="second-row row">
+	<div class="second-row row" ng-if="presenter.yolkoIsActive">
 		<div class="message-container">
 			{{ avatar.message }}
 		</div>
 	</div>
-
 
 	<!--<pre style="font-size: 20px;">-->
 	<!--# People With Dislike Votes: =====> {{ numOfPeopleWithDislikeVotes.length }}-->
@@ -28,7 +26,10 @@
 	<!--</pre>-->
 
 
-	<div class="row">
+	<!--<pre>{{presenter | json}}</pre>-->
+
+
+	<div class="row" ng-if="presenter.yolkoIsActive">
 		<div class="first-row container">
 			<div class="avatar-container">
 				<img ng-src="{{ avatar.face }}"/>
@@ -38,11 +39,10 @@
 
 
 	<div class="row">
-
 		<div class="third-row">
 			<div class="control-btns-container2 col-sm-6 col-sm-push-3">
 				<div class="btns-and-label-container">
-					<div class="sentiment-btns-container">
+					<div class="sentiment-btns-container" ng-if="presenter.yolkoIsActive">
 						<div class="dislike-button-container">
 							<button class="sentiment-btn control-btn btn likesBtn"
 									ng-click="voteDislike()"
@@ -64,12 +64,11 @@
 							<button class="sentiment-btn control-btn btn dislikesBtn"
 									ng-click="voteLike()"
 									ng-disabled="disableSentimentBtns">
-								<!--<img src="assets/icons/good-mood-icon.svg">-->
 								<i class="fa fa-smile-o" aria-hidden="true"></i>
 							</button>
 						</div>
 					</div>
-					<h4>How are you feeling?</h4>
+					<h4 ng-if="presenter.yolkoIsActive">How are you feeling?</h4>
 				</div>
 
 			</div>
@@ -77,11 +76,12 @@
 
 
 			<div class="control-btns-container1 col-sm-3 col-sm-pull-6">
-				<div class="btns-and-label-container">
+				<div class="btns-and-label-container"
+					 ng-if="presenter.hearingIsActive">
 
 					<button class="control-btn btn" type="button"
 							title="Press if you can't hear!"
-							ng-show="attendee.volumeUp ==='no' || !attendee.volumeUp"
+							ng-show="attendee.volumeUp === 'no' || !attendee.volumeUp"
 							ng-click="attendee.volumeUp = 'yes'">
 						<!--<img src="assets/icons/volume-up-icon.svg"-->
 						<!--ng-class="{ 'icon-control-active': attendee.volumeUp == 'yes' }">-->
@@ -96,7 +96,7 @@
 					<h4>LOUDER</h4>
 
 				</div>
-				<div class="btns-and-label-container">
+				<div class="btns-and-label-container" ng-if="presenter.lostIsActive">
 
 					<button class="control-btn btn"
 							title="Press if you are lost!"
@@ -117,11 +117,11 @@
 			</diV>
 
 
-			<div class="control-btns-container3 col-sm-3">
+			<div class="control-btns-container3 col-sm-3"
+				 ng-if="presenter.speedIsActive">
 
 
 				<div class="btns-and-label-container">
-
 					<button class="control-btn btn"
 							title="Press if you want the speaker to go slower"
 							ng-show="attendee.speed === 0 || attendee.speed === 1 || !attendee.speed"
@@ -135,7 +135,6 @@
 						<i class="fa fa-check-circle-o"></i>
 					</button>
 					<h4>SLOWER</h4>
-
 				</div>
 
 				<div class="btns-and-label-container">
@@ -235,7 +234,7 @@
 
 
 <!-- QUESTIONS TO PRESENTER -->
-<div class="container panel question-container">
+<div class="container panel question-container" ng-if="presenter.questionsIsActive">
 
 	<!-- ask question area - input filed and btn -->
 	<form role="form">

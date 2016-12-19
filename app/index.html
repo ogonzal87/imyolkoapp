@@ -1,60 +1,67 @@
 <!DOCTYPE html>
 <html ng-app="YolkoApp">
   <head>
-	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	  <meta charset="utf-8">
-	  <title>OG | Productions</title>
-	  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" title="no title" charset="utf-8">
-	  <link rel="stylesheet" href="node_modules/chartist/dist/chartist.min.css" title="no title" charset="utf-8"> <!-- Chart
-	  Library CSS -->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta charset="utf-8">
+      <title>OG | Productions</title>
+      <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" title="no title" charset="utf-8">
+      <link rel="stylesheet" href="node_modules/chartist/dist/chartist.min.css" title="no title" charset="utf-8"> <!-- Chart
+      Library CSS -->
 	  <link rel="stylesheet" href="./assets/font-awesome-4.6.3/css/font-awesome.css"> <!-- font awesome -->
 
 
-	  <!-- My custom css -->
-	  <link rel="stylesheet" href="views/landing-page/landing-page.css" title="no title" charset="utf-8" />
-	  <link rel="stylesheet" href="views/meeting-page/meeting-page.css" title="no title" charset="utf-8" />
-	  <link rel="stylesheet" href="views/dashboard-page/dashboard-page.css"  title="no title" charset="utf-8" />
-	  <link rel="stylesheet" href="views/app-styles.css" title="no title" charset="utf-8">
+      <!-- My custom css -->
+      <link rel="stylesheet" href="views/landing-page/landing-page.css" title="no title" charset="utf-8" />
+      <link rel="stylesheet" href="views/meeting-page/meeting-page.css" title="no title" charset="utf-8" />
+      <link rel="stylesheet" href="views/dashboard-page/dashboard-page.css"  title="no title" charset="utf-8" />
+      <link rel="stylesheet" href="views/app-styles.css" title="no title" charset="utf-8">
+
+	  <!--My HTML components css-->
+	  <link rel="stylesheet" href="components/presenter/components/control-panel/control-panel.css" title="no title"
+			charset="utf-8">
 
 	  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'> <!-- fonts -->
 
 
 
 
-	  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-			rel="stylesheet">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
 
   <body>
 
-	  <!-- injecting the views on the app -->
-	  <ui-view></ui-view>
+      <!-- injecting the views on the app -->
+      <ui-view></ui-view>
 
-	  <!--dependencies JS-->
-	  <script src="node_modules/jquery/dist/jquery.min.js"></script>
-	  <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-	  <script src="node_modules/angular/angular.min.js"></script>
-	  <script src="node_modules/firebase/lib/firebase-web.js"></script>
-	  <script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
-	  <script src="node_modules/angularfire/dist/angularfire.min.js"></script>
-	  <script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
-	  <script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
-	  <script src="node_modules/underscore/underscore-min.js"></script>
+      <!--dependencies JS-->
+      <script src="node_modules/jquery/dist/jquery.min.js"></script>
+      <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+      <script src="node_modules/angular/angular.min.js"></script>
+      <script src="node_modules/firebase/lib/firebase-web.js"></script>
+      <script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+      <script src="node_modules/angularfire/dist/angularfire.min.js"></script>
+      <script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
+      <script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+      <script src="node_modules/underscore/underscore-min.js"></script>
 	  <script src="node_modules/chartist/dist/chartist.min.js"></script>
 
-	  <!-- routing and app init -->
-	  <script src="app.js"></script>
-	  <!-- components -->
-	  <script src="components/stopwatch/stopwatch-service.js"></script>
-	  <script src="components/quiz/quiz.service.js"></script>
-	  <script src="components/votes/votes.service.js"></script>
-	  <script src="components/questions/questions.service.js"></script>
-	  <script src="components/attendee/attendee.module.js"></script>
-	  <script src="components/attendee/attendee.controller.js"></script>
-	  <script src="components/attendee/services/data.attendee.service.js"></script>
-	  <script src="components/presenter/presenter.module.js"></script>
-	  <script src="components/presenter/presenter.controller.js"></script>
-	  <script src="components/presenter/services/reset.service.js"></script>
+      <!-- routing and app init -->
+      <script src="app.js"></script>
+      <!-- components -->
+      <script src="components/stopwatch/stopwatch-service.js"></script>
+      <script src="components/quiz/quiz.service.js"></script>
+      <script src="components/votes/votes.service.js"></script>
+      <script src="components/questions/questions.service.js"></script>
+      <script src="components/attendee/attendee.module.js"></script>
+      <script src="components/attendee/attendee.controller.js"></script>
+      <script src="components/attendee/services/data.attendee.service.js"></script>
+      <script src="components/presenter/presenter.module.js"></script>
+      <script src="components/presenter/presenter.controller.js"></script>
+      <script src="components/presenter/services/reset.service.js"></script>
+	  <script src="components/presenter/services/data.presenter.service.js"></script>
+
+	  <!--My HTML components-->
+	  <script src="components/presenter/components/control-panel/control-panel.component.js"></script>
 
   </body>
 </html>

@@ -1,7 +1,7 @@
 angular.module('Presenter')
 .controller('PresenterCtrl', PresenterCtrl);
 
-function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsService, DataAttendeeService, ResetService, QuizService, StopwatchService) {
+function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsService, DataAttendeeService, DataPresenterService, ResetService, QuizService, StopwatchService) {
 	//LOAD ATTENDEES
 	$scope.attendees                 = DataAttendeeService.attendees;
 	// LOAD QUESTIONS
@@ -15,7 +15,13 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 	//LOAD QUIZ QUESTION OBJECT
 	$scope.quizQuestion1             = QuizService.quizQuestion1;
 
-	// bind the obj to the database in Firebase
+
+	// bind the obj in view (presenter) to the database in Firebase
+	// any changes that happen in the view will be updated automatically in Firebase and viceversa
+	DataPresenterService.currentPresenterSyncObj.$bindTo($scope, 'presenter');
+	DataPresenterService.currentPresenterApiUrl.set(DataPresenterService.defaultPresenter);
+
+	// bind the obj in view (quizQuestion1) to the database in Firebase
 	// any changes that happen in the view will be updated automatically in Firebase and viceversa
 	QuizService.quizQuestion1.$bindTo($scope, 'quizQuestion1');
 

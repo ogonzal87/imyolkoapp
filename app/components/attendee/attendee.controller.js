@@ -1,7 +1,7 @@
 angular.module('Attendee')
 	.controller("AttendeeCtrl", AttendeeCtrl);
 
-function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, QuestionsService, QuizService) {
+function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterService, VotesService, QuestionsService, QuizService) {
 
 // LOAD ATTENDEES
 	$scope.attendees            = DataAttendeeService.attendees;
@@ -16,7 +16,11 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 	//LOAD QUIZ QUESTIONS
 	$scope.quizQuestion1        = QuizService.quizQuestion1;
 
-	// bind the obj to the database in Firebase
+	// bind the obj in view (presenter) to the database in Firebase
+	// any changes that happen in the view will be updated automatically in Firebase and viceversa
+	$scope.presenter = DataPresenterService.currentPresenterSyncObj;
+
+	// bind the obj in view (attendee) to the database in Firebase
 	// any changes that happen in the view will be updated automatically in Firebase and viceversa
 	DataAttendeeService.currentAttendeeSyncObj.$bindTo($scope, 'attendee');
 	// create the attendee on page arrival - Push the user to the database and start the session
@@ -169,6 +173,10 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, VotesService, Quest
 			alert('Hey! Choose an option... ')
 		}
 	};
+
+
+
+
 
 	$scope.$watch('quizQuestion1', function(newVals, oldVals) {
 		var answersA = QuizService.quizAnswers1A.length;
