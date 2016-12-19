@@ -44,7 +44,7 @@ gulp.task('server', function() {
 	server.server({
 		root: '',
 		livereload: true,
-		port: 3000
+		port: 3001
 	});
 });
 
