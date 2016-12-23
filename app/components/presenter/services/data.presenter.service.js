@@ -6,9 +6,14 @@ function DataPresenterService(FIREBASE_URL, $firebaseObject, $firebaseArray) {
 	var randomKey = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 34);
 	// create an Attendee object that will be automatically constructed on page load with defaulted attributes
 	var defaultPresenter = {
-		name: 'Oscar',
 		key: randomKey,
-		startedAt: Firebase.ServerValue.TIMESTAMP
+		startedAt: Firebase.ServerValue.TIMESTAMP,
+		yolkoIsActive: false,
+		lostIsActive: false,
+		questionsIsActive: false,
+		speedIsActive: false,
+		customQuestionToAttendees: false,
+		hearingIsActive: false
 	};
 
 	// var currentPresenterApiUrl = new Firebase(FIREBASE_URL + "/presenter/" + defaultPresenter.key);

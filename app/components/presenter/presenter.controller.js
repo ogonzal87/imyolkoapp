@@ -326,20 +326,20 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 	}, true);
 
 	//Displaying Yolko
-	$scope.avatarDashboard = { face:'assets/icons/dash-great.svg', message: 'Yolko is great' };
+	$scope.avatarDashboard = { face:'assets/icons/dash-sleeping.svg', backgroundColor: 'lever-0-mood-color' };
 	function displayYolkoInDashboard() {
 		if($scope.dislikePercent >= 80) {
-			return $scope.avatarDashboard = {face: 'assets/icons/dash-tense.svg', message: 'Yolko is a little tense', backgroundColor: 'lever-5-mood-color'};
+			return $scope.avatarDashboard = {face: 'assets/icons/dash-tense.svg', message: 'Yolko is a little tense'};
 		} else if ($scope.dislikePercent >= 60 && $scope.dislikePercent <= 79.999999999999) {
-			return $scope.avatarDashboard = {face: 'assets/icons/dash-notsogood.svg', message: 'Yolko is not so good', backgroundColor: 'lever-4-mood-color'};
+			return $scope.avatarDashboard = {face: 'assets/icons/dash-notsogood.svg', message: 'Yolko is not so good'};
 		} else if ($scope.dislikePercent >= 40 && $scope.dislikePercent <= 59.999999999999) {
-			return $scope.avatarDashboard = {face: 'assets/icons/dash-serious.svg', message: 'Yolko is ok', backgroundColor: 'lever-3-mood-color'};
+			return $scope.avatarDashboard = {face: 'assets/icons/dash-serious.svg', message: 'Yolko is ok'};
 		} else if ($scope.dislikePercent >= 20 && $scope.dislikePercent <= 39.999999999999) {
-			return $scope.avatarDashboard = {face: 'assets/icons/dash-great.svg', message: 'Yolko is great', backgroundColor: ''};
+			return $scope.avatarDashboard = {face: 'assets/icons/dash-great.svg', message: 'Yolko is great'};
 		} else if ($scope.dislikePercent >= 0 && $scope.dislikePercent <= 29.999999999999) {
-			return $scope.avatarDashboard = {face: 'assets/icons/dash-motivated.svg', message: 'Yolko is motivated!', backgroundColor: 'lever-1-mood-color'};
+			return $scope.avatarDashboard = {face: 'assets/icons/dash-motivated.svg', message: 'Yolko is motivated!'};
 		} else {
-			return $scope.avatarDashboard = { face:'assets/icons/dash-great.svg', message: 'Yolko is great', backgroundColor: '' };
+			return $scope.avatarDashboard = { face:'assets/icons/dash-sleeping.svg'};
 		}
 	}
 
@@ -362,30 +362,6 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 		} else {
 			return { value: percent, content: "We are good", class: 'is-active-circle-we-good' };
 		}
-		//
-		// if (percent > 20) {
-		// 	return { value: percent, content: 'Go Way Faster', class: 'is-active-circle-too-fast' };
-		// } else if (percent > 10) {
-		// 	return { value: percent, content: 'Go Faster', class: 'is-active-circle-go-slower' };
-		// } else if (percent < -20) {
-		// 	return { value: percent,  content: 'Go way Slower', class: 'is-active-circle-too-slow' };
-		// } else if (percent < -10) {
-		// 	return { value: percent, content: 'Go Slower', class: 'is-active-circle-go-faster' };
-		// } else {
-		// 	return { value: percent, content: "We are good", class: 'is-active-circle-we-good' };
-		// }
-
-		// if (percent > 20) {
-		// 	return { value: percent, content: 'Too Slow', class: 'is-active-circle-too-slow' };
-		// } else if (percent > 10) {
-		// 	return { value: percent, content: 'Go Faster', class: 'is-active-circle-go-faster' };
-		// } else if (percent < -20) {
-		// 	return { value: percent, content: 'Too Fast!', class: 'is-active-circle-too-fast' };
-		// } else if (percent < -10) {
-		// 	return { value: percent, content: 'Go Slower', class: 'is-active-circle-go-slower' };
-		// } else {
-		// 	return { value: percent, content: "We are good!", class: 'is-active-circle-we-good' };
-		// }
 	}
 
 	function panic(percent) {

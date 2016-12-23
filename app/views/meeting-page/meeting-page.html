@@ -1,4 +1,5 @@
-<div class="avatar-and-controls-background" ng-class="avatar.backgroundColor">
+<div class="avatar-and-controls-background"
+	 ng-class="{'lever-0-mood-color': !presenter.yolkoIsActive && !presenter.lostIsActive && !presenter.questionsIsActive && !presenter.speedIsActive && !presenter.hearingIsActive && !presenter.customQuestionToAttendees}">
 	<div class="yolko-navbar">
 		<div class="yolko-navbar-container">
 			<div class="fa fa-bars burger-bars" ui-sref="dashboard"></div>
@@ -29,10 +30,11 @@
 	<!--<pre>{{presenter | json}}</pre>-->
 
 
-	<div class="row" ng-if="presenter.yolkoIsActive">
+	<div class="row">
 		<div class="first-row container">
 			<div class="avatar-container">
-				<img ng-src="{{ avatar.face }}"/>
+				<img ng-src="{{ avatarDeactive.face }}" ng-if="!presenter.yolkoIsActive && !presenter.lostIsActive && !presenter.questionsIsActive && !presenter.speedIsActive && !presenter.hearingIsActive && !presenter.customQuestionToAttendees">
+				<img ng-src="{{ avatar.face }}" ng-if="presenter.yolkoIsActive">
 			</div>
 		</div>
 	</div>

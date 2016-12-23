@@ -2,32 +2,32 @@
 
 	<div class="control-panel"
 		 ng-class="{'active' : $ctrl.presenter.yolkoIsActive}"
-		 ng-click="$ctrl.presenter.yolkoIsActive = !$ctrl.presenter.yolkoIsActive">YOlKO
+		 ng-click="$ctrl.yolkoEval()">YOlKO
 	</div>
 
 	<div class="control-panel"
 		 ng-class="{'active' : $ctrl.presenter.lostIsActive}"
-		 ng-click="$ctrl.presenter.lostIsActive = !$ctrl.presenter.lostIsActive">LOST
+		 ng-click="$ctrl.lostEval()">LOST
 	</div>
 
 	<div class="control-panel"
 		 ng-class="{'active' : $ctrl.presenter.questionsIsActive}"
-		 ng-click="$ctrl.presenter.questionsIsActive = !$ctrl.presenter.questionsIsActive">QUESTIONS
+		 ng-click="$ctrl.questionsEval()">QUESTIONS
 	</div>
 
 	<div class="control-panel"
 		 ng-class="{'active' : $ctrl.presenter.speedIsActive}"
-		 ng-click="$ctrl.presenter.speedIsActive = !$ctrl.presenter.speedIsActive">SPEED
+		 ng-click="$ctrl.speedEval()">SPEED
 	</div>
 
 	<div class="control-panel"
 		 ng-class="{'active' : $ctrl.presenter.hearingIsActive}"
-		 ng-click="$ctrl.presenter.hearingIsActive = !$ctrl.presenter.hearingIsActive">HEARING
+		 ng-click="$ctrl.hearingEval()">HEARING
 	</div>
 
 	<div class="control-panel"
 		 ng-class="{'active' : $ctrl.presenter.customIsActive}"
-		 ng-click="$ctrl.presenter.customIsActive = !$ctrl.presenter.customIsActive">+
+		 ng-click="$ctrl.customQuestionToAttendeesEval()">+
 	</div>
 
 </div>
