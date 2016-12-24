@@ -23,7 +23,7 @@ $panel-soso-border-color:          #eea236;
 $panel-soso-font-color:            $base-font-color-light;
 
 // bootstrap needs a container when you use a row. If not it adds 15px on the sides of the row for margin
-.row { margin: 0}
+.row { margin: 0 }
 
 
 .avatar-and-controls-background {
@@ -144,12 +144,40 @@ $panel-soso-font-color:            $base-font-color-light;
 			justify-content: center;
 			width: 80%;
 
+			.avatar-deactive-container {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				flex-direction: column;
+			}
+
+			.avatar-deactive-message-bg {
+				font-size: 80px;
+				font-weight: bold;
+				color: #B4B7C2;
+				p {
+					margin: 0;
+				}
+			}
+
+			.avatar-deactive-message-sm {
+				font-size: 30px;
+				color: #FFFFFF;
+			}
+
 			@media screen and (max-width: 767px) {
 				margin: 40px;
 
 				img {
 					width: 60%;
 					height: auto;
+				}
+
+				.avatar-deactive-message-bg {
+					font-size: 30px;
+				}
+				.avatar-deactive-message-sm {
+					font-size: 15px;
 				}
 			}
 		}

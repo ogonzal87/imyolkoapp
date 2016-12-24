@@ -96,7 +96,7 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 
 
 	//Displaying Yolko
-	$scope.avatarDeactive = { face:'assets/avatars/sleeping-face.svg', backgroundColor: 'lever-0-mood-color' };
+	$scope.avatarDeactive = { face:'assets/avatars/sleeping-face.svg' };
 
 	function displayYolko() {
 		if($scope.dislikePercent >= 80) {

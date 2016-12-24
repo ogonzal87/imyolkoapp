@@ -1,17 +1,10 @@
 <div class="avatar-and-controls-background"
 	 ng-class="{'lever-0-mood-color': !presenter.yolkoIsActive && !presenter.lostIsActive && !presenter.questionsIsActive && !presenter.speedIsActive && !presenter.hearingIsActive && !presenter.customQuestionToAttendees}">
-	<div class="yolko-navbar">
-		<div class="yolko-navbar-container">
-			<div class="fa fa-bars burger-bars" ui-sref="dashboard"></div>
-			<div class="right-side-nav">
-				<div class="notification-indicator" ng-if="questionsToPresenter.length > 0"></div>
-				<img class="user-avatar" src="assets/avatars/profile_pic.png">
-			</div>
-		</div>
-	</div>
 
-	<div class="second-row row" ng-if="presenter.yolkoIsActive">
-		<div class="message-container">
+	<og-navbar></og-navbar>
+
+	<div class="second-row row">
+		<div class="message-container" ng-if="presenter.yolkoIsActive">
 			{{ avatar.message }}
 		</div>
 	</div>
@@ -33,7 +26,13 @@
 	<div class="row">
 		<div class="first-row container">
 			<div class="avatar-container">
-				<img ng-src="{{ avatarDeactive.face }}" ng-if="!presenter.yolkoIsActive && !presenter.lostIsActive && !presenter.questionsIsActive && !presenter.speedIsActive && !presenter.hearingIsActive && !presenter.customQuestionToAttendees">
+				<div class="avatar-deactive-container" ng-if="!presenter.yolkoIsActive && !presenter.lostIsActive && !presenter.questionsIsActive && !presenter.speedIsActive && !presenter.hearingIsActive && !presenter.customQuestionToAttendees">
+					<img ng-src="{{ avatarDeactive.face }}">
+					<p class="avatar-deactive-message-bg">
+						We are good here...
+					</p>
+					<p class="avatar-deactive-message-sm">No feedback is needed right now. Check back in a few  </p>
+				</div>
 				<img ng-src="{{ avatar.face }}" ng-if="presenter.yolkoIsActive">
 			</div>
 		</div>
