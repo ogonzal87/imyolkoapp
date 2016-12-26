@@ -1,8 +1,10 @@
 //Variables
 $base-background-color:           #242a36;
-$base-background-color-secondary: #43c9c6;
+$base-dashboard-background-color: #EEE;
+$base-background-color-secondary: #4FCDFE;
 $base-background-color-light:     #fff;
-$base-background-color-purple:    #624DD6;
+$base-background-color-purple:    #5B00FB;
+$inactive-background-color:       #E1E1E9;
 
 $base-font-color-light:           #fff;
 $base-font-color-dark:            #555;
@@ -28,13 +30,11 @@ $second-row-container-height: 200px;
 $third-row-container-height: 284px;
 $speed-graph-container-width: 180px;
 
-
-
 $font-weight: 100;
 $label-font-size: 18px;
 
 .dashboard-background {
-	background-color: #eee;
+	background-color: $base-dashboard-background-color;
 	min-height: 80vh;
 	position: relative;
 
