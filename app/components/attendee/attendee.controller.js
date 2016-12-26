@@ -70,6 +70,39 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 	// Create a watch to watch what happens on the Attendees node
 	$scope.$watch('attendees', function(newVal, oldVal) {
 
+		//LOST LOGIC
+		$scope.attendeeInPanic = function () {
+			$scope.attendee.feeling = 'panic';
+			$scope.lostFeedbackTaken = true;
+		};
+		$scope.attendeeNotInPanic = function () {
+			$scope.attendee.feeling = 'fine';
+			$scope.lostFeedbackTaken = true;
+		};
+
+		//HEARING LOGIC
+		$scope.attendeeCannotHear = function () {
+			$scope.attendee.volumeUp = 'yes';
+			$scope.hearingFeedbackTaken = true;
+		};
+		$scope.attendeeCanHear = function () {
+			$scope.attendee.volumeUp = 'no';
+			$scope.hearingFeedbackTaken = true;
+		};
+
+		//SPEED LOGIC
+		$scope.attendeeWantSlower = function () {
+			$scope.attendee.speed = -1;
+			$scope.speedFeedbackTaken = true;
+		};
+		$scope.attendeeWantFaster = function () {
+			$scope.attendee.speed = 1;
+			$scope.speedFeedbackTaken = true;
+		};
+
+
+
+
 		// Panic Button Logic
 		// $scope.panicButton = function(attendee) {
 		// 	if ($scope.attendee.feeling == "fine") {

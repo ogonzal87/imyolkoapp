@@ -3,7 +3,7 @@ $base-background-color:           #242a36;
 $base-background-color-secondary: #4FCDFE;
 $base-background-color-light:     #fff;
 $base-background-color-purple:    #5B00FB;
-$inactive-background-color: #E1E1E9;
+$inactive-background-color:       #E1E1E9;
 
 $base-font-color-light:           #fff;
 $base-font-color-dark:            #555;
@@ -13,6 +13,7 @@ $border-light-color:              #fff;
 
 $panel-bad-background-color:      #d9534f;
 $panel-bad-border-color:          #d43f3a;
+$success-color:                    #00F85C;
 $panel-bad-font-color:            $base-font-color-light;
 
 $panel-soso-background-color:      #f0ad4e;
@@ -20,6 +21,15 @@ $panel-soso-border-color:          #eea236;
 
 // bootstrap needs a container when you use a row. If not it adds 15px on the sides of the row for margin
 .row { margin: 0 }
+
+
+// default material box-shadow effect:
+//box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+//transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+//
+//&:hover {
+//	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+//}
 
 
 .meeting-page {
@@ -56,7 +66,7 @@ $panel-soso-border-color:          #eea236;
 	}
 
 	@media screen and (max-width: 767px) {
-		margin: 40px;
+		padding: 40px;
 
 		img {
 			width: 60%;
@@ -71,10 +81,8 @@ $panel-soso-border-color:          #eea236;
 		}
 	}
 
-
-
 	.meeting-container {
-		width: 1040px;
+		width: 100%;
 		padding: 20px 0 0 0 ;
 		margin: 0;
 		display: flex;
@@ -133,12 +141,17 @@ $panel-soso-border-color:          #eea236;
 						border: 5px solid #fff;
 						box-shadow: 0 8px 10px 0 rgba(0, 0, 0, .3);
 						opacity: 1;
-						transition: opacity 500ms ease;
+						//transition: opacity 500ms ease;
 						outline: none;
 						font-size: 40px;
 						height: 70px;
 						width: 70px;
 						margin: 20px 20px 60px 20px;
+						transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+
+						&:hover {
+							box-shadow: 0 0 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+						}
 
 						&.btn-control-active {
 							box-shadow: inset  0 0 15px rgba(0,0,0,0.6);
@@ -170,10 +183,6 @@ $panel-soso-border-color:          #eea236;
 						}
 					}
 
-
-
-
-
 				}
 			}
 
@@ -186,10 +195,27 @@ $panel-soso-border-color:          #eea236;
 				.option {
 					padding: 15px 70px;
 					font-size: 60px;
+					cursor: pointer;
 
 					@media screen and (max-width: 767px) {
 						font-size: 30px;
 						padding: 7px 35px;
+					}
+				}
+
+				.meeting-feedback-taken {
+					font-size: 30px;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					flex-direction: column;
+
+					@media screen and (max-width: 767px) {
+						font-size: 20px;
+					}
+
+					i {
+						color: $success-color;
 					}
 				}
 			}
@@ -211,9 +237,245 @@ $panel-soso-border-color:          #eea236;
 			justify-content: center;
 			height: 340px;
 			border: 1px solid red;
+			transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 		}
 
-		//border: solid red 1px;
+		.meeting-quiz-container {
+			text-align: center;
+			margin-bottom: 80px;
+
+			.meeting-pop-question {
+				font-size: 48px;
+				margin-bottom: 30px;
+
+				@media screen and (max-width: 767px){
+					font-size: 24px;
+				}
+			}
+
+			.pop-choice {
+				display: flex;
+				align-items: center;
+				background-color:$base-background-color-light;
+				color:$base-font-color-dark;
+				height: 95px;
+				width: 800px;
+				font-size:24px;
+				margin-bottom: 15px;
+				box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+				transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+
+				&:hover {
+					box-shadow: 0 0 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+				}
+
+				@media screen and (max-width: 767px){
+					height: 70px;
+					width: 350px;
+					font-size:15px;
+				}
+
+				.pop-choice-letter {
+					padding: 20px 40px;
+					border-right: 3px solid $base-background-color-purple;
+					margin-right: 30px;
+					font-size: 36px;
+					color: $base-background-color-secondary;
+					font-weight: bold;
+
+					@media screen and (max-width: 767px){
+						padding: 10px 20px;
+						font-size:18px;
+					}
+				}
+			}
+
+			input[type="radio"] {
+				display:none;
+			}
+			input[type="radio"]:checked + label {
+				background-color: $base-background-color-secondary;
+				color: $base-background-color-purple;
+				box-shadow: 0 0 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+
+				.pop-choice-letter {
+					color: $base-background-color-purple;
+				}
+			}
+
+			.pop-submit-btn {
+				background-color: $base-background-color-secondary;
+				border-radius: 0;
+				border: none;
+				color: white;
+				font-size: 25px;
+				padding: 15px;
+				margin-top: 30px;
+				height:72px;
+				min-width: 50%;
+				box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+				transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+
+				&:hover {
+					box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+					color: white;
+				}
+				&:focus {
+					outline: 0;
+				}
+			}
+		}
+
+		.meeting-quiz-results-container {
+			background-color: #fff;
+			max-width: 800px;
+			margin-bottom: 60px;
+			padding: 20px 20px 0 0;
+			box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+
+			@media screen and (max-width: 767px) {
+				width: 100%;
+			}
+		}
+
+		.meeting-questions-to-presenter-container {
+			max-width: 800px;
+			width: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-direction: column;
+			margin-top: 80px;
+
+			@media screen and (max-width: 767px) {
+				max-width: 350px;
+				width: 100%;
+			}
+
+			.meeting-question-to-presenter-input {
+				width: 800px;
+				padding: 5px 10px;
+				height: 138px;
+				font-size: 30px;
+				box-sizing: border-box;
+				color: $base-font-color-dark;
+
+				@media screen and (max-width: 767px) {
+					font-size: 15px;
+					height: 70px;
+					width: 350px;
+				}
+			}
+
+			.ask-button-container {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+				.askbutton {
+					font-size: 30px;
+					height: 72px;
+					width: 385px;
+					margin: 30px 0 60px 0;
+					background-color: $base-background-color-secondary;
+					color: white;
+					border-radius: 0;
+					box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+					transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+
+					&:hover {
+						box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+					}
+
+					@media screen and (max-width: 767px) {
+						font-size: 25px;
+						height: 72px;
+						width: 235px;
+					}
+
+					&:focus {
+						outline: 0;
+					}
+				}
+			}
+
+			.meeting-questions-list {
+				width: 800px;
+
+				@media screen and (max-width: 767px) {
+					width: 100%;
+				}
+
+				.meeting-question-in-list {
+					border-radius: 0;
+					display: flex;
+					flex-direction: row;
+					position: relative;
+					margin-bottom: 14px;
+
+					box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+					transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+
+					&:hover {
+						box-shadow: 0 0 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+					}
+
+					.meeting-question-content {
+						color:$base-font-color-dark;
+						font-size: 24px;
+						width: 80%;
+						align-self: center;
+						margin-bottom: 5px;
+
+						@media screen and (max-width: 767px) {
+							font-size: 15px;
+						}
+
+						.meeting-question-content-time {
+							font-size: 12px;
+							position: absolute;
+							bottom:0;
+							opacity: .3;
+							padding-bottom: 2px;
+						}
+					}
+
+					.meeting-question-voting-controls {
+						width: 20%;
+						display: flex;
+						flex-direction: column;
+						justify-content: center;
+						text-align: center;
+						color: $base-font-color-dark;
+
+						button {
+							background-color: transparent;
+							border: none;
+							margin: 0;
+							padding: 0;
+
+							&:focus {
+								outline: 0;
+							}
+						}
+						.meeting-voting-up-arrow {
+							color: $base-background-color-secondary;
+							opacity: 1;
+						}
+						.question-voting-controls-text {
+							font-size: 35px;
+							color:$base-font-color-dark;
+
+							@media screen and (max-width: 767px) {
+								font-size: 15px;
+							}
+						}
+					}
+				}
+
+			}
+		}
+
 	}
 }
 

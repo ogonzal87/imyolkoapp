@@ -1,15 +1,16 @@
 <og-navbar></og-navbar>
-<div class="meeting-page"
-	 ng-class="{'inactive-background-color': !presenter.yolkoIsActive && !presenter.lostIsActive && !presenter.questionsIsActive && !presenter.speedIsActive && !presenter.hearingIsActive && !presenter.customQuestionToAttendees}">
+<!--<div class="meeting-page"-->
+	 <!--ng-class="{'inactive-background-color': !presenter.yolkoIsActive && !presenter.lostIsActive && !presenter.questionsIsActive && !presenter.speedIsActive && !presenter.hearingIsActive && !presenter.customQuestionToAttendees}">-->
+<div class="meeting-page">
 
 	<!--Show when there is no action from the Presenter-->
-	<div class="avatar-deactive-container" ng-if="!presenter.yolkoIsActive && !presenter.lostIsActive && !presenter.questionsIsActive && !presenter.speedIsActive && !presenter.hearingIsActive && !presenter.customQuestionToAttendees">
-		<img ng-src="{{ avatarDeactive.face }}">
-		<p class="avatar-deactive-message-bg">
-			We are good here...
-		</p>
-		<p class="avatar-deactive-message-sm">No feedback is needed right now. Check back in a few  </p>
-	</div>
+	<!--<div class="avatar-deactive-container" ng-if="!presenter.yolkoIsActive && !presenter.lostIsActive && !presenter.questionsIsActive && !presenter.speedIsActive && !presenter.hearingIsActive && !presenter.customQuestionToAttendees">-->
+		<!--<img ng-src="{{ avatarDeactive.face }}">-->
+		<!--<p class="avatar-deactive-message-bg">-->
+			<!--We are good here...-->
+		<!--</p>-->
+		<!--<p class="avatar-deactive-message-sm">No feedback is needed right now. Check back in a few  </p>-->
+	<!--</div>-->
 
 
 	<!--Show when there is action from the Presenter-->
@@ -31,7 +32,6 @@
 					<button class="yolko-dislike-btn meeting-yolko-sentiment-btn"
 							ng-click="voteDislike()"
 							ng-disabled="disableSentimentBtns">
-						<!--<img src="assets/icons/bad-mood-icon.svg">-->
 						<i class="fa fa-frown-o" aria-hidden="true"></i>
 					</button>
 
@@ -54,6 +54,71 @@
 		</div>
 
 
+		<!-- POP QUIZ -->
+		<div class="meeting-quiz-container" ng-show="showQuiz">
+			<div id="quiz">
+				<div id="question" class="meeting-pop-question">
+					{{ quizQuestion1.questionContent }}
+				</div>
+				<div id="choices" class="meeting-pop-choices">
+					<input type="radio"
+						   id="availableAnsA"
+						   name="availableAnsA"
+						   ng-model="attendee.chosenAnswer"
+						   ng-value="'A'"
+						   class="pop-choice" >
+					<label class="pop-choice" for="availableAnsA">
+						<span class="pop-choice-letter">A</span>
+						{{quizQuestion1.availableAns[0].content}}
+					</label>
+
+					<input type="radio"
+						   name="availableAnsB"
+						   id="availableAnsB"
+						   ng-model="attendee.chosenAnswer"
+						   ng-value="'B'"
+						   class="pop-choice">
+					<label class="pop-choice" for="availableAnsB">
+						<span class="pop-choice-letter">B</span>
+						{{quizQuestion1.availableAns[1].content}}
+					</label>
+
+					<input type="radio"
+						   name="availableAnsC"
+						   id="availableAnsC"
+						   ng-model="attendee.chosenAnswer"
+						   ng-value="'C'"
+						   class="pop-choice">
+					<label class="pop-choice" for="availableAnsC">
+						<span class="pop-choice-letter">C</span>
+						{{quizQuestion1.availableAns[2].content}}
+					</label>
+
+					<input type="radio"
+						   name="availableAnsD"
+						   id="availableAnsD"
+						   ng-model="attendee.chosenAnswer"
+						   ng-value="'D'"
+						   class="pop-choice">
+					<label class="pop-choice" for="availableAnsD">
+						<span class="pop-choice-letter">D</span>
+						{{quizQuestion1.availableAns[3].content}}
+					</label>
+
+				</div>
+				<button class="btn pop-submit-btn"
+						ng-click="submitAnswer()"
+						ng-disabled="disableAllChoices">
+					SUBMIT ANSWER
+				</button>
+			</div>
+		</div>
+		<!-- POP QUIZ RESULTS CHART -->
+		<div class="container meeting-quiz-results-container" ng-show="quizQuestion1.isShowingResultsToAttendees">
+			<div class="ct-chart ct-major-tenth"></div>
+		</div>
+
+
 		<!--LOST-->
 		<div class="meeting-row meeting-row-alternate-color" ng-if="presenter.lostIsActive">
 			<div class="meeting-question">
@@ -61,10 +126,19 @@
 			</div>
 
 			<div class="response-options">
-				<div class="option">
+				<div class="option"
+					 ng-click="attendeeInPanic()"
+					 ng-hide="lostFeedbackTaken">
 					Yep
 				</div>
-				<div class="option">
+
+				<div class="meeting-feedback-taken" ng-show="lostFeedbackTaken">
+					<i class="fa fa-check-circle fa-2x" aria-hidden="true"></i> On it... I'll let the presenter know.
+				</div>
+
+				<div class="option"
+					 ng-click="attendeeNotInPanic()"
+					 ng-hide="lostFeedbackTaken">
 					Nope
 				</div>
 			</div>
@@ -78,31 +152,96 @@
 			</div>
 
 			<div class="response-options">
-				<div class="option">
+				<div class="option"
+					 ng-click="attendeeCanHear()"
+					 ng-hide="hearingFeedbackTaken">
 					Yep
 				</div>
-				<div class="option">
+
+				<div class="meeting-feedback-taken" ng-show="hearingFeedbackTaken">
+					<i class="fa fa-check-circle fa-2x" aria-hidden="true"></i> On it... I'll let the presenter know.
+				</div>
+
+				<div class="option"
+					 ng-click="attendeeCannotHear()"
+					 ng-hide="hearingFeedbackTaken">
 					Nope
 				</div>
 			</div>
 		</div>
 
 
-
 		<!--SPEED-->
 		<div class="meeting-row meeting-row-alternate-color" ng-if="presenter.speedIsActive">
 			<div class="meeting-question">
-				How do you want me to go?
+				How do you like the speed?
 			</div>
 
 			<div class="response-options">
-				<div class="option">
+				<div class="option"
+					 ng-click="attendeeWantFaster()"
+					 ng-hide="speedFeedbackTaken">
 					Faster
 				</div>
-				<div class="option">
+
+				<div class="meeting-feedback-taken" ng-show="speedFeedbackTaken">
+					<i class="fa fa-check-circle fa-2x" aria-hidden="true"></i> On it... I'll let the presenter know.
+				</div>
+
+				<div class="option"
+					 ng-click="attendeeWantSlower()"
+					 ng-hide="speedFeedbackTaken">
 					Slower
 				</div>
 			</div>
+		</div>
+
+
+		<!--QUESTIONS TO PRESENTER-->
+		<div class="meeting-questions-to-presenter-container" ng-show="presenter.questionsIsActive">
+			<form role="form">
+				<textarea class="meeting-question-to-presenter-input"
+						  id="question-to-presenter"
+						  ng-model="questionContent"
+						  placeholder="Ask a question and the audience will vote for it..."
+						  ng-keydown="addQuestionKeyDown($event)">
+				</textarea>
+
+				<div class="ask-button-container">
+					<button class="btn askbutton"
+							type="button"
+							ng-click="addQuestionClick()">
+						<span><i class="fa fa-comment" style="margin-right: 10px;"></i></span>
+						ASK
+					</button>
+				</div>
+			</form>
+
+			<ul class="list-group meeting-questions-list">
+				<li class="list-group-item meeting-question-in-list"
+					ng-repeat="(key, questionToPresenter) in questionsToPresenter | orderBy: '-counter'">
+					<div class="meeting-question-content">
+						{{ questionToPresenter.content }}
+						<div class="meeting-question-content-time">
+							{{ questionToPresenter.time | date: 'h:mm:ss a' }}
+						</div>
+					</div>
+					<div class="meeting-question-voting-controls">
+						<button class="btn btn-sm btn-default"
+								ng-click="voteQuestionUp(questionToPresenter)">
+							<i class="fa fa-chevron-up fa-3x meeting-voting-up-arrow"></i>
+							<div class="question-voting-controls-text">
+								{{ questionToPresenter.counter }}
+							</div>
+						</button>
+
+						<!--<button class="btn btn-sm btn-default" ng-click="voteQuestionDown(questionToPresenter)">-->
+						<!--<i class="fa fa-chevron-down"></i>-->
+						<!--</button>-->
+						<!--<button class="btn btn-sm btn-default" ng-click="removeQuestion(key)">&times;</button>-->
+					</div>
+				</li>
+			</ul>
 		</div>
 
 
