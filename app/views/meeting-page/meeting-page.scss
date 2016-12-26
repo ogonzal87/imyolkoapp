@@ -11,13 +11,8 @@ $base-font-color-dark:            #555;
 $border-dark-color:               #44474c;
 $border-light-color:              #fff;
 
-$panel-bad-background-color:      #d9534f;
-$panel-bad-border-color:          #d43f3a;
 $success-color:                    #00F85C;
 $panel-bad-font-color:            $base-font-color-light;
-
-$panel-soso-background-color:      #f0ad4e;
-$panel-soso-border-color:          #eea236;
 
 // bootstrap needs a container when you use a row. If not it adds 15px on the sides of the row for margin
 .row { margin: 0 }

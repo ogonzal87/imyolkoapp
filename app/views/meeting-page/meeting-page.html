@@ -1,16 +1,16 @@
 <og-navbar></og-navbar>
-<!--<div class="meeting-page"-->
-	 <!--ng-class="{'inactive-background-color': !presenter.yolkoIsActive && !presenter.lostIsActive && !presenter.questionsIsActive && !presenter.speedIsActive && !presenter.hearingIsActive && !presenter.customQuestionToAttendees}">-->
-<div class="meeting-page">
+<div class="meeting-page"
+	 ng-class="{'inactive-background-color': !presenter.yolkoIsActive && !presenter.lostIsActive && !presenter.questionsIsActive && !presenter.speedIsActive && !presenter.hearingIsActive && !presenter.customQuestionToAttendees}">
+<!--<div class="meeting-page">-->
 
 	<!--Show when there is no action from the Presenter-->
-	<!--<div class="avatar-deactive-container" ng-if="!presenter.yolkoIsActive && !presenter.lostIsActive && !presenter.questionsIsActive && !presenter.speedIsActive && !presenter.hearingIsActive && !presenter.customQuestionToAttendees">-->
-		<!--<img ng-src="{{ avatarDeactive.face }}">-->
-		<!--<p class="avatar-deactive-message-bg">-->
-			<!--We are good here...-->
-		<!--</p>-->
-		<!--<p class="avatar-deactive-message-sm">No feedback is needed right now. Check back in a few  </p>-->
-	<!--</div>-->
+	<div class="avatar-deactive-container" ng-if="!presenter.yolkoIsActive && !presenter.lostIsActive && !presenter.questionsIsActive && !presenter.speedIsActive && !presenter.hearingIsActive && !presenter.customQuestionToAttendees">
+		<img ng-src="{{ avatarDeactive.face }}">
+		<p class="avatar-deactive-message-bg">
+			We are good here...
+		</p>
+		<p class="avatar-deactive-message-sm">No feedback is needed right now. Check back in a few  </p>
+	</div>
 
 
 	<!--Show when there is action from the Presenter-->
