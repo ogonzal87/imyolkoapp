@@ -2,7 +2,7 @@ angular.module('YolkoApp')
 .service('QuizService', QuizService);
 
 function QuizService(FIREBASE_URL, $firebaseArray, $firebaseObject) {
-	var quizQuestion1Url = new Firebase(FIREBASE_URL + '/quiz/question1/');
+	var customQuestionsToAttendeesUrl = new Firebase(FIREBASE_URL + '/customQuestionsToAttendees/');
 	var quizQuestion2Url = new Firebase(FIREBASE_URL + '/quiz/question2/');
 	var quizQuestion3Url = new Firebase(FIREBASE_URL + '/quiz/question3/');
 	var quizAnswer1AUrl = new Firebase(FIREBASE_URL + '/quiz/question1/answers/a/');
@@ -10,22 +10,23 @@ function QuizService(FIREBASE_URL, $firebaseArray, $firebaseObject) {
 	var quizAnswer1CUrl = new Firebase(FIREBASE_URL + '/quiz/question1/answers/c/');
 	var quizAnswer1DUrl = new Firebase(FIREBASE_URL + '/quiz/question1/answers/d/');
 
-	var quizQuestion1 = $firebaseObject(quizQuestion1Url);
+	var customQuestionsToAttendees = $firebaseObject(customQuestionsToAttendeesUrl);
 	var quizQuestion2 = $firebaseObject(quizQuestion2Url);
 	var quizQuestion3 = $firebaseObject(quizQuestion3Url);
 
 
 	var quizAnswers1A = $firebaseArray(quizAnswer1AUrl);
+
 	var quizAnswers1B = $firebaseArray(quizAnswer1BUrl);
 	var quizAnswers1C = $firebaseArray(quizAnswer1CUrl);
 	var quizAnswers1D = $firebaseArray(quizAnswer1DUrl);
 
 	return {
 		//questions
-		quizQuestion1Url: quizQuestion1Url,
+		customQuestionsToAttendeesUrl: customQuestionsToAttendeesUrl,
 		quizQuestion2Url: quizQuestion2Url,
 		quizQuestion3Url: quizQuestion3Url,
-		quizQuestion1: quizQuestion1,
+		customQuestionsToAttendees: customQuestionsToAttendees,
 		quizQuestion2: quizQuestion2,
 		quizQuestion3: quizQuestion3,
 

@@ -1,7 +1,7 @@
 angular.module('Presenter')
 .controller('PresenterCtrl', PresenterCtrl);
 
-function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsService, DataAttendeeService, DataPresenterService, ResetService, QuizService, StopwatchService) {
+function PresenterCtrl(FIREBASE_URL, $scope, $interval, $timeout, VotesService, QuestionsService, DataAttendeeService, DataPresenterService, ResetService, QuizService, StopwatchService) {
 	//LOAD ATTENDEES
 	$scope.attendees                 = DataAttendeeService.attendees;
 	// LOAD QUESTIONS
@@ -13,8 +13,7 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 	//LOAD DISLIKE VOTES
 	$scope.dislikeVotesArray         = VotesService.dislikeVotesArray;
 	//LOAD QUIZ QUESTION OBJECT
-	$scope.quizQuestion1             = QuizService.quizQuestion1;
-
+	$scope.customQuestionsToAttendees             = QuizService.customQuestionsToAttendees;
 
 	// bind the obj in view (presenter) to the database in Firebase
 	// any changes that happen in the view will be updated automatically in Firebase and viceversa
@@ -23,7 +22,7 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 
 	// bind the obj in view (quizQuestion1) to the database in Firebase
 	// any changes that happen in the view will be updated automatically in Firebase and viceversa
-	QuizService.quizQuestion1.$bindTo($scope, 'quizQuestion1');
+	QuizService.customQuestionsToAttendees.$bindTo($scope, 'customQuestionsToAttendees');
 
 	// arrays that keep track of all the votes --> this arrays are populated each time the interval is triggered
 	$scope.intervalLikeVotes    = [];
@@ -390,53 +389,45 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 
 	//Quiz Maker
 	// /////////////////////////////////////////////////////////////////////////
-	$scope.isCorrectAnsA = false;
-	$scope.isCorrectAnsB = false;
-	$scope.isCorrectAnsC = false;
-	$scope.isCorrectAnsD = false;
-	$scope.showFireQuizBtn = true;
-	$scope.fireQuizToAttendees = function() {
-		var randomKey = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 8);
+	function CustomQuestion(content, availAnswers, correctAnsw, questionData) {
+		this.key = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 8);
+		this.questionContent = content;
+		this.availAnswers = availAnswers;
+		this.correctAnsw = correctAnsw || '';
+		this.questionData = questionData;
+
+		// this.print = function() {
+		// };
+	}
+
+	$scope.questionsForAttendees = [];
+
+	$scope.saveQuestionForAttendees = function() {
+
 		var questionData = {
-			questionContent: $scope.popQuizQuestionContent,
-			availableAns: [
-				{
-					value: 'a',
-					content: $scope.choiceA,
-					isCorrectAns: $scope.isCorrectAnsA
-				},
-				{
-					value: 'b',
-					content: $scope.choiceB,
-					isCorrectAns: $scope.isCorrectAnsB
-				},
-				{
-					value: 'c',
-					content: $scope.choiceC,
-					isCorrectAns: $scope.isCorrectAnsC
-				},
-				{
-					value: 'd',
-					content: $scope.choiceD,
-					isCorrectAns: $scope.isCorrectAnsD
-				}
-			],
-			key: randomKey,
-			// Make the Pop Quiz show on the Meeting Page UI
-			// TODO: this is not the best approach. Need to come up with a better one.
+
 			isShowingQuiz: true,
 			isShowingResultsToAttendees: false,
 			isShowingResultsToPresenter: true,
 		};
 
+		console.log($scope.customQuestion.correctAnsw);
+
+		var options = [{a: $scope.customQuestion.optionA || ''}, {b: $scope.customQuestion.optionB || ''}, {c: $scope.customQuestion.optionC || ''}];
+
+		var question = new CustomQuestion($scope.customQuestion.content, options, $scope.customQuestion.correctAnsw, questionData);
+
 		//show 'Reveal Quiz Results' btn
-		$scope.showRevealResultsBtn = true;
+		// $scope.showRevealResultsBtn = true;
 		//hide 'Submit Quiz' btn
-		$scope.showFireQuizBtn = false;
+		// $scope.showFireQuizBtn = false;
 		// Figure out which is thw correct answer from the data in Firebase and store in a variable
-		questionData.correctAns =  _.findWhere(questionData.availableAns, {isCorrectAns: true});
+		// questionData.correctAns =  _.findWhere(questionData.availableAns, {isCorrectAns: true});
 		// Set the question in Firebase
-		QuizService.quizQuestion1Url.set(questionData);
+
+		console.log(question)
+		var newQuestionRef = new Firebase(FIREBASE_URL + '/customQuestionsToAttendees/' + question.key);
+		newQuestionRef.set(question);
 	};
 
 	// Results
@@ -469,9 +460,9 @@ function PresenterCtrl($scope, $interval, $timeout, VotesService, QuestionsServi
 		new Chartist.Bar('.ct-chart-quiz', chartAllData, chartBarOptions);
 
 		//Shows the quiz on the UI of the attendee when the Pop Qui is fired from the Dashboard
-		$scope.showQuiz = $scope.quizQuestion1.isShowingQuiz;
+		$scope.showQuiz = $scope.customQuestionsToAttendees.isShowingQuiz;
 		//Shows the quiz on the UI of the attendee when the Pop Qui is fired from the Dashboard
-		$scope.isShowingResultsToPresenter = $scope.quizQuestion1.isShowingResultsToPresenter;
+		$scope.isShowingResultsToPresenter = $scope.customQuestionsToAttendees.isShowingResultsToPresenter;
 	}, true);
 
 

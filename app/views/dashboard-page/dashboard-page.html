@@ -4,6 +4,7 @@
 
 	<og-control-panel presenter="presenter"></og-control-panel>
 
+
 	<div>
 		<div class="dashboard--presentation-ctrls-container row">
 
@@ -165,7 +166,7 @@
 	</div>
 
 	<div class="dashboard-tab-content">
-		<div ng-show="tab1IsActive" class="container question-list-container">
+		<div ng-show="tab1IsActive = false" class="container question-list-container">
 			<!--   QUESTIONS -->
 			<ul class="list-group questions">
 				<div ng-if="questionsToPresenter.length === 0" class="no-questions-container">
@@ -200,15 +201,16 @@
 
 
 
-		<div ng-show="tab2IsActive" class="container pop-quiz-container">
-			<form novalidate class="container" style="padding: 20px 60px;">
+		<div ng-show="tab2IsActive = true" class="container pop-quiz-container">
+
+			<form novalidate ng-submit="saveQuestionForAttendees()" class="container">
 				<div class="form-group">
 					<br>
 					<!--<h4 for="question">QUESTION</h4>-->
 					<textarea class="form-control"
 							  id="question"
 							  placeholder="What would you like to ask everyone?"
-							  ng-model="popQuizQuestionContent"
+							  ng-model="customQuestion.content"
 							  rows="4">
 					</textarea>
 				</div>
@@ -219,11 +221,12 @@
 						   class="form-control input-text"
 						   id="choice-a"
 						   placeholder="I'm a choice option"
-						   ng-model="choiceA">
+						   ng-model="customQuestion.optionA">
 
-					<input type="checkbox"
+					<input type="radio"
 						   id="choicea"
-						   ng-model="correctAnsA"
+						   ng-model="customQuestion.correctAnsw"
+						   value="A"
 						   ng-click="isCorrectAnsA = !isCorrectAnsA">
 					<label for="choicea" class="notchecked" ng-if="!isCorrectAnsA">
 						<i class="fa fa-check fa-2x"></i>
@@ -239,11 +242,12 @@
 						   class="form-control input-text"
 						   id="choice-b"
 						   placeholder="I'm a choice option"
-						   ng-model="choiceB">
+						   ng-model="customQuestion.optionB">
 
-					<input type="checkbox"
+					<input type="radio"
+						   value="B"
 						   id="choiceb"
-						   ng-model="correctAnsB"
+						   ng-model="customQuestion.correctAnsw"
 						   ng-click="isCorrectAnsB = !isCorrectAnsB">
 					<label for="choiceb" class="notchecked" ng-if="!isCorrectAnsB">
 						<i class="fa fa-check fa-2x"></i>
@@ -259,11 +263,12 @@
 						   class="form-control input-text"
 						   id="choice-c"
 						   placeholder="I'm a choice option"
-						   ng-model="choiceC">
+						   ng-model="customQuestion.optionC">
 
-					<input type="checkbox"
+					<input type="radio"
+						   value="C"
 						   id="choicec"
-						   ng-model="correctAnsC"
+						   ng-model="customQuestion.correctAnsw"
 						   ng-click="isCorrectAnsC = !isCorrectAnsC">
 					<label for="choicec" class="notchecked" ng-if="!isCorrectAnsC">
 						<i class="fa fa-check fa-2x"></i>
@@ -273,28 +278,8 @@
 					</label>
 				</div>
 
-				<div class="form-group quiz-question-container">
-					<label for="choice-d" class="letter">D</label>
-					<input type="text"
-						   class="form-control input-text"
-						   id="choice-d"
-						   placeholder="I'm a choice option"
-						   ng-model="choiceD">
-
-					<input type="checkbox"
-						   id="choiced"
-						   ng-model="correctAnsD"
-						   ng-click="isCorrectAnsD = !isCorrectAnsD">
-					<label for="choiced" class="notchecked" ng-if="!isCorrectAnsD">
-						<i class="fa fa-check fa-2x"></i>
-					</label>
-					<label for="choiced" class="checked" ng-if="isCorrectAnsD">
-						<i class="fa fa-check fa-2x"></i>
-					</label>
-				</div>
-
-				<div class="fire-quiz-btn-container" ng-show="showFireQuizBtn">
-					<button ng-click="fireQuizToAttendees()" class="btn fire-quiz-btn">FIRE QUESTION</button>
+				<div class="fire-quiz-btn-container" ng-show="showFireQuizBtn = true">
+					<input class="btn fire-quiz-btn" type="submit" id="submit" value="FIRE QUESTION" />
 				</div>
 
 				<div class="fire-quiz-btn-container" ng-show="showRevealResultsBtn">
