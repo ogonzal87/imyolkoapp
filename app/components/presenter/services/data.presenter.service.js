@@ -12,23 +12,23 @@ function DataPresenterService(FIREBASE_URL, $firebaseObject, $firebaseArray) {
 		lostIsActive: false,
 		questionsIsActive: false,
 		speedIsActive: false,
-		customQuestionToAttendees: false,
+		selectedQuestionForAttendees: {},
 		hearingIsActive: false
 	};
 
 	// var currentPresenterApiUrl = new Firebase(FIREBASE_URL + "/presenter/" + defaultPresenter.key);
 	var currentPresenterApiUrl = new Firebase(FIREBASE_URL + "/presenter/");
-	var allPresentersApiUrl = new Firebase(FIREBASE_URL + "/presenter/");
 	// create an Object for the current presenter on the session
 	var currentPresenterSyncObj = $firebaseObject(currentPresenterApiUrl);
-	var presenters = $firebaseArray(allPresentersApiUrl);
 
 
+	var selectedQuestionForAttendeesUrl = new Firebase(FIREBASE_URL + "/presenter/");
+	var selectedQuestionForAttendees = $firebaseArray(selectedQuestionForAttendeesUrl);
 
 	return {
 		defaultPresenter: defaultPresenter,
 		currentPresenterApiUrl: currentPresenterApiUrl,
 		currentPresenterSyncObj: currentPresenterSyncObj,
-		presenters: presenters
+		selectedQuestionForAttendees: selectedQuestionForAttendees
 	};
 }

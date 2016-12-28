@@ -53,12 +53,11 @@
 			</div>
 		</div>
 
-
 		<!-- POP QUIZ -->
-		<div class="meeting-quiz-container" ng-show="showQuiz">
+		<div class="meeting-quiz-container" ng-show="showQuiz = true">
 			<div id="quiz">
 				<div id="question" class="meeting-pop-question">
-					{{ quizQuestion1.questionContent }}
+					{{ presenter.selectedQuestionForAttendees.questionContent }}
 				</div>
 				<div id="choices" class="meeting-pop-choices">
 					<input type="radio"
@@ -69,7 +68,7 @@
 						   class="pop-choice" >
 					<label class="pop-choice" for="availableAnsA">
 						<span class="pop-choice-letter">A</span>
-						{{quizQuestion1.availableAns[0].content}}
+						{{presenter.selectedQuestionForAttendees.availAnswers[0].a}}
 					</label>
 
 					<input type="radio"
@@ -80,7 +79,7 @@
 						   class="pop-choice">
 					<label class="pop-choice" for="availableAnsB">
 						<span class="pop-choice-letter">B</span>
-						{{quizQuestion1.availableAns[1].content}}
+						{{presenter.selectedQuestionForAttendees.availAnswers[1].b}}
 					</label>
 
 					<input type="radio"
@@ -91,18 +90,7 @@
 						   class="pop-choice">
 					<label class="pop-choice" for="availableAnsC">
 						<span class="pop-choice-letter">C</span>
-						{{quizQuestion1.availableAns[2].content}}
-					</label>
-
-					<input type="radio"
-						   name="availableAnsD"
-						   id="availableAnsD"
-						   ng-model="attendee.chosenAnswer"
-						   ng-value="'D'"
-						   class="pop-choice">
-					<label class="pop-choice" for="availableAnsD">
-						<span class="pop-choice-letter">D</span>
-						{{quizQuestion1.availableAns[3].content}}
+						{{presenter.selectedQuestionForAttendees.availAnswers[2].c}}
 					</label>
 
 				</div>

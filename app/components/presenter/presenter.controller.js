@@ -12,8 +12,15 @@ function PresenterCtrl(FIREBASE_URL, $scope, $interval, $timeout, VotesService, 
 	$scope.likeVotesArray            = VotesService.likeVotesArray;
 	//LOAD DISLIKE VOTES
 	$scope.dislikeVotesArray         = VotesService.dislikeVotesArray;
-	//LOAD QUIZ QUESTION OBJECT
-	$scope.customQuestionsToAttendees             = QuizService.customQuestionsToAttendees;
+	//LOAD CUSTOM QUESTIONS OBJECT
+	$scope.customQuestionsToAttendees      = QuizService.customQuestionsToAttendees;
+	//LOAD CUSTOM QUESTIONS ARRAY
+	$scope.customQuestionsToAttendeesArr      = QuizService.customQuestionsToAttendeesArr;
+
+
+
+	$scope.selectedQuestionForAttendees = DataPresenterService.selectedQuestionForAttendees;
+
 
 	// bind the obj in view (presenter) to the database in Firebase
 	// any changes that happen in the view will be updated automatically in Firebase and viceversa
@@ -210,23 +217,6 @@ function PresenterCtrl(FIREBASE_URL, $scope, $interval, $timeout, VotesService, 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	//+++++++++++++++++++++++++++++++++//FIREBASE WATCHING ALL EVENTS+++++++++++++++++++++++++++++++//
 	$scope.$watch('attendees', function(newVal, oldVal) {
 		$scope.numAttendees = $scope.attendees.length;
@@ -387,6 +377,39 @@ function PresenterCtrl(FIREBASE_URL, $scope, $interval, $timeout, VotesService, 
 	};
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	//Quiz Maker
 	// /////////////////////////////////////////////////////////////////////////
 	function CustomQuestion(content, availAnswers, correctAnsw, questionData) {
@@ -403,15 +426,11 @@ function PresenterCtrl(FIREBASE_URL, $scope, $interval, $timeout, VotesService, 
 	$scope.questionsForAttendees = [];
 
 	$scope.saveQuestionForAttendees = function() {
-
 		var questionData = {
-
 			isShowingQuiz: true,
 			isShowingResultsToAttendees: false,
 			isShowingResultsToPresenter: true,
 		};
-
-		console.log($scope.customQuestion.correctAnsw);
 
 		var options = [{a: $scope.customQuestion.optionA || ''}, {b: $scope.customQuestion.optionB || ''}, {c: $scope.customQuestion.optionC || ''}];
 
@@ -424,11 +443,36 @@ function PresenterCtrl(FIREBASE_URL, $scope, $interval, $timeout, VotesService, 
 		// Figure out which is thw correct answer from the data in Firebase and store in a variable
 		// questionData.correctAns =  _.findWhere(questionData.availableAns, {isCorrectAns: true});
 		// Set the question in Firebase
-
-		console.log(question)
 		var newQuestionRef = new Firebase(FIREBASE_URL + '/customQuestionsToAttendees/' + question.key);
 		newQuestionRef.set(question);
 	};
+
+
+	//
+	$scope.selectQuestionToAttendees = function (question) {
+		$scope.presenter.selectedQuestionForAttendees = question;
+		// console.log($scope.presenter.selectedQuestionForAttendees);
+	};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	// Results
 	// /////////////////////////////////////////////////////////////////////////

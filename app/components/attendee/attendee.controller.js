@@ -20,6 +20,7 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 	// any changes that happen in the view will be updated automatically in Firebase and viceversa
 	$scope.presenter = DataPresenterService.currentPresenterSyncObj;
 
+
 	// bind the obj in view (attendee) to the database in Firebase
 	// any changes that happen in the view will be updated automatically in Firebase and viceversa
 	DataAttendeeService.currentAttendeeSyncObj.$bindTo($scope, 'attendee');
@@ -203,9 +204,9 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 		new Chartist.Bar('.ct-chart', chartAllData, chartBarOptions);
 
 		//Shows the quiz on the UI of the attendee when the Pop Qui is fired from the Dashboard
-		$scope.showQuiz = $scope.quizQuestion1.isShowingQuiz;
+		// $scope.showQuiz = $scope.quizQuestion1.isShowingQuiz;
 		//Shows the quiz on the UI of the attendee when the Pop Qui is fired from the Dashboard
-		$scope.isShowingResultsToPresenter = $scope.quizQuestion1.isShowingResultsToPresenter;
+		// $scope.isShowingResultsToPresenter = $scope.quizQuestion1.isShowingResultsToPresenter;
 	}, true);
 
 	//QUESTIONS TO THE PRESENTER

@@ -11,6 +11,7 @@ function QuizService(FIREBASE_URL, $firebaseArray, $firebaseObject) {
 	var quizAnswer1DUrl = new Firebase(FIREBASE_URL + '/quiz/question1/answers/d/');
 
 	var customQuestionsToAttendees = $firebaseObject(customQuestionsToAttendeesUrl);
+	var customQuestionsToAttendeesArr = $firebaseArray(customQuestionsToAttendeesUrl);
 	var quizQuestion2 = $firebaseObject(quizQuestion2Url);
 	var quizQuestion3 = $firebaseObject(quizQuestion3Url);
 
@@ -24,6 +25,7 @@ function QuizService(FIREBASE_URL, $firebaseArray, $firebaseObject) {
 	return {
 		//questions
 		customQuestionsToAttendeesUrl: customQuestionsToAttendeesUrl,
+		customQuestionsToAttendeesArr: customQuestionsToAttendeesArr,
 		quizQuestion2Url: quizQuestion2Url,
 		quizQuestion3Url: quizQuestion3Url,
 		customQuestionsToAttendees: customQuestionsToAttendees,

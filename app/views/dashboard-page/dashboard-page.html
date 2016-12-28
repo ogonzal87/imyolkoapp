@@ -201,13 +201,11 @@
 
 
 
-		<div ng-show="tab2IsActive = true" class="container pop-quiz-container">
+		<div ng-show="tab2IsActive = true" class="dashboard-custom-question-maker-container">
 
-			<form novalidate ng-submit="saveQuestionForAttendees()" class="container">
+			<form novalidate ng-submit="saveQuestionForAttendees()" class=" dashboard-custom-question-maker-form">
 				<div class="form-group">
-					<br>
-					<!--<h4 for="question">QUESTION</h4>-->
-					<textarea class="form-control"
+					<textarea class="custom-question-content"
 							  id="question"
 							  placeholder="What would you like to ask everyone?"
 							  ng-model="customQuestion.content"
@@ -215,7 +213,7 @@
 					</textarea>
 				</div>
 
-				<div class="form-group quiz-question-container">
+				<div class="form-group custom-question-option-container">
 					<label for="choice-a" class="letter">A</label>
 					<input type="text"
 						   class="form-control input-text"
@@ -236,7 +234,7 @@
 					</label>
 				</div>
 
-				<div class="form-group quiz-question-container">
+				<div class="form-group custom-question-option-container">
 					<label for="choice-b" class="letter">B</label>
 					<input type="text"
 						   class="form-control input-text"
@@ -257,7 +255,7 @@
 					</label>
 				</div>
 
-				<div class="form-group quiz-question-container">
+				<div class="form-group custom-question-option-container">
 					<label for="choice-c" class="letter">C</label>
 					<input type="text"
 						   class="form-control input-text"
@@ -279,7 +277,7 @@
 				</div>
 
 				<div class="fire-quiz-btn-container" ng-show="showFireQuizBtn = true">
-					<input class="btn fire-quiz-btn" type="submit" id="submit" value="FIRE QUESTION" />
+					<input class=" fire-quiz-btn" type="submit" id="submit" value="SAVE QUESTION" />
 				</div>
 
 				<div class="fire-quiz-btn-container" ng-show="showRevealResultsBtn">
@@ -298,15 +296,68 @@
 </div>
 
 
-<div class="live-chart">
-	<!-- CHART -->
-	<div class="ct-chart-timeline"></div>
-	<!-- CHART -->
-	<h3 style="text-align: center;">LIVE DATA COMING IN</h3>
-	<!-- <pre>
-		  LikeVotes: {{ intervalLikeVotes }} <br>
-		  Like Line Arr: {{ likeLine }} <br>
-		  DislikeVotes: {{ intervalDislikeVotes }} <br>
-		  Dislike Line Arr: {{ dislikeLine }} <br>
-	</pre> -->
+
+
+
+
+
+
+
+
+
+
+
+
+{{presenter.selectedQuestionForAttendees | json}}
+
+
+
+<div class="dashboard-custom-questions-for-attendees-container">
+	<ul class="dashboard-custom-questions-for-attendees-list">
+		<li class="dashboard-custom-question-for-attendees"
+			ng-click="selectQuestionToAttendees(question)"
+			ng-class="{'selected': question1}"
+			ng-repeat="(key, question) in customQuestionsToAttendeesArr track by $index">
+			{{question.questionContent}}
+		</li>
+	</ul>
+	<button class="dashboard-custom-question-for-attendees-save-btn">+</button>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<div class="live-chart">-->
+	<!--&lt;!&ndash; CHART &ndash;&gt;-->
+	<!--<div class="ct-chart-timeline"></div>-->
+	<!--&lt;!&ndash; CHART &ndash;&gt;-->
+	<!--<h3 style="text-align: center;">LIVE DATA COMING IN</h3>-->
+	<!--&lt;!&ndash; <pre>-->
+		  <!--LikeVotes: {{ intervalLikeVotes }} <br>-->
+		  <!--Like Line Arr: {{ likeLine }} <br>-->
+		  <!--DislikeVotes: {{ intervalDislikeVotes }} <br>-->
+		  <!--Dislike Line Arr: {{ dislikeLine }} <br>-->
+	<!--</pre> &ndash;&gt;-->
+<!--</div>-->
