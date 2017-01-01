@@ -1,10 +1,10 @@
 <og-navbar></og-navbar>
 <div class="meeting-page"
-	 ng-class="{'inactive-background-color': !presenter.yolkoIsActive && !presenter.lostIsActive && !presenter.questionsIsActive && !presenter.speedIsActive && !presenter.hearingIsActive && !presenter.customQuestionToAttendees}">
+	 ng-class="{'inactive-background-color': !presenter.yolkoIsActive && !presenter.lostIsActive && !presenter.questionsIsActive && !presenter.speedIsActive && !presenter.hearingIsActive && !presenter.customQuestionToAttendeesIsActive}">
 <!--<div class="meeting-page">-->
 
 	<!--Show when there is no action from the Presenter-->
-	<div class="avatar-deactive-container" ng-if="!presenter.yolkoIsActive && !presenter.lostIsActive && !presenter.questionsIsActive && !presenter.speedIsActive && !presenter.hearingIsActive && !presenter.customQuestionToAttendees">
+	<div class="avatar-deactive-container" ng-if="!presenter.yolkoIsActive && !presenter.lostIsActive && !presenter.questionsIsActive && !presenter.speedIsActive && !presenter.hearingIsActive && !presenter.customQuestionToAttendeesIsActive">
 		<img ng-src="{{ avatarDeactive.face }}">
 		<p class="avatar-deactive-message-bg">
 			We are good here...
@@ -54,7 +54,7 @@
 		</div>
 
 		<!-- POP QUIZ -->
-		<div class="meeting-quiz-container" ng-show="showQuiz = true">
+		<div class="meeting-quiz-container" ng-show="presenter.customQuestionToAttendeesIsActive && presenter.selectedQuestionForAttendees">
 			<div id="quiz">
 				<div id="question" class="meeting-pop-question">
 					{{ presenter.selectedQuestionForAttendees.questionContent }}
@@ -64,7 +64,7 @@
 						   id="availableAnsA"
 						   name="availableAnsA"
 						   ng-model="attendee.chosenAnswer"
-						   ng-value="'A'"
+						   value="A"
 						   class="pop-choice" >
 					<label class="pop-choice" for="availableAnsA">
 						<span class="pop-choice-letter">A</span>
@@ -75,7 +75,7 @@
 						   name="availableAnsB"
 						   id="availableAnsB"
 						   ng-model="attendee.chosenAnswer"
-						   ng-value="'B'"
+						   value="B"
 						   class="pop-choice">
 					<label class="pop-choice" for="availableAnsB">
 						<span class="pop-choice-letter">B</span>
@@ -86,7 +86,7 @@
 						   name="availableAnsC"
 						   id="availableAnsC"
 						   ng-model="attendee.chosenAnswer"
-						   ng-value="'C'"
+						   value="C"
 						   class="pop-choice">
 					<label class="pop-choice" for="availableAnsC">
 						<span class="pop-choice-letter">C</span>
@@ -102,8 +102,8 @@
 			</div>
 		</div>
 		<!-- POP QUIZ RESULTS CHART -->
-		<div class="container meeting-quiz-results-container" ng-show="quizQuestion1.isShowingResultsToAttendees">
-			<div class="ct-chart ct-major-tenth"></div>
+		<div class="container meeting-quiz-results-container" ng-show="presenter.selectedQuestionForAttendees.questionData.isShowingResultsToAttendees">
+			<div class="ct-chart-customQuestionsToAttendeesMeeting ct-major-tenth"></div>
 		</div>
 
 

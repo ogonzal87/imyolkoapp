@@ -9,27 +9,27 @@
 		<div class="dashboard--presentation-ctrls-container row">
 
 			<div class="stopwatch-container col-sm-6 col-sm-push-3">
-				<div class="chronometer" ng-init="showStopwatch()">
-					{{ stopWatch | date: 'h:mm:ss a' }}
-				</div>
-				<div class="media-controls">
+				<!--<div class="chronometer" ng-init="showStopwatch()">-->
+					<!--{{ stopWatch | date: 'h:mm:ss a' }}-->
+				<!--</div>-->
+				<!--<div class="media-controls">-->
 
-					<div class="play-icon" ng-class="{'active-media-btn': activePlayBtn}">
-						<i class="fa fa-play" aria-hidden="true" ng-click="startPresentation()"></i>
-						<!--<img src="assets/icons/play.svg" ng-click="startPresentation()">-->
-					</div>
+					<!--<div class="play-icon" ng-class="{'active-media-btn': activePlayBtn}">-->
+						<!--<i class="fa fa-play" aria-hidden="true" ng-click="startPresentation()"></i>-->
+						<!--&lt;!&ndash;<img src="assets/icons/play.svg" ng-click="startPresentation()">&ndash;&gt;-->
+					<!--</div>-->
 
-					<div class="pause-icon" ng-class="{'active-media-btn': activePauseBtn}">
-						<i class="fa fa-pause" aria-hidden="true" ng-click="pausePresentation()"></i>
-						<!--<img src="assets/icons/pause.svg" ng-click="pausePresentation()">-->
-					</div>
+					<!--<div class="pause-icon" ng-class="{'active-media-btn': activePauseBtn}">-->
+						<!--<i class="fa fa-pause" aria-hidden="true" ng-click="pausePresentation()"></i>-->
+						<!--&lt;!&ndash;<img src="assets/icons/pause.svg" ng-click="pausePresentation()">&ndash;&gt;-->
+					<!--</div>-->
 
-					<div class="stop-icon" ng-class="{'active-media-btn': activeStopBtn}">
-						<i class="fa fa-stop" aria-hidden="true" ng-click="stopPresentation()"></i>
-						<!--<img src="assets/icons/stop.svg" ng-click="pausePresentation()">-->
-					</div>
+					<!--<div class="stop-icon" ng-class="{'active-media-btn': activeStopBtn}">-->
+						<!--<i class="fa fa-stop" aria-hidden="true" ng-click="stopPresentation()"></i>-->
+						<!--&lt;!&ndash;<img src="assets/icons/stop.svg" ng-click="pausePresentation()">&ndash;&gt;-->
+					<!--</div>-->
 
-				</div>
+				<!--</div>-->
 			</div>
 
 			<div class="num-attendees-container col-sm-3 col-sm-pull-6">
@@ -151,63 +151,18 @@
 
 
 <div class="questions-and-quiz-container">
-	<div class="dashboard-tabs container">
-		<div class="dashboard-tab"
-			 ng-class="{'active': tab1IsActive}"
-			 ng-click="toggleTabs('tab1IsActive')">
-			QUESTIONS
-			<span class="notification-indicator" ng-if="questionsToPresenter.length > 0"></span>
-		</div>
-		<div class="dashboard-tab"
-			 ng-class="{'active': tab2IsActive}"
-			 ng-click="toggleTabs('tab2IsActive')">
-			POP QUIZ
-		</div>
-	</div>
+
 
 	<div class="dashboard-tab-content">
-		<div ng-show="tab1IsActive = false" class="container question-list-container">
-			<!--   QUESTIONS -->
-			<ul class="list-group questions">
-				<div ng-if="questionsToPresenter.length === 0" class="no-questions-container">
-					<div class="no-questions-message">
-						<h2>Great Job! There are no questions yet...</h2>
-					</div>
-				</div>
 
-				<li class="list-group-item items-in-list"
-					ng-repeat="(key, questionToPresenter) in questionsToPresenter | orderBy: '-counter'">
-					<div class="question-content">
-						{{ questionToPresenter.content }}
-						<div class="question-content-time">
-							{{ questionToPresenter.time | date: 'h:mm:ss a' }}
-						</div>
-					</div>
-					<div class="question-voting-controls">
-						<span style="">VOTES</span>
-						<div class="question-voting-controls-text">
-							{{ questionToPresenter.counter }}
-						</div>
+		<div class="dashboard-custom-question-maker-container" ng-show="customQuestionsToAttendeesArr <= 0 || showCustomQuestionMaker">
 
-						<!--<button class="btn btn-sm btn-default" ng-click="voteQuestionDown(questionToPresenter)">-->
-						<!--<i class="fa fa-chevron-down"></i>-->
-						<!--</button>-->
-						<button class="btn btn-delete" ng-click="removeQuestion(key)">&times;</button>
-					</div>
-				</li>
-			</ul>
-			<!--   QUESTIONS END -->
-		</div>
-
-
-
-		<div ng-show="tab2IsActive = true" class="dashboard-custom-question-maker-container">
-
-			<form novalidate ng-submit="saveQuestionForAttendees()" class=" dashboard-custom-question-maker-form">
+			<h1>What would you like to ask the audience?</h1>
+			<form novalidate ng-submit="saveQuestionForAttendees()" class="dashboard-custom-question-maker-form">
 				<div class="form-group">
 					<textarea class="custom-question-content"
 							  id="question"
-							  placeholder="What would you like to ask everyone?"
+							  placeholder="How much is 2 + 2?"
 							  ng-model="customQuestion.content"
 							  rows="4">
 					</textarea>
@@ -279,66 +234,74 @@
 				<div class="fire-quiz-btn-container" ng-show="showFireQuizBtn = true">
 					<input class=" fire-quiz-btn" type="submit" id="submit" value="SAVE QUESTION" />
 				</div>
-
-				<div class="fire-quiz-btn-container" ng-show="showRevealResultsBtn">
-					<button ng-click="quizQuestion1.isShowingResultsToAttendees = true" class="btn reveal-results-btn">REVEAL RESULTS</button>
-				</div>
-
-				<!--<pre>quizQuestion1.isShowingResultsToAttendees : {{quizQuestion1.isShowingResultsToAttendees}}</pre>-->
-
-				<!-- QUIZ RESULTS CHART -->
-				<div class="container quiz-results-container" ng-show="isShowingResultsToPresenter">
-					<div class="ct-chart-quiz ct-major-tenth"></div>
-				</div>
 			</form>
 		</div>
+
+		<div class="dashboard-custom-questions-for-attendees-container" ng-hide="customQuestionsToAttendeesArr <= 0">
+			<h1>Saved Questions</h1>
+			<ul class="dashboard-custom-questions-for-attendees-list">
+				<li class="dashboard-custom-question-for-attendees"
+					ng-click="selectQuestionToAttendees(question)"
+					data-ng-class="{'selected': addClassToSelected == question.key }"
+					ng-repeat="(key, question) in customQuestionsToAttendeesArr track by $index">
+					{{question.questionContent}}
+				</li>
+			</ul>
+			<button class="dashboard-custom-question-for-attendees-save-btn" ng-click="showCustomQuestionMaker = true">
+				+
+			</button>
+
+			<button ng-click="presenter.selectedQuestionForAttendees.questionData.isShowingResultsToAttendees = true"
+					class="reveal-results-btn"
+					ng-show="presenter.customQuestionToAttendeesIsActive">
+				REVEAL RESULTS
+			</button>
+		</div>
+
+		<!-- QUIZ RESULTS CHART -->
+		<div class="container quiz-results-container" ng-show="presenter.customQuestionToAttendeesIsActive">
+			<div class="ct-chart-customQuestionsToAttendees ct-major-tenth"></div>
+		</div>
+
+
+
+
+		<div class="dashboard-questions-for-presenter-container">
+			<!--   QUESTIONS -->
+			<!--<div ng-if="questionsToPresenter.length === 0" class="no-questions-container">-->
+				<!--<div class="no-questions-message">-->
+					<!--<h2>Great Job! There are no questions yet...</h2>-->
+				<!--</div>-->
+			<!--</div>-->
+			<ul class="dashboard-questions-for-presenter-list">
+				<li class="dashboard-question-for-presenter"
+					ng-repeat="(key, questionToPresenter) in questionsToPresenter | orderBy: '-counter'">
+					<div class="question-for-presenter-question-content">
+						{{ questionToPresenter.content }}
+						<div class="question-for-presenter-question-content-time">
+							{{ questionToPresenter.time | date: 'h:mm:ss a' }}
+						</div>
+					</div>
+					<div class="question-for-presenter-question-voting-controls">
+						<span>VOTES</span>
+						<div class="question-for-presenter-voting-controls-text">
+							{{ questionToPresenter.counter }}
+						</div>
+
+						<!--<button class="btn btn-sm btn-default" ng-click="voteQuestionDown(questionToPresenter)">-->
+						<!--<i class="fa fa-chevron-down"></i>-->
+						<!--</button>-->
+						<button class="question-for-presenter-delete-btn" ng-click="removeQuestion(key)">&times;</button>
+					</div>
+				</li>
+			</ul>
+			<!--   QUESTIONS END -->
+		</div>
+
+
+
 	</div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{{presenter.selectedQuestionForAttendees | json}}
-
-
-
-<div class="dashboard-custom-questions-for-attendees-container">
-	<ul class="dashboard-custom-questions-for-attendees-list">
-		<li class="dashboard-custom-question-for-attendees"
-			ng-click="selectQuestionToAttendees(question)"
-			ng-class="{'selected': question1}"
-			ng-repeat="(key, question) in customQuestionsToAttendeesArr track by $index">
-			{{question.questionContent}}
-		</li>
-	</ul>
-	<button class="dashboard-custom-question-for-attendees-save-btn">+</button>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

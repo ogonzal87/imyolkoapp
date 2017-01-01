@@ -27,6 +27,11 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 	// create the attendee on page arrival - Push the user to the database and start the session
 	DataAttendeeService.currentAttendeeApiUrl.set(DataAttendeeService.defaultAttendee);
 
+
+	// bind the obj in view (quizQuestion1) to the database in Firebase
+	// any changes that happen in the view will be updated automatically in Firebase and viceversa
+	DataPresenterService.answersForSelectedQuestionForAttendeesObj.$bindTo($scope, 'answersForSelectedQuestionForAttendeesObj');
+
 	//VOTES
 	/////////////////////////////////////////////////////////////////////////
 	// Create a function that when is clicked creates a LIKE vote Object in Firebase this is stored in an array
@@ -160,13 +165,11 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 	// ///////////////////////////////////////////////////////////////////////
 	$scope.submitAnswer = function () {
 		if ($scope.attendee.chosenAnswer === "A") {
-			QuizService.quizAnswers1A.$add(1);
+			DataPresenterService.choiceAForSelectedQuestionForAttendees.$add(1);
 		} else if ($scope.attendee.chosenAnswer === "B") {
-			QuizService.quizAnswers1B.$add(1);
+			DataPresenterService.choiceBForSelectedQuestionForAttendees.$add(1);
 		} else if ($scope.attendee.chosenAnswer === "C") {
-			QuizService.quizAnswers1C.$add(1);
-		} else if ($scope.attendee.chosenAnswer === "D") {
-			QuizService.quizAnswers1D.$add(1);
+			DataPresenterService.choiceCForSelectedQuestionForAttendees.$add(1);
 		}
 		//disbale all other answers after attendee submits their answers
 		if($scope.attendee.chosenAnswer) {
@@ -180,34 +183,82 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 
 
 
-	$scope.$watch('quizQuestion1', function(newVals, oldVals) {
-		var answersA = QuizService.quizAnswers1A.length;
-		var answersB = QuizService.quizAnswers1B.length;
-		var answersC = QuizService.quizAnswers1C.length;
-		var answersD = QuizService.quizAnswers1D.length;
+	// $scope.$watch('quizQuestion1', function(newVals, oldVals) {
+	// 	var answersA = QuizService.quizAnswers1A.length;
+	// 	var answersB = QuizService.quizAnswers1B.length;
+	// 	var answersC = QuizService.quizAnswers1C.length;
+	// 	var answersD = QuizService.quizAnswers1D.length;
+	//
+	// 	var chartAllData = {
+	// 		labels: ['A', 'B', 'C', 'D'],
+	// 		series: [answersA, answersB, answersC, answersD]
+	// 	};
+	//
+	// 	var chartBarOptions = {
+	// 		distributeSeries: true,
+	// 		axisY: {
+	// 			onlyInteger: true
+	// 		}
+	// 	};
+	//
+	// 	// Create a new bar chart object where as first parameter we pass in a selector
+	// 	// that is resolving to our chart container element. The Second parameter
+	// 	// is the actual data object and the third the options.
+	// 	new Chartist.Bar('.ct-chart', chartAllData, chartBarOptions);
+	//
+	// 	//Shows the quiz on the UI of the attendee when the Pop Qui is fired from the Dashboard
+	// 	// $scope.showQuiz = $scope.quizQuestion1.isShowingQuiz;
+	// 	//Shows the quiz on the UI of the attendee when the Pop Qui is fired from the Dashboard
+	// 	// $scope.isShowingResultsToPresenter = $scope.quizQuestion1.isShowingResultsToPresenter;
+	// }, true);
+
+
+
+
+
+
+
+
+
+
+
+	$scope.$watch('answersForSelectedQuestionForAttendeesObj', function(newVals, oldVals) {
+		var answersA = DataPresenterService.choiceAForSelectedQuestionForAttendees.length;
+		var answersB = DataPresenterService.choiceBForSelectedQuestionForAttendees.length;
+		var answersC = DataPresenterService.choiceCForSelectedQuestionForAttendees.length;
 
 		var chartAllData = {
-			labels: ['A', 'B', 'C', 'D'],
-			series: [answersA, answersB, answersC, answersD]
+			labels: ['A', 'B', 'C'],
+			series: [answersA, answersB, answersC]
 		};
 
 		var chartBarOptions = {
 			distributeSeries: true,
 			axisY: {
 				onlyInteger: true
-			}
+			},
+			width: 700,
+			height: 350,
 		};
 
 		// Create a new bar chart object where as first parameter we pass in a selector
 		// that is resolving to our chart container element. The Second parameter
 		// is the actual data object and the third the options.
-		new Chartist.Bar('.ct-chart', chartAllData, chartBarOptions);
-
-		//Shows the quiz on the UI of the attendee when the Pop Qui is fired from the Dashboard
-		// $scope.showQuiz = $scope.quizQuestion1.isShowingQuiz;
-		//Shows the quiz on the UI of the attendee when the Pop Qui is fired from the Dashboard
-		// $scope.isShowingResultsToPresenter = $scope.quizQuestion1.isShowingResultsToPresenter;
+		new Chartist.Bar('.ct-chart-customQuestionsToAttendeesMeeting', chartAllData, chartBarOptions);
 	}, true);
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	//QUESTIONS TO THE PRESENTER
 	// ///////////////////////////////////////////////////////////////////////

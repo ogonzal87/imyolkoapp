@@ -322,11 +322,19 @@ $panel-bad-font-color:            $base-font-color-light;
 		}
 
 		.meeting-quiz-results-container {
+			display: flex;
+			align-items: center;
 			background-color: #fff;
 			max-width: 800px;
+			height: 400px;
 			margin-bottom: 60px;
-			padding: 20px 20px 0 0;
+			padding: 0 0 20px 20px;
+			font-size: 24px;
 			box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+
+			.ct-label {
+				font-size: 15px;
+			}
 
 			@media screen and (max-width: 767px) {
 				width: 100%;

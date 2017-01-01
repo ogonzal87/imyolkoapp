@@ -1,4 +1,4 @@
-<div class="control-panel-container">
+<div class="control-panel-container" data-spy="affix" data-offset-top="78">
 
 	<div class="control-panel"
 		 ng-class="{'active' : $ctrl.presenter.yolkoIsActive}"
@@ -35,10 +35,13 @@
 		HEARING
 	</div>
 
-	<div class="control-panel"
-		 ng-class="{'active' : $ctrl.presenter.customIsActive}"
-		 ng-click="$ctrl.customQuestionToAttendeesEval()">
+	<button class="control-panel disabled btn"
+		 ng-class="{active : $ctrl.presenter.customQuestionToAttendeesIsActive && $ctrl.presenter.selectedQuestionForAttendees,
+		  disabled : !$ctrl.presenter.selectedQuestionForAttendees}"
+		 ng-click="$ctrl.customQuestionToAttendeesEval()"
+		 ng-disabled="$ctrl.fire()">
 		<i class="fa fa-plus-circle fa-3x" aria-hidden="true"></i>
-	</div>
+		CUSTOM
+	</button>
 
 </div>

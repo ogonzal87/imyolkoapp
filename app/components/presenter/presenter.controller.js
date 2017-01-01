@@ -16,6 +16,7 @@ function PresenterCtrl(FIREBASE_URL, $scope, $interval, $timeout, VotesService, 
 	$scope.customQuestionsToAttendees      = QuizService.customQuestionsToAttendees;
 	//LOAD CUSTOM QUESTIONS ARRAY
 	$scope.customQuestionsToAttendeesArr      = QuizService.customQuestionsToAttendeesArr;
+	$scope.presenter = DataPresenterService.currentPresenterSyncObj;
 
 
 
@@ -29,7 +30,9 @@ function PresenterCtrl(FIREBASE_URL, $scope, $interval, $timeout, VotesService, 
 
 	// bind the obj in view (quizQuestion1) to the database in Firebase
 	// any changes that happen in the view will be updated automatically in Firebase and viceversa
-	QuizService.customQuestionsToAttendees.$bindTo($scope, 'customQuestionsToAttendees');
+	DataPresenterService.answersForSelectedQuestionForAttendeesObj.$bindTo($scope, 'answersForSelectedQuestionForAttendeesObj');
+
+
 
 	// arrays that keep track of all the votes --> this arrays are populated each time the interval is triggered
 	$scope.intervalLikeVotes    = [];
@@ -426,6 +429,7 @@ function PresenterCtrl(FIREBASE_URL, $scope, $interval, $timeout, VotesService, 
 	$scope.questionsForAttendees = [];
 
 	$scope.saveQuestionForAttendees = function() {
+		$scope.showCustomQuestionMaker = false;
 		var questionData = {
 			isShowingQuiz: true,
 			isShowingResultsToAttendees: false,
@@ -445,13 +449,19 @@ function PresenterCtrl(FIREBASE_URL, $scope, $interval, $timeout, VotesService, 
 		// Set the question in Firebase
 		var newQuestionRef = new Firebase(FIREBASE_URL + '/customQuestionsToAttendees/' + question.key);
 		newQuestionRef.set(question);
+
+		$scope.customQuestion.content = '';
+		$scope.customQuestion.correctAnsw = '';
+		$scope.customQuestion.optionA = '';
+		$scope.customQuestion.optionB = '';
+		$scope.customQuestion.optionC = '';
+
 	};
 
 
-	//
 	$scope.selectQuestionToAttendees = function (question) {
 		$scope.presenter.selectedQuestionForAttendees = question;
-		// console.log($scope.presenter.selectedQuestionForAttendees);
+		$scope.addClassToSelected = question.key;
 	};
 
 
@@ -476,17 +486,18 @@ function PresenterCtrl(FIREBASE_URL, $scope, $interval, $timeout, VotesService, 
 
 	// Results
 	// /////////////////////////////////////////////////////////////////////////
-	$scope.$watch('quizQuestion1', function(newVals, oldVals) {
-		$scope.numOfAnswersFromAttendees = QuizService.quizAnswers1A.length + QuizService.quizAnswers1B.length + QuizService.quizAnswers1C.length + QuizService.quizAnswers1D.length;
+	$scope.$watch('answersForSelectedQuestionForAttendeesObj', function(newVals, oldVals) {
+		$scope.numOfAnswersFromAttendees = DataPresenterService.choiceAForSelectedQuestionForAttendees.length + DataPresenterService.choiceBForSelectedQuestionForAttendees.length + DataPresenterService.choiceCForSelectedQuestionForAttendees.length;
 
-		var answersA = QuizService.quizAnswers1A.length;
-		var answersB = QuizService.quizAnswers1B.length;
-		var answersC = QuizService.quizAnswers1C.length;
-		var answersD = QuizService.quizAnswers1D.length;
+		console.log($scope.numOfAnswersFromAttendees)
+
+		var answersA = DataPresenterService.choiceAForSelectedQuestionForAttendees.length;
+		var answersB = DataPresenterService.choiceBForSelectedQuestionForAttendees.length;
+		var answersC = DataPresenterService.choiceCForSelectedQuestionForAttendees.length;
 
 		var chartAllData = {
-			labels: ['A', 'B', 'C', 'D'],
-			series: [answersA, answersB, answersC, answersD]
+			labels: ['A', 'B', 'C'],
+			series: [answersA, answersB, answersC]
 		};
 
 		var chartBarOptions = {
@@ -494,17 +505,17 @@ function PresenterCtrl(FIREBASE_URL, $scope, $interval, $timeout, VotesService, 
 			axisY: {
 				onlyInteger: true
 			},
-			width: 900,
-			height: 400,
+			width: 700,
+			height: 350,
 		};
 
 		// Create a new bar chart object where as first parameter we pass in a selector
 		// that is resolving to our chart container element. The Second parameter
 		// is the actual data object and the third the options.
-		new Chartist.Bar('.ct-chart-quiz', chartAllData, chartBarOptions);
+		new Chartist.Bar('.ct-chart-customQuestionsToAttendees', chartAllData, chartBarOptions);
 
 		//Shows the quiz on the UI of the attendee when the Pop Qui is fired from the Dashboard
-		$scope.showQuiz = $scope.customQuestionsToAttendees.isShowingQuiz;
+
 		//Shows the quiz on the UI of the attendee when the Pop Qui is fired from the Dashboard
 		$scope.isShowingResultsToPresenter = $scope.customQuestionsToAttendees.isShowingResultsToPresenter;
 	}, true);
@@ -515,7 +526,6 @@ function PresenterCtrl(FIREBASE_URL, $scope, $interval, $timeout, VotesService, 
 
 	$scope.openFab = function() {
 		$scope.isActive = !$scope.isActive;
-
 	};
 
 
