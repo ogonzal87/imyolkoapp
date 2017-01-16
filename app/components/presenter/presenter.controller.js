@@ -3,38 +3,36 @@ angular.module('Presenter')
 
 function PresenterCtrl(FIREBASE_URL, $scope, $interval, $timeout, VotesService, QuestionsService, DataAttendeeService, DataPresenterService, ResetService, QuizService, StopwatchService) {
 	//LOAD ATTENDEES
-	$scope.attendees                 = DataAttendeeService.attendees;
-	// LOAD QUESTIONS
-	$scope.allQuestionsFromAttendees = QuestionsService.questions;
+	$scope.attendees                     = DataAttendeeService.attendees;
+	//LOAD QUESTIONS
+	$scope.allQuestionsFromAttendees     = QuestionsService.questions;
 	//LOAD VOTES
-	$scope.votes                     = VotesService.votes;
+	$scope.votes                         = VotesService.votes;
 	//LOAD LIKE VOTES
-	$scope.likeVotesArray            = VotesService.likeVotesArray;
+	$scope.likeVotesArray                = VotesService.likeVotesArray;
 	//LOAD DISLIKE VOTES
-	$scope.dislikeVotesArray         = VotesService.dislikeVotesArray;
+	$scope.dislikeVotesArray             = VotesService.dislikeVotesArray;
 	//LOAD CUSTOM QUESTIONS OBJECT
-	$scope.customQuestionsToAttendees      = QuizService.customQuestionsToAttendees;
+	$scope.customQuestionsToAttendees    = QuizService.customQuestionsToAttendees;
 	//LOAD CUSTOM QUESTIONS ARRAY
-	$scope.customQuestionsToAttendeesArr      = QuizService.customQuestionsToAttendeesArr;
-	$scope.presenter = DataPresenterService.currentPresenterSyncObj;
+	$scope.customQuestionsToAttendeesArr = QuizService.customQuestionsToAttendeesArr;
 
+	$scope.presenter                     = DataPresenterService.currentPresenterSyncObj;
 
+	$scope.selectedQuestionForAttendees  = DataPresenterService.selectedQuestionForAttendees;
 
-	$scope.selectedQuestionForAttendees = DataPresenterService.selectedQuestionForAttendees;
-
-
-	// bind the obj in view (presenter) to the database in Firebase
-	// any changes that happen in the view will be updated automatically in Firebase and viceversa
+	//bind the obj in view (presenter) to the database in Firebase
+	//any changes that happen in the view will be updated automatically in Firebase and viceversa
 	DataPresenterService.currentPresenterSyncObj.$bindTo($scope, 'presenter');
 	DataPresenterService.currentPresenterApiUrl.set(DataPresenterService.defaultPresenter);
 
-	// bind the obj in view (quizQuestion1) to the database in Firebase
-	// any changes that happen in the view will be updated automatically in Firebase and viceversa
+	//bind the obj in view (quizQuestion1) to the database in Firebase
+	//any changes that happen in the view will be updated automatically in Firebase and viceversa
 	DataPresenterService.answersForSelectedQuestionForAttendeesObj.$bindTo($scope, 'answersForSelectedQuestionForAttendeesObj');
 
 
 
-	// arrays that keep track of all the votes --> this arrays are populated each time the interval is triggered
+	//arrays that keep track of all the votes --> this arrays are populated each time the interval is triggered
 	$scope.intervalLikeVotes    = [];
 	$scope.intervalDislikeVotes = [];
 	//initializing the dislike and like line arrays that will be used to populate the chart
@@ -43,7 +41,7 @@ function PresenterCtrl(FIREBASE_URL, $scope, $interval, $timeout, VotesService, 
 	var chartLabels = [];
 
 	//////////////////////////////////////////////////////////////////////////////////////
-// STOPWATCH TODO: Need to syncronize the crart with the stopwatch a little bit better -> Stop Presentation should delete all the chart data and start from scratch
+	// STOPWATCH TODO: Need to syncronize the crart with the stopwatch a little bit better -> Stop Presentation should delete all the chart data and start from scratch
 	//////////////////////////////////////////////////////////////////////////////////////
 	var clsStopwatch = StopwatchService.clsStopwatch;
 	var x = new clsStopwatch();
@@ -220,33 +218,33 @@ function PresenterCtrl(FIREBASE_URL, $scope, $interval, $timeout, VotesService, 
 
 
 
-	//+++++++++++++++++++++++++++++++++//FIREBASE WATCHING ALL EVENTS+++++++++++++++++++++++++++++++//
+	//WATCHING ALL EVENTS UNDER THE ATTENDEES NODE IN FIREBASE --> to have 3-way data binding working.
 	$scope.$watch('attendees', function(newVal, oldVal) {
 		$scope.numAttendees = $scope.attendees.length;
 
-		//VOLUME
+		//Volume Percentage
 		// /////////////////////////////////////////////////////////////////////////
 		var volumeUpAttendees = _.filter($scope.attendees, function(attendee) {
 			return attendee.volumeUp == "yes";
 		});
 		$scope.volumeUpPercent = volume(Math.round((volumeUpAttendees.length / $scope.numAttendees) * 100));
 
-		//SPEED
+		//Speed Percentage
 		///////////////////////////////////////////////////////////////////////////
 		var speedValue = _.reduce($scope.attendees, function(memo, attendee) {
 			return memo + attendee.speed;
 		}, 0);
 		$scope.speedPercent = speed(Math.round((speedValue / $scope.numAttendees) * 100));
 
-		//LOST
+		//Lost Percentage
 		// /////////////////////////////////////////////////////////////////////////
 		var lostValues = _.filter($scope.attendees, function(attendee) {
 			return attendee.feeling == "panic";
 		});
 		$scope.panicPercent = panic(Math.round((lostValues.length / $scope.numAttendees) * 100));
 
-		//DISLIKE PERCENTAGE
-		// /////////////////////////////////////////////////////////////////////////
+		//dislike percentage
+		//////////////////////////////////////////////////////////////////////////
 		$scope.numOfPeopleWithVoteAttribute = _.filter($scope.attendees, function(attendee) {
 			return attendee.vote;
 		});
@@ -317,7 +315,7 @@ function PresenterCtrl(FIREBASE_URL, $scope, $interval, $timeout, VotesService, 
 		});
 	}, true);
 
-	//Displaying Yolko
+	//DISPLAYING YOLKO
 	$scope.avatarDashboard = { face:'assets/icons/dash-sleeping.svg', backgroundColor: 'lever-0-mood-color' };
 	function displayYolkoInDashboard() {
 		if($scope.dislikePercent >= 80) {
@@ -335,7 +333,7 @@ function PresenterCtrl(FIREBASE_URL, $scope, $interval, $timeout, VotesService, 
 		}
 	}
 
-
+	//DISPLAYING VOLUME PERCENTAGE
 	function volume(percent) {
 		if (percent > 10) {
 			return { value: percent, content: percent, class: 'dashboard-bad-color' };
@@ -344,7 +342,7 @@ function PresenterCtrl(FIREBASE_URL, $scope, $interval, $timeout, VotesService, 
 		}
 	}
 
-
+	//DISPLAYING SPEED IDICATOR
 	function speed(percent) {
 
 		if (percent > 20) {
@@ -356,74 +354,22 @@ function PresenterCtrl(FIREBASE_URL, $scope, $interval, $timeout, VotesService, 
 		}
 	}
 
+	//DISPLAYING LOST/PANIC PERCENT
 	function panic(percent) {
-		if (percent > 25) {
-			return { content: percent };
-		} else {
-			return { content: percent };
-		}
+		return { content: percent };
 	}
 
-	// toggle tabs in dashboard
-	// /////////////////////////////////////////////////////////////////////////
-	$scope.tab1IsActive = false;
-	$scope.tab2IsActive = false;
-	$scope.toggleTabs = function(tab) {
-		if (tab === 'tab1IsActive') {
-			$scope.tab1IsActive = true;
-			$scope.tab2IsActive = false;
-		}
-		if (tab === 'tab2IsActive' ) {
-			$scope.tab2IsActive = true;
-			$scope.tab1IsActive = false;
-		}
-	};
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	//Quiz Maker
-	// /////////////////////////////////////////////////////////////////////////
+	//CUSTOM QUESTION MAKER
+	///////////////////////////////////////////////////////////////////////////
 	function CustomQuestion(content, availAnswers, correctAnsw, questionData) {
 		this.key = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 8);
 		this.questionContent = content;
 		this.availAnswers = availAnswers;
 		this.correctAnsw = correctAnsw || '';
 		this.questionData = questionData;
-
-		// this.print = function() {
-		// };
 	}
 
 	$scope.questionsForAttendees = [];
@@ -437,15 +383,8 @@ function PresenterCtrl(FIREBASE_URL, $scope, $interval, $timeout, VotesService, 
 		};
 
 		var options = [{a: $scope.customQuestion.optionA || ''}, {b: $scope.customQuestion.optionB || ''}, {c: $scope.customQuestion.optionC || ''}];
-
 		var question = new CustomQuestion($scope.customQuestion.content, options, $scope.customQuestion.correctAnsw, questionData);
 
-		//show 'Reveal Quiz Results' btn
-		// $scope.showRevealResultsBtn = true;
-		//hide 'Submit Quiz' btn
-		// $scope.showFireQuizBtn = false;
-		// Figure out which is thw correct answer from the data in Firebase and store in a variable
-		// questionData.correctAns =  _.findWhere(questionData.availableAns, {isCorrectAns: true});
 		// Set the question in Firebase
 		var newQuestionRef = new Firebase(FIREBASE_URL + '/customQuestionsToAttendees/' + question.key);
 		newQuestionRef.set(question);
@@ -455,7 +394,6 @@ function PresenterCtrl(FIREBASE_URL, $scope, $interval, $timeout, VotesService, 
 		$scope.customQuestion.optionA = '';
 		$scope.customQuestion.optionB = '';
 		$scope.customQuestion.optionC = '';
-
 	};
 
 
@@ -467,29 +405,10 @@ function PresenterCtrl(FIREBASE_URL, $scope, $interval, $timeout, VotesService, 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	// Results
-	// /////////////////////////////////////////////////////////////////////////
+	//RESULTS FROM THE CUSTOM QUESTION SELECTED BY THE PRESENTER
+	////////////////////////////////////////////////////////////////////////////
 	$scope.$watch('answersForSelectedQuestionForAttendeesObj', function(newVals, oldVals) {
 		$scope.numOfAnswersFromAttendees = DataPresenterService.choiceAForSelectedQuestionForAttendees.length + DataPresenterService.choiceBForSelectedQuestionForAttendees.length + DataPresenterService.choiceCForSelectedQuestionForAttendees.length;
-
-		console.log($scope.numOfAnswersFromAttendees)
 
 		var answersA = DataPresenterService.choiceAForSelectedQuestionForAttendees.length;
 		var answersB = DataPresenterService.choiceBForSelectedQuestionForAttendees.length;
@@ -509,27 +428,23 @@ function PresenterCtrl(FIREBASE_URL, $scope, $interval, $timeout, VotesService, 
 			height: 350,
 		};
 
-		// Create a new bar chart object where as first parameter we pass in a selector
-		// that is resolving to our chart container element. The Second parameter
-		// is the actual data object and the third the options.
+		// Create a new bar chart object where as first parameter is the selector
+		// that is resolving to our chart container element in the view. The Second parameter
+		// is the actual data object and the third the options for the view of the Chart.
 		new Chartist.Bar('.ct-chart-customQuestionsToAttendees', chartAllData, chartBarOptions);
-
-		//Shows the quiz on the UI of the attendee when the Pop Qui is fired from the Dashboard
 
 		//Shows the quiz on the UI of the attendee when the Pop Qui is fired from the Dashboard
 		$scope.isShowingResultsToPresenter = $scope.customQuestionsToAttendees.isShowingResultsToPresenter;
 	}, true);
 
 
-	//RESET
-	// /////////////////////////////////////////////////////////////////////////
 
+
+	//RESET CONTROLS
+	////////////////////////////////////////////////////////////////////////////
 	$scope.openFab = function() {
 		$scope.isActive = !$scope.isActive;
 	};
-
-
-
 	$scope.resetVolumeTracker  = ResetService.resetVolumeTracker; //sets to default values
 	$scope.resetSpeedTracker   = ResetService.resetSpeedTracker; //sets to default values
   $scope.resetYolko          = ResetService.resetYolko; //deletes the Votes node
