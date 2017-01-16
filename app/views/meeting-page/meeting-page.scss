@@ -1,4 +1,4 @@
-@import '../app-styles';
+@import '../app-styles.scss';
 
 .meeting-page {
 	margin: 0;
@@ -184,7 +184,7 @@
 					}
 
 					i {
-						color: $success-color;
+						color: $success;
 					}
 				}
 			}

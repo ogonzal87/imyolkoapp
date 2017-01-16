@@ -1,4 +1,4 @@
-@import '../app-styles';
+@import '../app-styles.scss';
 
 .dashboard-background {
 	background-color: $base-background-color-dashboard;
@@ -791,7 +791,7 @@
 				}
 
 				.question-for-presenter-delete-btn {
-					background-color:$panel-bad-background-color;
+					background-color: orangered;
 					font-size: 24px;
 					width: 40px;
 					border: none;
