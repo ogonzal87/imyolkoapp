@@ -1,7 +1,7 @@
 angular.module('Presenter')
 .service('ResetService', ResetService);
 
-function ResetService(DataAttendeeService, VotesService, QuestionsService, QuizService) {
+function ResetService(DataAttendeeService, VotesService, QuestionsToPresenterService, QuizService) {
 
 	var resetVolumeTracker = function() {
 		_.each(DataAttendeeService.attendees, function(attendee) {
@@ -41,7 +41,7 @@ function ResetService(DataAttendeeService, VotesService, QuestionsService, QuizS
 		    attendee.volumeUp = 0;
 		    attendee.vote = 'like';
 		    DataAttendeeService.attendees.$save(attendee);
-		    QuestionsService.allQuestionsApiUrl.remove();
+		    QuestionsToPresenterService.allQuestionsApiUrl.remove();
 		    VotesService.allVotesApiUrl.remove();
 		    QuizService.quizQuestion1Url.remove();
 	    });
@@ -50,7 +50,7 @@ function ResetService(DataAttendeeService, VotesService, QuestionsService, QuizS
     var deleteEverything = function() {
 	    DataAttendeeService.allAttendeesApiUrl.remove();
 	    VotesService.allVotesApiUrl.remove();
-	    QuestionsService.allQuestionsApiUrl.remove();
+	    QuestionsToPresenterService.allQuestionsApiUrl.remove();
 	    QuizService.quizQuestion1Url.remove();
     };
 

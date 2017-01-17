@@ -1,12 +1,12 @@
 angular.module('Attendee')
 	.controller("AttendeeCtrl", AttendeeCtrl);
 
-function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterService, VotesService, QuestionsService, QuizService) {
+function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterService, VotesService, QuestionsToPresenterService, QuizService) {
 
 // LOAD ATTENDEES
 	$scope.attendees            = DataAttendeeService.attendees;
 	//LOAD QUESTIONS
-	$scope.questionsToPresenter = QuestionsService.questions;
+	$scope.questionsToPresenter = QuestionsToPresenterService.questions;
 	//LOAD VOTES
 	$scope.votes                = VotesService.votes;
 	//LOAD LIKE VOTES
@@ -107,17 +107,6 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 		};
 
 
-
-
-		// Panic Button Logic
-		// $scope.panicButton = function(attendee) {
-		// 	if ($scope.attendee.feeling == "fine") {
-		// 		$scope.attendee.feeling = "panic";
-		// 	} else if ($scope.attendee.feeling == "panic") {
-		// 		$scope.attendee.feeling = "fine";
-		// 	}
-		// };// Panic Button Logic
-
 		$scope.numOfPeopleWithVoteAttribute = _.filter($scope.attendees, function(attendee) {
 			return attendee.vote;
 		});
@@ -155,12 +144,6 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 
 
 
-
-
-
-
-
-
 	//QUIZ
 	// ///////////////////////////////////////////////////////////////////////
 	$scope.submitAnswer = function () {
@@ -178,47 +161,6 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 			alert('Hey! Choose an option... ')
 		}
 	};
-
-
-
-
-
-	// $scope.$watch('quizQuestion1', function(newVals, oldVals) {
-	// 	var answersA = QuizService.quizAnswers1A.length;
-	// 	var answersB = QuizService.quizAnswers1B.length;
-	// 	var answersC = QuizService.quizAnswers1C.length;
-	// 	var answersD = QuizService.quizAnswers1D.length;
-	//
-	// 	var chartAllData = {
-	// 		labels: ['A', 'B', 'C', 'D'],
-	// 		series: [answersA, answersB, answersC, answersD]
-	// 	};
-	//
-	// 	var chartBarOptions = {
-	// 		distributeSeries: true,
-	// 		axisY: {
-	// 			onlyInteger: true
-	// 		}
-	// 	};
-	//
-	// 	// Create a new bar chart object where as first parameter we pass in a selector
-	// 	// that is resolving to our chart container element. The Second parameter
-	// 	// is the actual data object and the third the options.
-	// 	new Chartist.Bar('.ct-chart', chartAllData, chartBarOptions);
-	//
-	// 	//Shows the quiz on the UI of the attendee when the Pop Qui is fired from the Dashboard
-	// 	// $scope.showQuiz = $scope.quizQuestion1.isShowingQuiz;
-	// 	//Shows the quiz on the UI of the attendee when the Pop Qui is fired from the Dashboard
-	// 	// $scope.isShowingResultsToPresenter = $scope.quizQuestion1.isShowingResultsToPresenter;
-	// }, true);
-
-
-
-
-
-
-
-
 
 
 
@@ -246,18 +188,6 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 		// is the actual data object and the third the options.
 		new Chartist.Bar('.ct-chart-customQuestionsToAttendeesMeeting', chartAllData, chartBarOptions);
 	}, true);
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 	//QUESTIONS TO THE PRESENTER
@@ -291,13 +221,13 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 
 	$scope.voteQuestionUp = function(questionToPresenter) {
 		questionToPresenter.counter++;
-		QuestionsService.questions.$save(questionToPresenter);
+		QuestionsToPresenterService.questions.$save(questionToPresenter);
 		console.log('questionToPresenter', questionToPresenter)
 	};
 
 	// $scope.voteQuestionDown = function(questionToPresenter) {
 	// 	questionToPresenter.counter--;
-	// 	QuestionsService.questions.$save(questionToPresenter);
+	// 	QuestionsToPresenterService.questions.$save(questionToPresenter);
 	// };
 
 }
