@@ -1,5 +1,5 @@
 angular.module('YolkoApp')
-.service('QuestionsService', QuestionsService);
+.service('QuestionsToPresenterService', QuestionsService);
 
 function QuestionsService(FIREBASE_URL, $firebaseArray) {
 	// var allQuestionsApiUrl = new Firebase(FIREBASE_URL + '/attendees/' + DataAttendeeService.defaultAttendee.key + '/questions');
