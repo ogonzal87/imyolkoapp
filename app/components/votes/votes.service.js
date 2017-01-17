@@ -21,7 +21,6 @@ function VotesService(FIREBASE_URL, $firebaseArray, $firebaseObject) {
 
 	  //Dislikes
 	  allDislikeVotesApiUrl: allDislikeVotesApiUrl,
-	  dislikeVotesArray: dislikeVotesArray,
-	  dislikeVotesArray: dislikeVotesArray,
+	  dislikeVotesArray: dislikeVotesArray
   };
 }
