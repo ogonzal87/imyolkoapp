@@ -15,7 +15,6 @@ function QuizService(FIREBASE_URL, $firebaseArray, $firebaseObject) {
 	var quizQuestion2 = $firebaseObject(quizQuestion2Url);
 	var quizQuestion3 = $firebaseObject(quizQuestion3Url);
 
-
 	var quizAnswers1A = $firebaseArray(quizAnswer1AUrl);
 
 	var quizAnswers1B = $firebaseArray(quizAnswer1BUrl);
