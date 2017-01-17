@@ -4,32 +4,10 @@
 
 	<og-control-panel presenter="presenter"></og-control-panel>
 
-
 	<div>
 		<div class="dashboard--presentation-ctrls-container row">
-
 			<div class="stopwatch-container col-sm-6 col-sm-push-3">
-				<!--<div class="chronometer" ng-init="showStopwatch()">-->
-					<!--{{ stopWatch | date: 'h:mm:ss a' }}-->
-				<!--</div>-->
-				<!--<div class="media-controls">-->
-
-					<!--<div class="play-icon" ng-class="{'active-media-btn': activePlayBtn}">-->
-						<!--<i class="fa fa-play" aria-hidden="true" ng-click="startPresentation()"></i>-->
-						<!--&lt;!&ndash;<img src="assets/icons/play.svg" ng-click="startPresentation()">&ndash;&gt;-->
-					<!--</div>-->
-
-					<!--<div class="pause-icon" ng-class="{'active-media-btn': activePauseBtn}">-->
-						<!--<i class="fa fa-pause" aria-hidden="true" ng-click="pausePresentation()"></i>-->
-						<!--&lt;!&ndash;<img src="assets/icons/pause.svg" ng-click="pausePresentation()">&ndash;&gt;-->
-					<!--</div>-->
-
-					<!--<div class="stop-icon" ng-class="{'active-media-btn': activeStopBtn}">-->
-						<!--<i class="fa fa-stop" aria-hidden="true" ng-click="stopPresentation()"></i>-->
-						<!--&lt;!&ndash;<img src="assets/icons/stop.svg" ng-click="pausePresentation()">&ndash;&gt;-->
-					<!--</div>-->
-
-				<!--</div>-->
+				<!--TODO: Figue out what could go here or just rearrange the whole grid. -->
 			</div>
 
 			<div class="num-attendees-container col-sm-3 col-sm-pull-6">
@@ -45,17 +23,9 @@
 
 		<div class="dashboard--second-row-container row">
 			<div class="mood-container col-sm-6 col-sm-push-3">
-
-
 				<div class="circles">
 					<img ng-src="{{ avatarDashboard.face }}" class="face">
 				</div>
-
-
-
-				<!--<div class="circles">-->
-					<!--<div class="circle-mood" ng-class="{'is-pulsing': dislikePercent > 50}"></div>-->
-				<!--</div>-->
 				<div class="dashboard-label avatar-message">{{avatarDashboard.message}}</div>
 			</div>
 
@@ -71,15 +41,12 @@
 		</div>
 
 		<div class="dashboard--primary-graphs-container row">
-
 			<div class="speed-container col-sm-6 col-sm-push-3">
 				<div class="speed-graph-message-container">
 					<div class="message">{{speedPercent.content | uppercase}}</div>
 					<div class="graph-container">
 						<div class="fa fa-caret-left triangle" ng-class="{'is-active-circle-too-slow': 	speedPercent.class === 'is-active-circle-too-slow'}"></div>
-						<!--<div class="fa fa-caret-left triangle" ng-class="{'is-active-circle-go-faster': speedPercent.class === 'is-active-circle-go-faster'}"></div>-->
 						<div class="bg-circle" ng-class="{'is-active-circle-we-good': speedPercent.class === 'is-active-circle-we-good'}"></div>
-						<!--<div class="fa fa-caret-right triangle" ng-class="{'is-active-circle-go-slower': speedPercent.class === 'is-active-circle-go-slower'}"></div>-->
 						<div class="fa fa-caret-right triangle" ng-class="{'is-active-circle-too-fast ': speedPercent.class === 'is-active-circle-too-fast'}"></div>
 					</div>
 				</div>
@@ -103,23 +70,18 @@
 				</div>
 				<div class="dashboard-label">LOST</div>
 			</div>
-
 		</div>
 	</div>
-	<div class="reset-btn-container">
 
+	<div class="reset-btn-container">
 		<div class="fab" ng-click="openFab()" ng-class="{'open': isActive}">
 			<div class="option yolko-reset-btn" ng-class="{'open': isActive}" ng-click="resetYolko()">
-				<!--<i class="material-icons">autorenew</i>-->
 				<i class="material-icons">insert_emoticon</i>
 			</div>
 			<div class="option hearing-reset-btn" ng-class="{'open': isActive}" ng-click="resetVolumeTracker()">
-				<!--<i class="material-icons">refresh</i>-->
 				<i class="material-icons">hearing</i>
 			</div>
 			<div class="option lost-reset-btn" ng-class="{'open': isActive}" ng-click="resetPanicTracker()">
-				<!--<i class="material-icons">present_to_all</i>-->
-				<!--<i class="material-icons">flash_on</i>-->
 				<i class="material-icons">warning</i>
 			</div>
 			<div class="option new-presentation-reset-btn" ng-class="{'open': isActive}" ng-click="deleteEverything()">
@@ -129,32 +91,13 @@
 				<i class="material-icons">autorenew</i>
 			</div>
 		</div>
-
-		<!--<button class="reset-control-btn">-->
-			<!--<i class="fa fa-refresh"></i>-->
-		<!--</button>-->
-		<!--<button class="reset-control-btn">-->
-			<!--<i class="fa fa-refresh"></i>-->
-		<!--</button>-->
-		<!--<button class="reset-control-btn">-->
-			<!--<i class="fa fa-refresh"></i>-->
-		<!--</button>-->
-		<!--<button class="reset-control-btn">-->
-			<!--<i class="fa fa-refresh"></i>-->
-		<!--</button>-->
-		<!--<button class="reset-control-btn">-->
-			<!--<i class="fa fa-refresh"></i>-->
-		<!--</button>-->
 	</div>
 
 </div>
 
 
 <div class="questions-and-quiz-container">
-
-
 	<div class="dashboard-tab-content">
-
 		<div class="dashboard-custom-question-maker-container" ng-show="customQuestionsToAttendeesArr <= 0 || showCustomQuestionMaker">
 
 			<h1>What would you like to ask the audience?</h1>
@@ -264,15 +207,8 @@
 		</div>
 
 
-
-
 		<div class="dashboard-questions-for-presenter-container">
-			<!--   QUESTIONS -->
-			<!--<div ng-if="questionsToPresenter.length === 0" class="no-questions-container">-->
-				<!--<div class="no-questions-message">-->
-					<!--<h2>Great Job! There are no questions yet...</h2>-->
-				<!--</div>-->
-			<!--</div>-->
+			<!--   QUESTIONS TO PRESENTER -->
 			<ul class="dashboard-questions-for-presenter-list">
 				<li class="dashboard-question-for-presenter"
 					ng-repeat="(key, questionToPresenter) in questionsToPresenter | orderBy: '-counter'">
@@ -287,40 +223,10 @@
 						<div class="question-for-presenter-voting-controls-text">
 							{{ questionToPresenter.counter }}
 						</div>
-
-						<!--<button class="btn btn-sm btn-default" ng-click="voteQuestionDown(questionToPresenter)">-->
-						<!--<i class="fa fa-chevron-down"></i>-->
-						<!--</button>-->
 						<button class="question-for-presenter-delete-btn" ng-click="removeQuestion(key)">&times;</button>
 					</div>
 				</li>
 			</ul>
-			<!--   QUESTIONS END -->
 		</div>
-
-
-
 	</div>
 </div>
-
-
-
-
-
-
-
-
-
-
-<!--<div class="live-chart">-->
-	<!--&lt;!&ndash; CHART &ndash;&gt;-->
-	<!--<div class="ct-chart-timeline"></div>-->
-	<!--&lt;!&ndash; CHART &ndash;&gt;-->
-	<!--<h3 style="text-align: center;">LIVE DATA COMING IN</h3>-->
-	<!--&lt;!&ndash; <pre>-->
-		  <!--LikeVotes: {{ intervalLikeVotes }} <br>-->
-		  <!--Like Line Arr: {{ likeLine }} <br>-->
-		  <!--DislikeVotes: {{ intervalDislikeVotes }} <br>-->
-		  <!--Dislike Line Arr: {{ dislikeLine }} <br>-->
-	<!--</pre> &ndash;&gt;-->
-<!--</div>-->
