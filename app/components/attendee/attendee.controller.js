@@ -3,22 +3,24 @@ angular.module('Attendee')
 
 function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterService, VotesService, QuestionsToPresenterService, QuizService) {
 
+	var vm = this;
+
 // LOAD ATTENDEES
-	$scope.attendees            = DataAttendeeService.attendees;
+	$scope.attendees        = DataAttendeeService.attendees;
 	//LOAD QUESTIONS
-	$scope.questionsToPresenter = QuestionsToPresenterService.questions;
+	vm.questionsToPresenter = QuestionsToPresenterService.questions;
 	//LOAD VOTES
-	$scope.votes                = VotesService.votes;
+	vm.votes                = VotesService.votes;
 	//LOAD LIKE VOTES
-	$scope.likeVotesArray       = VotesService.likeVotesArray;
+	vm.likeVotesArray       = VotesService.likeVotesArray;
 	//LOAD DISLIKE VOTES
-	$scope.dislikeVotesArray    = VotesService.dislikeVotesArray;
+	vm.dislikeVotesArray    = VotesService.dislikeVotesArray;
 	//LOAD QUIZ QUESTIONS
-	$scope.quizQuestion1        = QuizService.quizQuestion1;
+	vm.quizQuestion1        = QuizService.quizQuestion1;
 
 	// bind the obj in view (presenter) to the database in Firebase
 	// any changes that happen in the view will be updated automatically in Firebase and viceversa
-	$scope.presenter = DataPresenterService.currentPresenterSyncObj;
+	vm.presenter = DataPresenterService.currentPresenterSyncObj;
 
 
 	// bind the obj in view (attendee) to the database in Firebase
@@ -35,9 +37,9 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 	//VOTES
 	/////////////////////////////////////////////////////////////////////////
 	// Create a function that when is clicked creates a LIKE vote Object in Firebase this is stored in an array
-	$scope.voteLike = function() {
+	vm.voteLike = function() {
 		$scope.attendee.vote = 'like';
-		$scope.likeVotesArray.$add({
+		vm.likeVotesArray.$add({
 			user: $scope.attendee.$id,
 			vote: 'like',
 			value: 1,
@@ -45,16 +47,16 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 		});
 		// I have to disable to btn so people so not submit more than 1 vote per
 		// interval
-		$scope.disableSentimentBtns = true;
+		vm.disableSentimentBtns = true;
 		$timeout(function() {
-			$scope.disableSentimentBtns = false;
+			vm.disableSentimentBtns = false;
 		}, 5000);
 	};
 
 	// Create a function that when is clicked creates a DISLIKE vote Object in Firebase this is stored in an array
-	$scope.voteDislike = function() {
+	vm.voteDislike = function() {
 		$scope.attendee.vote = 'dislike';
-		$scope.dislikeVotesArray.$add({
+		vm.dislikeVotesArray.$add({
 			user: $scope.attendee.$id,
 			vote: 'dislike',
 			value: 0,
@@ -62,9 +64,9 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 		});
 		// I have to disable to btn so people so not submit more than 1 vote per
 		// interval
-		$scope.disableSentimentBtns = true;
+		vm.disableSentimentBtns = true;
 		$timeout(function() {
-			$scope.disableSentimentBtns = false;
+			vm.disableSentimentBtns = false;
 		}, 5000);
 	};
 
@@ -77,68 +79,69 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 	$scope.$watch('attendees', function(newVal, oldVal) {
 
 		//LOST LOGIC
-		$scope.attendeeInPanic = function () {
+		vm.attendeeInPanic = function () {
 			$scope.attendee.feeling = 'panic';
-			$scope.lostFeedbackTaken = true;
+			vm.lostFeedbackTaken = true;
 		};
-		$scope.attendeeNotInPanic = function () {
+		vm.attendeeNotInPanic = function () {
 			$scope.attendee.feeling = 'fine';
-			$scope.lostFeedbackTaken = true;
+			vm.lostFeedbackTaken = true;
 		};
 
 		//HEARING LOGIC
-		$scope.attendeeCannotHear = function () {
+		vm.attendeeCannotHear = function () {
 			$scope.attendee.volumeUp = 'yes';
-			$scope.hearingFeedbackTaken = true;
+			vm.hearingFeedbackTaken = true;
 		};
-		$scope.attendeeCanHear = function () {
+		vm.attendeeCanHear = function () {
 			$scope.attendee.volumeUp = 'no';
-			$scope.hearingFeedbackTaken = true;
+			vm.hearingFeedbackTaken = true;
 		};
 
 		//SPEED LOGIC
-		$scope.attendeeWantSlower = function () {
+		vm.attendeeWantSlower = function () {
 			$scope.attendee.speed = -1;
-			$scope.speedFeedbackTaken = true;
+			vm.speedFeedbackTaken = true;
 		};
-		$scope.attendeeWantFaster = function () {
+		vm.attendeeWantFaster = function () {
 			$scope.attendee.speed = 1;
-			$scope.speedFeedbackTaken = true;
+			vm.speedFeedbackTaken = true;
 		};
 
 
-		$scope.numOfPeopleWithVoteAttribute = _.filter($scope.attendees, function(attendee) {
+		vm.numOfPeopleWithVoteAttribute = _.filter($scope.attendees, function(attendee) {
+			console.log(attendee);
 			return attendee.vote;
 		});
 
-		$scope.numOfPeopleWithDislikeVotes = _.filter($scope.attendees, function(attendee) {
+		vm.numOfPeopleWithDislikeVotes = _.filter($scope.attendees, function(attendee) {
 			return attendee.vote === 'dislike';
 		});
 
-		if(!$scope.dislikePercent) { $scope.dislikePercent = 0 }
+		if(!vm.dislikePercent) { vm.dislikePercent = 0 }
 
-		$scope.dislikePercent = Math.round(($scope.numOfPeopleWithDislikeVotes.length / $scope.numOfPeopleWithVoteAttribute.length) * 100);
+		vm.dislikePercent = Math.round((vm.numOfPeopleWithDislikeVotes.length / vm.numOfPeopleWithVoteAttribute.length) * 100);
 
 		displayYolko()
 	}, true);
 
 
 	//Displaying Yolko
-	$scope.avatarDeactive = { face:'assets/avatars/sleeping-face.svg' };
+	vm.avatarDeactive = { face:'assets/avatars/sleeping-face.svg' };
 
 	function displayYolko() {
-		if($scope.dislikePercent >= 80) {
-			return $scope.avatar = {face: 'assets/avatars/tense-full-face.svg', message: 'Yolko is a little tense'};
-		} else if ($scope.dislikePercent >= 60 && $scope.dislikePercent <= 79.999999999999) {
-			return $scope.avatar = {face: 'assets/avatars/notsogood-full-face.svg', message: 'Yolko is not so good'};
-		} else if ($scope.dislikePercent >= 40 && $scope.dislikePercent <= 59.999999999999) {
-			return $scope.avatar = {face: 'assets/avatars/serious-full-face.svg', message: 'Yolko is ok'};
-		} else if ($scope.dislikePercent >= 20 && $scope.dislikePercent <= 39.999999999999) {
-			return $scope.avatar = {face: 'assets/avatars/great-full-face.svg',	message: 'Yolko is great'};
-		} else if ($scope.dislikePercent >= 0 && $scope.dislikePercent <= 29.999999999999) {
-			return $scope.avatar = {face: 'assets/avatars/motivated-full-face.svg', message: 'Yolko is motivated!'};
+		if(vm.dislikePercent >= 80) {
+			return vm.avatar = {face: 'assets/avatars/tense-full-face.svg', message: 'Yolko is a little tense'};
+		} else if (vm.dislikePercent >= 60 && vm.dislikePercent <= 79.999999999999) {
+			return vm.avatar = {face: 'assets/avatars/notsogood-full-face.svg', message: 'Yolko is not so good'};
+		} else if (vm.dislikePercent >= 40 && vm.dislikePercent <= 59.999999999999) {
+			return vm.avatar = {face: 'assets/avatars/serious-full-face.svg', message: 'Yolko is ok'};
+		} else if (vm.dislikePercent >= 20 && vm.dislikePercent <= 39.999999999999) {
+			return vm.avatar = {face: 'assets/avatars/great-full-face.svg',	message: 'Yolko is great'};
+		} else if (vm.dislikePercent >= 0 && vm.dislikePercent <= 29.999999999999) {
+			return vm.avatar = {face: 'assets/avatars/motivated-full-face.svg', message: 'Yolko is motivated!'};
 		} else {
-			return $scope.avatar = {face: 'assets/avatars/great-full-face.svg', message: 'Yolko is great'};
+			return vm.avatar = {face: 'assets/avatars/great-full-face.svg', message: 'Yolko is great'};
 		}
 	}
 
@@ -146,7 +149,7 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 
 	//QUIZ
 	// ///////////////////////////////////////////////////////////////////////
-	$scope.submitAnswer = function () {
+	vm.submitAnswer = function () {
 		if ($scope.attendee.chosenAnswer === "A") {
 			DataPresenterService.choiceAForSelectedQuestionForAttendees.$add(1);
 		} else if ($scope.attendee.chosenAnswer === "B") {
@@ -156,7 +159,7 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 		}
 		//disbale all other answers after attendee submits their answers
 		if($scope.attendee.chosenAnswer) {
-			$scope.disableAllChoices = true;
+			vm.disableAllChoices = true;
 		} else {
 			alert('Hey! Choose an option... ')
 		}
@@ -192,40 +195,40 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 
 	//QUESTIONS TO THE PRESENTER
 	// ///////////////////////////////////////////////////////////////////////
-	$scope.addQuestionKeyDown = function(event) {
-		if (event.keyCode === 13 && $scope.questionContent) {
-			$scope.questionsToPresenter.$add({
-				content: $scope.questionContent,
+	vm.addQuestionKeyDown = function(event) {
+		if (event.keyCode === 13 && vm.questionContent) {
+			vm.questionsToPresenter.$add({
+				content: vm.questionContent,
 				counter: 0,
 				time: Firebase.ServerValue.TIMESTAMP
 			});
-			$scope.questionContent = "";
+			vm.questionContent = "";
 		}
 	};
 
-	$scope.addQuestionClick = function() {
-		if($scope.questionContent) {
-			$scope.questionsToPresenter.$add({
-				content: $scope.questionContent,
+	vm.addQuestionClick = function() {
+		if(vm.questionContent) {
+			vm.questionsToPresenter.$add({
+				content: vm.questionContent,
 				counter: 0,
 				time: Firebase.ServerValue.TIMESTAMP
 			});
 		}
-		$scope.questionContent = "";
+		vm.questionContent = "";
 	};
 
-	$scope.removeQuestion = function(key) {
-		$scope.questionsToPresenter.$remove(key);
+	vm.removeQuestion = function(key) {
+		vm.questionsToPresenter.$remove(key);
 	};
 
 
-	$scope.voteQuestionUp = function(questionToPresenter) {
+	vm.voteQuestionUp = function(questionToPresenter) {
 		questionToPresenter.counter++;
 		QuestionsToPresenterService.questions.$save(questionToPresenter);
 		console.log('questionToPresenter', questionToPresenter)
 	};
 
-	// $scope.voteQuestionDown = function(questionToPresenter) {
+	// vm.voteQuestionDown = function(questionToPresenter) {
 	// 	questionToPresenter.counter--;
 	// 	QuestionsToPresenterService.questions.$save(questionToPresenter);
 	// };
