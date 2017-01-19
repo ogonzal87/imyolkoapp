@@ -1,4 +1,4 @@
-<div class="dashboard-background" ng-class="avatarDashboard.backgroundColor">
+<div class="dashboard-background" ng-class="$ctrl.avatarDashboard.backgroundColor">
 
 	<og-navbar></og-navbar>
 
@@ -11,12 +11,12 @@
 			</div>
 
 			<div class="num-attendees-container col-sm-3 col-sm-pull-6">
-				<div class="num">{{numAttendees}}</div>
+				<div class="num">{{ $ctrl.numAttendees }}</div>
 				<div class="dashboard-label">ATTENDEES</div>
 			</div>
 
 			<div class="dashboard--questions-container col-sm-3 ">
-				<div class="num">{{allQuestionsFromAttendees.length}}</div>
+				<div class="num">{{ $ctrl.allQuestionsFromAttendees.length }}</div>
 				<div class="dashboard-label">QUESTIONS</div>
 			</div>
 		</div>
@@ -24,18 +24,18 @@
 		<div class="dashboard--second-row-container row">
 			<div class="mood-container col-sm-6 col-sm-push-3">
 				<div class="circles">
-					<img ng-src="{{ avatarDashboard.face }}" class="face">
+					<img ng-src="{{ $ctrl.avatarDashboard.face }}" class="face">
 				</div>
-				<div class="dashboard-label avatar-message">{{avatarDashboard.message}}</div>
+				<div class="dashboard-label avatar-message">{{ $ctrl.avatarDashboard.message }}</div>
 			</div>
 
 			<div class="likes-container col-sm-3 col-sm-pull-6">
-				<div class="num">{{likeVotesArray.length}}</div>
+				<div class="num">{{ $ctrl.likeVotesArray.length }}</div>
 				<div class="dashboard-label">LIKES</div>
 			</div>
 
 			<div class="dislikes-container col-sm-3">
-				<div class="num">{{dislikeVotesArray.length}}</div>
+				<div class="num">{{ $ctrl.dislikeVotesArray.length }}</div>
 				<div class="dashboard-label">DISLIKES</div>
 			</div>
 		</div>
@@ -43,30 +43,30 @@
 		<div class="dashboard--primary-graphs-container row">
 			<div class="speed-container col-sm-6 col-sm-push-3">
 				<div class="speed-graph-message-container">
-					<div class="message">{{speedPercent.content | uppercase}}</div>
+					<div class="message">{{ $ctrl.speedPercent.content | uppercase }}</div>
 					<div class="graph-container">
-						<div class="fa fa-caret-left triangle" ng-class="{'is-active-circle-too-slow': 	speedPercent.class === 'is-active-circle-too-slow'}"></div>
-						<div class="bg-circle" ng-class="{'is-active-circle-we-good': speedPercent.class === 'is-active-circle-we-good'}"></div>
-						<div class="fa fa-caret-right triangle" ng-class="{'is-active-circle-too-fast ': speedPercent.class === 'is-active-circle-too-fast'}"></div>
+						<div class="fa fa-caret-left triangle" ng-class="{'is-active-circle-too-slow': $ctrl.speedPercent.class === 'is-active-circle-too-slow'}"></div>
+						<div class="bg-circle" ng-class="{'is-active-circle-we-good': $ctrl.speedPercent.class === 'is-active-circle-we-good'}"></div>
+						<div class="fa fa-caret-right triangle" ng-class="{'is-active-circle-too-fast ': $ctrl.speedPercent.class === 'is-active-circle-too-fast'}"></div>
 					</div>
 				</div>
 				<div class="dashboard-label">SPEED</div>
 			</div>
 
 			<div class="cant-hear-container col-sm-3 col-sm-pull-6">
-				<div class="cant-hear-graph" ng-class="{'cant-hear-graph-bg-white': avatarDashboard.backgroundColor }">
+				<div class="cant-hear-graph" ng-class="{'cant-hear-graph-bg-white': $ctrl.avatarDashboard.backgroundColor }">
 					<div class="ct-chart-volume"></div>
-					<div class="percentage" ng-class="volumeUpPercent.class">
-						{{volumeUpPercent.content}}%
+					<div class="percentage" ng-class="$ctrl.volumeUpPercent.class">
+						{{ $ctrl.volumeUpPercent.content }}%
 					</div>
 				</div>
 				<div class="dashboard-label">CAN'T HEAR</div>
 			</div>
 
 			<div class="lost-container col-sm-3">
-				<div class="panic-graph" ng-class="{'panic-graph-bg-white': avatarDashboard.backgroundColor === 'lever-1-mood-color' || 'lever-5-mood-color'}">
+				<div class="panic-graph" ng-class="{'panic-graph-bg-white': $ctrl.avatarDashboard.backgroundColor === 'lever-1-mood-color' || 'lever-5-mood-color'}">
 					<div class="ct-chart-lost"></div>
-					<div class="percentage">{{panicPercent.content}}%</div>
+					<div class="percentage">{{ $ctrl.panicPercent.content }}%</div>
 				</div>
 				<div class="dashboard-label">LOST</div>
 			</div>
@@ -74,17 +74,17 @@
 	</div>
 
 	<div class="reset-btn-container">
-		<div class="fab" ng-click="openFab()" ng-class="{'open': isActive}">
-			<div class="option yolko-reset-btn" ng-class="{'open': isActive}" ng-click="resetYolko()">
+		<div class="fab" ng-click="$ctrl.openFab()" ng-class="{'open': $ctrl.isActive}">
+			<div class="option yolko-reset-btn" ng-class="{'open': $ctrl.isActive}" ng-click="$ctrl.resetYolko()">
 				<i class="material-icons">insert_emoticon</i>
 			</div>
-			<div class="option hearing-reset-btn" ng-class="{'open': isActive}" ng-click="resetVolumeTracker()">
+			<div class="option hearing-reset-btn" ng-class="{'open': $ctrl.isActive}" ng-click="$ctrl.resetVolumeTracker()">
 				<i class="material-icons">hearing</i>
 			</div>
-			<div class="option lost-reset-btn" ng-class="{'open': isActive}" ng-click="resetPanicTracker()">
+			<div class="option lost-reset-btn" ng-class="{'open': $ctrl.isActive}" ng-click="$ctrl.resetPanicTracker()">
 				<i class="material-icons">warning</i>
 			</div>
-			<div class="option new-presentation-reset-btn" ng-class="{'open': isActive}" ng-click="deleteEverything()">
+			<div class="option new-presentation-reset-btn" ng-class="{'open': $ctrl.isActive}" ng-click="$ctrl.deleteEverything()">
 				<i class="material-icons">fiber_new</i>
 			</div>
 			<div class="close">
@@ -98,15 +98,15 @@
 
 <div class="questions-and-quiz-container">
 	<div class="dashboard-tab-content">
-		<div class="dashboard-custom-question-maker-container" ng-show="customQuestionsToAttendeesArr <= 0 || showCustomQuestionMaker">
+		<div class="dashboard-custom-question-maker-container" ng-show="$ctrl.customQuestionsToAttendeesArr <= 0 || $ctrl.showCustomQuestionMaker">
 
 			<h1>What would you like to ask the audience?</h1>
-			<form novalidate ng-submit="saveQuestionForAttendees()" class="dashboard-custom-question-maker-form">
+			<form novalidate ng-submit="$ctrl.saveQuestionForAttendees()" class="dashboard-custom-question-maker-form">
 				<div class="form-group">
 					<textarea class="custom-question-content"
 							  id="question"
 							  placeholder="How much is 2 + 2?"
-							  ng-model="customQuestion.content"
+							  ng-model="$ctrl.customQuestion.content"
 							  rows="4">
 					</textarea>
 				</div>
@@ -117,17 +117,17 @@
 						   class="form-control input-text"
 						   id="choice-a"
 						   placeholder="I'm a choice option"
-						   ng-model="customQuestion.optionA">
+						   ng-model="$ctrl.customQuestion.optionA">
 
 					<input type="radio"
 						   id="choicea"
-						   ng-model="customQuestion.correctAnsw"
+						   ng-model="$ctrl.customQuestion.correctAnsw"
 						   value="A"
-						   ng-click="isCorrectAnsA = !isCorrectAnsA">
-					<label for="choicea" class="notchecked" ng-if="!isCorrectAnsA">
+						   ng-click="$ctrl.isCorrectAnsA = !$ctrl.isCorrectAnsA">
+					<label for="choicea" class="notchecked" ng-if="!$ctrl.isCorrectAnsA">
 						<i class="fa fa-check fa-2x"></i>
 					</label>
-					<label for="choicea" class="checked" ng-if="isCorrectAnsA">
+					<label for="choicea" class="checked" ng-if="$ctrl.isCorrectAnsA">
 						<i class="fa fa-check fa-2x"></i>
 					</label>
 				</div>
@@ -138,17 +138,17 @@
 						   class="form-control input-text"
 						   id="choice-b"
 						   placeholder="I'm a choice option"
-						   ng-model="customQuestion.optionB">
+						   ng-model="$ctrl.customQuestion.optionB">
 
 					<input type="radio"
 						   value="B"
 						   id="choiceb"
-						   ng-model="customQuestion.correctAnsw"
-						   ng-click="isCorrectAnsB = !isCorrectAnsB">
-					<label for="choiceb" class="notchecked" ng-if="!isCorrectAnsB">
+						   ng-model="$ctrl.customQuestion.correctAnsw"
+						   ng-click="$ctrl.isCorrectAnsB = !$ctrl.isCorrectAnsB">
+					<label for="choiceb" class="notchecked" ng-if="!$ctrl.isCorrectAnsB">
 						<i class="fa fa-check fa-2x"></i>
 					</label>
-					<label for="choiceb" class="checked" ng-if="isCorrectAnsB">
+					<label for="choiceb" class="checked" ng-if="$ctrl.isCorrectAnsB">
 						<i class="fa fa-check fa-2x"></i>
 					</label>
 				</div>
@@ -159,38 +159,38 @@
 						   class="form-control input-text"
 						   id="choice-c"
 						   placeholder="I'm a choice option"
-						   ng-model="customQuestion.optionC">
+						   ng-model="$ctrl.customQuestion.optionC">
 
 					<input type="radio"
 						   value="C"
 						   id="choicec"
-						   ng-model="customQuestion.correctAnsw"
-						   ng-click="isCorrectAnsC = !isCorrectAnsC">
-					<label for="choicec" class="notchecked" ng-if="!isCorrectAnsC">
+						   ng-model="$ctrl.customQuestion.correctAnsw"
+						   ng-click="$ctrl.isCorrectAnsC = !$ctrl.isCorrectAnsC">
+					<label for="choicec" class="notchecked" ng-if="!$ctrl.isCorrectAnsC">
 						<i class="fa fa-check fa-2x"></i>
 					</label>
-					<label for="choicec" class="checked" ng-if="isCorrectAnsC">
+					<label for="choicec" class="checked" ng-if="$ctrl.isCorrectAnsC">
 						<i class="fa fa-check fa-2x"></i>
 					</label>
 				</div>
 
-				<div class="fire-quiz-btn-container" ng-show="showFireQuizBtn = true">
+				<div class="fire-quiz-btn-container" ng-show="$ctrl.showFireQuizBtn = true">
 					<input class=" fire-quiz-btn" type="submit" id="submit" value="SAVE QUESTION" />
 				</div>
 			</form>
 		</div>
 
-		<div class="dashboard-custom-questions-for-attendees-container" ng-hide="customQuestionsToAttendeesArr <= 0">
+		<div class="dashboard-custom-questions-for-attendees-container" ng-hide="$ctrl.customQuestionsToAttendeesArr <= 0">
 			<h1>Saved Questions</h1>
 			<ul class="dashboard-custom-questions-for-attendees-list">
 				<li class="dashboard-custom-question-for-attendees"
-					ng-click="selectQuestionToAttendees(question)"
-					data-ng-class="{'selected': addClassToSelected == question.key }"
-					ng-repeat="(key, question) in customQuestionsToAttendeesArr track by $index">
+					ng-click="$ctrl.selectQuestionToAttendees(question)"
+					data-ng-class="{'selected': $ctrl.addClassToSelected == question.key }"
+					ng-repeat="(key, question) in $ctrl.customQuestionsToAttendeesArr track by $index">
 					{{question.questionContent}}
 				</li>
 			</ul>
-			<button class="dashboard-custom-question-for-attendees-save-btn" ng-click="showCustomQuestionMaker = true">
+			<button class="dashboard-custom-question-for-attendees-save-btn" ng-click="$ctrl.showCustomQuestionMaker = true">
 				+
 			</button>
 
@@ -211,7 +211,7 @@
 			<!--   QUESTIONS TO PRESENTER -->
 			<ul class="dashboard-questions-for-presenter-list">
 				<li class="dashboard-question-for-presenter"
-					ng-repeat="(key, questionToPresenter) in questionsToPresenter | orderBy: '-counter'">
+					ng-repeat="(key, questionToPresenter) in $ctrl.questionsToPresenter | orderBy: '-counter'">
 					<div class="question-for-presenter-question-content">
 						{{ questionToPresenter.content }}
 						<div class="question-for-presenter-question-content-time">
@@ -223,7 +223,7 @@
 						<div class="question-for-presenter-voting-controls-text">
 							{{ questionToPresenter.counter }}
 						</div>
-						<button class="question-for-presenter-delete-btn" ng-click="removeQuestion(key)">&times;</button>
+						<button class="question-for-presenter-delete-btn" ng-click="$ctrl.removeQuestion(key)">&times;</button>
 					</div>
 				</li>
 			</ul>

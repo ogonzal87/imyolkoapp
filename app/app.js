@@ -20,12 +20,14 @@ function ApplicationConfig($stateProvider, $urlRouterProvider) {
     .state('meeting', {
   		url: '/meeting',
   		templateUrl: 'views/meeting-page/meeting-page.html',
-      controller: 'AttendeeCtrl'
+      controller: 'AttendeeCtrl',
+	    controllerAs: '$ctrl'
   	})
     .state('dashboard', {
   		url: '/dashboard',
   		templateUrl: 'views/dashboard-page/dashboard-page.html',
-      controller: 'PresenterCtrl'
+      controller: 'PresenterCtrl',
+	    controllerAs: '$ctrl'
   	});  
 
   $urlRouterProvider.otherwise('/');

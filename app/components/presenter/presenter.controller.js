@@ -2,24 +2,27 @@ angular.module('Presenter')
 .controller('PresenterCtrl', PresenterCtrl);
 
 function PresenterCtrl(FIREBASE_URL, $scope, VotesService, QuestionsToPresenterService, DataAttendeeService, DataPresenterService, ResetService, QuizService) {
+
+	var vm = this;
+
 	//LOAD ATTENDEES
 	$scope.attendees                     = DataAttendeeService.attendees;
 	//LOAD QUESTIONS
-	$scope.allQuestionsFromAttendees     = QuestionsToPresenterService.questions;
+	vm.allQuestionsFromAttendees     = QuestionsToPresenterService.questions;
 	//LOAD VOTES
-	$scope.votes                         = VotesService.votes;
+	vm.votes                         = VotesService.votes;
 	//LOAD LIKE VOTES
-	$scope.likeVotesArray                = VotesService.likeVotesArray;
+	vm.likeVotesArray                = VotesService.likeVotesArray;
 	//LOAD DISLIKE VOTES
-	$scope.dislikeVotesArray             = VotesService.dislikeVotesArray;
+	vm.dislikeVotesArray             = VotesService.dislikeVotesArray;
 	//LOAD CUSTOM QUESTIONS OBJECT
-	$scope.customQuestionsToAttendees    = QuizService.customQuestionsToAttendees;
+	vm.customQuestionsToAttendees    = QuizService.customQuestionsToAttendees;
 	//LOAD CUSTOM QUESTIONS ARRAY
-	$scope.customQuestionsToAttendeesArr = QuizService.customQuestionsToAttendeesArr;
+	vm.customQuestionsToAttendeesArr = QuizService.customQuestionsToAttendeesArr;
 
 	$scope.presenter                     = DataPresenterService.currentPresenterSyncObj;
 
-	$scope.selectedQuestionForAttendees  = DataPresenterService.selectedQuestionForAttendees;
+	vm.selectedQuestionForAttendees  = DataPresenterService.selectedQuestionForAttendees;
 
 	//bind the obj in view (presenter) to the database in Firebase
 	//any changes that happen in the view will be updated automatically in Firebase and viceversa
@@ -33,55 +36,55 @@ function PresenterCtrl(FIREBASE_URL, $scope, VotesService, QuestionsToPresenterS
 
 	//WATCHING ALL EVENTS UNDER THE ATTENDEES NODE IN FIREBASE --> to have 3-way data binding working.
 	$scope.$watch('attendees', function(newVal, oldVal) {
-		$scope.numAttendees = $scope.attendees.length;
+		vm.numAttendees = $scope.attendees.length;
 
 		//Volume Percentage
 		// /////////////////////////////////////////////////////////////////////////
 		var volumeUpAttendees = _.filter($scope.attendees, function(attendee) {
 			return attendee.volumeUp == "yes";
 		});
-		$scope.volumeUpPercent = volume(Math.round((volumeUpAttendees.length / $scope.numAttendees) * 100));
+		vm.volumeUpPercent = volume(Math.round((volumeUpAttendees.length / vm.numAttendees) * 100));
 
 		//Speed Percentage
 		///////////////////////////////////////////////////////////////////////////
 		var speedValue = _.reduce($scope.attendees, function(memo, attendee) {
 			return memo + attendee.speed;
 		}, 0);
-		$scope.speedPercent = speed(Math.round((speedValue / $scope.numAttendees) * 100));
+		vm.speedPercent = speed(Math.round((speedValue / $scope.numAttendees) * 100));
 
 		//Lost Percentage
 		// /////////////////////////////////////////////////////////////////////////
 		var lostValues = _.filter($scope.attendees, function(attendee) {
 			return attendee.feeling == "panic";
 		});
-		$scope.panicPercent = panic(Math.round((lostValues.length / $scope.numAttendees) * 100));
+		vm.panicPercent = panic(Math.round((lostValues.length / vm.numAttendees) * 100));
 
 		//dislike percentage
 		//////////////////////////////////////////////////////////////////////////
-		$scope.numOfPeopleWithVoteAttribute = _.filter($scope.attendees, function(attendee) {
+		vm.numOfPeopleWithVoteAttribute = _.filter($scope.attendees, function(attendee) {
 			return attendee.vote;
 		});
-		$scope.numOfPeopleWithDislikeVotes = _.filter($scope.attendees, function(attendee) {
+		vm.numOfPeopleWithDislikeVotes = _.filter($scope.attendees, function(attendee) {
 			return attendee.vote === 'dislike';
 		});
-		if(!$scope.dislikePercent) { $scope.dislikePercent = 0 }
+		if(!vm.dislikePercent) { vm.dislikePercent = 0 }
 
-		$scope.dislikePercent = Math.round(($scope.numOfPeopleWithDislikeVotes.length / $scope.numOfPeopleWithVoteAttribute.length) * 100);
+		vm.dislikePercent = Math.round((vm.numOfPeopleWithDislikeVotes.length / vm.numOfPeopleWithVoteAttribute.length) * 100);
 
 		// displays the mood of the class in the Dashboard with avatar's face
 		displayYolkoInDashboard();
 
 		//QUESTIONS TO PRESENTER
 		// /////////////////////////////////////////////////////////////////////////
-		$scope.questionsToPresenter = $scope.allQuestionsFromAttendees;
+		vm.questionsToPresenter = vm.allQuestionsFromAttendees;
 
-		$scope.removeQuestion = function(key) {
-			$scope.questionsToPresenter.$remove(key);
+		vm.removeQuestion = function(key) {
+			vm.questionsToPresenter.$remove(key);
 		};
 
 		// _.each($scope.attendees, function(attendee) {
 		// 	_.each(attendee.questions, function(question) {
-		// 		$scope.allQuestionsFromAttendees.push({
+		// 		vm.allQuestionsFromAttendees.push({
 		// 			content: question.content,
 		// 			name: attendee.name
 		// 		});
@@ -90,7 +93,7 @@ function PresenterCtrl(FIREBASE_URL, $scope, VotesService, QuestionsToPresenterS
 
 		//show chart for the VOLUME
 		new Chartist.Pie('.ct-chart-volume', {
-			series: [$scope.volumeUpPercent, 100]
+			series: [vm.volumeUpPercent, 100]
 		}, {
 			donut: true,
 			donutWidth: 40,
@@ -116,7 +119,7 @@ function PresenterCtrl(FIREBASE_URL, $scope, VotesService, QuestionsToPresenterS
 
 		//show chart for the LOST
 		new Chartist.Pie('.ct-chart-lost', {
-			series: [$scope.panicPercent.content, 100]
+			series: [vm.panicPercent.content, 100]
 		}, {
 			donut: true,
 			donutWidth: 40,
@@ -129,20 +132,20 @@ function PresenterCtrl(FIREBASE_URL, $scope, VotesService, QuestionsToPresenterS
 	}, true);
 
 	//DISPLAYING YOLKO
-	$scope.avatarDashboard = { face:'assets/icons/dash-sleeping.svg', backgroundColor: 'lever-0-mood-color' };
+	vm.avatarDashboard = { face:'assets/icons/dash-sleeping.svg', backgroundColor: 'lever-0-mood-color' };
 	function displayYolkoInDashboard() {
-		if($scope.dislikePercent >= 80) {
-			return $scope.avatarDashboard = {face: 'assets/icons/dash-tense.svg', message: 'Yolko is a little tense'};
-		} else if ($scope.dislikePercent >= 60 && $scope.dislikePercent <= 79.999999999999) {
-			return $scope.avatarDashboard = {face: 'assets/icons/dash-notsogood.svg', message: 'Yolko is not so good'};
-		} else if ($scope.dislikePercent >= 40 && $scope.dislikePercent <= 59.999999999999) {
-			return $scope.avatarDashboard = {face: 'assets/icons/dash-serious.svg', message: 'Yolko is ok'};
-		} else if ($scope.dislikePercent >= 20 && $scope.dislikePercent <= 39.999999999999) {
-			return $scope.avatarDashboard = {face: 'assets/icons/dash-great.svg', message: 'Yolko is great'};
-		} else if ($scope.dislikePercent >= 0 && $scope.dislikePercent <= 29.999999999999) {
-			return $scope.avatarDashboard = {face: 'assets/icons/dash-motivated.svg', message: 'Yolko is motivated!'};
+		if(vm.dislikePercent >= 80) {
+			return vm.avatarDashboard = {face: 'assets/icons/dash-tense.svg', message: 'Yolko is a little tense'};
+		} else if (vm.dislikePercent >= 60 && vm.dislikePercent <= 79.999999999999) {
+			return vm.avatarDashboard = {face: 'assets/icons/dash-notsogood.svg', message: 'Yolko is not so good'};
+		} else if (vm.dislikePercent >= 40 && vm.dislikePercent <= 59.999999999999) {
+			return vm.avatarDashboard = {face: 'assets/icons/dash-serious.svg', message: 'Yolko is ok'};
+		} else if (vm.dislikePercent >= 20 && vm.dislikePercent <= 39.999999999999) {
+			return vm.avatarDashboard = {face: 'assets/icons/dash-great.svg', message: 'Yolko is great'};
+		} else if (vm.dislikePercent >= 0 && vm.dislikePercent <= 29.999999999999) {
+			return vm.avatarDashboard = {face: 'assets/icons/dash-motivated.svg', message: 'Yolko is motivated!'};
 		} else {
-			return $scope.avatarDashboard = { face:'assets/icons/dash-sleeping.svg'};
+			return vm.avatarDashboard = { face:'assets/icons/dash-sleeping.svg'};
 		}
 	}
 
@@ -185,34 +188,34 @@ function PresenterCtrl(FIREBASE_URL, $scope, VotesService, QuestionsToPresenterS
 		this.questionData = questionData;
 	}
 
-	$scope.questionsForAttendees = [];
+	vm.questionsForAttendees = [];
 
-	$scope.saveQuestionForAttendees = function() {
-		$scope.showCustomQuestionMaker = false;
+	vm.saveQuestionForAttendees = function() {
+		vm.showCustomQuestionMaker = false;
 		var questionData = {
 			isShowingQuiz: true,
 			isShowingResultsToAttendees: false,
 			isShowingResultsToPresenter: true,
 		};
 
-		var options = [{a: $scope.customQuestion.optionA || ''}, {b: $scope.customQuestion.optionB || ''}, {c: $scope.customQuestion.optionC || ''}];
-		var question = new CustomQuestion($scope.customQuestion.content, options, $scope.customQuestion.correctAnsw, questionData);
+		var options = [{a: vm.customQuestion.optionA || ''}, {b: vm.customQuestion.optionB || ''}, {c: vm.customQuestion.optionC || ''}];
+		var question = new CustomQuestion(vm.customQuestion.content, options, vm.customQuestion.correctAnsw, questionData);
 
 		// Set the question in Firebase
 		var newQuestionRef = new Firebase(FIREBASE_URL + '/customQuestionsToAttendees/' + question.key);
 		newQuestionRef.set(question);
 
-		$scope.customQuestion.content = '';
-		$scope.customQuestion.correctAnsw = '';
-		$scope.customQuestion.optionA = '';
-		$scope.customQuestion.optionB = '';
-		$scope.customQuestion.optionC = '';
+		vm.customQuestion.content = '';
+		vm.customQuestion.correctAnsw = '';
+		vm.customQuestion.optionA = '';
+		vm.customQuestion.optionB = '';
+		vm.customQuestion.optionC = '';
 	};
 
 
-	$scope.selectQuestionToAttendees = function (question) {
+	vm.selectQuestionToAttendees = function (question) {
 		$scope.presenter.selectedQuestionForAttendees = question;
-		$scope.addClassToSelected = question.key;
+		vm.addClassToSelected = question.key;
 	};
 
 
@@ -221,7 +224,7 @@ function PresenterCtrl(FIREBASE_URL, $scope, VotesService, QuestionsToPresenterS
 	//RESULTS FROM THE CUSTOM QUESTION SELECTED BY THE PRESENTER
 	////////////////////////////////////////////////////////////////////////////
 	$scope.$watch('answersForSelectedQuestionForAttendeesObj', function(newVals, oldVals) {
-		$scope.numOfAnswersFromAttendees = DataPresenterService.choiceAForSelectedQuestionForAttendees.length + DataPresenterService.choiceBForSelectedQuestionForAttendees.length + DataPresenterService.choiceCForSelectedQuestionForAttendees.length;
+		vm.numOfAnswersFromAttendees = DataPresenterService.choiceAForSelectedQuestionForAttendees.length + DataPresenterService.choiceBForSelectedQuestionForAttendees.length + DataPresenterService.choiceCForSelectedQuestionForAttendees.length;
 
 		var answersA = DataPresenterService.choiceAForSelectedQuestionForAttendees.length;
 		var answersB = DataPresenterService.choiceBForSelectedQuestionForAttendees.length;
@@ -247,7 +250,7 @@ function PresenterCtrl(FIREBASE_URL, $scope, VotesService, QuestionsToPresenterS
 		new Chartist.Bar('.ct-chart-customQuestionsToAttendees', chartAllData, chartBarOptions);
 
 		//Shows the quiz on the UI of the attendee when the Pop Qui is fired from the Dashboard
-		$scope.isShowingResultsToPresenter = $scope.customQuestionsToAttendees.isShowingResultsToPresenter;
+		vm.isShowingResultsToPresenter = vm.customQuestionsToAttendees.isShowingResultsToPresenter;
 	}, true);
 
 
@@ -255,13 +258,13 @@ function PresenterCtrl(FIREBASE_URL, $scope, VotesService, QuestionsToPresenterS
 
 	//RESET CONTROLS
 	////////////////////////////////////////////////////////////////////////////
-	$scope.openFab = function() {
-		$scope.isActive = !$scope.isActive;
+	vm.openFab = function() {
+		vm.isActive = !vm.isActive;
 	};
-	$scope.resetVolumeTracker  = ResetService.resetVolumeTracker; //sets to default values
-	$scope.resetSpeedTracker   = ResetService.resetSpeedTracker; //sets to default values
-  $scope.resetYolko          = ResetService.resetYolko; //deletes the Votes node
-  $scope.resetPanicTracker   = ResetService.resetPanicTracker; //sets to default values
-  $scope.resetEverything     = ResetService.resetEverything; //deletes the Votes and Questionn nodes in the database but sets the values of the attendees back to start
-  $scope.deleteEverything    = ResetService.deleteEverything; //delets all the nodes in the Database
+	vm.resetVolumeTracker  = ResetService.resetVolumeTracker; //sets to default values
+	vm.resetSpeedTracker   = ResetService.resetSpeedTracker; //sets to default values
+  vm.resetYolko          = ResetService.resetYolko; //deletes the Votes node
+  vm.resetPanicTracker   = ResetService.resetPanicTracker; //sets to default values
+  vm.resetEverything     = ResetService.resetEverything; //deletes the Votes and Questionn nodes in the database but sets the values of the attendees back to start
+  vm.deleteEverything    = ResetService.deleteEverything; //delets all the nodes in the Database
 }
