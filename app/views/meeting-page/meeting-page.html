@@ -1,7 +1,7 @@
 <og-navbar></og-navbar>
+
 <div class="meeting-page"
 	 ng-class="{'inactive-background-color': !$ctrl.presenter.yolkoIsActive && !$ctrl.presenter.lostIsActive && !$ctrl.presenter.questionsIsActive && !$ctrl.presenter.speedIsActive && !$ctrl.presenter.hearingIsActive && !$ctrl.presenter.customQuestionToAttendeesIsActive}">
-<!--<div class="meeting-page">-->
 
 	<!--Show when there is no action from the Presenter-->
 	<div class="avatar-deactive-container" ng-if="!$ctrl.presenter.yolkoIsActive && !$ctrl.presenter.lostIsActive && !$ctrl.presenter.questionsIsActive && !$ctrl.presenter.speedIsActive && !$ctrl.presenter.hearingIsActive && !$ctrl.presenter.customQuestionToAttendeesIsActive">
@@ -108,8 +108,8 @@
 
 
 		<!--LOST-->
-		<div class="meeting-row meeting-row-alternate-color" ng-if="$ctrl.presenter.lostIsActive">
-			<div class="meeting-question">
+		<div class="meeting-row" ng-if="$ctrl.presenter.lostIsActive">
+			<div class="meeting-question" ng-hide="$ctrl.lostFeedbackTaken">
 				Are you lost?
 			</div>
 
@@ -121,7 +121,15 @@
 				</div>
 
 				<div class="meeting-feedback-taken" ng-show="$ctrl.lostFeedbackTaken">
-					<i class="fa fa-check-circle fa-2x" aria-hidden="true"></i> On it... I'll let the presenter know.
+					<div>
+						<div class="yolko-avatar-feedback-taken-container">
+							<img src="assets/avatars/winking.png"/>
+						</div>
+					</div>
+					<div class="text-feedback">
+						<h2>High fives!</h2><i class="em em-raised_hand hand-emoji"></i>
+					</div>
+					<p>I'll let the presenter know now</p>
 				</div>
 
 				<div class="option"
@@ -135,7 +143,7 @@
 
 		<!--HEARING-->
 		<div class="meeting-row" ng-if="$ctrl.presenter.hearingIsActive">
-			<div class="meeting-question">
+			<div class="meeting-question" ng-hide="$ctrl.hearingFeedbackTaken">
 				Can you hear?
 			</div>
 
@@ -147,7 +155,15 @@
 				</div>
 
 				<div class="meeting-feedback-taken" ng-show="$ctrl.hearingFeedbackTaken">
-					<i class="fa fa-check-circle fa-2x" aria-hidden="true"></i> On it... I'll let the presenter know.
+					<div>
+						<div class="yolko-avatar-feedback-taken-container">
+							<img src="assets/avatars/winking.png"/>
+						</div>
+					</div>
+					<div class="text-feedback">
+						<h2>High fives!</h2><i class="em em-raised_hand hand-emoji"></i>
+					</div>
+					<p>I'll let the presenter know now</p>
 				</div>
 
 				<div class="option"
@@ -160,8 +176,8 @@
 
 
 		<!--SPEED-->
-		<div class="meeting-row meeting-row-alternate-color" ng-if="$ctrl.presenter.speedIsActive">
-			<div class="meeting-question">
+		<div class="meeting-row" ng-if="$ctrl.presenter.speedIsActive">
+			<div class="meeting-question" ng-hide="$ctrl.speedFeedbackTaken">
 				How do you like the speed?
 			</div>
 
@@ -173,7 +189,15 @@
 				</div>
 
 				<div class="meeting-feedback-taken" ng-show="$ctrl.speedFeedbackTaken">
-					<i class="fa fa-check-circle fa-2x" aria-hidden="true"></i> On it... I'll let the presenter know.
+					<div>
+						<div class="yolko-avatar-feedback-taken-container">
+							<img src="assets/avatars/winking.png"/>
+						</div>
+					</div>
+					<div class="text-feedback">
+						<h2>High fives!</h2><i class="em em-raised_hand hand-emoji"></i>
+					</div>
+					<p>I'll let the presenter know now</p>
 				</div>
 
 				<div class="option"
@@ -231,11 +255,7 @@
 				</li>
 			</ul>
 		</div>
-
-
 	</div>
-
-
 </div>
 
 
