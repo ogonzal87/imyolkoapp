@@ -6,7 +6,8 @@ function PresenterCtrl(FIREBASE_URL, $scope, VotesService, QuestionsToPresenterS
 	var vm = this;
 
 	//LOAD ATTENDEES
-	$scope.attendees                     = DataAttendeeService.attendees;
+	//$scope here because of the $bindTo from Firebase and the $scope.$watch
+	$scope.attendees                 = DataAttendeeService.attendees;
 	//LOAD QUESTIONS
 	vm.allQuestionsFromAttendees     = QuestionsToPresenterService.questions;
 	//LOAD VOTES
@@ -20,7 +21,8 @@ function PresenterCtrl(FIREBASE_URL, $scope, VotesService, QuestionsToPresenterS
 	//LOAD CUSTOM QUESTIONS ARRAY
 	vm.customQuestionsToAttendeesArr = QuizService.customQuestionsToAttendeesArr;
 
-	$scope.presenter                     = DataPresenterService.currentPresenterSyncObj;
+	//$scope here because of the $bindTo from Firebase
+	$scope.presenter                 = DataPresenterService.currentPresenterSyncObj;
 
 	vm.selectedQuestionForAttendees  = DataPresenterService.selectedQuestionForAttendees;
 
@@ -159,7 +161,7 @@ function PresenterCtrl(FIREBASE_URL, $scope, VotesService, QuestionsToPresenterS
 		}
 	}
 
-	//DISPLAYING SPEED IDICATOR
+	//DISPLAYING SPEED INDICATOR
 	function speed(percent) {
 		if (percent > 20) {
 			return { value: percent, content: 'Go Faster', class: 'is-active-circle-too-fast' };
@@ -180,6 +182,8 @@ function PresenterCtrl(FIREBASE_URL, $scope, VotesService, QuestionsToPresenterS
 
 	//CUSTOM QUESTION MAKER
 	///////////////////////////////////////////////////////////////////////////
+
+	//constructor to create a Custom Question for Attendees
 	function CustomQuestion(content, availAnswers, correctAnsw, questionData) {
 		this.key = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 8);
 		this.questionContent = content;
@@ -188,6 +192,7 @@ function PresenterCtrl(FIREBASE_URL, $scope, VotesService, QuestionsToPresenterS
 		this.questionData = questionData;
 	}
 
+	//arr containing al the questions that the presenter has created to ask the attendees
 	vm.questionsForAttendees = [];
 
 	vm.saveQuestionForAttendees = function() {
@@ -217,8 +222,6 @@ function PresenterCtrl(FIREBASE_URL, $scope, VotesService, QuestionsToPresenterS
 		$scope.presenter.selectedQuestionForAttendees = question;
 		vm.addClassToSelected = question.key;
 	};
-
-
 
 
 	//RESULTS FROM THE CUSTOM QUESTION SELECTED BY THE PRESENTER
@@ -255,9 +258,9 @@ function PresenterCtrl(FIREBASE_URL, $scope, VotesService, QuestionsToPresenterS
 
 
 
-
 	//RESET CONTROLS
 	////////////////////////////////////////////////////////////////////////////
+	//Floating Btn to hard reset the presentation on the Presenter page
 	vm.openFab = function() {
 		vm.isActive = !vm.isActive;
 	};

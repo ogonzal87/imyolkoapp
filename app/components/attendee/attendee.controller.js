@@ -6,6 +6,7 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 	var vm = this;
 
 // LOAD ATTENDEES
+	//$scope here because of the $bindTo from Firebase and the $scope.$watch
 	$scope.attendees        = DataAttendeeService.attendees;
 	//LOAD QUESTIONS
 	vm.questionsToPresenter = QuestionsToPresenterService.questions;
@@ -30,13 +31,14 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 	DataAttendeeService.currentAttendeeApiUrl.set(DataAttendeeService.defaultAttendee);
 
 
-	// bind the obj in view (quizQuestion1) to the database in Firebase
+	// bind the obj in view (answersForSelectedQuestionForAttendeesObj) to the database in Firebase
 	// any changes that happen in the view will be updated automatically in Firebase and viceversa
+	// this one in particular, is to display the responses on the Graph when the presenter reveals the graph
 	DataPresenterService.answersForSelectedQuestionForAttendeesObj.$bindTo($scope, 'answersForSelectedQuestionForAttendeesObj');
 
 	//VOTES
 	/////////////////////////////////////////////////////////////////////////
-	// Create a function that when is clicked creates a LIKE vote Object in Firebase this is stored in an array
+	// creates a LIKE vote Object in Firebase stored in an array
 	vm.voteLike = function() {
 		$scope.attendee.vote = 'like';
 		vm.likeVotesArray.$add({
@@ -45,15 +47,14 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 			value: 1,
 			timestamp: Firebase.ServerValue.TIMESTAMP
 		});
-		// I have to disable to btn so people so not submit more than 1 vote per
-		// interval
+		// Disable to btn so people so not submit more than 1 vote per interval
 		vm.disableSentimentBtns = true;
 		$timeout(function() {
 			vm.disableSentimentBtns = false;
 		}, 5000);
 	};
 
-	// Create a function that when is clicked creates a DISLIKE vote Object in Firebase this is stored in an array
+	// creates a DISLIKE vote Object in Firebase. This is stored in an array
 	vm.voteDislike = function() {
 		$scope.attendee.vote = 'dislike';
 		vm.dislikeVotesArray.$add({
@@ -62,8 +63,7 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 			value: 0,
 			timestamp: Firebase.ServerValue.TIMESTAMP
 		});
-		// I have to disable to btn so people so not submit more than 1 vote per
-		// interval
+		// Disable to btn so people so not submit more than 1 vote per interval
 		vm.disableSentimentBtns = true;
 		$timeout(function() {
 			vm.disableSentimentBtns = false;
@@ -108,19 +108,20 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 			vm.speedFeedbackTaken = true;
 		};
 
-
+		// find how many people have voted from the total amount of attendees
 		vm.numOfPeopleWithVoteAttribute = _.filter($scope.attendees, function(attendee) {
 			return attendee.vote;
 		});
 
+		// find how many people have voted DISLIKE from the total amount of attendees
 		vm.numOfPeopleWithDislikeVotes = _.filter($scope.attendees, function(attendee) {
 			return attendee.vote === 'dislike';
 		});
 
 		if(!vm.dislikePercent) { vm.dislikePercent = 0 }
 
+		//**LOGIC THAT DRIVES YOLKO DISPLAYING**//
 		vm.dislikePercent = Math.round((vm.numOfPeopleWithDislikeVotes.length / vm.numOfPeopleWithVoteAttribute.length) * 100);
-
 		displayYolko()
 	}, true);
 
@@ -146,7 +147,7 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 
 
 
-	//QUIZ
+	//CUSTOM QUESTION
 	// ///////////////////////////////////////////////////////////////////////
 	vm.submitAnswer = function () {
 		if ($scope.attendee.chosenAnswer === "A") {
@@ -156,7 +157,7 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 		} else if ($scope.attendee.chosenAnswer === "C") {
 			DataPresenterService.choiceCForSelectedQuestionForAttendees.$add(1);
 		}
-		//disbale all other answers after attendee submits their answers
+		//disable all other answers after attendee submits their answers
 		if($scope.attendee.chosenAnswer) {
 			vm.disableAllChoices = true;
 		} else {
@@ -165,7 +166,7 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 	};
 
 
-
+	//Answers Chart that come from the view of the Meeting Page after the custom question is fired
 	$scope.$watch('answersForSelectedQuestionForAttendeesObj', function(newVals, oldVals) {
 		var answersA = DataPresenterService.choiceAForSelectedQuestionForAttendees.length;
 		var answersB = DataPresenterService.choiceBForSelectedQuestionForAttendees.length;
@@ -193,7 +194,7 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 
 
 	//QUESTIONS TO THE PRESENTER
-	// ///////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////
 	vm.addQuestionKeyDown = function(event) {
 		if (event.keyCode === 13 && vm.questionContent) {
 			vm.questionsToPresenter.$add({
@@ -231,5 +232,4 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 	// 	questionToPresenter.counter--;
 	// 	QuestionsToPresenterService.questions.$save(questionToPresenter);
 	// };
-
 }
