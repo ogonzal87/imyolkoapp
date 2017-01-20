@@ -50,7 +50,8 @@ function PresenterCtrl(FIREBASE_URL, $scope, VotesService, QuestionsToPresenterS
 		var speedValue = _.reduce($scope.attendees, function(memo, attendee) {
 			return memo + attendee.speed;
 		}, 0);
-		vm.speedPercent = speed(Math.round((speedValue / $scope.numAttendees) * 100));
+
+		vm.speedPercent = speed(Math.round((speedValue / vm.numAttendees) * 100));
 
 		//Lost Percentage
 		// /////////////////////////////////////////////////////////////////////////
@@ -160,7 +161,6 @@ function PresenterCtrl(FIREBASE_URL, $scope, VotesService, QuestionsToPresenterS
 
 	//DISPLAYING SPEED IDICATOR
 	function speed(percent) {
-
 		if (percent > 20) {
 			return { value: percent, content: 'Go Faster', class: 'is-active-circle-too-fast' };
 		} else if (percent < -20) {
