@@ -110,7 +110,6 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 
 
 		vm.numOfPeopleWithVoteAttribute = _.filter($scope.attendees, function(attendee) {
-			console.log(attendee);
 			return attendee.vote;
 		});
 
