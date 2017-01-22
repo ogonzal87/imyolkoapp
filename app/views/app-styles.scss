@@ -69,6 +69,16 @@ button:focus {
 	outline: 0;
 }
 
+.btn {
+	border-radius: 0;
+	&:focus {
+		outline: none;
+	}
+	&:active {
+		outline: none;
+	}
+}
+
 // the code below was composed with: https://typeanything.io/
 
 html {
