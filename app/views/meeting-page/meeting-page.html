@@ -9,7 +9,7 @@
 		<p class="avatar-deactive-message-bg">
 			We are good here...
 		</p>
-		<p class="avatar-deactive-message-sm">No feedback is needed right now. Check back in a few  </p>
+		<p class="avatar-deactive-message-sm">Nothing is needed right now. Check back in a few  </p>
 	</div>
 
 
@@ -96,7 +96,7 @@
 				</div>
 				<button class="btn pop-submit-btn"
 						ng-click="$ctrl.submitAnswer()"
-						ng-disabled="$ctrl.disableAllChoices">
+						ng-disabled="!attendee.chosenAnswer || attendee.submittedChosenAnswer">
 					SUBMIT ANSWER
 				</button>
 			</div>
@@ -109,18 +109,18 @@
 
 		<!--LOST-->
 		<div class="meeting-row" ng-if="$ctrl.presenter.lostIsActive">
-			<div class="meeting-question" ng-hide="$ctrl.lostFeedbackTaken">
+			<div class="meeting-question" ng-hide="attendee.feeling">
 				Are you lost?
 			</div>
 
 			<div class="response-options">
 				<div class="option"
 					 ng-click="$ctrl.attendeeInPanic()"
-					 ng-hide="$ctrl.lostFeedbackTaken">
+					 ng-hide="attendee.feeling">
 					Yep
 				</div>
 
-				<div class="meeting-feedback-taken" ng-show="$ctrl.lostFeedbackTaken">
+				<div class="meeting-feedback-taken" ng-show="attendee.feeling">
 					<div>
 						<div class="yolko-avatar-feedback-taken-container">
 							<img src="assets/avatars/winking.png"/>
@@ -134,7 +134,7 @@
 
 				<div class="option"
 					 ng-click="$ctrl.attendeeNotInPanic()"
-					 ng-hide="$ctrl.lostFeedbackTaken">
+					 ng-hide="attendee.feeling">
 					Nope
 				</div>
 			</div>
@@ -143,18 +143,18 @@
 
 		<!--HEARING-->
 		<div class="meeting-row" ng-if="$ctrl.presenter.hearingIsActive">
-			<div class="meeting-question" ng-hide="$ctrl.hearingFeedbackTaken">
+			<div class="meeting-question" ng-hide="attendee.volumeUp">
 				Can you hear?
 			</div>
 
 			<div class="response-options">
 				<div class="option"
 					 ng-click="$ctrl.attendeeCanHear()"
-					 ng-hide="$ctrl.hearingFeedbackTaken">
+					 ng-hide="attendee.volumeUp">
 					Yep
 				</div>
 
-				<div class="meeting-feedback-taken" ng-show="$ctrl.hearingFeedbackTaken">
+				<div class="meeting-feedback-taken" ng-show="attendee.volumeUp">
 					<div>
 						<div class="yolko-avatar-feedback-taken-container">
 							<img src="assets/avatars/winking.png"/>
@@ -168,7 +168,7 @@
 
 				<div class="option"
 					 ng-click="$ctrl.attendeeCannotHear()"
-					 ng-hide="$ctrl.hearingFeedbackTaken">
+					 ng-hide="attendee.volumeUp">
 					Nope
 				</div>
 			</div>
@@ -177,18 +177,18 @@
 
 		<!--SPEED-->
 		<div class="meeting-row" ng-if="$ctrl.presenter.speedIsActive">
-			<div class="meeting-question" ng-hide="$ctrl.speedFeedbackTaken">
+			<div class="meeting-question" ng-hide="attendee.speed">
 				How do you like the speed?
 			</div>
 
 			<div class="response-options">
 				<div class="option"
 					 ng-click="$ctrl.attendeeWantFaster()"
-					 ng-hide="$ctrl.speedFeedbackTaken">
-					Faster
+					 ng-hide="attendee.speed">
+					Go Faster
 				</div>
 
-				<div class="meeting-feedback-taken" ng-show="$ctrl.speedFeedbackTaken">
+				<div class="meeting-feedback-taken" ng-show="attendee.speed">
 					<div>
 						<div class="yolko-avatar-feedback-taken-container">
 							<img src="assets/avatars/winking.png"/>
@@ -202,8 +202,8 @@
 
 				<div class="option"
 					 ng-click="$ctrl.attendeeWantSlower()"
-					 ng-hide="$ctrl.speedFeedbackTaken">
-					Slower
+					 ng-hide="attendee.speed">
+					Go Slower
 				</div>
 			</div>
 		</div>

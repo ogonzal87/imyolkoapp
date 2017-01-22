@@ -6,9 +6,9 @@ function DataAttendeeService(FIREBASE_URL, $firebaseArray, $firebaseObject) {
 	var randomKey = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 34);
 	// create an Attendee object that will be automatically constructed on page load with defaulted attributes
 	var defaultAttendee = {
-		feeling: 'fine',
-		speed: 0,
-		volumeUp: 'no',
+		feeling: '',
+		speed: '',
+		volumeUp: '',
 		key: randomKey,
 		startedAt: Firebase.ServerValue.TIMESTAMP
 	};

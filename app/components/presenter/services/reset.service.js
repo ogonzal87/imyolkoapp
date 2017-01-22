@@ -1,18 +1,18 @@
 angular.module('Presenter')
 .service('ResetService', ResetService);
 
-function ResetService(DataAttendeeService, VotesService, QuestionsToPresenterService, QuizService) {
+function ResetService(DataAttendeeService, DataPresenterService, VotesService, QuestionsToPresenterService, QuizService) {
 
 	var resetVolumeTracker = function() {
 		_.each(DataAttendeeService.attendees, function(attendee) {
-			attendee.volumeUp = 'no';
+			attendee.volumeUp = '';
 			DataAttendeeService.attendees.$save(attendee);
 		});
 	};
 
     var resetSpeedTracker = function() {
 	    _.each(DataAttendeeService.attendees, function(attendee) {
-		    attendee.speed = 0;
+		    attendee.speed = '';
 		    DataAttendeeService.attendees.$save(attendee);
 	    });
     };
@@ -29,17 +29,28 @@ function ResetService(DataAttendeeService, VotesService, QuestionsToPresenterSer
 
     var resetPanicTracker = function() {
 	    _.each(DataAttendeeService.attendees, function(attendee) {
-		    attendee.feeling = 'fine';
+		    attendee.feeling = '';
+		    DataAttendeeService.attendees.$save(attendee);
+	    });
+    };
+
+    var resetCustomQuestion = function() {
+			DataPresenterService.answersForSelectedQuestionForAttendeesUrl.remove();
+	    _.each(DataAttendeeService.attendees, function(attendee) {
+		    if (attendee.chosenAnswer) {
+			    attendee.chosenAnswer = null;
+			    attendee.submittedChosenAnswer = false;
+		    }
 		    DataAttendeeService.attendees.$save(attendee);
 	    });
     };
 
     var resetEverything = function() {
 	    _.each(DataAttendeeService.attendees, function(attendee) {
-		    attendee.feeling = 'fine';
-		    attendee.speed = 0;
-		    attendee.volumeUp = 0;
-		    attendee.vote = 'like';
+		    attendee.feeling = '';
+		    attendee.speed = '';
+		    attendee.volumeUp = '';
+		    attendee.vote = '';
 		    DataAttendeeService.attendees.$save(attendee);
 		    QuestionsToPresenterService.allQuestionsApiUrl.remove();
 		    VotesService.allVotesApiUrl.remove();
@@ -60,6 +71,7 @@ function ResetService(DataAttendeeService, VotesService, QuestionsToPresenterSer
 	    resetSpeedTracker:   resetSpeedTracker,
 	    resetYolko:          resetYolko,
 	    resetPanicTracker:   resetPanicTracker,
+			resetCustomQuestion: resetCustomQuestion,
 	    resetEverything:     resetEverything,
 	    deleteEverything:    deleteEverything
     };

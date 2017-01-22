@@ -12,19 +12,17 @@ function DataPresenterService(FIREBASE_URL, $firebaseObject, $firebaseArray) {
 		lostIsActive: false,
 		questionsIsActive: false,
 		speedIsActive: false,
-		selectedQuestionForAttendees: {},
-		answers: {},
 		hearingIsActive: false
 	};
 
-	// var currentPresenterApiUrl = new Firebase(FIREBASE_URL + "/presenter/" + defaultPresenter.key);
 	var currentPresenterApiUrl = new Firebase(FIREBASE_URL + "/presenter/");
 	// create an Object for the current presenter on the session
 	var currentPresenterSyncObj = $firebaseObject(currentPresenterApiUrl);
 
+	var customQuestionsToAttendeesUrl = new Firebase(FIREBASE_URL + '/presenter/customQuestionsToAttendees/');
 
-	var selectedQuestionForAttendeesUrl = new Firebase(FIREBASE_URL + "/presenter/");
-	var selectedQuestionForAttendees = $firebaseArray(selectedQuestionForAttendeesUrl);
+	var customQuestionsToAttendeesArr = $firebaseArray(customQuestionsToAttendeesUrl);
+
 
 	var answersForSelectedQuestionForAttendeesUrl = new Firebase(FIREBASE_URL + '/presenter/answers/');
 	var choiceAForSelectedQuestionForAttendeesUrl = new Firebase(FIREBASE_URL + '/presenter/answers/a/');
@@ -37,7 +35,8 @@ function DataPresenterService(FIREBASE_URL, $firebaseObject, $firebaseArray) {
 		defaultPresenter: defaultPresenter,
 		currentPresenterApiUrl: currentPresenterApiUrl,
 		currentPresenterSyncObj: currentPresenterSyncObj,
-		selectedQuestionForAttendees: selectedQuestionForAttendees,
+		customQuestionsToAttendeesArr: customQuestionsToAttendeesArr,
+		answersForSelectedQuestionForAttendeesUrl: answersForSelectedQuestionForAttendeesUrl,
 		answersForSelectedQuestionForAttendees: $firebaseArray(answersForSelectedQuestionForAttendeesUrl),
 		answersForSelectedQuestionForAttendeesObj: $firebaseObject(answersForSelectedQuestionForAttendeesUrl),
 		choiceAForSelectedQuestionForAttendees: $firebaseArray(choiceAForSelectedQuestionForAttendeesUrl),

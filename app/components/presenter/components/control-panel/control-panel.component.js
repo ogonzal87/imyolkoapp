@@ -48,7 +48,15 @@ function ogControlPanelCtrl(ResetService) {
 	};
 
 	vm.customQuestionToAttendeesEval = function() {
-		vm.presenter.customQuestionToAttendeesIsActive = !vm.presenter.customQuestionToAttendeesIsActive
+		vm.presenter.customQuestionToAttendeesIsActive = !vm.presenter.customQuestionToAttendeesIsActive;
+
+		if(vm.presenter.customQuestionToAttendeesIsActive) {
+			ResetService.resetCustomQuestion();
+		}
+
+		if( vm.presenter.selectedQuestionForAttendees.questionData.isShowingResultsToAttendees ) {
+			vm.presenter.selectedQuestionForAttendees.questionData.isShowingResultsToAttendees = false;
+		}
 	};
 
 }

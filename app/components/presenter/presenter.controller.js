@@ -19,7 +19,7 @@ function PresenterCtrl(FIREBASE_URL, $scope, VotesService, QuestionsToPresenterS
 	//LOAD CUSTOM QUESTIONS OBJECT
 	vm.customQuestionsToAttendees    = QuizService.customQuestionsToAttendees;
 	//LOAD CUSTOM QUESTIONS ARRAY
-	vm.customQuestionsToAttendeesArr = QuizService.customQuestionsToAttendeesArr;
+	vm.customQuestionsToAttendeesArr = DataPresenterService.customQuestionsToAttendeesArr;
 
 	//$scope here because of the $bindTo from Firebase
 	$scope.presenter                 = DataPresenterService.currentPresenterSyncObj;
@@ -206,8 +206,8 @@ function PresenterCtrl(FIREBASE_URL, $scope, VotesService, QuestionsToPresenterS
 		var options = [{a: vm.customQuestion.optionA || ''}, {b: vm.customQuestion.optionB || ''}, {c: vm.customQuestion.optionC || ''}];
 		var question = new CustomQuestion(vm.customQuestion.content, options, vm.customQuestion.correctAnsw, questionData);
 
-		// Set the question in Firebase
-		var newQuestionRef = new Firebase(FIREBASE_URL + '/customQuestionsToAttendees/' + question.key);
+		// Set the questions in Firebase in an array.
+		var newQuestionRef = new Firebase(FIREBASE_URL + 'presenter/customQuestionsToAttendees/' + question.key);
 		newQuestionRef.set(question);
 
 		vm.customQuestion.content = '';
@@ -251,9 +251,6 @@ function PresenterCtrl(FIREBASE_URL, $scope, VotesService, QuestionsToPresenterS
 		// that is resolving to our chart container element in the view. The Second parameter
 		// is the actual data object and the third the options for the view of the Chart.
 		new Chartist.Bar('.ct-chart-customQuestionsToAttendees', chartAllData, chartBarOptions);
-
-		//Shows the quiz on the UI of the attendee when the Pop Qui is fired from the Dashboard
-		vm.isShowingResultsToPresenter = vm.customQuestionsToAttendees.isShowingResultsToPresenter;
 	}, true);
 
 

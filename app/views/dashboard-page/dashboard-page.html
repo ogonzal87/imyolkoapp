@@ -124,12 +124,12 @@
 						   ng-model="$ctrl.customQuestion.correctAnsw"
 						   value="A"
 						   ng-click="$ctrl.isCorrectAnsA = !$ctrl.isCorrectAnsA">
-					<label for="choicea" class="notchecked" ng-if="!$ctrl.isCorrectAnsA">
+					<label for="choicea"
+						   class="notchecked"
+						   ng-class="{'checked': $ctrl.customQuestion.correctAnsw === 'A'}">
 						<i class="fa fa-check fa-2x"></i>
 					</label>
-					<label for="choicea" class="checked" ng-if="$ctrl.isCorrectAnsA">
-						<i class="fa fa-check fa-2x"></i>
-					</label>
+
 				</div>
 
 				<div class="form-group custom-question-option-container">
@@ -145,10 +145,9 @@
 						   id="choiceb"
 						   ng-model="$ctrl.customQuestion.correctAnsw"
 						   ng-click="$ctrl.isCorrectAnsB = !$ctrl.isCorrectAnsB">
-					<label for="choiceb" class="notchecked" ng-if="!$ctrl.isCorrectAnsB">
-						<i class="fa fa-check fa-2x"></i>
-					</label>
-					<label for="choiceb" class="checked" ng-if="$ctrl.isCorrectAnsB">
+					<label for="choiceb"
+						   class="notchecked"
+						   ng-class="{'checked': $ctrl.customQuestion.correctAnsw === 'B'}">
 						<i class="fa fa-check fa-2x"></i>
 					</label>
 				</div>
@@ -166,10 +165,9 @@
 						   id="choicec"
 						   ng-model="$ctrl.customQuestion.correctAnsw"
 						   ng-click="$ctrl.isCorrectAnsC = !$ctrl.isCorrectAnsC">
-					<label for="choicec" class="notchecked" ng-if="!$ctrl.isCorrectAnsC">
-						<i class="fa fa-check fa-2x"></i>
-					</label>
-					<label for="choicec" class="checked" ng-if="$ctrl.isCorrectAnsC">
+					<label for="choicec"
+						   class="notchecked"
+						   ng-class="{'checked': $ctrl.customQuestion.correctAnsw === 'C'}">
 						<i class="fa fa-check fa-2x"></i>
 					</label>
 				</div>

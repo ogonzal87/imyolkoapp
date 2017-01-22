@@ -81,31 +81,25 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 		//LOST LOGIC
 		vm.attendeeInPanic = function () {
 			$scope.attendee.feeling = 'panic';
-			vm.lostFeedbackTaken = true;
 		};
 		vm.attendeeNotInPanic = function () {
 			$scope.attendee.feeling = 'fine';
-			vm.lostFeedbackTaken = true;
 		};
 
 		//HEARING LOGIC
 		vm.attendeeCannotHear = function () {
 			$scope.attendee.volumeUp = 'yes';
-			vm.hearingFeedbackTaken = true;
 		};
 		vm.attendeeCanHear = function () {
 			$scope.attendee.volumeUp = 'no';
-			vm.hearingFeedbackTaken = true;
 		};
 
 		//SPEED LOGIC
 		vm.attendeeWantSlower = function () {
 			$scope.attendee.speed = -1;
-			vm.speedFeedbackTaken = true;
 		};
 		vm.attendeeWantFaster = function () {
 			$scope.attendee.speed = 1;
-			vm.speedFeedbackTaken = true;
 		};
 
 		// find how many people have voted from the total amount of attendees
@@ -122,7 +116,7 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 
 		//**LOGIC THAT DRIVES YOLKO DISPLAYING**//
 		vm.dislikePercent = Math.round((vm.numOfPeopleWithDislikeVotes.length / vm.numOfPeopleWithVoteAttribute.length) * 100);
-		displayYolko()
+		displayYolko();
 	}, true);
 
 
@@ -158,11 +152,7 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 			DataPresenterService.choiceCForSelectedQuestionForAttendees.$add(1);
 		}
 		//disable all other answers after attendee submits their answers
-		if($scope.attendee.chosenAnswer) {
-			vm.disableAllChoices = true;
-		} else {
-			alert('Hey! Choose an option... ')
-		}
+		$scope.attendee.submittedChosenAnswer = true;
 	};
 
 
