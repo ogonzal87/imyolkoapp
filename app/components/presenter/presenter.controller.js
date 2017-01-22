@@ -1,7 +1,7 @@
 angular.module('Presenter')
 .controller('PresenterCtrl', PresenterCtrl);
 
-function PresenterCtrl(FIREBASE_URL, $scope, VotesService, QuestionsToPresenterService, DataAttendeeService, DataPresenterService, ResetService, QuizService) {
+function PresenterCtrl(FIREBASE_URL, $scope, VotesService, QuestionsToPresenterService, DataAttendeeService, DataPresenterService, ResetService) {
 
 	var vm = this;
 
@@ -16,8 +16,6 @@ function PresenterCtrl(FIREBASE_URL, $scope, VotesService, QuestionsToPresenterS
 	vm.likeVotesArray                = VotesService.likeVotesArray;
 	//LOAD DISLIKE VOTES
 	vm.dislikeVotesArray             = VotesService.dislikeVotesArray;
-	//LOAD CUSTOM QUESTIONS OBJECT
-	vm.customQuestionsToAttendees    = QuizService.customQuestionsToAttendees;
 	//LOAD CUSTOM QUESTIONS ARRAY
 	vm.customQuestionsToAttendeesArr = DataPresenterService.customQuestionsToAttendeesArr;
 

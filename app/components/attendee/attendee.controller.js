@@ -1,7 +1,7 @@
 angular.module('Attendee')
 	.controller("AttendeeCtrl", AttendeeCtrl);
 
-function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterService, VotesService, QuestionsToPresenterService, QuizService) {
+function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterService, VotesService, QuestionsToPresenterService) {
 
 	var vm = this;
 
@@ -16,8 +16,6 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 	vm.likeVotesArray       = VotesService.likeVotesArray;
 	//LOAD DISLIKE VOTES
 	vm.dislikeVotesArray    = VotesService.dislikeVotesArray;
-	//LOAD QUIZ QUESTIONS
-	vm.quizQuestion1        = QuizService.quizQuestion1;
 
 	// bind the obj in view (presenter) to the database in Firebase
 	// any changes that happen in the view will be updated automatically in Firebase and viceversa
