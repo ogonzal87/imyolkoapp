@@ -213,7 +213,6 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 	vm.voteQuestionUp = function(questionToPresenter) {
 		questionToPresenter.counter++;
 		QuestionsToPresenterService.questions.$save(questionToPresenter);
-		console.log('questionToPresenter', questionToPresenter)
 	};
 
 	// vm.voteQuestionDown = function(questionToPresenter) {
