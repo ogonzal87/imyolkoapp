@@ -59,22 +59,24 @@
 		flex-direction: column;
 
 		.meeting-row {
-			min-height: 350px;
+			min-height: 400px;
+			width: 60%;
 			display: flex;
 			justify-content: center;
 			flex-direction: column;
 
 			@media screen and (max-width: 767px) {
 				min-height: 200px;
+				width: 100%;
 			}
 
 			.meeting-question {
-				font-size: 80px;
+				font-size: 60px;
 				color: $base-background-color-secondary;
 				text-align: center;
 
 				@media screen and (max-width: 767px) {
-					font-size: 40px;
+					font-size: 30px;
 				}
 			}
 
@@ -162,13 +164,29 @@
 				flex-direction: row;
 
 				.option {
-					padding: 15px 70px;
-					font-size: 60px;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					font-size: 35px;
 					cursor: pointer;
+					background-color: $white;
+					color: $base-background-color-purple;
+					margin: 20px;
+					width: 250px;
+					height: 80px;
+					box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+					transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+					&:hover {
+						box-shadow: 0 0 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+					}
+
 
 					@media screen and (max-width: 767px) {
-						font-size: 30px;
-						padding: 7px 35px;
+						font-size: 18px;
+						margin: 10px;
+						width: 200px;
+						height: 40px;
 					}
 				}
 
@@ -214,6 +232,10 @@
 			}
 		}
 
+		.meeting-row-border-bottom {
+			border-bottom: 10px $white solid;
+		}
+
 		.meeting-row-alternate-color {
 			background-color: $base-background-color-secondary;
 			width: 100vw;
@@ -234,11 +256,14 @@
 		}
 
 		.meeting-quiz-container {
+			display: flex;
+			align-items: center;
+			justify-content: center;
 			text-align: center;
-			margin-bottom: 80px;
+			padding: 40px;
+
 
 			.meeting-pop-question {
-				font-size: 48px;
 				margin-bottom: 30px;
 
 				@media screen and (max-width: 767px){

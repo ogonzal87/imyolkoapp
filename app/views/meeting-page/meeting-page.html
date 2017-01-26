@@ -17,7 +17,9 @@
 	<div class="meeting-container container">
 
 		<!--YOLKO-->
-		<div class="meeting-row" ng-if="$ctrl.presenter.yolkoIsActive">
+		<div class="meeting-row"
+			 ng-class="{'meeting-row-border-bottom' : $ctrl.presenter.lostIsActive || $ctrl.presenter.questionsIsActive || $ctrl.presenter.speedIsActive || $ctrl.presenter.hearingIsActive || $ctrl.presenter.customQuestionToAttendeesIsActive}"
+			 ng-if="$ctrl.presenter.yolkoIsActive">
 			<div class="meeting-question">
 				How are you feeling?
 			</div>
@@ -54,9 +56,11 @@
 		</div>
 
 		<!-- POP QUIZ -->
-		<div class="meeting-quiz-container" ng-show="$ctrl.presenter.customQuestionToAttendeesIsActive && $ctrl.presenter.selectedQuestionForAttendees">
+		<div class="meeting-quiz-container meeting-row"
+			 ng-class="{'meeting-row-border-bottom' : $ctrl.presenter.lostIsActive || $ctrl.presenter.questionsIsActive || $ctrl.presenter.speedIsActive || $ctrl.presenter.hearingIsActive}"
+			 ng-show="$ctrl.presenter.customQuestionToAttendeesIsActive && $ctrl.presenter.selectedQuestionForAttendees">
 			<div id="quiz">
-				<div id="question" class="meeting-pop-question">
+				<div id="question" class="meeting-pop-question meeting-question">
 					{{ $ctrl.presenter.selectedQuestionForAttendees.questionContent }}
 				</div>
 				<div id="choices" class="meeting-pop-choices">
@@ -87,8 +91,9 @@
 						   id="availableAnsC"
 						   ng-model="attendee.chosenAnswer"
 						   value="C"
-						   class="pop-choice">
-					<label class="pop-choice" for="availableAnsC">
+						   class="pop-choice"
+						   ng-if="$ctrl.presenter.selectedQuestionForAttendees.availAnswers[2].c">
+					<label class="pop-choice" for="availableAnsC" ng-if="$ctrl.presenter.selectedQuestionForAttendees.availAnswers[2].c">
 						<span class="pop-choice-letter">C</span>
 						{{$ctrl.presenter.selectedQuestionForAttendees.availAnswers[2].c}}
 					</label>
@@ -108,7 +113,9 @@
 
 
 		<!--LOST-->
-		<div class="meeting-row" ng-if="$ctrl.presenter.lostIsActive">
+		<div class="meeting-row"
+			 ng-if="$ctrl.presenter.lostIsActive"
+			 ng-class="{'meeting-row-border-bottom' : $ctrl.presenter.questionsIsActive || $ctrl.presenter.speedIsActive || $ctrl.presenter.hearingIsActive}">
 			<div class="meeting-question" ng-hide="attendee.feeling">
 				Are you lost?
 			</div>
@@ -142,7 +149,9 @@
 
 
 		<!--HEARING-->
-		<div class="meeting-row" ng-if="$ctrl.presenter.hearingIsActive">
+		<div class="meeting-row"
+			 ng-class="{'meeting-row-border-bottom' : $ctrl.presenter.questionsIsActive || $ctrl.presenter.speedIsActive}"
+			 ng-if="$ctrl.presenter.hearingIsActive">
 			<div class="meeting-question" ng-hide="attendee.volumeUp">
 				Can you hear?
 			</div>
@@ -176,7 +185,9 @@
 
 
 		<!--SPEED-->
-		<div class="meeting-row" ng-if="$ctrl.presenter.speedIsActive">
+		<div class="meeting-row"
+			 ng-if="$ctrl.presenter.speedIsActive"
+			 ng-class="{'meeting-row-border-bottom' : $ctrl.presenter.questionsIsActive}">
 			<div class="meeting-question" ng-hide="attendee.speed">
 				How do you like the speed?
 			</div>
