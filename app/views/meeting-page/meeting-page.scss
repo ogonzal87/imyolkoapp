@@ -35,7 +35,6 @@
 	}
 
 	@media screen and (max-width: 767px) {
-		padding: 40px;
 
 		img {
 			width: 60%;
@@ -71,6 +70,7 @@
 			}
 
 			.meeting-question {
+				margin-bottom: 20px;
 				font-size: 60px;
 				color: $base-background-color-secondary;
 				text-align: center;
@@ -226,7 +226,16 @@
 					}
 
 					@media screen and (max-width: 767px) {
-						font-size: 20px;
+						.yolko-avatar-feedback-taken-container {
+							height: 80px;
+							width: 80px;
+						}
+						h2 {font-size: 30px;}
+						.hand-emoji {
+							margin-top: 5px;
+							font-size: 30px;
+						}
+						p {font-size: 14px;}
 					}
 				}
 			}
@@ -242,6 +251,14 @@
 
 			.meeting-question {
 				color: $base-background-color-purple;
+			}
+
+			.response-options{
+				.meeting-feedback-taken {
+					.yolko-avatar-feedback-taken-container {
+						background-color: $base-background-color-purple;
+					}
+				}
 			}
 		}
 
@@ -264,7 +281,7 @@
 
 
 			.meeting-pop-question {
-				margin-bottom: 30px;
+				margin-bottom: 40px;
 
 				@media screen and (max-width: 767px){
 					font-size: 24px;
@@ -365,13 +382,12 @@
 		}
 
 		.meeting-questions-to-presenter-container {
-			max-width: 800px;
-			width: 100%;
+			width: 100vw;
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			flex-direction: column;
-			margin-top: 80px;
+			padding-top: 60px;
 
 			@media screen and (max-width: 767px) {
 				max-width: 350px;
@@ -379,9 +395,8 @@
 			}
 
 			.meeting-question {
-				margin-bottom: 20px;
+				margin-bottom: 40px;
 				font-size: 60px;
-				color: $base-background-color-secondary;
 				text-align: center;
 
 				@media screen and (max-width: 767px) {
@@ -391,11 +406,12 @@
 
 			.meeting-question-to-presenter-input {
 				width: 800px;
-				padding: 5px 10px;
+				padding: 10px 20px;
 				height: 138px;
 				font-size: 30px;
 				box-sizing: border-box;
 				color: $base-font-color-dark;
+				border: none;
 
 				@media screen and (max-width: 767px) {
 					font-size: 15px;
