@@ -1,63 +1,106 @@
-<!-- Jumbotron -->
-<div class="jumbotron jumbotronhome">
-	<div class="container">
-		<div class="row rows-home">
-			<div class="col-sm-9">
-				<h1 class="yolko-greeting">Hi, I am Yolko</h1>
-				<p>I read minds.</p>
-				<p>Just kidding... With some team effort, I show what an audience is thinking and feeling. And the best thing..? It's all in real time.</p>
-				<p>I will be joining your class today. Get excited.</p>
-				<p><a class="btn btn-info btn-xlg" ui-sref="meeting" role="button">Join the Class</a></p>
+<nav class="navbar navbar-default">
+	<div class="container landing-nav-contents">
+		<img src="assets/logo.svg"/>
+
+		<div class="landing-links-container">
+			<span ui-sref="meeting" style="margin: 0 100px;">Meeting</span>
+			<span ui-sref="dashboard">Dashboard</span>
+		</div>
+	</div>
+</nav>
+
+<div class="jumbotron">
+
+
+
+	<div class="landing-content-jumbotron container">
+		<div class="text-landing-introduction-text-container">
+			<h1>Hi, I'm Yolko</h1>
+			<p>I read minds.</p>
+			<p>Just kidding… With some team effort, I show and measure what an audience is feeling, priotitize their questions and give out pop quizes. The best thing..? It’s all in <span>real time</span>.</p>
+			<p>Simply, I am the the audience.</p>
+		</div>
+		<div class="landing-yolko-jumbotron">
+			<img src="assets/avatars/great-full-face.svg"/>
+		</div>
+	</div>
+</div>
+
+<div class="landing-join-button-container container">
+	<button ui-sref="meeting">Join the class</button>
+</div>
+
+<div class="landing-marketing-pointers-container container">
+	<div class="marketing-pointer">
+		<h4>Strength in numbers</h4>
+		<p>Feedback happens less than it should and often comes too late. I am an interactive graphical representation of any presentation’s mood in <span>real time</span>. If you want to know what your audience is truly feeling or their stress levels
+			just ask me.</p>
+	</div>
+	<div class="marketing-pointer" style="margin: 0 100px;">
+		<h4>Yolko speaks for the audience</h4>
+		<p>Feedback happens less than it should and often comes too late. I am an interactive graphical representation of any presentation’s mood in real time. If you want to know what your audience is truly feeling or their stress levels just ask me.</p>
+	</div>
+	<div class="marketing-pointer">
+		<h4>Immediate results</h4>
+		<p>I measure the level of stress while covering a subject. This let’s you adjust the presentation to the audience’s needs, improving their performance. No more blank stares whenever you ask: “Any questions, class..?”</p>
+	</div>
+</div>
+
+
+
+<div class="row">
+	<div class="landing-grey-skew">
+		<div class="screenshots-container container">
+			<div class="sheenshot-meeting-page">
+				<img src="assets/yolko-meeting-page.png"/>
 			</div>
-			<div class="col-sm-3 icons-home">
-				<img src="assets/avatars/nosepick.png"/>
+			<div>
+				<p><span>It’s all about synchronization.</span> Any inputs from the audience are logged and displayed in The Dashboard for the presenter to see in realtime.</p>
+			</div>
+			<div class="container sheenshot-dashboard-page">
+				<img src="assets/yolko-dashboard-page.png"/>
 			</div>
 		</div>
 	</div>
 </div>
 
-<!-- Main Content -->
-<div class="container homemain">
 
-	<div class="row rows-home">
-		<div class="col-sm-6 hidden-xs icons-home">
-			<img src="assets/avatars/shout.png"/>
-		</div>
-		<div class="col-sm-6">
-			<h2 class="padding-paragraph">Yolko speaks for the audience</h2>
-			<p>
-				Yolko is an interactive graphical representation of any presentation’s mood in real time. If you want to know what your audience is <strong>really</strong> feeling and/or thinking, just ask Yolko.
-			</p>
-		</div>
-	</div>
 
-	<div class="row rows-home">
-		<div class="col-sm-6">
-			<h2 class="padding-paragraph">Yolko is always watching</h2>
-			<p>
-				Yolko is powered by state of the art technologies giving you <strong>real time</strong> feedback on topics you are covering. It also tells you how you are doing throughout the presentation and whether or not you are doing a good job at communicating your thoughts.
-			</p>
-		</div>
-		<div class="col-sm-6 hidden-xs icons-home">
-			<img src="assets/avatars/iamlooking.png"/>
-		</div>
-	</div>
-
-	<div class="row rows-home">
-		<div class="col-sm-6 hidden-xs icons-home">
-			<img src="assets/avatars/faill.png"/>
-		</div>
-		<div class="col-sm-6 ft-copy">
-			<h2 class="padding-paragraph">Yolko improves audience success</h2>
-			<p>
-				Yolko is essential for classrooms as he measures the level of stress while covering your subject. This let's you adjust the presentation to the audience's needs, improving their performance. You can even keep track of questions from the audience and fire Pop Quizzes. <strong>No more blank stares whenever you ask: "Any questions, class..?"</strong>
-			</p>
+<div class="landing-questions-row">
+	<div class="landing-questions-container container">
+		<p><span>Take control of questions.</span> The audience can ask questions anonimasly. Since they all see the same questions, they can be voted up them collectively.</p>
+		<div class="landing-questions-screenshot-container">
+			<img src="assets/questions-screenshot.png"/>
 		</div>
 	</div>
 </div>
 
-<!-- Footer -->
-<footer class="site-footer"></footer>
+<div class="landing-custom-questions-row">
+	<div class="landing-custom-question-container container">
+		<div class="landing-custom-questions-screenshot-container">
+			<img src="assets/custom-question-screenshot.png"/>
+		</div>
+		<p><span>Strike back.</span> You can also ask questions to the audience in the form of a Pop Quiz. All of their answers are then logged to gaunge the collective undestanding of a subject.</p>
+	</div>
+</div>
 
 
+<div class="landing-footer">
+	<div class="landing-avatars-container">
+		<div class="landing-footer-yolko-sm">
+			<img src="assets/avatars/yolko-footer-happy.svg"/>
+		</div>
+		<div class="landing-footer-yolko-md">
+			<img src="assets/avatars/yolko-footer-kiss.svg"/>
+		</div>
+		<div class="landing-footer-yolko-lg">
+			<img src="assets/avatars/yolko-footer-movitaved.svg"/>
+		</div>
+	</div>
+	<div class="text-footer-container">
+		<p><span>Ready to get started?</span></p>
+		<p>Ping us.</p>
+		<button>GET IN TOUCH</button>
+	</div>
 
+</div>
