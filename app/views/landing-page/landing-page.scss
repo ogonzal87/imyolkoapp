@@ -43,6 +43,7 @@
 			}
 			h1 {
 				color: $white;
+				margin-bottom: 20px;
 				@media screen and (max-width: 767px) {
 					font-size: 20px;
 				}
@@ -98,13 +99,14 @@
 }
 
 .landing-marketing-pointers-container {
-	margin-top: 100px;
-	margin-bottom: 100px;
+	margin-top: 80px;
+	margin-bottom: 120px;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 
 	.marketing-pointer {
+		width: 280px;
 		h4 {
 			color: $base-background-color-purple;
 			margin-bottom: 20px;
@@ -280,6 +282,11 @@
 			margin-top: 20px;
 			box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 			transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+			a {
+				text-decoration: none;
+				color: $white;
+			}
 
 			&:hover {
 				box-shadow: 0 0 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);

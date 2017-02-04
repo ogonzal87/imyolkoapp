@@ -48,6 +48,10 @@ $speed-graph-container-width:      180px;
 
 // bootstrap needs a container when you use a row. If not it adds 15px on the sides of the row for margin
 .row { margin: 0 }
+.container {
+	padding-left: 0;
+	padding-right: 0;
+}
 
 
 // default material box-shadow effect:
