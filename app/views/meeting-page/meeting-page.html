@@ -265,7 +265,9 @@
 					</div>
 					<div class="meeting-question-voting-controls">
 						<button class="btn btn-sm btn-default"
-								ng-click="$ctrl.voteQuestionUp(questionToPresenter)">
+								ng-click="$ctrl.voteQuestionUp(questionToPresenter)"
+								ng-disabled="$ctrl.voteHistory[questionToPresenter.$id]">
+
 							<i class="fa fa-chevron-up fa-3x meeting-voting-up-arrow"></i>
 							<div class="question-voting-controls-text">
 								{{ questionToPresenter.counter }}

@@ -16,6 +16,8 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 	vm.likeVotesArray       = VotesService.likeVotesArray;
 	//LOAD DISLIKE VOTES
 	vm.dislikeVotesArray    = VotesService.dislikeVotesArray;
+	// LOAD VOTE HISTORY
+	vm.voteHistory = [];
 
 	// bind the obj in view (presenter) to the database in Firebase
 	// any changes that happen in the view will be updated automatically in Firebase and viceversa
@@ -209,10 +211,18 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 		vm.questionsToPresenter.$remove(key);
 	};
 
+	console.log('voteHistory', vm.voteHistory);
 
 	vm.voteQuestionUp = function(questionToPresenter) {
+		if (vm.voteHistory[questionToPresenter.$id]) {
+			alert('already voted for this');
+			return;
+		}
 		questionToPresenter.counter++;
 		QuestionsToPresenterService.questions.$save(questionToPresenter);
+		vm.voteHistory[questionToPresenter.$id] = true;
+
+		questionToPresenter.voteUpBtnMakeItDisabled = true;
 	};
 
 	// vm.voteQuestionDown = function(questionToPresenter) {
