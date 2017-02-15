@@ -1,3 +1,4 @@
 angular.module('Presenter', [
-  'firebase'
+  'firebase',
+	'hl.sticky'
 ]);
