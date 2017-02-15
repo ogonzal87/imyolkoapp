@@ -100,7 +100,7 @@
 	<div class="dashboard-tab-content">
 		<div class="dashboard-custom-question-maker-container" ng-show="$ctrl.customQuestionsToAttendeesArr <= 0 || $ctrl.showCustomQuestionMaker">
 
-			<h1>What would you like to ask the audience?</h1>
+			<h1>Would you like to ask anything?</h1>
 			<form novalidate ng-submit="$ctrl.saveQuestionForAttendees()" class="dashboard-custom-question-maker-form">
 				<div class="form-group">
 					<textarea class="custom-question-content"
@@ -206,6 +206,7 @@
 
 
 		<div class="dashboard-questions-for-presenter-container">
+			<h1 ng-show="$ctrl.questionsToPresenter.length > 0">Questions for You</h1>
 			<!--   QUESTIONS TO PRESENTER -->
 			<ul class="dashboard-questions-for-presenter-list">
 				<li class="dashboard-question-for-presenter"
