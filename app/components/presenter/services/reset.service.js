@@ -24,7 +24,7 @@ function ResetService(DataAttendeeService, DataPresenterService, VotesService, Q
 		    }
 		    DataAttendeeService.attendees.$save(attendee);
 	    });
-
+        VotesService.allVotesApiUrl.remove();
     };
 
     var resetPanicTracker = function() {
@@ -69,7 +69,7 @@ function ResetService(DataAttendeeService, DataPresenterService, VotesService, Q
 	    resetSpeedTracker:   resetSpeedTracker,
 	    resetYolko:          resetYolko,
 	    resetPanicTracker:   resetPanicTracker,
-			resetCustomQuestion: resetCustomQuestion,
+		resetCustomQuestion: resetCustomQuestion,
 	    resetEverything:     resetEverything,
 	    deleteEverything:    deleteEverything
     };
