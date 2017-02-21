@@ -7,7 +7,10 @@
 	<div>
 		<div class="dashboard--presentation-ctrls-container row">
 			<div class="stopwatch-container col-sm-6 col-sm-push-3">
-				<!--TODO: Figue out what could go here or just rearrange the whole grid. -->
+				<div class="circles">
+					<img ng-src="{{ $ctrl.avatarDashboard.face }}" class="face">
+				</div>
+				<div class="dashboard-label avatar-message">{{ $ctrl.avatarDashboard.message }}</div>
 			</div>
 
 			<div class="num-attendees-container col-sm-3 col-sm-pull-6">
@@ -21,24 +24,17 @@
 			</div>
 		</div>
 
-		<div class="dashboard--second-row-container row">
-			<div class="mood-container col-sm-6 col-sm-push-3">
-				<div class="circles">
-					<img ng-src="{{ $ctrl.avatarDashboard.face }}" class="face">
-				</div>
-				<div class="dashboard-label avatar-message">{{ $ctrl.avatarDashboard.message }}</div>
-			</div>
+		<!--<div class="dashboard&#45;&#45;second-row-container row">-->
+			<!--<div class="likes-container col-sm-3">-->
+				<!--<div class="num">{{ $ctrl.likeVotesArray.length }}</div>-->
+				<!--<div class="dashboard-label">LIKES</div>-->
+			<!--</div>-->
 
-			<div class="likes-container col-sm-3 col-sm-pull-6">
-				<div class="num">{{ $ctrl.likeVotesArray.length }}</div>
-				<div class="dashboard-label">LIKES</div>
-			</div>
-
-			<div class="dislikes-container col-sm-3">
-				<div class="num">{{ $ctrl.dislikeVotesArray.length }}</div>
-				<div class="dashboard-label">DISLIKES</div>
-			</div>
-		</div>
+			<!--<div class="dislikes-container col-sm-3">-->
+				<!--<div class="num">{{ $ctrl.dislikeVotesArray.length }}</div>-->
+				<!--<div class="dashboard-label">DISLIKES</div>-->
+			<!--</div>-->
+		<!--</div>-->
 
 		<div class="dashboard--primary-graphs-container row">
 			<div class="speed-container col-sm-6 col-sm-push-3">
