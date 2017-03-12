@@ -28,10 +28,18 @@ function PresenterCtrl(FIREBASE_URL, $scope, VotesService, QuestionsToPresenterS
 	//any changes that happen in the view will be updated automatically in Firebase and viceversa
 	DataPresenterService.currentPresenterSyncObj.$bindTo($scope, 'presenter');
 	DataPresenterService.currentPresenterApiUrl.set(DataPresenterService.defaultPresenter);
-
 	//bind the obj in view (quizQuestion1) to the database in Firebase
 	//any changes that happen in the view will be updated automatically in Firebase and viceversa
 	DataPresenterService.answersForSelectedQuestionForAttendeesObj.$bindTo($scope, 'answersForSelectedQuestionForAttendeesObj');
+
+
+
+	$scope.$watch('presenter', function(nv, ov) {
+        vm.showMetricYolko = $scope.presenter.yolkoIsActive;
+        vm.showMetricHearing = $scope.presenter.hearingIsActive;
+        vm.showMetricSpeed = $scope.presenter.speedIsActive;
+        vm.showMetricLost = $scope.presenter.lostIsActive;
+	}, true)
 
 
 	//WATCHING ALL EVENTS UNDER THE ATTENDEES NODE IN FIREBASE --> to have 3-way data binding working.
@@ -40,25 +48,36 @@ function PresenterCtrl(FIREBASE_URL, $scope, VotesService, QuestionsToPresenterS
 
 		//Volume Percentage
 		// /////////////////////////////////////////////////////////////////////////
-		var volumeUpAttendees = _.filter($scope.attendees, function(attendee) {
+		vm.volumeUpAttendees = _.filter($scope.attendees, function(attendee) {
 			return attendee.volumeUp == "yes";
 		});
-		vm.volumeUpPercent = volume(Math.round((volumeUpAttendees.length / vm.numAttendees) * 100));
+        vm.volumeDownAttendees = _.filter($scope.attendees, function(attendee) {
+            return attendee.volumeUp == "no";
+        });
+		vm.volumeUpPercent = volume(Math.round((vm.volumeUpAttendees.length / vm.numAttendees) * 100));
 
 		//Speed Percentage
 		///////////////////////////////////////////////////////////////////////////
-		var speedValue = _.reduce($scope.attendees, function(memo, attendee) {
+		vm.speedValue = _.reduce($scope.attendees, function(memo, attendee) {
 			return memo + attendee.speed;
 		}, 0);
+		vm.goFaster = _.filter($scope.attendees, function(attendee) {
+            return attendee.speed == 1;
+        });vm.goSlower = _.filter($scope.attendees, function(attendee) {
+            return attendee.speed == -1;
+        });
 
-		vm.speedPercent = speed(Math.round((speedValue / vm.numAttendees) * 100));
+		vm.speedPercent = speed(Math.round((vm.speedValue / vm.numAttendees) * 100));
 
 		//Lost Percentage
 		// /////////////////////////////////////////////////////////////////////////
-		var lostValues = _.filter($scope.attendees, function(attendee) {
+		vm.lost = _.filter($scope.attendees, function(attendee) {
 			return attendee.feeling == "panic";
 		});
-		vm.panicPercent = panic(Math.round((lostValues.length / vm.numAttendees) * 100));
+        vm.notLost = _.filter($scope.attendees, function(attendee) {
+            return attendee.feeling == "fine";
+        });
+		vm.panicPercent = panic(Math.round((vm.lost.length / vm.numAttendees) * 100));
 
 		//dislike percentage
 		//////////////////////////////////////////////////////////////////////////

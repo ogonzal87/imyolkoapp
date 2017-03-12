@@ -1,3 +1,4 @@
+
 <div class="dashboard-background" ng-class="$ctrl.avatarDashboard.backgroundColor">
 
 	<og-navbar></og-navbar>
@@ -10,7 +11,24 @@
 				<div class="circles">
 					<img ng-src="{{ $ctrl.avatarDashboard.face }}" class="face">
 				</div>
-				<div class="dashboard-label avatar-message">{{ $ctrl.avatarDashboard.message }}</div>
+
+				<div class="dashboard-label avatar-message" >
+					{{ $ctrl.avatarDashboard.message }}
+					<div class="dashboard-metrics-container" ng-show="$ctrl.showMetricYolko && $ctrl.avatarDashboard.message">
+						<div class="metric-container">
+							<div>{{ $ctrl.likeVotesArray.length }}</div>
+							<div>LIKES</div>
+						</div>
+						<div class="metric-container" >
+							<div>{{ $ctrl.dislikeVotesArray.length }}</div>
+							<div>DISLIKES</div>
+						</div>
+						<div class="metric-container">
+							<div>{{ $ctrl.dislikeVotesArray.length + $ctrl.likeVotesArray.length }}</div>
+							<div>TOTAL</div>
+						</div>
+					</div>
+				</div>
 			</div>
 
 			<div class="num-attendees-container col-sm-3 col-sm-pull-6">
@@ -24,17 +42,6 @@
 			</div>
 		</div>
 
-		<!--<div class="dashboard&#45;&#45;second-row-container row">-->
-			<!--<div class="likes-container col-sm-3">-->
-				<!--<div class="num">{{ $ctrl.likeVotesArray.length }}</div>-->
-				<!--<div class="dashboard-label">LIKES</div>-->
-			<!--</div>-->
-
-			<!--<div class="dislikes-container col-sm-3">-->
-				<!--<div class="num">{{ $ctrl.dislikeVotesArray.length }}</div>-->
-				<!--<div class="dashboard-label">DISLIKES</div>-->
-			<!--</div>-->
-		<!--</div>-->
 
 		<div class="dashboard--primary-graphs-container row">
 			<div class="speed-container col-sm-6 col-sm-push-3">
@@ -46,7 +53,25 @@
 						<div class="fa fa-caret-right triangle" ng-class="{'is-active-circle-too-fast ': $ctrl.speedPercent.class === 'is-active-circle-too-fast'}"></div>
 					</div>
 				</div>
+
 				<div class="dashboard-label">SPEED</div>
+
+				<div class="dashboard-metrics-container" ng-show="$ctrl.showMetricSpeed">
+					<div class="metric-container">
+						<div>{{ $ctrl.goSlower.length || 0 }}</div>
+						<div>SLOWER</div>
+					</div>
+					<div class="metric-container">
+						<div>{{ $ctrl.goFaster.length || 0 }}</div>
+						<div>FASTER</div>
+					</div>
+					<div class="metric-container">
+						<div>{{ $ctrl.goFaster.length + $ctrl.goSlower.length || 0 }}</div>
+						<div>TOTAL</div>
+					</div>
+					<!--speedValue{{$ctrl.speedValue}}-->
+					<!--speedValue{{$ctrl.speedPercent.value}}-->
+				</div>
 			</div>
 
 			<div class="cant-hear-container col-sm-3 col-sm-pull-6">
@@ -56,7 +81,23 @@
 						{{ $ctrl.volumeUpPercent.content }}%
 					</div>
 				</div>
+
 				<div class="dashboard-label">CAN'T HEAR</div>
+
+				<div class="dashboard-metrics-container" ng-show="$ctrl.showMetricHearing">
+					<div class="metric-container">
+						<div>{{ $ctrl.volumeDownAttendees.length || 0 }}</div>
+						<div>YES</div>
+					</div>
+					<div class="metric-container" >
+						<div>{{ $ctrl.volumeUpAttendees.length || 0 }}</div>
+						<div>NO</div>
+					</div>
+					<div class="metric-container">
+						<div>{{ $ctrl.volumeDownAttendees.length + $ctrl.volumeUpAttendees.length || 0 }}</div>
+						<div>TOTAL</div>
+					</div>
+				</div>
 			</div>
 
 			<div class="lost-container col-sm-3">
@@ -65,6 +106,21 @@
 					<div class="percentage">{{ $ctrl.panicPercent.content }}%</div>
 				</div>
 				<div class="dashboard-label">LOST</div>
+
+				<div class="dashboard-metrics-container" ng-show="$ctrl.showMetricLost">
+					<div class="metric-container">
+						<div>{{ $ctrl.lost.length || 0 }}</div>
+						<div>YES</div>
+					</div>
+					<div class="metric-container" >
+						<div>{{ $ctrl.notLost.length || 0 }}</div>
+						<div>NO</div>
+					</div>
+					<div class="metric-container">
+						<div>{{ $ctrl.lost.length + $ctrl.notLost.length || 0 }}</div>
+						<div>TOTAL</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -3,7 +3,6 @@ angular.module('Presenter')
 	templateUrl: "components/presenter/components/control-panel/control-panel.html",
 	controller: ogControlPanelCtrl,
 	bindings: {
-		presenters: '=',
 		presenter: '='
 	}
 });
