@@ -46,6 +46,49 @@ $speed-graph-container-width:      180px;
 
 
 
+// ****MIXINS****
+
+
+// **MEDIA QUERIES**
+
+$tablet-width: 768px;
+$desktop-width: 1024px;
+$desktop-hd-width: 1440px;
+
+@mixin phone {
+	@media (min-width: 1px) and (max-width: #{$tablet-width - 1px}) {
+		@content;
+	}
+}
+
+@mixin tablet {
+	@media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
+		@content;
+	}
+}
+
+@mixin desktop {
+	@media (min-width: #{$desktop-width}) and (max-width: #{$desktop-hd-width - 1px}) {
+		@content;
+	}
+}
+
+@mixin desktop-hd {
+	@media (min-width: #{$desktop-hd-width}) {
+		@content;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
 // bootstrap needs a container when you use a row. If not it adds 15px on the sides of the row for margin
 .row { margin: 0 }
 .container {
@@ -90,6 +133,7 @@ html {
 	-moz-osx-font-smoothing: grayscale;
 }
 
+
 h1.yolko-greeting {
 	font-size: 150px;
 	font-weight: 900;
@@ -130,4 +174,5 @@ p {
 	font-size: 18px;
 	font-weight: 400;
 }
+
 
