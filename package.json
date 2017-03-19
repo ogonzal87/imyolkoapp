@@ -31,7 +31,7 @@
     "angular-ui-router": "^1.0.0-alpha.4",
     "angularfire": "^1.2.0",
     "bootstrap": "^3.3.6",
-    "chartist": "^0.9.8",
+    "chartist": "^0.10.1",
     "firebase": "^2.4.2",
     "gulp-install": "^0.6.0",
     "jquery": "^2.2.3",

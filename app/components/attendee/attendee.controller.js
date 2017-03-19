@@ -172,8 +172,8 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 			axisY: {
 				onlyInteger: true
 			},
-			width: 700,
-			height: 350,
+            width: '100%',
+            height: '100%',
 		};
 
 		// Create a new bar chart object where as first parameter we pass in a selector
