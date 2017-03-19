@@ -26,34 +26,28 @@
 
 			<div class="meeting-avatar-and-btns-container">
 				<img ng-src="{{ $ctrl.avatar.face }}">
-				<div class="meeting-avatar-container">
 
-				</div>
-
-				<div class="meeting-question">
+				<div class="meeting-question" ng-if="!attendee.vote">
 					How are you feeling?
 				</div>
 
-				<div class="meeting-yolko-btns-container">
+				<div class="meeting-yolko-btns-container" ng-if="!attendee.vote">
 					<button class="yolko-dislike-btn meeting-yolko-sentiment-btn"
-							ng-click="$ctrl.voteDislike()"
-							ng-disabled="$ctrl.disableSentimentBtns">
+							ng-click="$ctrl.voteDislike()">
 						<i class="fa fa-frown-o" aria-hidden="true"></i>
 					</button>
 
-					<span>
-						<div class="vote-submitted-feedback-icon"
-							 ng-class="{'vote-submitted-feedback-icon-active': $ctrl.disableSentimentBtns}"
-							 ng-if="$ctrl.disableSentimentBtns">
-							<i class="fa fa-check-circle-o" aria-hidden="true"></i>
-						</div>
-					</span>
-
 					<button class="yolko-like-btn meeting-yolko-sentiment-btn"
-							ng-click="$ctrl.voteLike()"
-							ng-disabled="$ctrl.disableSentimentBtns">
+							ng-click="$ctrl.voteLike()">
 						<i class="fa fa-smile-o" aria-hidden="true"></i>
 					</button>
+				</div>
+
+				<div class="vote-submitted-feedback-icon-container"
+					 ng-class="{'vote-submitted-feedback-icon-active': attendee.vote}"
+					 ng-if="attendee.vote">
+					<i class="fa fa-check-circle-o" aria-hidden="true"></i>
+					<div>Thanks for your feedback! My emotions are the aggregate mood of the audience right now.</div>
 				</div>
 
 			</div>
@@ -115,7 +109,7 @@
 				<div class="meeting-feedback-taken" ng-show="attendee.speed">
 					<div>
 						<div class="yolko-avatar-feedback-taken-container">
-							<img src="assets/avatars/winking.png"/>
+							<img src="assets/avatars/winkface.svg"/>
 						</div>
 					</div>
 					<div class="text-feedback">
@@ -152,7 +146,7 @@
 				<div class="meeting-feedback-taken" ng-show="attendee.volumeUp">
 					<div>
 						<div class="yolko-avatar-feedback-taken-container">
-							<img src="assets/avatars/winking.png"/>
+							<img src="assets/avatars/winkface.svg"/>
 						</div>
 					</div>
 					<div class="text-feedback">
@@ -174,52 +168,51 @@
 		<!-- POP QUIZ -->
 		<div class="meeting-quiz-container meeting-row"
 			 ng-show="$ctrl.presenter.customQuestionToAttendeesIsActive && $ctrl.presenter.selectedQuestionForAttendees">
-			<div id="quiz">
-				<div id="question" class="meeting-pop-question meeting-question">
-					{{ $ctrl.presenter.selectedQuestionForAttendees.questionContent }}
-				</div>
-				<div id="choices" class="meeting-pop-choices">
-					<input type="radio"
-						   id="availableAnsA"
-						   name="availableAnsA"
-						   ng-model="attendee.chosenAnswer"
-						   value="A"
-						   class="pop-choice" >
-					<label class="pop-choice" for="availableAnsA">
-						<span class="pop-choice-letter">A</span>
-						{{$ctrl.presenter.selectedQuestionForAttendees.availAnswers[0].a}}
-					</label>
 
-					<input type="radio"
-						   name="availableAnsB"
-						   id="availableAnsB"
-						   ng-model="attendee.chosenAnswer"
-						   value="B"
-						   class="pop-choice">
-					<label class="pop-choice" for="availableAnsB">
-						<span class="pop-choice-letter">B</span>
-						{{$ctrl.presenter.selectedQuestionForAttendees.availAnswers[1].b}}
-					</label>
-
-					<input type="radio"
-						   name="availableAnsC"
-						   id="availableAnsC"
-						   ng-model="attendee.chosenAnswer"
-						   value="C"
-						   class="pop-choice"
-						   ng-if="$ctrl.presenter.selectedQuestionForAttendees.availAnswers[2].c">
-					<label class="pop-choice" for="availableAnsC" ng-if="$ctrl.presenter.selectedQuestionForAttendees.availAnswers[2].c">
-						<span class="pop-choice-letter">C</span>
-						{{$ctrl.presenter.selectedQuestionForAttendees.availAnswers[2].c}}
-					</label>
-
-				</div>
-				<button class="btn pop-submit-btn"
-						ng-click="$ctrl.submitAnswer()"
-						ng-disabled="!attendee.chosenAnswer || attendee.submittedChosenAnswer">
-					SUBMIT ANSWER
-				</button>
+			<div id="question" class="meeting-pop-question meeting-question">
+				{{ $ctrl.presenter.selectedQuestionForAttendees.questionContent }}
 			</div>
+			<div id="choices" class="meeting-pop-choices">
+				<input type="radio"
+					   id="availableAnsA"
+					   name="availableAnsA"
+					   ng-model="attendee.chosenAnswer"
+					   value="A"
+					   class="pop-choice" >
+				<label class="pop-choice" for="availableAnsA">
+					<span class="pop-choice-letter">A</span>
+					{{$ctrl.presenter.selectedQuestionForAttendees.availAnswers[0].a}}
+				</label>
+
+				<input type="radio"
+					   name="availableAnsB"
+					   id="availableAnsB"
+					   ng-model="attendee.chosenAnswer"
+					   value="B"
+					   class="pop-choice">
+				<label class="pop-choice" for="availableAnsB">
+					<span class="pop-choice-letter">B</span>
+					{{$ctrl.presenter.selectedQuestionForAttendees.availAnswers[1].b}}
+				</label>
+
+				<input type="radio"
+					   name="availableAnsC"
+					   id="availableAnsC"
+					   ng-model="attendee.chosenAnswer"
+					   value="C"
+					   class="pop-choice"
+					   ng-if="$ctrl.presenter.selectedQuestionForAttendees.availAnswers[2].c">
+				<label class="pop-choice" for="availableAnsC" ng-if="$ctrl.presenter.selectedQuestionForAttendees.availAnswers[2].c">
+					<span class="pop-choice-letter">C</span>
+					{{$ctrl.presenter.selectedQuestionForAttendees.availAnswers[2].c}}
+				</label>
+
+			</div>
+			<button class="btn pop-submit-btn"
+					ng-click="$ctrl.submitAnswer()"
+					ng-disabled="!attendee.chosenAnswer || attendee.submittedChosenAnswer">
+				SUBMIT ANSWER
+			</button>
 		</div>
 		<!-- POP QUIZ RESULTS CHART -->
 		<div class="container meeting-quiz-results-container" ng-show="$ctrl.presenter.selectedQuestionForAttendees.questionData.isShowingResultsToAttendees">

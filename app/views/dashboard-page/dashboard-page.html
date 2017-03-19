@@ -152,10 +152,10 @@
 	<div class="dashboard-tab-content">
 		<div class="dashboard-custom-question-maker-container" ng-show="$ctrl.customQuestionsToAttendeesArr <= 0 || $ctrl.showCustomQuestionMaker">
 
-			<h1>Would you like to ask anything?</h1>
 			<form novalidate ng-submit="$ctrl.saveQuestionForAttendees()" class="dashboard-custom-question-maker-form">
-				<div class="form-group">
-					<textarea class="custom-question-content"
+				<h1>Would you like to ask anything?</h1>
+				<div class="form-group custom-question-content-container">
+					<textarea class="custom-question-content form-control"
 							  id="question"
 							  placeholder="How much is 2 + 2?"
 							  ng-model="$ctrl.customQuestion.content"
@@ -270,11 +270,8 @@
 						</div>
 					</div>
 					<div class="question-for-presenter-question-voting-controls">
-						<span>VOTES</span>
-						<div class="question-for-presenter-voting-controls-text">
-							{{ questionToPresenter.counter }}
-						</div>
-						<button class="question-for-presenter-delete-btn" ng-click="$ctrl.removeQuestion(key)">&times;</button>
+						<span>VOTES: </span> {{ questionToPresenter.counter }}
+						<!--<button class="question-for-presenter-delete-btn" ng-click="$ctrl.removeQuestion(key)">&times;</button>-->
 					</div>
 				</li>
 			</ul>

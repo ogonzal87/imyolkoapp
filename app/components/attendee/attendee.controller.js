@@ -49,9 +49,9 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 		});
 		// Disable to btn so people so not submit more than 1 vote per interval
 		vm.disableSentimentBtns = true;
-		$timeout(function() {
-			vm.disableSentimentBtns = false;
-		}, 5000);
+		// $timeout(function() {
+		// 	vm.disableSentimentBtns = false;
+		// }, 5000);
 	};
 
 	// creates a DISLIKE vote Object in Firebase. This is stored in an array
@@ -63,11 +63,6 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 			value: 0,
 			timestamp: Firebase.ServerValue.TIMESTAMP
 		});
-		// Disable to btn so people so not submit more than 1 vote per interval
-		vm.disableSentimentBtns = true;
-		$timeout(function() {
-			vm.disableSentimentBtns = false;
-		}, 5000);
 	};
 
 
@@ -77,6 +72,8 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 	// ///////////////////////////////////////////////////////////////////////
 	// Create a watch to watch what happens on the Attendees node
 	$scope.$watch('attendees', function(newVal, oldVal) {
+
+		console.log('attendee.vote', $scope.attendee.vote)
 
 		//LOST LOGIC
 		vm.attendeeInPanic = function () {
