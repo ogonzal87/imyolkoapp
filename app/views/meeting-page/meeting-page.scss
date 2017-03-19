@@ -14,89 +14,76 @@
 
 
 	.avatar-deactive-container {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		flex-direction: column;
-	}
-
-	.avatar-deactive-message-bg {
-		font-size: 80px;
-		font-weight: bold;
-		color: #B4B7C2;
-		p {
-			margin: 0;
-		}
-	}
-
-	.avatar-deactive-message-sm {
-		font-size: 30px;
-		color: #FFFFFF;
-	}
-
-	@media screen and (max-width: 767px) {
+		@include center-contents-column;
+		text-align: center;
 
 		img {
-			width: 60%;
-			height: auto;
+			width: 420px;
 		}
 
 		.avatar-deactive-message-bg {
-			font-size: 30px;
+			font-size: 80px;
+			font-weight: bold;
+			color: #B4B7C2;
+			p {
+				margin: 0;
+			}
 		}
+
 		.avatar-deactive-message-sm {
-			font-size: 15px;
+			font-size: 30px;
+			color: #FFFFFF;
+		}
+
+		@include phone {
+			img {
+				width: 70%;
+			}
+			.avatar-deactive-message-bg {
+				font-size: 32px;
+				font-weight: bold;
+			}
+			.avatar-deactive-message-sm {
+				font-size: 14px;
+				color: #FFFFFF;
+			}
 		}
 	}
 
 	.meeting-container {
 		width: 100%;
-		padding: 20px 0 0 0 ;
-		margin: 0;
-		display: flex;
-		align-items: center;
-		flex-direction: column;
+		padding-top: 30px;
 
 		.meeting-row {
+			@include center-contents-column;
 			min-height: 400px;
-			width: 60%;
-			display: flex;
-			justify-content: center;
-			flex-direction: column;
 
-			@media screen and (max-width: 767px) {
+			@include phone {
 				min-height: 200px;
 				width: 100%;
 			}
 
 			.meeting-question {
-				margin-bottom: 20px;
 				font-size: 60px;
 				color: $base-background-color-secondary;
 				text-align: center;
 
-				@media screen and (max-width: 767px) {
+				@include phone {
 					font-size: 30px;
 				}
 			}
 
 			.meeting-avatar-and-btns-container {
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				flex-direction: column;
+				@include center-contents-column;
 
-				.meeting-avatar-container {
+
+				img {
 					margin-top: 20px;
-					max-height: 235px;
-					display: flex;
-					align-items: center;
-					justify-content: center;
+					width: 420px;
 
-						img {
-							height: 235px;
-							width: 260px;
-						}
+					@include phone {
+						width: 70%;
+					}
 				}
 
 				.meeting-yolko-btns-container {
@@ -158,33 +145,26 @@
 			}
 
 			.response-options {
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				flex-direction: row;
+				@include center-contents-row;
+				width: 100%;
 
 				.option {
-					display: flex;
-					align-items: center;
-					justify-content: center;
-					font-size: 35px;
+					@include center-contents-row;
+					@include motion;
+					@include hover-effect
+					flex: 1;
+					max-width: 250px;
+					font-size: 32px;
 					cursor: pointer;
 					background-color: $white;
 					color: $base-background-color-purple;
 					margin: 20px;
-					width: 250px;
 					height: 80px;
-					box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-					transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 
-					&:hover {
-						box-shadow: 0 0 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-					}
 
-					@media screen and (max-width: 767px) {
+					@include phone {
 						font-size: 20px;
 						margin: 10px;
-						width: 200px;
 						height: 60px;
 					}
 				}
@@ -204,6 +184,10 @@
 						display: flex;
 						align-items: center;
 						justify-content: center;
+
+						img {
+							width: 80%;
+						}
 					}
 
 					.text-feedback {
@@ -212,7 +196,7 @@
 					}
 
 					h2 {
-						margin-top: 10px;
+						margin: 10px 0 0 0;
 					}
 
 					.hand-emoji {
@@ -224,7 +208,7 @@
 						font-size: 24px;
 					}
 
-					@media screen and (max-width: 767px) {
+					@include phone {
 						.yolko-avatar-feedback-taken-container {
 							height: 80px;
 							width: 80px;
@@ -365,9 +349,10 @@
 			align-items: center;
 			background-color: #fff;
 			max-width: 800px;
-			height: 400px;
+			min-height: 240px;
+			width: 100%;
 			margin-bottom: 60px;
-			padding: 0 0 20px 20px;
+			padding: 30px;
 			font-size: 24px;
 			box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 
@@ -375,8 +360,10 @@
 				font-size: 15px;
 			}
 
-			@media screen and (max-width: 767px) {
+			@include phone {
+				padding: 0;
 				width: 100%;
+				font-size: 10px;
 			}
 		}
 

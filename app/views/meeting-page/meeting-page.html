@@ -1,15 +1,15 @@
-<og-navbar></og-navbar>
+<!--<og-navbar></og-navbar>-->
 
 <div class="meeting-page"
 	 ng-class="{'inactive-background-color': !$ctrl.presenter.yolkoIsActive && !$ctrl.presenter.lostIsActive && !$ctrl.presenter.questionsIsActive && !$ctrl.presenter.speedIsActive && !$ctrl.presenter.hearingIsActive && !$ctrl.presenter.customQuestionToAttendeesIsActive}">
 
 	<!--Show when there is no action from the Presenter-->
-	<div class="avatar-deactive-container" ng-if="!$ctrl.presenter.yolkoIsActive && !$ctrl.presenter.lostIsActive && !$ctrl.presenter.questionsIsActive && !$ctrl.presenter.speedIsActive && !$ctrl.presenter.hearingIsActive && !$ctrl.presenter.customQuestionToAttendeesIsActive">
+	<div class="avatar-deactive-container container" ng-if="!$ctrl.presenter.yolkoIsActive && !$ctrl.presenter.lostIsActive && !$ctrl.presenter.questionsIsActive && !$ctrl.presenter.speedIsActive && !$ctrl.presenter.hearingIsActive && !$ctrl.presenter.customQuestionToAttendeesIsActive">
 		<img ng-src="{{ $ctrl.avatarDeactive.face }}">
 		<p class="avatar-deactive-message-bg">
 			We are good here...
 		</p>
-		<p class="avatar-deactive-message-sm">Nothing is needed right now. Check back in a few  </p>
+		<p class="avatar-deactive-message-sm">Nothing is needed right now. Check back in a few.</p>
 	</div>
 
 
@@ -24,14 +24,14 @@
 				 <!--ng-if="$ctrl.presenter.yolkoIsActive">-->
 
 
-			<div class="meeting-question">
-				How are you feeling?
-			</div>
-
 			<div class="meeting-avatar-and-btns-container">
-
+				<img ng-src="{{ $ctrl.avatar.face }}">
 				<div class="meeting-avatar-container">
-					<img ng-src="{{ $ctrl.avatar.face }}">
+
+				</div>
+
+				<div class="meeting-question">
+					How are you feeling?
 				</div>
 
 				<div class="meeting-yolko-btns-container">
@@ -79,7 +79,7 @@
 				<div class="meeting-feedback-taken" ng-show="attendee.feeling">
 					<div>
 						<div class="yolko-avatar-feedback-taken-container">
-							<img src="assets/avatars/winking.png"/>
+							<img src="assets/avatars/winkface.svg"/>
 						</div>
 					</div>
 					<div class="text-feedback">
