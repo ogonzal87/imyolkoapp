@@ -539,10 +539,14 @@
 			flex-direction: column;
 			margin: 60px 0;
 
+			h1 {
+				text-align: center;
+			}
+
 			@include phone {
 				margin: 30px 0;
 				h1 {
-					font-size: 24px;
+					font-size: 32px;
 				}
 			}
 
@@ -552,21 +556,33 @@
 				flex-direction: column;
 				align-items: center;
 				margin: 15px 0;
+				padding: 0 20px;
 
-				@media screen and (max-width: 767px) {
+				@include phone {
 					width: 100%;
 				}
 
-				.custom-question-content {
-					font-size: 18px;
-					width: 800px;
-					height: 100px;
-					padding: 12px;
+				.custom-question-content-container {
+					max-width: 800px;
 
-					@media screen and (max-width: 767px) {
-						width: 350px;
+					@include phone {
+						width: 100%;
+					}
+					.custom-question-content {
+						font-size: 18px;
+						width: 800px;
+						height: 100px;
+						padding: 12px;
+						border-radius: 0;
+
+						@include phone {
+							width: 100%;
+							font-size: 12px;
+						}
 					}
 				}
+
+
 
 				.custom-question-option-container {
 					display: flex;
@@ -574,8 +590,10 @@
 					justify-content: center;
 					flex-direction: row;
 					width: 800px;
-					@media screen and (max-width: 767px) {
+
+					@include phone {
 						width: 100%;
+						font-size: 12px;
 					}
 				}
 
@@ -589,7 +607,7 @@
 					min-width: 72px;
 					color: $base-font-color-light;
 
-					@media screen and (max-width: 767px) {
+					@include phone {
 						height: 50px;
 						min-width: 50px;
 						font-size: 18px;
@@ -602,7 +620,7 @@
 					font-size: 18px;
 					@media screen and (max-width: 767px) {
 						height: 50px;
-						font-size: 18px;
+						font-size: 12px;
 					}
 				}
 
@@ -687,6 +705,12 @@
 	align-items: center;
 	flex-direction: column;
 
+	h1 {
+		@include phone {
+			font-size: 32px;
+		}
+	}
+
 	.dashboard-custom-questions-for-attendees-list {
 		width: 800px;
 		margin-top: 20px;
@@ -697,8 +721,9 @@
 		justify-content: space-between;
 		flex-wrap: wrap;
 
-		@media screen and (max-width: 767px) {
-			width: 350px;
+		@include phone {
+			width: 100%;
+			padding: 0 20px;
 		}
 
 		.dashboard-custom-question-for-attendees{
@@ -706,12 +731,17 @@
 			align-items: center;
 			padding: 10px 45px;
 			font-size: 18px;
-			height: 100px;
+			min-height: 100px;
 			width: 377px;
 			margin-bottom: 20px;
 			box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 			transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 			cursor: pointer;
+
+			@include phone {
+				padding: 10px 20px;
+				font-size: 14px;
+			}
 
 			&:hover {
 				box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
@@ -733,8 +763,9 @@
 		margin-bottom: 60px;
 		box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 		transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-		@media screen and (max-width: 767px) {
-			width: 350px;
+
+		@include phone {
+			width: 90%;
 		}
 
 		&:hover {
@@ -749,7 +780,7 @@
 		font-size: 25px;
 		padding: 15px;
 		margin: 20px;
-		max-width: 50%;
+		max-width: 90%;
 		box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 		transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 		&:hover {
@@ -784,16 +815,17 @@
 		flex-direction: column;
 		width: 800px;
 		height: 100%;
+		padding: 0 20px;
 
 		@media screen and (max-width: 767px) {
-			width: 350px;
+			width: 100%;
 		}
 
 
 		.dashboard-question-for-presenter {
 			width: 100%;
 			list-style: none;
-			height: 100px;
+			min-height: 100px;
 			display: flex;
 			flex-direction: row;
 			justify-content: space-between;
@@ -803,6 +835,10 @@
 			padding: 16px;
 			box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 			transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+			@include phone {
+				min-height: 80px;
+			}
 
 			.question-for-presenter-question-content{
 				color: #555;
@@ -817,19 +853,29 @@
 					opacity: .3;
 					padding-bottom: 2px;
 				}
+
+				@include phone {
+					font-size: 12px;
+				}
 			}
 
 			.question-for-presenter-question-voting-controls {
 				display: flex;
 				flex-direction: row;
 				align-items: center;
+				margin-left: 16px;
+				font-size: 24px;
 
 				span {
-					font-size: 24px;
+					margin-right: 16px;
+					@include phone {
+						font-size: 12px;
+						margin-right: 8px;
+					}
 				}
-				.question-for-presenter-voting-controls-text {
-					margin: 0 16px;
-					font-size: 24px;
+
+				@include phone {
+					font-size: 12px;
 				}
 
 				.question-for-presenter-delete-btn {
