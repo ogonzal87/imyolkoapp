@@ -32,6 +32,7 @@
     "angularfire": "^1.2.0",
     "bootstrap": "^3.3.6",
     "chartist": "^0.10.1",
+    "chartist-plugin-fill-donut": "^0.1.4",
     "firebase": "^2.4.2",
     "gulp-install": "^0.6.0",
     "jquery": "^2.2.3",

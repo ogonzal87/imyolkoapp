@@ -2,7 +2,6 @@
 
 .dashboard-background {
 	background-color: $base-background-color-dashboard;
-	min-height: 80vh;
 	position: relative;
 
 
@@ -48,7 +47,7 @@
 
 	.dashboard--presentation-ctrls-container {
 		font-weight: $font-weight;
-		padding-top: 40px;
+		padding-top: 80px;
 		margin-bottom: 40px;
 
 		.num-attendees-container {
@@ -59,30 +58,44 @@
 			justify-content: center;
 		}
 
-		.stopwatch-container{
-			height: $fisrt-row-container-height;
+		.avatar-col {
 			display: flex;
 			flex-direction: column;
 			align-items: center;
 			text-align: center;
 			justify-content: center;
 
-			.chronometer {
-				font-size: 48px;
-			}
-
-			.media-controls {
-				font-size: 30px;
-				width: 140px;
+			.avatar-container{
+				margin-bottom: 20px;
 				display: flex;
+				flex-direction: column;
 				align-items: center;
-				justify-content: space-between;
+				text-align: center;
+				justify-content: center;
 
-				.active-media-btn {
-					color:$base-background-color-purple;
+				img {
+					max-width: 130px;
 				}
+				//
+				// .chronometer {
+				// 	font-size: 48px;
+				// }
+				//
+				// .media-controls {
+				// 	font-size: 30px;
+				// 	width: 140px;
+				// 	display: flex;
+				// 	align-items: center;
+				// 	justify-content: space-between;
+				//
+				// 	.active-media-btn {
+				// 		color:$base-background-color-purple;
+				// 	}
+				// }
 			}
 		}
+
+
 
 		.dashboard--questions-container {
 			height: $fisrt-row-container-height;
@@ -168,7 +181,6 @@
 			.percentage {
 				font-size: 48px;
 				font-weight: bold;
-				position: absolute;
 			}
 
 			.dashboard-bad-color {
@@ -180,10 +192,12 @@
 				align-items: center;
 				justify-content: center;
 				.ct-series-a .ct-slice-donut{
-					stroke: $base-background-color-purple;
+					stroke: #fff;
+					z-index: 999;
 				}
 				.ct-series-b .ct-slice-donut{
-					stroke: #fff;
+					stroke: $base-background-color-purple;
+					z-index: -1;
 				}
 			}
 		}
@@ -260,7 +274,6 @@
 			.percentage {
 				font-size: 48px;
 				font-weight: bold;
-				position: absolute;
 			}
 
 			.panic-graph {
@@ -269,25 +282,14 @@
 				align-items: center;
 				justify-content: center;
 				.ct-series-a .ct-slice-donut{
-					stroke: $base-background-color-purple;
+					stroke: #fff;
 				}
 				.ct-series-b .ct-slice-donut{
-					stroke: #e4e3e4;
+					stroke: $base-background-color-purple;
 				}
 			}
 
-			.panic-graph-bg-white {
-				position: relative;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				.ct-series-a .ct-slice-donut{
-					stroke: $base-background-color-purple;
-				}
-				.ct-series-b .ct-slice-donut{
-					stroke: #fff;
-				}
-			}
+
 		}
 	}
 

@@ -7,7 +7,7 @@ angular
 	// Angular Bootstrap
 	'ui.bootstrap'
 ])
-.constant('FIREBASE_URL', 'https://yolkoapp-sandbox.firebaseio.com/')
+.constant('FIREBASE_URL', 'https://yolko-sandbox3.firebaseio.com/')
 .config(ApplicationConfig);
 
 // configure app and routing. this should be the only thing on this file
@@ -28,7 +28,7 @@ function ApplicationConfig($stateProvider, $urlRouterProvider) {
   		templateUrl: 'views/dashboard-page/dashboard-page.html',
       controller: 'PresenterCtrl',
 	    controllerAs: '$ctrl'
-  	});  
+  	});
 
   $urlRouterProvider.otherwise('/');
 }

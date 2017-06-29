@@ -7,8 +7,8 @@
 
 	<div>
 		<div class="dashboard--presentation-ctrls-container row">
-			<div class="stopwatch-container col-sm-6 col-sm-push-3">
-				<div class="circles">
+			<div class="avatar-col col-sm-6 col-sm-push-3">
+				<div class="avatar-container">
 					<img ng-src="{{ $ctrl.avatarDashboard.face }}" class="face">
 				</div>
 
@@ -77,9 +77,9 @@
 			<div class="cant-hear-container col-sm-3 col-sm-pull-6">
 				<div class="cant-hear-graph" ng-class="{'cant-hear-graph-bg-white': $ctrl.avatarDashboard.backgroundColor }">
 					<div class="ct-chart-volume"></div>
-					<div class="percentage" ng-class="$ctrl.volumeUpPercent.class">
-						{{ $ctrl.volumeUpPercent.content }}%
-					</div>
+					<!--<div class="percentage" ng-class="$ctrl.volumeUpPercent.class">-->
+						<!--{{ $ctrl.volumeUpPercent.content }}%-->
+					<!--</div>-->
 				</div>
 
 				<div class="dashboard-label">CAN'T HEAR</div>
@@ -103,7 +103,7 @@
 			<div class="lost-container col-sm-3">
 				<div class="panic-graph" ng-class="{'panic-graph-bg-white': $ctrl.avatarDashboard.backgroundColor === 'lever-1-mood-color' || 'lever-5-mood-color'}">
 					<div class="ct-chart-lost"></div>
-					<div class="percentage">{{ $ctrl.panicPercent.content }}%</div>
+					<!--<div class="percentage">{{ $ctrl.panicPercent.content }}%</div>-->
 				</div>
 				<div class="dashboard-label">LOST</div>
 

@@ -199,10 +199,8 @@
 
 				.meeting-feedback-taken {
 					font-size: 30px;
-					display: flex;
-					align-items: center;
-					justify-content: center;
-					flex-direction: column;
+					width: 100%;
+					@include center-contents-column;
 
 					.yolko-avatar-feedback-taken-container {
 						height:120px;
@@ -292,7 +290,7 @@
 
 
 			.meeting-pop-question {
-				margin-bottom: 40px;
+				margin: 40px;
 
 				@include phone{
 					font-size: 30px;

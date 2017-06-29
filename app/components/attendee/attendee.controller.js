@@ -118,21 +118,21 @@ function AttendeeCtrl($scope, $timeout, DataAttendeeService, DataPresenterServic
 
 
 	//Displaying Yolko
-	vm.avatarDeactive = { face:'assets/avatars/sleeping-face.svg' };
+	vm.avatarDeactive = { face:'assets/avatars/sleeping.svg' };
 
 	function displayYolko() {
 		if(vm.dislikePercent >= 80) {
-			return vm.avatar = {face: 'assets/avatars/tense-full-face.svg', message: 'Yolko is a little tense'};
+			return vm.avatar = {face: 'assets/avatars/stressed.svg', message: 'Yolko is a little tense'};
 		} else if (vm.dislikePercent >= 60 && vm.dislikePercent <= 79.999999999999) {
-			return vm.avatar = {face: 'assets/avatars/notsogood-full-face.svg', message: 'Yolko is not so good'};
+			return vm.avatar = {face: 'assets/avatars/sad.svg', message: 'Yolko is not so good'};
 		} else if (vm.dislikePercent >= 40 && vm.dislikePercent <= 59.999999999999) {
-			return vm.avatar = {face: 'assets/avatars/serious-full-face.svg', message: 'Yolko is ok'};
+			return vm.avatar = {face: 'assets/avatars/serious.svg', message: 'Yolko is ok'};
 		} else if (vm.dislikePercent >= 20 && vm.dislikePercent <= 39.999999999999) {
-			return vm.avatar = {face: 'assets/avatars/great-full-face.svg',	message: 'Yolko is great'};
+			return vm.avatar = {face: 'assets/avatars/fine.svg',	message: 'Yolko is great'};
 		} else if (vm.dislikePercent >= 0 && vm.dislikePercent <= 29.999999999999) {
-			return vm.avatar = {face: 'assets/avatars/motivated-full-face.svg', message: 'Yolko is motivated!'};
+			return vm.avatar = {face: 'assets/avatars/n-motivated.svg', message: 'Yolko is motivated!'};
 		} else {
-			return vm.avatar = {face: 'assets/avatars/great-full-face.svg', message: 'Yolko is great'};
+			return vm.avatar = {face: 'assets/avatars/fine.svg', message: 'Yolko is great'};
 		}
 	}
 

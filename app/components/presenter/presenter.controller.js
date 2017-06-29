@@ -113,7 +113,7 @@ function PresenterCtrl(FIREBASE_URL, $scope, VotesService, QuestionsToPresenterS
 
 		//show chart for the VOLUME
 		new Chartist.Pie('.ct-chart-volume', {
-			series: [vm.volumeUpPercent, 100]
+			series: [100, vm.volumeUpPercent.content]
 		}, {
 			donut: true,
 			donutWidth: 40,
@@ -121,7 +121,14 @@ function PresenterCtrl(FIREBASE_URL, $scope, VotesService, QuestionsToPresenterS
 			height: 254,
 			width: 254,
 			total: 100,
-			showLabel: false
+			showLabel: false,
+            plugins: [
+                Chartist.plugins.fillDonut({
+                    items: [ {
+                        content: '<p class="percentage">' + vm.volumeUpPercent.content + '<span >%</span></p>'
+                    }]
+                })
+            ],
 		});
 
 		//show chart for the SPEED
@@ -138,34 +145,42 @@ function PresenterCtrl(FIREBASE_URL, $scope, VotesService, QuestionsToPresenterS
 		});
 
 		//show chart for the LOST
-		new Chartist.Pie('.ct-chart-lost', {
-			series: [vm.panicPercent.content, 100]
-		}, {
-			donut: true,
-			donutWidth: 40,
-			startAngle: 0,
-			height: 254,
-			width: 254,
-			total: 100,
-			showLabel: false
-		});
+        new Chartist.Pie('.ct-chart-lost',
+            {
+                series: [100, vm.panicPercent.content]
+            }, {
+                donut: true,
+                donutWidth: 40,
+                startAngle: 0,
+                height: 254,
+				width: 254,
+                total: 100,
+                showLabel: false,
+                plugins: [
+                    Chartist.plugins.fillDonut({
+                        items: [ {
+                            content: '<p class="percentage">' + vm.panicPercent.content + '<span >%</span></p>'
+                        }]
+                    })
+                ],
+            });
 	}, true);
 
 	//DISPLAYING YOLKO
-	vm.avatarDashboard = { face:'assets/icons/dash-sleeping.svg', backgroundColor: 'lever-0-mood-color' };
+	vm.avatarDashboard = { face:'assets/avatars/sleeping.svg', backgroundColor: 'lever-0-mood-color' };
 	function displayYolkoInDashboard() {
 		if(vm.dislikePercent >= 80) {
-			return vm.avatarDashboard = {face: 'assets/icons/dash-tense.svg', message: 'Yolko is a little tense'};
+			return vm.avatarDashboard = {face: 'assets/avatars/stressed.svg', message: 'Yolko is a little tense'};
 		} else if (vm.dislikePercent >= 60 && vm.dislikePercent <= 79.999999999999) {
-			return vm.avatarDashboard = {face: 'assets/icons/dash-notsogood.svg', message: 'Yolko is not so good'};
+			return vm.avatarDashboard = {face: 'assets/avatars/sad.svg', message: 'Yolko is not so good'};
 		} else if (vm.dislikePercent >= 40 && vm.dislikePercent <= 59.999999999999) {
-			return vm.avatarDashboard = {face: 'assets/icons/dash-serious.svg', message: 'Yolko is ok'};
+			return vm.avatarDashboard = {face: 'assets/avatars/serious.svg', message: 'Yolko is ok'};
 		} else if (vm.dislikePercent >= 20 && vm.dislikePercent <= 39.999999999999) {
-			return vm.avatarDashboard = {face: 'assets/icons/dash-great.svg', message: 'Yolko is great'};
+			return vm.avatarDashboard = {face: 'assets/avatars/fine.svg', message: 'Yolko is great'};
 		} else if (vm.dislikePercent >= 0 && vm.dislikePercent <= 29.999999999999) {
-			return vm.avatarDashboard = {face: 'assets/icons/dash-motivated.svg', message: 'Yolko is motivated!'};
+			return vm.avatarDashboard = {face: 'assets/avatars/n-motivated.svg', message: 'Yolko is motivated!'};
 		} else {
-			return vm.avatarDashboard = { face:'assets/icons/dash-sleeping.svg'};
+			return vm.avatarDashboard = { face:'assets/avatars/sleeping.svg'};
 		}
 	}
 
